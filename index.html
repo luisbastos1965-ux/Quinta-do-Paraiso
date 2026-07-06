@@ -4,313 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quinta do Paraíso | Experiências que amadurecem</title>
-    <!-- Fontes elegantes do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
-        /* VARIÁVEIS DE CORES (Baseadas na PAP) */
         :root {
             --verde-douro: #4A5D23;
             --castanho-terra: #5C4033;
             --dourado: #C5A059;
             --fundo-claro: #F9F6F0;
-            --texto-escuro: #2C2C2C;
         }
 
-        /* RESET & BASE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none; /* Esconde o cursor normal para usar o nosso personalizado */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lora', serif; background-color: var(--fundo-claro); color: #2C2C2C; overflow-x: hidden; }
+        h1, h2 { font-family: 'Playfair Display', serif; }
+
+        /* TRANSIÇÃO DE PÁGINA (Efeito cortina) */
+        .page-transition {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--verde-douro); z-index: 10000;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            transform: translateY(0); pointer-events: none;
+        }
+        body.loaded .page-transition { transform: translateY(-100%); }
+
+        /* MENU FULLSCREEN ELEGANTE */
+        .menu-btn {
+            position: fixed; top: 40px; right: 50px; z-index: 9000;
+            background: none; border: none; font-family: 'Playfair Display'; font-size: 1.2rem;
+            color: white; cursor: pointer; mix-blend-mode: difference;
+        }
+        .menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: rgba(44, 44, 44, 0.98); z-index: 8000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
+        }
+        .menu-overlay.open { opacity: 1; pointer-events: all; }
+        .menu-overlay a {
+            color: var(--dourado); font-family: 'Playfair Display'; font-size: 3rem;
+            text-decoration: none; margin: 15px 0; opacity: 0; transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        .menu-overlay.open a { opacity: 1; transform: translateY(0); }
+        .menu-overlay a:hover { color: white; letter-spacing: 2px; }
+
+        /* FIO CONDUTOR (A conexão entre secções) */
+        .fio-condutor {
+            position: absolute; left: 50%; top: 100vh; width: 2px; height: 200%;
+            background: linear-gradient(to bottom, transparent, var(--dourado), transparent);
+            z-index: 0; opacity: 0.3; transform: translateX(-50%);
         }
 
-        body {
-            font-family: 'Lora', serif;
-            background-color: var(--fundo-claro);
-            color: var(--texto-escuro);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-        }
-
-        /* CURSOR PERSONALIZADO (Toque premium) */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--dourado);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none; /* Para não interferir com cliques */
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-            z-index: 9999;
-            mix-blend-mode: difference;
-        }
-
-        .cursor.hovering {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(197, 160, 89, 0.2);
-        }
-
-        /* SECÇÃO HERO (O impacto inicial) */
+        /* HERO SECTION */
         .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=2000&auto=format&fit=crop') center/cover fixed;
-            color: white;
-            position: relative;
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=2000') center/cover;
+            color: white; text-align: center;
         }
+        .hero h1 { font-size: 6rem; animation: fadeUp 1.5s ease forwards 0.5s; opacity: 0; transform: translateY(30px); }
+        .hero p { font-size: 1.5rem; color: var(--dourado); animation: fadeUp 1.5s ease forwards 1s; opacity: 0; transform: translateY(30px); }
 
-        .hero h1 {
-            font-size: 5rem;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeIn 1.5s ease forwards 0.5s;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--dourado);
-            opacity: 0;
-            animation: fadeIn 1.5s ease forwards 1.2s;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            animation: bounce 2s infinite;
-            opacity: 0;
-            animation: fadeIn 1.5s ease forwards 2s, bounce 2s infinite 2s;
-        }
-
-        /* ESTRUTURA DAS SECÇÕES SCROLLYTELLING */
+        /* SECÇÕES */
         .section {
-            padding: 10vh 10vw;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 5rem;
+            padding: 15vh 10vw; min-height: 100vh; display: flex; align-items: center; gap: 5rem;
+            position: relative; z-index: 1;
         }
+        .section:nth-child(even) { flex-direction: row-reverse; background-color: #fff; border-radius: 100px 0 100px 0; margin: -50px 0; padding-top: 20vh;}
+        
+        .content { flex: 1; padding: 2rem; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 10px;}
+        .content h2 { font-size: 3.5rem; color: var(--verde-douro); margin-bottom: 1.5rem; }
+        .content p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem; color: #555; }
+        .image-container { flex: 1; border-radius: 15px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .image-container img { width: 100%; height: auto; display: block; transition: transform 1s; }
+        .image-container:hover img { transform: scale(1.05); }
 
-        .section:nth-child(even) {
-            flex-direction: row-reverse;
-            background-color: #fff;
-        }
-
-        .content {
-            flex: 1;
-        }
-
-        .content h2 {
-            font-size: 3.5rem;
-            color: var(--verde-douro);
-            margin-bottom: 1.5rem;
-        }
-
-        .content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            color: #555;
-        }
-
-        .image-container {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transform: scale(1.1); /* Preparado para efeito hover */
-            transition: transform 0.8s ease;
-        }
-
-        .image-container:hover img {
-            transform: scale(1);
-        }
-
-        /* CLASSES DE ANIMAÇÃO NO SCROLL (JavaScript ativa) */
-        .reveal {
-            opacity: 0;
-            transform: translateY(100px);
-            transition: all 1.2s cubic-bezier(0.5, 0, 0, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* BOTÃO ELEGANTE */
         .btn {
-            display: inline-block;
-            padding: 15px 40px;
-            border: 1px solid var(--dourado);
-            color: var(--castanho-terra);
-            text-decoration: none;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            transition: color 0.4s;
+            display: inline-block; padding: 15px 40px; border: 1px solid var(--dourado); color: var(--castanho-terra);
+            text-decoration: none; font-family: 'Playfair Display'; transition: all 0.4s;
         }
+        .btn:hover { background-color: var(--dourado); color: white; }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background-color: var(--dourado);
-            transition: left 0.4s;
-            z-index: -1;
-        }
+        .reveal { opacity: 0; transform: translateY(80px); transition: all 1.2s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .btn:hover {
-            color: white;
-        }
-
-        .btn:hover::before {
-            left: 0;
-        }
-
-        /* KEYFRAMES */
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
-        }
-
-        /* RESPONSIVO */
-        @media (max-width: 768px) {
-            .section, .section:nth-child(even) {
-                flex-direction: column;
-                padding: 5vh 5vw;
-                text-align: center;
-            }
-            .hero h1 { font-size: 3rem; }
-            .content h2 { font-size: 2.5rem; }
-        }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body>
+<body onload="document.body.classList.add('loaded')">
 
-    <!-- Cursor customizado -->
-    <div class="cursor"></div>
+    <div class="page-transition"></div>
 
-    <!-- 1. Hero Section -->
+    <!-- Navegação -->
+    <button class="menu-btn" onclick="toggleMenu()">MENU</button>
+    <div class="menu-overlay" id="menu">
+        <a href="index.html">A Quinta</a>
+        <a href="experiencias.html" onclick="delayLink(event, 'experiencias.html')">Experiências</a>
+        <a href="#">Área de Cliente</a>
+    </div>
+
+    <!-- Fio Condutor Visual -->
+    <div class="fio-condutor"></div>
+
     <header class="hero">
         <h1>Quinta do Paraíso</h1>
         <p>Experiências que amadurecem.</p>
-        <div class="scroll-indicator">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--dourado)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
-        </div>
     </header>
 
-    <!-- 2. Secção Conceito (História) -->
     <section class="section">
         <div class="content reveal">
             <h2>O Refúgio Duriense</h2>
-            <p>Mais do que um espaço de pernoita, a Quinta do Paraíso é uma viagem às raízes do Alto Douro Vinhateiro. Antigos pombais de pedra ganharam nova vida, transformando-se num santuário de tranquilidade onde o xisto, a madeira e a paisagem em socalcos se fundem num abraço perfeito.</p>
-            <a href="#" class="btn hover-target">Descobrir a História</a>
+            <p>Mais do que pernoitar, oferecemos uma imersão nas raízes do Douro. Antigos pombais de pedra renascem como o seu santuário privado, fundindo-se com os socalcos seculares.</p>
         </div>
-        <div class="image-container reveal" style="transition-delay: 0.2s;">
-            <!-- Substituir por imagem real da aluna depois -->
-            <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=1000&auto=format&fit=crop" alt="Paisagem do Douro em Socalcos">
+        <div class="image-container reveal">
+            <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=1000" alt="Paisagem">
         </div>
     </section>
 
-    <!-- 3. Secção Enoturismo e Bem-Estar -->
     <section class="section">
         <div class="content reveal">
-            <h2>Enoturismo & Vinoterapia</h2>
-            <p>A uva é a nossa essência. Desde as visitas imersivas à nossa adega, onde acompanha o ciclo do vinho até à degustação, até ao nosso exclusivo Spa de Vinoterapia. Mergulhe num banho de extratos vínicos e deixe as propriedades antioxidantes da uva renovarem o seu corpo e mente.</p>
-            <a href="#" class="btn hover-target">Ver Experiências</a>
+            <h2>A Arte do Tempo</h2>
+            <p>Descubra o nosso Spa de Vinoterapia ou embarque num passeio pelo rio Douro. Momentos desenhados para conectar a alma à natureza.</p>
+            <!-- ESTE É O BOTÃO QUE ABRE A NOVA PÁGINA -->
+            <a href="experiencias.html" class="btn" onclick="delayLink(event, 'experiencias.html')">Explorar Experiências</a>
         </div>
-        <div class="image-container reveal" style="transition-delay: 0.2s;">
-            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1000&auto=format&fit=crop" alt="Vinho e Enoturismo">
-        </div>
-    </section>
-
-    <!-- 4. Secção Natureza (O Rio e a Quinta) -->
-    <section class="section">
-        <div class="content reveal">
-            <h2>O Tempo e o Rio</h2>
-            <p>Deixe o tempo suspender-se. Aventure-se num passeio de jipe pelos nossos socalcos históricos, desfrute de um piquenique com os melhores produtos locais à sombra das oliveiras, ou deixe-se levar pelas águas do rio Douro num passeio de barco privativo.</p>
-            <a href="#" class="btn hover-target">Agendar Visita</a>
-        </div>
-        <div class="image-container reveal" style="transition-delay: 0.2s;">
-            <img src="https://images.unsplash.com/photo-1544070014-49c8f2ba1613?q=80&w=1000&auto=format&fit=crop" alt="Rio Douro e Natureza">
+        <div class="image-container reveal">
+            <img src="https://images.unsplash.com/photo-1544070014-49c8f2ba1613?q=80&w=1000" alt="Experiências">
         </div>
     </section>
 
-    <!-- JAVASCRIPT: A magia da interação -->
     <script>
-        // 1. Cursor Personalizado
-        const cursor = document.querySelector('.cursor');
-        const hoverTargets = document.querySelectorAll('a, .btn, .hover-target');
+        // Função do Menu
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('open');
+            const btn = document.querySelector('.menu-btn');
+            btn.innerText = btn.innerText === 'MENU' ? 'FECHAR' : 'MENU';
+        }
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        // Função para ativar a animação de cortina antes de mudar de página
+        function delayLink(e, url) {
+            e.preventDefault();
+            document.body.classList.remove('loaded'); // Desce a cortina
+            setTimeout(() => { window.location.href = url; }, 800); // Muda de página após 0.8s
+        }
 
-        // Efeito do cursor aumentar ao passar em links/botões
-        hoverTargets.forEach(target => {
-            target.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-            target.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-        });
-
-        // 2. Animação Scroll Reveal (O segredo para um site não convencional)
-        // Usamos Intersection Observer para detetar quando o elemento entra no ecrã
+        // Scroll Reveal Animado
         const reveals = document.querySelectorAll('.reveal');
-
-        const revealOptions = {
-            threshold: 0.2, // Dispara quando 20% do elemento está visível
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+        const revealOnScroll = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Anima só uma vez
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, revealOptions);
-
-        reveals.forEach(reveal => {
-            revealOnScroll.observe(reveal);
-        });
+        }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
+        reveals.forEach(reveal => revealOnScroll.observe(reveal));
     </script>
 </body>
 </html>
