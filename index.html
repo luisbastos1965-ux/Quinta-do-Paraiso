@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinta do Paraíso | Experiências que amadurecem</title>
+    <!-- Fontes elegantes do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* VARIÁVEIS DE CORES (Baseadas na PAP) */
+        :root {
+            --verde-douro: #4A5D23;
+            --castanho-terra: #5C4033;
+            --dourado: #C5A059;
+            --fundo-claro: #F9F6F0;
+            --texto-escuro: #2C2C2C;
+        }
+
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none; /* Esconde o cursor normal para usar o nosso personalizado */
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--fundo-claro);
+            color: var(--texto-escuro);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        /* CURSOR PERSONALIZADO (Toque premium) */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--dourado);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none; /* Para não interferir com cliques */
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.hovering {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(197, 160, 89, 0.2);
+        }
+
+        /* SECÇÃO HERO (O impacto inicial) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=2000&auto=format&fit=crop') center/cover fixed;
+            color: white;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.5s ease forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--dourado);
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards 1.2s;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            animation: bounce 2s infinite;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards 2s, bounce 2s infinite 2s;
+        }
+
+        /* ESTRUTURA DAS SECÇÕES SCROLLYTELLING */
+        .section {
+            padding: 10vh 10vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5rem;
+        }
+
+        .section:nth-child(even) {
+            flex-direction: row-reverse;
+            background-color: #fff;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .content h2 {
+            font-size: 3.5rem;
+            color: var(--verde-douro);
+            margin-bottom: 1.5rem;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+
+        .image-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: scale(1.1); /* Preparado para efeito hover */
+            transition: transform 0.8s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1);
+        }
+
+        /* CLASSES DE ANIMAÇÃO NO SCROLL (JavaScript ativa) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1.2s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* BOTÃO ELEGANTE */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--dourado);
+            color: var(--castanho-terra);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dourado);
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: white;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        /* KEYFRAMES */
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .section, .section:nth-child(even) {
+                flex-direction: column;
+                padding: 5vh 5vw;
+                text-align: center;
+            }
+            .hero h1 { font-size: 3rem; }
+            .content h2 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cursor customizado -->
+    <div class="cursor"></div>
+
+    <!-- 1. Hero Section -->
+    <header class="hero">
+        <h1>Quinta do Paraíso</h1>
+        <p>Experiências que amadurecem.</p>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--dourado)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- 2. Secção Conceito (História) -->
+    <section class="section">
+        <div class="content reveal">
+            <h2>O Refúgio Duriense</h2>
+            <p>Mais do que um espaço de pernoita, a Quinta do Paraíso é uma viagem às raízes do Alto Douro Vinhateiro. Antigos pombais de pedra ganharam nova vida, transformando-se num santuário de tranquilidade onde o xisto, a madeira e a paisagem em socalcos se fundem num abraço perfeito.</p>
+            <a href="#" class="btn hover-target">Descobrir a História</a>
+        </div>
+        <div class="image-container reveal" style="transition-delay: 0.2s;">
+            <!-- Substituir por imagem real da aluna depois -->
+            <img src="https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?q=80&w=1000&auto=format&fit=crop" alt="Paisagem do Douro em Socalcos">
+        </div>
+    </section>
+
+    <!-- 3. Secção Enoturismo e Bem-Estar -->
+    <section class="section">
+        <div class="content reveal">
+            <h2>Enoturismo & Vinoterapia</h2>
+            <p>A uva é a nossa essência. Desde as visitas imersivas à nossa adega, onde acompanha o ciclo do vinho até à degustação, até ao nosso exclusivo Spa de Vinoterapia. Mergulhe num banho de extratos vínicos e deixe as propriedades antioxidantes da uva renovarem o seu corpo e mente.</p>
+            <a href="#" class="btn hover-target">Ver Experiências</a>
+        </div>
+        <div class="image-container reveal" style="transition-delay: 0.2s;">
+            <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1000&auto=format&fit=crop" alt="Vinho e Enoturismo">
+        </div>
+    </section>
+
+    <!-- 4. Secção Natureza (O Rio e a Quinta) -->
+    <section class="section">
+        <div class="content reveal">
+            <h2>O Tempo e o Rio</h2>
+            <p>Deixe o tempo suspender-se. Aventure-se num passeio de jipe pelos nossos socalcos históricos, desfrute de um piquenique com os melhores produtos locais à sombra das oliveiras, ou deixe-se levar pelas águas do rio Douro num passeio de barco privativo.</p>
+            <a href="#" class="btn hover-target">Agendar Visita</a>
+        </div>
+        <div class="image-container reveal" style="transition-delay: 0.2s;">
+            <img src="https://images.unsplash.com/photo-1544070014-49c8f2ba1613?q=80&w=1000&auto=format&fit=crop" alt="Rio Douro e Natureza">
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT: A magia da interação -->
+    <script>
+        // 1. Cursor Personalizado
+        const cursor = document.querySelector('.cursor');
+        const hoverTargets = document.querySelectorAll('a, .btn, .hover-target');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Efeito do cursor aumentar ao passar em links/botões
+        hoverTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+            target.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+        });
+
+        // 2. Animação Scroll Reveal (O segredo para um site não convencional)
+        // Usamos Intersection Observer para detetar quando o elemento entra no ecrã
+        const reveals = document.querySelectorAll('.reveal');
+
+        const revealOptions = {
+            threshold: 0.2, // Dispara quando 20% do elemento está visível
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Anima só uma vez
+                }
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => {
+            revealOnScroll.observe(reveal);
+        });
+    </script>
+</body>
+</html>
