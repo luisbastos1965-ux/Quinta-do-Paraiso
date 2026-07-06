@@ -10,7 +10,7 @@
         :root {
             --bg-color: #1a1a1a;
             --text-color: #f4f0ea;
-            --accent-color: #C5A059; /* Dourado */
+            --accent-color: #C5A059;
             --douro-green: #3e4f2b;
         }
 
@@ -18,6 +18,33 @@
         
         body { font-family: 'Manrope', sans-serif; background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; scroll-behavior: smooth; }
         h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 400; }
+
+        /* PRELOADER COM O LOGO (A Entrada de Ouro) */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--bg-color); z-index: 999999;
+            display: flex; justify-content: center; align-items: center;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s;
+        }
+        #preloader.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+        
+        .preloader-logo {
+            width: 300px;
+            animation: breath 2.5s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.2));
+        }
+
+        @keyframes breath {
+            0% { transform: scale(0.95); filter: drop-shadow(0 0 10px rgba(197, 160, 89, 0.2)); }
+            100% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(197, 160, 89, 0.6)); }
+        }
+
+        /* LOGO FIXO NO CANTO SUPERIOR ESQUERDO */
+        .corner-logo {
+            position: fixed; top: 30px; left: 40px; width: 100px; z-index: 9000;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .corner-logo:hover { transform: scale(1.1) rotate(5deg); }
 
         /* CURSOR CRIATIVO */
         .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
@@ -28,10 +55,10 @@
         /* HERO SECTION */
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
         .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: -1; }
-        .title-mask { font-size: 8vw; line-height: 1; text-align: center; background: url('https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=2000') center/cover; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: revealUp 2s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
-        .hero p { font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 20px; color: var(--accent-color); }
+        .title-mask { font-size: 8vw; line-height: 1; text-align: center; background: url('https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=2000') center/cover; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: revealUp 2s cubic-bezier(0.77, 0, 0.175, 1) forwards; animation-delay: 1.5s; opacity: 0; }
+        .hero p { font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 20px; color: var(--accent-color); animation: revealUp 2s ease forwards; animation-delay: 2s; opacity: 0; }
 
-        /* SECÇÃO O CONCEITO (PAP) */
+        /* SECÇÃO O CONCEITO */
         .concept-section { padding: 15vh 10vw; display: flex; gap: 5rem; align-items: center; background-color: #111; }
         .concept-text { flex: 1; }
         .concept-text h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 2rem; }
@@ -40,7 +67,7 @@
         .concept-image img { width: 100%; height: auto; display: block; filter: grayscale(30%); transition: transform 1s; }
         .concept-image:hover img { transform: scale(1.05); filter: grayscale(0%); }
 
-        /* SECÇÃO DO JÚRI (INTERATIVA COM DADOS DA PAP) */
+        /* SECÇÃO DO JÚRI */
         .jury-section { min-height: 100vh; padding: 15vh 10vw; display: flex; flex-direction: column; align-items: center; text-align: center; background-color: #0f0f0f; }
         .jury-section h2 { font-size: 4rem; margin-bottom: 20px; }
         .jury-section p.subtitle { color: #888; font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; line-height: 1.6; }
@@ -54,7 +81,7 @@
         .interactive-text { position: absolute; bottom: 40px; left: 40px; right: 40px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); padding: 30px; border-radius: 15px; border-left: 4px solid var(--accent-color); transform: translateY(100px); opacity: 0; transition: all 0.6s ease; text-align: left; }
         .interactive-display.show .interactive-text { transform: translateY(0); opacity: 1; }
 
-        /* NOVA SECÇÃO: RESERVAS */
+        /* SECÇÃO DE RESERVAS */
         .booking-section { padding: 15vh 10vw; background-color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
         .booking-section h2 { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 1rem; }
         .booking-section p { color: #aaa; margin-bottom: 3rem; text-align: center; max-width: 600px; }
@@ -67,7 +94,7 @@
         .booking-form input:focus, .booking-form select:focus { border-bottom-color: var(--accent-color); }
         .booking-form input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
         
-        .submit-btn { grid-column: span 2; padding: 20px; background-color: var(--accent-color); color: #111; border: none; font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 600; cursor: pointer; margin-top: 20px; transition: background-color 0.3s; }
+        .submit-btn { grid-column: span 2; padding: 20px; background-color: var(--accent-color); color: #111; border: none; font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 600; margin-top: 20px; transition: background-color 0.3s; }
         .submit-btn:hover { background-color: white; }
 
         @keyframes revealUp { 0% { transform: translateY(100px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
@@ -83,6 +110,12 @@
 </head>
 <body>
 
+    <div id="preloader">
+        <img src="Logo.png" alt="Quinta do Paraíso Logo" class="preloader-logo">
+    </div>
+
+    <img src="Logo.png" alt="QP" class="corner-logo hover-target" onclick="window.scrollTo(0,0)">
+
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
@@ -92,22 +125,20 @@
         <p>Experiências que amadurecem</p>
     </header>
 
-    <!-- SECÇÃO COM O TEXTO OFICIAL DA PAP -->
     <section class="concept-section">
         <div class="concept-image">
             <img src="https://images.unsplash.com/photo-1469522197541-118cba46522a?q=80&w=1000" alt="Casa de Pedra e Xisto">
         </div>
         <div class="concept-text">
             <h2>O Nosso Legado</h2>
-            <p>A Quinta do Paraíso nasce no coração do Alto Douro Vinhateiro, no concelho de Vila Nova de Foz Côa[cite: 1]. Transformámos os antigos pombais da propriedade em 5 a 6 unidades exclusivas de alojamento em espaço rural[cite: 1].</p>
-            <p>Com um profundo respeito pela arquitetura tradicional duriense, preservámos a pedra, o xisto e a madeira, fundindo este património devoluto com a majestosa paisagem em socalcos que nos envolve[cite: 1]. Aqui, não oferecemos apenas pernoita, mas um destino imersivo de experiências[cite: 1].</p>
+            <p>A Quinta do Paraíso nasce no coração do Alto Douro Vinhateiro, no concelho de Vila Nova de Foz Côa. Transformámos os antigos pombais da propriedade em 5 a 6 unidades exclusivas de alojamento em espaço rural.</p>
+            <p>Com um profundo respeito pela arquitetura tradicional duriense, preservámos a pedra, o xisto e a madeira, fundindo este património devoluto com a majestosa paisagem em socalcos que nos envolve. Aqui, não oferecemos apenas pernoita, mas um destino imersivo de experiências.</p>
         </div>
     </section>
 
-    <!-- A ESCOLHA DO JÚRI COM AS ATIVIDADES REAIS -->
     <section class="jury-section">
         <h2>A Essência Duriense</h2>
-        <p class="subtitle">A nossa oferta articula a hotelaria rural com atividades pensadas para criar uma ligação emocional com o destino[cite: 1]. Selecione a experiência que mais o inspira.</p>
+        <p class="subtitle">A nossa oferta articula a hotelaria rural com atividades pensadas para criar uma ligação emocional com o destino. Selecione a experiência que mais o inspira.</p>
         
         <div class="magnetic-wrap">
             <button class="magnetic-btn hover-target" data-type="enoturismo">Enoturismo</button>
@@ -125,7 +156,6 @@
         </div>
     </section>
 
-    <!-- SECÇÃO DE RESERVAS INOVADORA -->
     <section class="booking-section">
         <h2>Garanta o seu Lugar</h2>
         <p>Inicie a sua jornada preenchendo os detalhes da sua estadia nos nossos pombais reabilitados.</p>
@@ -164,6 +194,14 @@
     </section>
 
     <script>
+        // LÓGICA DO PRELOADER
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+            }, 2500); // Fica 2.5 segundos no ecrã para o logo brilhar bem!
+        });
+
+        // CURSORES E BOTÕES
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
         const hoverTargets = document.querySelectorAll('.hover-target, button, input, select');
@@ -189,28 +227,12 @@
             btn.addEventListener('mouseleave', () => btn.style.transform = `translate(0px, 0px)`);
         });
 
-        // DADOS REAIS DA PAP PARA A INTERAÇÃO
+        // DADOS INTERATIVOS
         const data = {
-            enoturismo: {
-                img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1000",
-                title: "Visitas e Degustação",
-                text: "Acompanhe todo o processo produtivo da vinha ao engarrafamento e desfrute de provas orientadas acompanhadas por produtos regionais, valorizando a gastronomia local[cite: 1]."
-            },
-            spa: {
-                img: "https://images.unsplash.com/photo-1549416878-b9ca95e1e127?q=80&w=1000",
-                title: "Spa de Vinoterapia",
-                text: "Usufrua de tratamentos inspirados nas propriedades da uva e do vinho, com esfoliações à base de grainhas e banhos de imersão que promovem relaxamento e rejuvenescimento[cite: 1]."
-            },
-            natureza: {
-                img: "https://images.unsplash.com/photo-1544070014-49c8f2ba1613?q=80&w=1000",
-                title: "Rio e Socalcos",
-                text: "Explore as vinhas em passeios de jipe, desfrute de piqueniques com sabores sazonais, ou admire a paisagem a partir de um passeio de barco exclusivo no rio Douro[cite: 1]."
-            },
-            cultura: {
-                img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000",
-                title: "Património e Arqueologia",
-                text: "A nossa proximidade ao Parque Arqueológico do Vale do Côa permite-lhe descobrir um dos mais importantes sítios de arte rupestre ao ar livre do mundo[cite: 1]."
-            }
+            enoturismo: { img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1000", title: "Visitas e Degustação", text: "Acompanhe todo o processo produtivo da vinha ao engarrafamento e desfrute de provas orientadas acompanhadas por produtos regionais, valorizando a gastronomia local." },
+            spa: { img: "https://images.unsplash.com/photo-1549416878-b9ca95e1e127?q=80&w=1000", title: "Spa de Vinoterapia", text: "Usufrua de tratamentos inspirados nas propriedades da uva e do vinho, com esfoliações à base de grainhas e banhos de imersão que promovem relaxamento e rejuvenescimento." },
+            natureza: { img: "https://images.unsplash.com/photo-1544070014-49c8f2ba1613?q=80&w=1000", title: "Rio e Socalcos", text: "Explore as vinhas em passeios de jipe, desfrute de piqueniques com sabores sazonais, ou admire a paisagem a partir de um passeio de barco exclusivo no rio Douro." },
+            cultura: { img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000", title: "Património e Arqueologia", text: "A nossa proximidade ao Parque Arqueológico do Vale do Côa permite-lhe descobrir um dos mais importantes sítios de arte rupestre ao ar livre do mundo." }
         };
 
         const displayBoard = document.getElementById('display-board');
@@ -232,7 +254,7 @@
             });
         });
 
-        setTimeout(() => displayBoard.classList.add('show'), 1000);
+        setTimeout(() => displayBoard.classList.add('show'), 3000);
     </script>
 </body>
 </html>
