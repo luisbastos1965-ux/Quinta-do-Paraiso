@@ -19,7 +19,7 @@
         body { font-family: 'Manrope', sans-serif; background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; scroll-behavior: smooth; }
         h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 400; }
 
-        /* PRELOADER: EFEITO COPO DE VINHO A ENCHER */
+        /* PRELOADER: EFEITO LÍQUIDO ONDULADO (O Verdadeiro Copo de Vinho) */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background-color: var(--bg-color); z-index: 999999;
@@ -28,28 +28,31 @@
         }
         #preloader.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
         
-        .logo-wrapper { position: relative; width: 250px; height: 250px; }
+        .logo-wrapper { position: relative; width: 250px; height: 250px; overflow: hidden; }
         .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.1; filter: grayscale(100%); }
-        .logo-cheio { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; 
-            clip-path: inset(100% 0 0 0); /* Escondido em baixo */
-            animation: encherVinho 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; 
-            animation-delay: 0.5s;
-            filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.4));
+        
+        /* O logo cheio fica escondido atrás da cortina líquida */
+        .logo-cheio-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .logo-cheio { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.4)); }
+        
+        /* A "Cortina Líquida" escura que desce para revelar o ouro */
+        .liquid-mask {
+            position: absolute; top: 0; left: -50%; width: 200%; height: 200%;
+            background-color: var(--bg-color);
+            border-radius: 40%;
+            animation: waves 3s infinite linear, fillWine 3s ease forwards 0.5s;
         }
 
-        @keyframes encherVinho {
-            0% { clip-path: inset(100% 0 0 0); }
-            40% { clip-path: inset(60% 0 0 0); }
-            70% { clip-path: inset(20% 0 0 0); }
-            100% { clip-path: inset(0 0 0 0); }
-        }
+        @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fillWine { 0% { top: 10%; } 100% { top: -200%; } }
 
-        /* LOGO FIXO NO CANTO SUPERIOR ESQUERDO */
+        /* LOGO FIXO NO CANTO */
         .corner-logo { position: fixed; top: 30px; left: 40px; width: 100px; z-index: 9000; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .corner-logo:hover { transform: scale(1.1) rotate(5deg); }
 
-        /* CURSOR CRIATIVO */
+        /* CURSORES */
         .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
         .cursor-dot { width: 8px; height: 8px; background-color: var(--accent-color); }
         .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-color); transition: width 0.2s, height 0.2s, background-color 0.2s; }
@@ -61,18 +64,12 @@
         .title-mask { font-size: 8vw; line-height: 1; text-align: center; background: url('https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?q=80&w=2000') center/cover; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: revealUp 2s cubic-bezier(0.77, 0, 0.175, 1) forwards; animation-delay: 3s; opacity: 0; }
         .hero p { font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase; margin-top: 20px; color: var(--accent-color); animation: revealUp 2s ease forwards; animation-delay: 3.5s; opacity: 0; }
 
-        /* MODO APRESENTAÇÃO: SECÇÕES INVISÍVEIS POR DEFEITO */
-        .build-section {
-            display: none; opacity: 0; transform: translateY(100px);
-            transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
+        /* MODO APRESENTAÇÃO */
+        .build-section { display: none; opacity: 0; transform: translateY(100px); transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.19, 1, 0.22, 1); }
         .build-section.visible { display: flex; opacity: 1; transform: translateY(0); }
-        
-        /* O override para forçar display flex na secção do júri e form */
-        .jury-section.visible { display: flex; flex-direction: column; }
-        .booking-section.visible { display: flex; flex-direction: column; }
+        .jury-section.visible, .booking-section.visible, .sustainability-section.visible { display: flex; flex-direction: column; }
 
-        /* ESTILOS DAS SECÇÕES */
+        /* SECÇÃO O CONCEITO */
         .concept-section { padding: 15vh 10vw; gap: 5rem; align-items: center; background-color: #111; }
         .concept-text { flex: 1; }
         .concept-text h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 2rem; }
@@ -81,6 +78,16 @@
         .concept-image img { width: 100%; height: auto; display: block; filter: grayscale(30%); transition: transform 1s; }
         .concept-image:hover img { transform: scale(1.05); filter: grayscale(0%); }
 
+        /* NOVA SECÇÃO: LOCALIZAÇÃO E SUSTENTABILIDADE */
+        .sustainability-section { padding: 15vh 10vw; background-color: #161616; align-items: center; text-align: center; }
+        .sustainability-section h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 1rem; }
+        .sustainability-section p { font-size: 1.1rem; color: #aaa; max-width: 800px; line-height: 1.8; margin-bottom: 3rem; }
+        .eco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; max-width: 1000px; width: 100%; }
+        .eco-card { border-top: 1px solid rgba(197, 160, 89, 0.3); padding-top: 2rem; text-align: left; }
+        .eco-card h3 { font-size: 1.5rem; color: white; margin-bottom: 10px; font-family: 'Manrope', sans-serif; }
+        .eco-card p { font-size: 0.95rem; color: #888; }
+
+        /* SECÇÃO DO JÚRI */
         .jury-section { min-height: 100vh; padding: 15vh 10vw; align-items: center; text-align: center; background-color: #0f0f0f; }
         .jury-section h2 { font-size: 4rem; margin-bottom: 20px; }
         .jury-section p.subtitle { color: #888; font-size: 1.2rem; margin-bottom: 50px; max-width: 800px; line-height: 1.6; }
@@ -94,34 +101,46 @@
         .interactive-text { position: absolute; bottom: 40px; left: 40px; right: 40px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); padding: 30px; border-radius: 15px; border-left: 4px solid var(--accent-color); transform: translateY(100px); opacity: 0; transition: all 0.6s ease; text-align: left; }
         .interactive-display.show .interactive-text { transform: translateY(0); opacity: 1; }
 
+        /* FORMULÁRIO NARRATIVO DINÂMICO (Premium Booking) */
         .booking-section { padding: 15vh 10vw; background-color: #1a1a1a; align-items: center; }
-        .booking-section h2 { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 1rem; }
-        .booking-section p { color: #aaa; margin-bottom: 3rem; text-align: center; max-width: 600px; }
+        .booking-section h2 { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 3rem; }
         
-        .booking-form { width: 100%; max-width: 800px; background: #222; padding: 3rem; border-radius: 15px; border: 1px solid #333; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-group.full-width { grid-column: span 2; }
-        .booking-form label { font-family: 'Cinzel', serif; font-size: 0.9rem; color: #888; margin-bottom: 8px; }
-        .booking-form input, .booking-form select { background: transparent; border: none; border-bottom: 1px solid #555; color: white; padding: 10px 0; font-family: 'Manrope', sans-serif; font-size: 1rem; outline: none; transition: border-color 0.3s; }
-        .booking-form input:focus, .booking-form select:focus { border-bottom-color: var(--accent-color); }
-        .booking-form input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
-        .submit-btn { grid-column: span 2; padding: 20px; background-color: var(--accent-color); color: #111; border: none; font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 600; margin-top: 20px; transition: background-color 0.3s; }
-        .submit-btn:hover { background-color: white; }
+        .narrative-form {
+            max-width: 900px; font-size: 2.2rem; line-height: 2; color: #bbb;
+            text-align: center; font-family: 'Cinzel', serif;
+        }
+        .narrative-form input, .narrative-form select {
+            font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--accent-color);
+            background: transparent; border: none; border-bottom: 2px dashed #555;
+            padding: 0 10px; margin: 0 10px; cursor: pointer; text-align: center;
+            appearance: none; -webkit-appearance: none; transition: border-color 0.3s;
+        }
+        .narrative-form input:focus, .narrative-form select:focus { border-bottom: 2px solid var(--accent-color); outline: none; }
+        .narrative-form input[type="date"]::-webkit-calendar-picker-indicator { filter: sepia(1) hue-rotate(10deg) saturate(3); cursor: pointer; }
+        
+        .submit-btn { display: block; margin: 60px auto 0; padding: 20px 50px; background-color: transparent; color: var(--accent-color); border: 1px solid var(--accent-color); border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; transition: all 0.4s; }
+        .submit-btn:hover { background-color: var(--accent-color); color: #111; }
 
         @keyframes revealUp { 0% { transform: translateY(100px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        
+        @media (max-width: 768px) {
+            .narrative-form, .narrative-form input, .narrative-form select { font-size: 1.5rem; }
+            .eco-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- PRELOADER EFEITO VINHO -->
     <div id="preloader">
         <div class="logo-wrapper">
-            <img src="Logo.png" alt="QP Fundo" class="logo-vazio">
-            <img src="Logo.png" alt="QP Cheio" class="logo-cheio">
+            <img src="Logo.png" alt="Fundo" class="logo-vazio">
+            <div class="logo-cheio-container">
+                <img src="Logo.png" alt="Cheio" class="logo-cheio">
+            </div>
+            <div class="liquid-mask"></div>
         </div>
     </div>
 
-    <!-- LOGO FIXO -->
     <img src="Logo.png" alt="QP" class="corner-logo hover-target" onclick="window.scrollTo(0,0)">
 
     <div class="cursor-dot"></div>
@@ -133,29 +152,45 @@
         <p>Experiências que amadurecem</p>
     </header>
 
-    <!-- SECÇÕES COM A CLASSE "build-section" (Escondidas no início) -->
     <section class="build-section concept-section">
         <div class="concept-image">
             <img src="https://images.unsplash.com/photo-1469522197541-118cba46522a?q=80&w=1000" alt="Casa de Pedra e Xisto">
         </div>
         <div class="concept-text">
             <h2>O Nosso Legado</h2>
-            <p>A Quinta do Paraíso nasce no coração do Alto Douro Vinhateiro, no concelho de Vila Nova de Foz Côa. Transformámos os antigos pombais da propriedade em 5 a 6 unidades exclusivas de alojamento em espaço rural.</p>
-            <p>Aqui, não oferecemos apenas pernoita, mas um destino imersivo de experiências em total harmonia com a paisagem em socalcos.</p>
+            <p>A Quinta do Paraíso nasce no coração do Alto Douro Vinhateiro, em Vila Nova de Foz Côa. Transformámos os antigos pombais da propriedade em exclusivas unidades de alojamento rural.</p>
+            <p>Aqui, não oferecemos apenas pernoita, mas um destino imersivo de experiências em total harmonia com a paisagem em socalcos e as tradições ancestrais.</p>
+        </div>
+    </section>
+
+    <section class="build-section sustainability-section">
+        <h2>Preservar o Berço do Vinho</h2>
+        <p>O privilégio de habitar um território classificado como Património Mundial da UNESCO traz consigo a responsabilidade de o proteger. A nossa infraestrutura foi pensada para o futuro.</p>
+        <div class="eco-grid hover-target">
+            <div class="eco-card">
+                <h3>Arquitetura Viva</h3>
+                <p>Recuperação de estruturas devolutas utilizando pedra aparelhada, xisto e madeira local, evitando construção nova invasiva.</p>
+            </div>
+            <div class="eco-card">
+                <h3>Mobilidade Verde</h3>
+                <p>Estacionamento preparado com postos de carregamento para veículos elétricos, incentivando o turismo ecológico no interior.</p>
+            </div>
+            <div class="eco-card">
+                <h3>Km Zero</h3>
+                <p>Privilegiamos a economia circular duriense, servindo nos nossos piqueniques produtos endógenos e vinhos da própria quinta.</p>
+            </div>
         </div>
     </section>
 
     <section class="build-section jury-section">
         <h2>A Essência Duriense</h2>
         <p class="subtitle">A nossa oferta articula a hotelaria rural com atividades pensadas para criar uma ligação emocional com o destino. Selecione a experiência que mais o inspira.</p>
-        
         <div class="magnetic-wrap">
             <button class="magnetic-btn hover-target" data-type="enoturismo">Enoturismo</button>
             <button class="magnetic-btn hover-target" data-type="spa">Vinoterapia</button>
             <button class="magnetic-btn hover-target" data-type="natureza">Natureza e Rio</button>
-            <button class="magnetic-btn hover-target" data-type="cultura">Cultura e Arqueologia</button>
+            <button class="magnetic-btn hover-target" data-type="cultura">Arqueologia</button>
         </div>
-
         <div class="interactive-display" id="display-board">
             <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1000" id="dinamic-img" class="interactive-img" alt="Dinâmico">
             <div class="interactive-text" id="dinamic-text">
@@ -166,30 +201,20 @@
     </section>
 
     <section class="build-section booking-section">
-        <h2>Garanta o seu Lugar</h2>
-        <p>Inicie a sua jornada preenchendo os detalhes da sua estadia nos nossos pombais reabilitados.</p>
-        <form class="booking-form hover-target">
-            <div class="form-group">
-                <label>Data de Chegada</label>
-                <input type="date" required>
-            </div>
-            <div class="form-group">
-                <label>Data de Partida</label>
-                <input type="date" required>
-            </div>
-            <div class="form-group full-width">
-                <label>O Seu Nome</label>
-                <input type="text" placeholder="Como gosta de ser tratado?" required>
-            </div>
-            <button type="button" class="submit-btn hover-target" onclick="alert('Pedido de reserva simulado com sucesso!')">Solicitar Reserva</button>
+        <h2>Escreva a sua História</h2>
+        <form class="narrative-form hover-target">
+            "Olá. Eu sou o(a) <input type="text" placeholder="o seu nome" style="width: 250px;" required>, e desejo refugiar-me na Quinta a partir do dia <input type="date" required> 
+            até ao dia <input type="date" required>. Seremos <select><option>2 Adultos</option><option>1 Adulto</option><option>Uma Família</option></select> 
+            à procura de uma experiência profundamente focada em <select><option>Enoturismo & Provas</option><option>Vinoterapia & Bem-Estar</option><option>Navegação Fluvial</option></select>. 
+            Aguardo o vosso contacto!"
+            
+            <button type="button" class="submit-btn hover-target" onclick="alert('História submetida com sucesso! A magia duriense começará em breve.')">Enviar Pedido</button>
         </form>
     </section>
 
     <script>
         // PRELOADER
-        window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('preloader').classList.add('hide'); }, 4000); 
-        });
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('preloader').classList.add('hide'); }, 4000); });
 
         // CURSORES E BOTÕES
         const cursorDot = document.querySelector('.cursor-dot');
@@ -234,7 +259,6 @@
                 const type = btn.getAttribute('data-type');
                 displayBoard.classList.remove('show');
                 imgEl.style.filter = "blur(10px) grayscale(100%)";
-                
                 setTimeout(() => {
                     imgEl.src = data[type].img;
                     textEl.innerHTML = `<h3 style="font-size: 2rem; margin-bottom: 10px; color: var(--accent-color);">${data[type].title}</h3><p style="font-size: 1.1rem; line-height: 1.6;">${data[type].text}</p>`;
@@ -244,31 +268,21 @@
             });
         });
 
-        // ----------------------------------------------------
-        // O SEGREDO DO MODO APRESENTAÇÃO (A MAGIA DO 20)
-        // ----------------------------------------------------
+        // MODO APRESENTAÇÃO POR BARRA DE ESPAÇOS
         const seccoesConstrucao = document.querySelectorAll('.build-section');
         let seccaoAtual = 0;
 
         window.addEventListener('keydown', (e) => {
-            // Se carregar na Barra de Espaços (Space)
             if(e.code === 'Space') {
-                e.preventDefault(); // Evita que a página dê saltos bruscos
-                
+                e.preventDefault();
                 if(seccaoAtual < seccoesConstrucao.length) {
-                    // Revela a secção atual
                     seccoesConstrucao[seccaoAtual].classList.add('visible');
-                    
-                    // Faz scroll suave até ela
                     setTimeout(() => {
                         seccoesConstrucao[seccaoAtual - 1].scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        
-                        // Se for a secção interativa, ativa o ecrã automaticamente após o scroll
                         if(seccoesConstrucao[seccaoAtual - 1].classList.contains('jury-section')) {
                             setTimeout(() => displayBoard.classList.add('show'), 1000);
                         }
                     }, 100);
-                    
                     seccaoAtual++;
                 }
             }
