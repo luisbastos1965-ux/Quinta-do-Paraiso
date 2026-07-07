@@ -21,7 +21,7 @@
         body, html { width: 100%; height: 100vh; overflow: hidden; font-family: 'Manrope', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
         h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 
-        /* PRELOADER E ONDULAÇÃO */
+        /* PRELOADER */
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #000000; z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s; }
         #preloader.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
         
@@ -49,7 +49,6 @@
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 10%; } 100% { top: -200%; } }
 
-        /* LOGO FIXO NO CANTO (Interativo após enquadramento) */
         .corner-logo { position: absolute; top: 30px; left: 40px; width: 90px; z-index: 50; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.4)); pointer-events: none; }
         .corner-logo.clickable { pointer-events: all; }
         .corner-logo.clickable:hover { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.9)); }
@@ -68,7 +67,6 @@
         .map-container.focus-mode .map-bg-container, .map-container.card-open .map-bg-container { filter: blur(12px) brightness(0.4); transform: translate(var(--px), var(--py)) scale(1.05); }
         .map-container.focus-mode .hero-title, .map-container.card-open .hero-title, .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo, .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase { opacity: 0 !important; filter: blur(5px); }
 
-        /* SLICES */
         .map-slice { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('fundo_douro.jpg') center/cover no-repeat; transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1); }
         .slice-1 { clip-path: polygon(0 0, 25.5% 0, 25.5% 100%, 0% 100%); transform: translateY(-100%); }
         .slice-2 { clip-path: polygon(24.5% 0, 50.5% 0, 50.5% 100%, 24.5% 100%); transform: translateY(100%); }
@@ -84,7 +82,7 @@
         .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)); pointer-events: none; z-index: 1; opacity: 0; transition: background 1.5s ease, opacity 2s ease 1s; }
         .map-container.assemble .map-overlay { opacity: 1; }
 
-        /* TÍTULOS */
+        /* TÍTULOS E FRASES */
         .hero-title { position: absolute; top: 40px; right: 60px; text-align: right; z-index: 10; opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .hero-title h1 { font-size: 3.5rem; letter-spacing: 4px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: color 1s; }
         .hero-title p { font-size: 1.1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; transition: color 1s; }
@@ -100,8 +98,6 @@
         
         .deck-wrapper { flex: 1.3; position: relative; perspective: 1500px; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; }
         .deck-hint { position: absolute; bottom: 20px; width: 100%; text-align: center; color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px; animation: pulse 2s infinite; pointer-events: none; text-shadow: 0 2px 5px #000; z-index: 50;}
-        
-        /* Ajuste do object-fit para contain para garantir que os mapas não são cortados */
         .deck-card { position: absolute; width: 480px; height: 320px; object-fit: contain; background: rgba(0,0,0,0.5); border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s, border-color 0.3s; }
         .deck-card:hover { border-color: rgba(212, 175, 55, 0.9); cursor: pointer; }
         .card-swipe-out { transform: translateX(-120%) rotate(-15deg) scale(0.8) !important; opacity: 0 !important; }
@@ -110,7 +106,7 @@
         .douro-text h3 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; line-height: 1.3;}
         .douro-text p { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify;}
 
-        /* MODAL DE IDENTIDADE VISUAL (Aberto clicando no logo) */
+        /* MODAL DE IDENTIDADE VISUAL - "ESTÚDIO DE CRIAÇÃO" */
         .brand-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
         .brand-modal.active { opacity: 1; pointer-events: all; }
         .brand-container { display: flex; width: 85%; max-width: 1200px; height: 80vh; background: rgba(15,15,15,0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); overflow: hidden; transform: scale(0.9); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative;}
@@ -118,23 +114,31 @@
         .close-brand { position: absolute; top: 20px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 10; }
         .close-brand:hover { color: var(--accent-color); }
         
-        .brand-left { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%); border-right: 1px solid rgba(212, 175, 55, 0.2); }
-        .brand-left img.big-logo { width: 60%; filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6)); animation: floatLogo 4s ease-in-out infinite; }
+        .brand-left { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); border-right: 1px solid rgba(212, 175, 55, 0.2); padding: 40px; text-align: center; }
+        .brand-left img.big-logo { width: 60%; max-height: 250px; object-fit: contain; filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6)); animation: floatLogo 4s ease-in-out infinite; transition: opacity 0.3s ease; }
         @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         
+        /* O Texto gerado da seleção */
+        .brand-preview-text { margin-top: 40px; }
+        .brand-preview-text h2 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: opacity 0.3s; }
+        .brand-preview-text p { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #ddd; font-style: italic; letter-spacing: 1px; transition: opacity 0.3s; }
+
         .brand-right { flex: 1.5; padding: 50px 60px; overflow-y: auto; }
         .brand-section { margin-bottom: 40px; }
-        .brand-section h3 { color: var(--accent-color); font-size: 1.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase;}
+        .brand-section h3 { color: var(--accent-color); font-size: 1.6rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase;}
         
         .ideas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; }
+        .idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; }
         .idea-pill:hover { border-color: var(--accent-color); color: #fff; background: rgba(212, 175, 55, 0.1); }
         .idea-pill.chosen { border-color: var(--accent-color); color: var(--accent-color); font-weight: 600; background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);}
         
         .logo-comparison { display: flex; gap: 30px; margin-top: 20px; }
-        .logo-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px dashed rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center;}
-        .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; }
-        .logo-box img { max-width: 80%; max-height: 120px; object-fit: contain; }
+        .logo-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px dashed rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; cursor: none; }
+        .logo-box:hover { border-color: var(--accent-color); background: rgba(212, 175, 55, 0.05); }
+        .logo-box.chosen { border: 1px solid var(--accent-color); background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; transition: color 0.3s; }
+        .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
+        .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
 
         /* PONTOS DA PAP E COMERCIAIS */
         .pap-spot { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0) translateY(20px); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 20; pointer-events: none; }
@@ -155,16 +159,17 @@
         .com-spot.active-focus .com-dot { background: rgba(212, 175, 55, 1); transform: scale(1.5); box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
         .com-spot.active-focus .com-spot-content { opacity: 1; transform: translateX(0); background: rgba(212, 175, 55, 0.9); border-color: transparent; color: #000; font-weight: 600; }
 
-        /* POSIÇÕES */
         #pap-1 { top: 30%; left: 30%; } #pap-2 { top: 40%; left: 60%; } #pap-3 { top: 25%; left: 80%; }
         #com-1 { top: 68%; left: 42%; } #com-2 { top: 48%; left: 18%; } #com-3 { top: 60%; left: 68%; } #com-4 { top: 82%; left: 85%; }
 
-        /* MODAL GERAL (Pontos do Mapa) */
+        /* MODAL DOS PONTOS DE MAPA */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
         .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 800px; width: 90%; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
+        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; }
+        .close-btn:hover { color: var(--accent-color); }
         .modal-body h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .modal-body p { font-size: 1.1rem; line-height: 1.8; color: #ddd; margin-bottom: 15px; }
         
@@ -205,7 +210,6 @@
         </div>
     </div>
 
-    <!-- MAPA PRINCIPAL -->
     <div class="map-container" id="mapa-interativo">
         <div class="map-bg-container" id="parallax-bg">
             <div class="map-slice slice-1"></div>
@@ -216,8 +220,7 @@
         
         <div class="map-overlay" id="main-overlay"></div>
         
-        <!-- O LOGO AGORA TEM UMA AÇÃO -->
-        <img src="Logo.png" alt="QP" class="corner-logo hover-target" id="nav-logo" onclick="openBrandModal()" title="Explorar Identidade da Marca">
+        <img src="Logo.png" alt="QP" class="corner-logo hover-target" id="nav-logo" onclick="openBrandModal()" title="Estúdio de Marca">
         
         <div class="hero-title" id="main-title">
             <h1>O PROJETO</h1>
@@ -264,7 +267,6 @@
         </div>
     </div>
 
-    <!-- MODAL DO MAPA (Info Geral) -->
     <div class="modal-overlay" id="main-modal">
         <div class="modal-content">
             <button class="close-btn hover-target" onclick="closeModal()">FECHAR ✕</button>
@@ -272,50 +274,50 @@
         </div>
     </div>
 
-    <!-- NOVO: MODAL DA IDENTIDADE VISUAL (Aberto pelo Logo) -->
     <div class="brand-modal" id="brand-modal">
         <div class="brand-container">
             <button class="close-brand hover-target" onclick="closeBrandModal()">FECHAR ✕</button>
             
-            <!-- Esquerda: O Logo em Grande -->
             <div class="brand-left">
-                <img src="Logo.png" alt="Logotipo Oficial" class="big-logo hover-target">
+                <img src="Logo.png" alt="Logotipo em Preview" class="big-logo hover-target" id="floating-logo">
+                <div class="brand-preview-text">
+                    <h2 id="preview-name">Quinta do Paraíso</h2>
+                    <p id="preview-slogan">"Experiências que amadurecem"</p>
+                </div>
             </div>
             
-            <!-- Direita: A Construção da Marca (Dados da PAP) -->
             <div class="brand-right">
                 <div class="brand-section">
                     <h3>Construção da Identidade</h3>
-                    <div class="ideas-grid hover-target">
-                        <div class="idea-pill">Quinta dos Pombais[cite: 1]</div>
-                        <div class="idea-pill">Recanto do Douro[cite: 1]</div>
-                        <div class="idea-pill">Quinta do Socalco[cite: 1]</div>
-                        <div class="idea-pill">Casa da Vinha Velha[cite: 1]</div>
-                        <div class="idea-pill">Douro Nest / Ninho do Douro[cite: 1]</div>
-                        <div class="idea-pill chosen">Quinta do Paraíso[cite: 1]</div>
+                    <div class="ideas-grid" id="names-grid">
+                        <div class="idea-pill hover-target" onclick="selectName(this, 'Quinta dos Pombais')">Quinta dos Pombais</div>
+                        <div class="idea-pill hover-target" onclick="selectName(this, 'Recanto do Douro')">Recanto do Douro</div>
+                        <div class="idea-pill hover-target" onclick="selectName(this, 'Quinta do Socalco')">Quinta do Socalco</div>
+                        <div class="idea-pill hover-target" onclick="selectName(this, 'Casa da Vinha Velha')">Casa da Vinha Velha</div>
+                        <div class="idea-pill hover-target" onclick="selectName(this, 'Douro Nest / Ninho do Douro')">Douro Nest / Ninho do Douro</div>
+                        <div class="idea-pill chosen hover-target" onclick="selectName(this, 'Quinta do Paraíso')">Quinta do Paraíso</div>
                     </div>
                 </div>
 
                 <div class="brand-section">
                     <h3>Exploração de Slogans</h3>
-                    <div class="ideas-grid hover-target">
-                        <div class="idea-pill">"Onde o tempo amadurece como o vinho"[cite: 1]</div>
-                        <div class="idea-pill">"Douro. Natureza. Paraíso."[cite: 1]</div>
-                        <div class="idea-pill">"Um refúgio entre vinhas"[cite: 1]</div>
-                        <div class="idea-pill">"Viva o Douro devagar"[cite: 1]</div>
-                        <div class="idea-pill chosen">"Experiências que amadurecem"[cite: 1]</div>
+                    <div class="ideas-grid" id="slogans-grid">
+                        <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Onde o tempo amadurece como o vinho')">"Onde o tempo amadurece como o vinho"</div>
+                        <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Douro. Natureza. Paraíso.')">"Douro. Natureza. Paraíso."</div>
+                        <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Um refúgio entre vinhas')">"Um refúgio entre vinhas"</div>
+                        <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Viva o Douro devagar')">"Viva o Douro devagar"</div>
+                        <div class="idea-pill chosen hover-target" onclick="selectSlogan(this, 'Experiências que amadurecem')">"Experiências que amadurecem"</div>
                     </div>
                 </div>
 
                 <div class="brand-section">
                     <h3>Evolução Gráfica</h3>
-                    <div class="logo-comparison hover-target">
-                        <div class="logo-box">
+                    <div class="logo-comparison">
+                        <div class="logo-box hover-target" onclick="selectLogo(this, 'logo_antigo.png')" id="logo-box-esboco">
                             <span>Esboço / Inspiração</span>
-                            <!-- Pode inserir um rascunho ou logo antigo se tiver, senao mostra o placeholder -->
-                            <img src="logo_antigo.png" alt="Logotipo Antigo" onerror="this.src='https://via.placeholder.com/200x150/1a1a1a/D4AF37?text=LOGOTIPO+ANTERIOR'">
+                            <img src="logo_antigo.png" alt="Logotipo Antigo" onerror="this.src='https://via.placeholder.com/200x150/1a1a1a/D4AF37?text=ESBOÇO'">
                         </div>
-                        <div class="logo-box" style="border: 1px solid var(--accent-color); background: rgba(212, 175, 55, 0.1);">
+                        <div class="logo-box chosen hover-target" onclick="selectLogo(this, 'Logo.png')" id="logo-box-final">
                             <span>Versão Final</span>
                             <img src="Logo.png" alt="Logotipo Atual">
                         </div>
@@ -329,6 +331,7 @@
     <div class="cursor-outline"></div>
 
     <script>
+        // CURSORES E PARALLAX
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
         const mapBgContainer = document.getElementById('parallax-bg');
@@ -350,6 +353,7 @@
             });
         };
 
+        // LÓGICA DO BARALHO DE MAPAS
         const deckContainer = document.getElementById('deck-container');
         let cardElements = [];
         
@@ -503,15 +507,57 @@
             }, 1000);
         }
 
-        // LÓGICA DO MODAL DA MARCA (Aberto pelo Logo)
+        // -----------------------------------------------------
+        // INTERATIVIDADE DO "ESTÚDIO DE CRIAÇÃO" (Brand Modal)
+        // -----------------------------------------------------
         const brandModal = document.getElementById('brand-modal');
-        window.openBrandModal = function() {
-            brandModal.classList.add('active');
-        }
-        window.closeBrandModal = function() {
-            brandModal.classList.remove('active');
+        const previewName = document.getElementById('preview-name');
+        const previewSlogan = document.getElementById('preview-slogan');
+        const floatingLogo = document.getElementById('floating-logo');
+
+        window.openBrandModal = function() { brandModal.classList.add('active'); }
+        window.closeBrandModal = function() { brandModal.classList.remove('active'); }
+
+        // Função que altera o Nome em tempo real
+        window.selectName = function(element, text) {
+            document.querySelectorAll('#names-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
+            element.classList.add('chosen');
+            
+            // Efeito de transição suave no texto
+            previewName.style.opacity = '0';
+            setTimeout(() => {
+                previewName.innerText = text;
+                previewName.style.opacity = '1';
+            }, 300);
         }
 
+        // Função que altera o Slogan em tempo real
+        window.selectSlogan = function(element, text) {
+            document.querySelectorAll('#slogans-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
+            element.classList.add('chosen');
+            
+            previewSlogan.style.opacity = '0';
+            setTimeout(() => {
+                previewSlogan.innerText = `"${text.replace(/"/g, '')}"`; // Garante aspas
+                previewSlogan.style.opacity = '1';
+            }, 300);
+        }
+
+        // Função que altera o Logotipo (Esboço vs Final) em tempo real
+        window.selectLogo = function(element, src) {
+            document.querySelectorAll('.logo-comparison .logo-box').forEach(b => b.classList.remove('chosen'));
+            element.classList.add('chosen');
+            
+            floatingLogo.style.opacity = '0';
+            setTimeout(() => {
+                floatingLogo.src = src;
+                floatingLogo.style.opacity = '1';
+            }, 300);
+        }
+
+        // -----------------------------------------------------
+        // CONTEÚDO DOS MODAIS DA PAP E SITE COMERCIAL
+        // -----------------------------------------------------
         const modalData = {
             pap_conceito: `<h2>O Conceito</h2><p>O projeto centra-se na requalificação de antigos pombais existentes na propriedade, transformando-os em unidades de alojamento rural de elevada qualidade, com profundo respeito pela arquitetura e materiais da região.</p>`,
             pap_experiencia: `<h2>Tipologias de Turismo</h2><p>O empreendimento integra múltiplas tipologias num só ecossistema:</p><div class="grid-essencia"><div class="grid-item"><h3>Enoturismo</h3><p>Ligação direta à vinha.</p></div><div class="grid-item"><h3>Bem-Estar</h3><p>O exclusivo spa de vinoterapia.</p></div><div class="grid-item"><h3>Rio & Arqueologia</h3><p>Passeios fluviais e ligação ao Côa.</p></div></div>`,
@@ -526,8 +572,8 @@
                     "Eu sou o(a) <input type="text" placeholder="o seu nome" style="width: 200px;" required>, e desejo refugiar-me nos Pombais a partir de <input type="date" required>. 
                     Seremos <select><option>2 Adultos</option><option>1 Adulto</option></select> e a nossa experiência de eleição será <select><option>Enoturismo & Vinhos</option><option>Spa de Vinoterapia</option></select>."
                     <div class="action-buttons">
-                        <button type="button" class="btn-primary hover-target" onclick="alert('Obrigado! A reserva simulada foi guardada.')">Efetuar Pedido de Reserva</button>
-                        <button type="button" class="btn-secondary hover-target" onclick="alert('Área de Cliente em construção. No futuro, será integrada autenticação segura para gerir as reservas.')">Área de Cliente</button>
+                        <button type="button" class="btn-primary hover-target" onclick="alert('Reserva iniciada! Aguardamos a sua visita.')">Efetuar Pedido de Reserva</button>
+                        <button type="button" class="btn-secondary hover-target" onclick="alert('Área de Cliente: Integração de login agendada para a próxima fase.')">Área de Cliente</button>
                     </div>
                 </form>
             `
