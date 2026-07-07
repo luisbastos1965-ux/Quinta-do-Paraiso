@@ -11,7 +11,7 @@
             --bg-color: #050505;
             --text-color: #ffffff; 
             --accent-color: #D4AF37; 
-            --glass-bg: rgba(15, 15, 15, 0.85);
+            --glass-bg: rgba(15, 15, 15, 0.88);
             --px: 0px; 
             --py: 0px;
         }
@@ -49,6 +49,7 @@
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 10%; } 100% { top: -200%; } }
 
+        /* LOGO FIXO NO CANTO */
         .corner-logo { position: absolute; top: 30px; left: 40px; width: 90px; z-index: 50; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.4)); pointer-events: none; }
         .corner-logo.clickable { pointer-events: all; }
         .corner-logo.clickable:hover { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.9)); }
@@ -111,20 +112,12 @@
         .douro-text h3 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; line-height: 1.3;}
         .douro-text p { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify;}
 
-        /* ========= FASE 2: LINHA DO RIO ========= */
-        #river-path-svg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 15; opacity: 0; transition: opacity 1s ease;
-        }
+        /* ========= FASE 2: LINHA DO RIO (5 PONTOS) ========= */
+        #river-path-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; opacity: 0; transition: opacity 1s ease; }
         .map-container.river-mode #river-path-svg { opacity: 1; }
-        #river-line { transition: stroke-dashoffset 0.8s ease-in-out; }
+        #river-line { transition: stroke-dashoffset 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
 
-        .river-node {
-            position: absolute; display: flex; flex-direction: column; align-items: center;
-            opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 25;
-            pointer-events: none; width: 250px; margin-left: -125px; margin-top: -9px; 
-        }
-        
+        .river-node { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 25; pointer-events: none; width: 250px; margin-left: -125px; margin-top: -9px; }
         .river-node.visible { opacity: 1; transform: scale(1); pointer-events: all; }
         .river-node.fade-out { opacity: 0 !important; transform: scale(0) !important; pointer-events: none !important; transition: all 0.6s ease; }
         
@@ -136,12 +129,12 @@
         .river-label { margin-top: 12px; font-family: 'Cinzel', serif; font-size: 1.1rem; background: rgba(0,0,0,0.85); padding: 6px 18px; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(212, 175, 55, 0.4); white-space: nowrap; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); transition: color 0.3s, background 0.3s, transform 0.3s; }
         .river-node:hover .river-label { transform: translateY(-3px); }
 
+        /* Coordenadas Perfeitas para a Curva de 5 Pontos */
         #node-1 { top: 25%; left: 85%; } 
-        #node-2 { top: 35%; left: 75%; } 
-        #node-3 { top: 48%; left: 65%; } 
-        #node-4 { top: 65%; left: 50%; } 
-        #node-5 { top: 48%; left: 35%; } 
-        #node-6 { top: 25%; left: 20%; } 
+        #node-2 { top: 50%; left: 68%; } 
+        #node-3 { top: 70%; left: 50%; } 
+        #node-4 { top: 50%; left: 32%; } 
+        #node-5 { top: 25%; left: 15%; } 
 
         /* ========= FASE 3: SITE COMERCIAL ========= */
         .com-spot { position: absolute; display: flex; align-items: center; opacity: 0; transform: scale(0.8) translateY(20px); transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); z-index: 20; pointer-events: none; }
@@ -175,22 +168,20 @@
         .modal-content::-webkit-scrollbar-track { background: transparent; }
         .modal-content::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
 
-        /* ESTRUTURAS ESPECÍFICAS DE CONTEÚDO (PAP) */
-        
-        /* 1. Missão, Visão, Valores (Grelha Tripartida) */
+        /* 1. Missão, Visão, Valores */
         .grid-tripartida { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
         .tri-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px; border-radius: 15px; transition: transform 0.3s, border-color 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .tri-item:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.6); }
         .tri-item h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px; text-align: center; }
         .tri-item p { font-size: 0.95rem; color: #ccc; line-height: 1.7; text-align: justify; margin: 0; }
 
-        /* 2. Público-Alvo (Pílulas / Nuvem de Tags) */
-        .target-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+        /* 2. Público-Alvo */
+        .target-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 25px; }
         .target-pill { background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px 22px; border-radius: 30px; font-family: 'Manrope', sans-serif; font-size: 0.95rem; color: #ddd; transition: all 0.3s; display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .target-pill:hover { background: rgba(212, 175, 55, 0.2); border-color: var(--accent-color); transform: translateY(-3px); color: #fff; }
         .target-pill::before { content: '•'; color: var(--accent-color); font-size: 1.5rem; line-height: 0; }
 
-        /* 3. Análise SWOT (Grelha 2x2 com Cores) */
+        /* 3. Análise SWOT */
         .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
         .swot-box { background: rgba(0,0,0,0.6); padding: 25px; border-radius: 15px; border-top: 4px solid; transition: transform 0.3s; }
         .swot-box:hover { transform: translateY(-5px); }
@@ -220,6 +211,23 @@
         .price-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
         .price-tags span { background: rgba(212, 175, 55, 0.15); color: var(--accent-color); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); }
 
+        /* 5. Estrutura Organizacional CSS (Organograma Dinâmico) */
+        .org-wrapper { display: flex; flex-direction: column; align-items: center; padding: 20px 0; }
+        .org-node { background: rgba(0,0,0,0.7); border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.8rem; color: #ccc; text-align: center; width: 140px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; z-index: 2; position: relative; }
+        .org-node:hover { border-color: var(--accent-color); color: #fff; transform: translateY(-3px); background: rgba(212, 175, 55, 0.1); }
+        .org-node.manager { font-weight: 700; color: var(--accent-color); border-color: var(--accent-color); width: 200px; font-size: 1rem; }
+        .org-node.dept { font-weight: 600; color: #fff; background: rgba(255,255,255,0.05); }
+
+        .org-top { display: flex; flex-direction: column; align-items: center; position: relative; }
+        .org-top::after { content: ''; width: 2px; height: 25px; background: var(--accent-color); display: block; }
+        .org-bottom { display: flex; gap: 20px; position: relative; }
+        /* A linha horizontal que liga os pilares baseia-se na largura dos cartões para não sobrar nas pontas (Metade de 140px = 70px) */
+        .org-bottom::before { content: ''; position: absolute; top: 0; left: 70px; right: 70px; height: 2px; background: var(--accent-color); }
+        
+        .org-col { display: flex; flex-direction: column; align-items: center; position: relative; }
+        .org-col::before { content: ''; width: 2px; height: 20px; background: var(--accent-color); display: block; }
+        .org-connector { width: 2px; height: 15px; background: rgba(212, 175, 55, 0.4); display: block; }
+
         /* Outros estilos formulário */
         .narrative-form { font-size: 1.5rem; line-height: 2.2; color: #ccc; text-align: left; font-family: 'Cinzel', serif; margin-top: 20px; }
         .narrative-form input, .narrative-form select { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--accent-color); background: transparent; border: none; border-bottom: 1px dashed #666; padding: 0 5px; cursor: pointer; text-align: center; transition: border-color 0.3s; }
@@ -230,7 +238,7 @@
         .btn-secondary { padding: 15px 30px; background-color: transparent; color: #aaa; border: 1px solid #444; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.9rem; transition: all 0.4s; flex: 1; text-align: center; }
         .btn-secondary:hover { border-color: var(--text-color); color: var(--text-color); }
         
-        /* BRAND MODAL (Estúdio Sims em Branco) */
+        /* BRAND MODAL */
         .brand-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
         .brand-modal.active { opacity: 1; pointer-events: all; }
         .brand-container { display: flex; width: 85%; max-width: 1200px; height: 80vh; background: rgba(15,15,15,0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); overflow: hidden; transform: scale(0.9); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative;}
@@ -243,7 +251,6 @@
         .brand-preview-text { margin-top: 40px; min-height: 80px;}
         .brand-preview-text h2 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: opacity 0.3s; }
         .brand-preview-text p { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #ddd; font-style: italic; letter-spacing: 1px; transition: opacity 0.3s; }
-        
         .brand-right { flex: 1.5; padding: 50px 60px; overflow-y: auto; }
         .brand-section { margin-bottom: 40px; }
         .brand-section h3 { color: var(--accent-color); font-size: 1.6rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase;}
@@ -251,7 +258,6 @@
         .idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; }
         .idea-pill:hover { border-color: var(--accent-color); color: #fff; background: rgba(212, 175, 55, 0.1); }
         .idea-pill.chosen { border-color: var(--accent-color); color: var(--accent-color); font-weight: 600; background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);}
-        
         .logo-comparison { display: flex; gap: 30px; margin-top: 20px; }
         .logo-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px dashed rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; cursor: none; }
         .logo-box:hover { border-color: var(--accent-color); background: rgba(212, 175, 55, 0.05); }
@@ -260,8 +266,13 @@
         .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
         .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
 
-        .apresentacao-dica { position: absolute; bottom: 30px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.9rem; letter-spacing: 2px; opacity: 0; transition: opacity 1s; pointer-events: none; z-index: 10; text-shadow: 0 2px 4px rgba(0,0,0,1); }
-        .apresentacao-dica.show { animation: fadeInOut 3s infinite; }
+        @media (max-width: 768px) {
+            .grid-tripartida { grid-template-columns: 1fr; }
+            .swot-grid { grid-template-columns: 1fr; }
+            .mix-grid { grid-template-columns: 1fr; }
+            .org-bottom { flex-wrap: wrap; justify-content: center; }
+            .org-bottom::before { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -314,12 +325,12 @@
 
         <div class="apresentacao-dica" id="map-hint">CONTINUE A PREMIR A BARRA DE ESPAÇOS</div>
 
-        <!-- SVG DO RIO SINUOSO -->
+        <!-- SVG DO RIO (5 Pontos Curvos Perfeitos) -->
         <svg id="river-path-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path id="river-line" d="M 85 25 C 85 30, 80 35, 75 35 C 70 35, 70 48, 65 48 C 60 48, 55 65, 50 65 C 45 65, 40 48, 35 48 C 30 48, 25 25, 20 25" fill="none" stroke="rgba(212, 175, 55, 0.8)" stroke-width="0.3" stroke-dasharray="100" stroke-dashoffset="100" pathLength="100"/>
+            <path id="river-line" d="M 85 25 C 80 40, 75 50, 68 50 C 60 50, 56 70, 50 70 C 44 70, 40 50, 32 50 C 25 50, 20 40, 15 25" fill="none" stroke="rgba(212, 175, 55, 0.8)" stroke-width="0.3" stroke-dasharray="100" stroke-dashoffset="100" pathLength="100"/>
         </svg>
 
-        <!-- FASE 2: OS 6 PONTOS DO RIO -->
+        <!-- FASE 2: OS 5 PONTOS DO RIO -->
         <div class="river-node hover-target" id="node-1" onclick="openModal('river_missao')">
             <div class="river-dot"></div><div class="river-label">Missão, Visão e Valores</div>
         </div>
@@ -334,9 +345,6 @@
         </div>
         <div class="river-node hover-target" id="node-5" onclick="openModal('river_org')">
             <div class="river-dot"></div><div class="river-label">Estrutura Organizacional</div>
-        </div>
-        <div class="river-node hover-target" id="node-6" onclick="openModal('river_reserva')">
-            <div class="river-dot"></div><div class="river-label">Portal de Hóspedes</div>
         </div>
 
         <!-- FASE 3: SITE COMERCIAL FINAL -->
@@ -436,7 +444,7 @@
         });
 
         const updateHoverTargets = () => {
-            document.querySelectorAll('.hover-target, button, input, select, .com-spot, .river-node').forEach(target => {
+            document.querySelectorAll('.hover-target, button, input, select, .com-spot, .river-node, .idea-pill, .logo-box').forEach(target => {
                 target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
                 target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
             });
@@ -493,7 +501,7 @@
         });
 
         // ------------------------------------------------------------------
-        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO
+        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO (5 Pontos)
         // ------------------------------------------------------------------
         let presentationPhase = 'preloader';
         let currentRiverNode = 0;
@@ -509,7 +517,6 @@
 
                 if (presentationPhase === 'preloader') {
                     presentationPhase = 'animating_splash';
-                    
                     const drop = document.getElementById('drop');
                     const ripple = document.getElementById('ripple');
                     const logoContainer = document.getElementById('logo-container');
@@ -526,18 +533,22 @@
                     setTimeout(() => {
                         document.getElementById('preloader').classList.add('hide');
                         mapaContainer.classList.add('assemble');
-                        setTimeout(() => { presentationPhase = 'initial_frame'; }, 2000);
+                        setTimeout(() => { document.getElementById('map-hint').classList.add('show'); presentationPhase = 'initial_frame'; }, 2000);
                     }, 4500);
 
                 } else if (presentationPhase === 'initial_frame') {
+                    document.getElementById('map-hint').style.display = 'none';
                     document.getElementById('motivation').classList.add('fade-out');
-                    document.getElementById('main-title').classList.add('fade-out');
+                    document.getElementById('main-title').classList.add('fade-out'); 
                     
                     document.getElementById('douro-card').classList.add('show');
                     mapaContainer.classList.add('card-open'); 
                     presentationPhase = 'douro_char';
                     
+                    setTimeout(() => { document.getElementById('map-hint').style.display = 'block'; }, 1500);
+                    
                 } else if (presentationPhase === 'douro_char') {
+                    document.getElementById('map-hint').style.display = 'none';
                     document.getElementById('douro-card').classList.add('fade-out');
                     mapaContainer.classList.remove('card-open');
                     
@@ -547,7 +558,8 @@
                     
                     setTimeout(() => {
                         riverNodes[0].classList.add('visible', 'active-node');
-                        riverLine.style.strokeDashoffset = 100 - (1 * (100 / 6)); 
+                        // 5 pontos: cada avanço = 20%
+                        riverLine.style.strokeDashoffset = 80; 
                         currentRiverNode = 1;
                     }, 800);
 
@@ -565,7 +577,7 @@
                         if (currentRiverNode < riverNodes.length) {
                             riverNodes[currentRiverNode - 1].classList.remove('active-node');
                             
-                            let nextOffset = 100 - ((currentRiverNode + 1) * (100 / 6));
+                            let nextOffset = 100 - ((currentRiverNode + 1) * 20);
                             riverLine.style.strokeDashoffset = nextOffset;
                             
                             setTimeout(() => {
@@ -602,13 +614,13 @@
             }, 1000);
         }
 
-        // ESTÚDIO DE MARCA EM BRANCO
+        // ESTÚDIO DE MARCA
         const brandModal = document.getElementById('brand-modal');
         const previewName = document.getElementById('preview-name');
         const previewSlogan = document.getElementById('preview-slogan');
         const floatingLogo = document.getElementById('floating-logo');
 
-        window.openBrandModal = function() { brandModal.classList.add('active'); }
+        window.openBrandModal = function() { brandModal.classList.add('active'); updateHoverTargets(); }
         window.closeBrandModal = function() { brandModal.classList.remove('active'); }
 
         window.selectName = function(element, text) {
@@ -632,7 +644,7 @@
             setTimeout(() => { floatingLogo.src = src; floatingLogo.style.opacity = '1'; }, 300);
         }
 
-        // CONTEÚDO FINAL DOS TÓPICOS DA PAP
+        // CONTEÚDO FINAL DOS TÓPICOS DA PAP E SITE COMERCIAL
         const modalData = {
             river_missao: `
                 <h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
@@ -670,25 +682,25 @@
                     <div class="swot-box strengths">
                         <h3>Forças</h3>
                         <ul>
-                            <li>Localização privilegiada</li>
+                            <li>Localização privilegiada no Douro</li>
                             <li>Forte identidade enoturística</li>
                             <li>Valorização dos produtos locais</li>
                             <li>Capacidade reduzida de alojamentos (Exclusividade)</li>
-                            <li>Oferta Diferenciada</li>
+                            <li>Oferta Diferenciada e Autêntica</li>
                             <li>Clima e Tranquilidade</li>
                             <li>Diversidade de experiências sensoriais</li>
-                            <li>Foco na sustentabilidade</li>
+                            <li>Foco total na sustentabilidade</li>
                         </ul>
                     </div>
                     <div class="swot-box weaknesses">
                         <h3>Fraquezas</h3>
                         <ul>
-                            <li>Acessibilidade geográfica limitada</li>
+                            <li>Acessibilidade geográfica limitante</li>
                             <li>Elevado investimento inicial</li>
                             <li>Capacidade limitada de expansão física</li>
-                            <li>Dependência de recursos humanos especializados</li>
-                            <li>Sazonalidade do turismo na região</li>
-                            <li>Marca nova no mercado</li>
+                            <li>Dependência de recursos humanos locais e especializados</li>
+                            <li>Sazonalidade vincada no turismo da região</li>
+                            <li>Marca 100% nova no mercado</li>
                             <li>Tempo elevado de maturação do investimento</li>
                         </ul>
                     </div>
@@ -696,23 +708,23 @@
                         <h3>Oportunidades</h3>
                         <ul>
                             <li>Crescimento da procura turística e digitalização</li>
-                            <li>Aumento do interesse pelo enoturismo global</li>
+                            <li>Aumento orgânico do interesse pelo enoturismo global</li>
                             <li>Possibilidade de integração em rotas regionais</li>
-                            <li>Parcerias estratégicas fortes</li>
-                            <li>Interesse crescente por sustentabilidade</li>
+                            <li>Parcerias estratégicas (Ex: Parque do Côa)</li>
+                            <li>Interesse crescente do mercado por sustentabilidade</li>
                             <li>Programas de financiamento ao turismo rural</li>
-                            <li>Forte reputação internacional do Douro</li>
+                            <li>Forte reputação internacional do destino Douro</li>
                         </ul>
                     </div>
                     <div class="swot-box threats">
                         <h3>Ameaças</h3>
                         <ul>
-                            <li>Concorrência estabelecida e plataformas digitais</li>
-                            <li>Crises económicas e impactos globais</li>
-                            <li>Alterações climáticas (impacto na vinha)</li>
+                            <li>Concorrência estabelecida e dependência de plataformas digitais</li>
+                            <li>Crises económicas e impactos no poder de compra</li>
+                            <li>Alterações climáticas (impacto destrutivo na vinha)</li>
                             <li>Dependência do fluxo de turistas internacionais</li>
-                            <li>Custos elevados de manutenção</li>
-                            <li>Exigências legais e burocráticas rigorosas</li>
+                            <li>Custos crescentes e elevados de manutenção</li>
+                            <li>Exigências legais e burocráticas no Património</li>
                         </ul>
                     </div>
                 </div>
@@ -722,47 +734,82 @@
                 <div class="mix-grid hover-target">
                     <div class="mix-card custom-scroll">
                         <h3>Produto</h3>
-                        <p>O projeto consiste na criação de uma unidade de alojamento turístico dedicada ao enoturismo, valorizando a propriedade tradicional ligada à produção de vinho. O empreendimento oferece um restaurante exclusivo, pequeno-almoço, snacks e jantar, receção 24h, quartos familiares e unidades com piscina privativa.</p>
-                        <p>Aposta na acessibilidade com infraestruturas adaptadas, estacionamento com postos elétricos, Wi-Fi, lavanderia, serviço pet friendly e cabaz de boas-vindas com produtos regionais, aliando hospitalidade à sustentabilidade e cultura local.</p>
+                        <p>O projeto consiste na criação de uma unidade de alojamento turístico dedicada ao enoturismo, valorizando a propriedade tradicional ligada à produção de vinho. O empreendimento oferece um restaurante exclusivo para hóspedes, serviço de pequeno-almoço, snacks e jantar, receção 24h, quartos familiares e algumas unidades com piscina privativa.</p>
+                        <p>Aposta fortemente na acessibilidade através de infraestruturas adaptadas para mobilidade condicionada, buggy de circulação interna, estacionamento com postos para veículos elétricos, Wi-Fi em todo o recinto, lavanderia, serviço pet friendly, equipamentos para bebés e um luxuoso cabaz de boas-vindas.</p>
                     </div>
-                    <div class="mix-card custom-scroll" style="background: rgba(212, 175, 55, 0.05);">
+                    <div class="mix-card custom-scroll" style="background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.5);">
                         <h3>Preço</h3>
                         <p><em>(Estrutura de preçário em fase de definição)</em></p>
-                        <p>A estratégia de precificação refletirá o posicionamento premium e sustentável, sendo segmentada para as seguintes áreas de negócio:</p>
+                        <p>A estratégia refletirá o posicionamento premium da quinta, sendo segmentada de forma rentável para as seguintes áreas de negócio:</p>
                         <div class="price-tags">
-                            <span>Casas (Alojamento)</span>
-                            <span>Atividades (Rio / Enoturismo)</span>
-                            <span>Vinhos (Provas e Experiências)</span>
+                            <span>Casas e Pombais</span>
+                            <span>Atividades & Enoturismo</span>
+                            <span>Vinhos (Provas e Venda)</span>
                         </div>
                     </div>
                     <div class="mix-card custom-scroll">
                         <h3>Promoção</h3>
-                        <p>Estratégia integrada focada na valorização da identidade no turismo rural. Aposta principal num website multilingue e comunicação reforçada nas redes sociais, destacando vindimas, paisagem e atividades participativas.</p>
-                        <p>Presença em plataformas (Booking/Airbnb) com foco futuro em reservas diretas. Parcerias com agências, entidades regionais e produtores locais. Diferenciação assegurada por passeios de jipe, barcos privados e vinoterapia adaptada ao perfil do hóspede.</p>
+                        <p>Estratégia integrada focada na valorização da identidade rural. A aposta principal consistirá numa presença digital sólida, com website multilingue e conteúdos que promovam as tradições durienses.</p>
+                        <p>Comunicação reforçada nas redes sociais, realçando as experiências reais (vindimas, paisagem). A diferenciação será garantida pela promoção de passeios de jipe e barco privados, bem como rituais imersivos de vinoterapia.</p>
                     </div>
                     <div class="mix-card custom-scroll">
                         <h3>Distribuição (Praça)</h3>
-                        <p>Estratégia multicanal combinando venda direta e indireta. O canal primário será o website oficial com sistema de reservas integrado, garantindo pagamentos seguros e personalização.</p>
-                        <p>Complementado por plataformas OTA numa fase inicial. A médio e longo prazo, a Quinta focará na fidelização através de comunicações pós-estadia, aumentando reservas diretas e reduzindo a competição baseada apenas no preço.</p>
+                        <p>Estratégia multicanal combinando venda direta e indireta. O canal primário será o website oficial da Quinta com um motor de reservas integrado e pagamentos diretos.</p>
+                        <p>Numa primeira fase, haverá integração tática nas plataformas Booking e Airbnb para gerar captação de clientes. A médio/longo prazo, a marca focará na fidelização e na venda direta, reduzindo drasticamente as comissões pagas aos intermediários de mercado.</p>
                     </div>
                 </div>
             `,
-            river_org: `<h2>Estrutura Organizacional</h2><p>Prepara o conteúdo para inserir aqui na próxima iteração.</p>`,
-            river_reserva: `
-                <!-- Lembrete da Memória: Quando avançares para produção, lembra-te que podes integrar Firebase Auth aqui para ter login via Google, Apple ou Telefone! -->
-                <h2>Portal de Hóspedes</h2>
-                <form class="narrative-form hover-target">
-                    "Eu sou o(a) <input type="text" placeholder="o seu nome" style="width: 200px;" required>, e desejo refugiar-me a partir de <input type="date" required>."
-                    <div class="action-buttons">
-                        <button type="button" class="btn-primary hover-target" onclick="alert('Reserva submetida!')">Efetuar Pedido de Reserva</button>
-                        <button type="button" class="btn-secondary hover-target" onclick="alert('Área de Cliente em construção. Pronta para integração segura (Google/Telefone).')">Área de Cliente</button>
+            river_org: `
+                <h2 style="text-align: center; margin-bottom: 30px;">Estrutura Organizacional & Operações</h2>
+                
+                <div class="org-wrapper hover-target">
+                    <div class="org-top">
+                        <div class="org-node manager">Gerente</div>
                     </div>
-                </form>
+                    <div class="org-bottom">
+                        <div class="org-col">
+                            <div class="org-node dept">Receção</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node">Rececionistas</div>
+                        </div>
+                        <div class="org-col">
+                            <div class="org-node dept">Alojamento</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node">Governanta</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node" style="font-size: 0.75rem;">Emp. de limpeza</div>
+                        </div>
+                        <div class="org-col">
+                            <div class="org-node dept">Restauração</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node">Chefe de Cozinha</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node">Cozinheiros</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node">Emp. de mesa</div>
+                        </div>
+                        <div class="org-col">
+                            <div class="org-node dept">Enoturismo</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node">Guia Turístico</div>
+                        </div>
+                        <div class="org-col">
+                            <div class="org-node dept">Manutenção</div>
+                            <div class="org-connector"></div>
+                            <div class="org-node">Técnico</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hover-target" style="margin-top: 40px; background: rgba(212, 175, 55, 0.05); border: 1px dashed rgba(212, 175, 55, 0.4); padding: 20px; border-radius: 15px;">
+                    <h3 style="color: var(--accent-color); margin-bottom: 10px; font-size: 1.3rem; font-family: 'Cinzel', serif;">Portal de Hóspedes (Gestão Operacional)</h3>
+                    <p style="margin:0; font-size: 0.95rem; color: #ccc; line-height: 1.6;">Simulação de gestão operacional integrada para apoiar as equipas em cima. A venda direta e a articulação de serviços (spa, restaurante e limpeza) será canalizada através de um <strong>website oficial com motor de reservas integrado</strong>, otimizando o fluxo de trabalho diário de toda a Quinta.</p>
+                </div>
             `,
 
-            com_alojamento: `<h2>Os Nossos Pombais</h2><p>Na tranquilidade da encosta duriense, transformámos o património esquecido num refúgio de luxo. Dispomos de unidades exclusivas de alojamento onde a pedra, o xisto e a madeira criam uma atmosfera de conforto absoluto.</p>`,
-            com_vinhos: `<h2>Néctar das Encostas</h2><p>A cultura vitivinícola é a alma do nosso projeto. Caminhe connosco pelos socalcos milenares e conheça as nossas castas autóctones.</p>`,
-            com_rio: `<h2>Água & Bem-Estar</h2><p>Desça até às margens do rio Douro e embarque num cruzeiro fluvial privativo. No regresso à quinta, o nosso Spa de Vinoterapia aguarda por si.</p>`,
+            com_alojamento: `<h2>Os Nossos Pombais</h2><p>Na tranquilidade da encosta duriense, transformámos o património esquecido num refúgio de luxo. Dispomos de unidades exclusivas de alojamento onde a pedra, o xisto e a madeira criam uma atmosfera de conforto absoluto.</p><p>Acorde com a neblina sobre o rio e termine o dia na sua piscina privativa, em total privacidade.</p>`,
+            com_vinhos: `<h2>Néctar das Encostas</h2><p>A cultura vitivinícola é a alma do nosso projeto. Caminhe connosco pelos socalcos milenares e conheça as nossas castas autóctones.</p><p>A experiência culmina na adega, onde as nossas provas de vinhos orientadas são harmonizadas de forma sublime com enchidos, compotas e queijos locais.</p>`,
+            com_rio: `<h2>Água & Bem-Estar</h2><p>Desça até às margens do rio Douro e embarque num cruzeiro fluvial privativo, explorando os imponentes vales a partir do leito.</p><p>No regresso à quinta, o nosso Spa aguarda por si. Experimente a verdadeira Vinoterapia: banhos de imersão antioxidantes que purificam o corpo.</p>`,
             com_reservas: `
                 <h2>O Seu Refúgio</h2>
                 <form class="narrative-form hover-target">
