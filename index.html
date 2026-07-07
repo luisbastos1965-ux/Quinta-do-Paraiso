@@ -85,14 +85,14 @@
         .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)); pointer-events: none; z-index: 1; opacity: 0; transition: background 1.5s ease, opacity 2s ease 1s; }
         .map-container.assemble .map-overlay { opacity: 1; }
 
-        /* TÍTULOS */
-        .hero-title { position: absolute; top: 40px; right: 60px; text-align: right; z-index: 10; opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        /* TÍTULOS E FRASES INICIAIS */
+        .hero-title { position: absolute; top: 40px; right: 60px; text-align: right; z-index: 10; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .hero-title.fade-out { opacity: 0 !important; filter: blur(5px); transform: translateY(-10px); transition: all 0.5s ease !important; }
         .hero-title h1 { font-size: 3.5rem; letter-spacing: 4px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: color 1s; }
         .hero-title p { font-size: 1.1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; transition: color 1s; }
         .map-container.assemble .hero-title { opacity: 1; transform: translateY(0); transition-delay: 1.5s; }
 
-        .motivation-phrase { position: absolute; bottom: 15vh; left: 6vw; max-width: 650px; opacity: 0; transform: translateY(20px); transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; }
+        .motivation-phrase { position: absolute; bottom: 15vh; left: 6vw; max-width: 650px; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; }
         .map-container.assemble .motivation-phrase { opacity: 1; transform: translateY(0); transition-delay: 2s; }
         .motivation-phrase.fade-out { opacity: 0 !important; filter: blur(8px); transform: translateY(-10px); transition: all 0.5s ease !important; }
         .motivation-phrase p { font-family: 'Cinzel', serif; font-size: 2rem; line-height: 1.5; color: rgba(255, 255, 255, 0.95); border-left: 3px solid var(--accent-color); padding-left: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.9); }
@@ -111,21 +111,12 @@
         .douro-text h3 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; line-height: 1.3;}
         .douro-text p { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify;}
 
-        /* ========= FASE 2: LINHA DO RIO (6 Pontos Curvos) ========= */
-        #river-path-svg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 15; opacity: 0; transition: opacity 1s ease;
-        }
+        /* FASE 2: LINHA DO RIO */
+        #river-path-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; opacity: 0; transition: opacity 1s ease; }
         .map-container.river-mode #river-path-svg { opacity: 1; }
-        
         #river-line { transition: stroke-dashoffset 0.8s ease-in-out; }
 
-        .river-node {
-            position: absolute; display: flex; flex-direction: column; align-items: center;
-            opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 25;
-            pointer-events: none; width: 250px; margin-left: -125px; margin-top: -9px; 
-        }
-        
+        .river-node { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 25; pointer-events: none; width: 250px; margin-left: -125px; margin-top: -9px; }
         .river-node.visible { opacity: 1; transform: scale(1); pointer-events: all; }
         .river-node.fade-out { opacity: 0 !important; transform: scale(0) !important; pointer-events: none !important; transition: all 0.6s ease; }
         
@@ -137,7 +128,6 @@
         .river-label { margin-top: 12px; font-family: 'Cinzel', serif; font-size: 1.1rem; background: rgba(0,0,0,0.85); padding: 6px 18px; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(212, 175, 55, 0.4); white-space: nowrap; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); transition: color 0.3s, background 0.3s, transform 0.3s; }
         .river-node:hover .river-label { transform: translateY(-3px); }
 
-        /* Coordenadas Curvas (Alinhadas milimetricamente com a curva Bezier) */
         #node-1 { top: 25%; left: 85%; } 
         #node-2 { top: 35%; left: 75%; } 
         #node-3 { top: 48%; left: 65%; } 
@@ -145,7 +135,7 @@
         #node-5 { top: 48%; left: 35%; } 
         #node-6 { top: 25%; left: 20%; } 
 
-        /* ========= FASE 3: SITE COMERCIAL ========= */
+        /* FASE 3: SITE COMERCIAL */
         .com-spot { position: absolute; display: flex; align-items: center; opacity: 0; transform: scale(0.8) translateY(20px); transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); z-index: 20; pointer-events: none; }
         .com-spot.visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
         .com-dot { width: 14px; height: 14px; background: rgba(212, 175, 55, 0.6); border-radius: 50%; box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); transition: all 0.4s ease; }
@@ -160,11 +150,20 @@
         /* MODAIS GERAIS */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 800px; width: 90%; transform: translateY(30px) scale(0.95); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+        /* Aumentei o max-width para acomodar a grelha de 3 colunas de forma fluida */
+        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1000px; width: 90%; transform: translateY(30px) scale(0.95); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
-        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; }
+        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; }
         .close-btn:hover { color: var(--accent-color); }
+        
+        /* GRELHA TRIPARTIDA PARA MISSÃO, VISÃO E VALORES */
+        .grid-tripartida { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
+        .tri-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s, border-color 0.3s; }
+        .tri-item:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.6); }
+        .tri-item h3 { color: var(--accent-color); font-size: 1.6rem; margin-bottom: 15px; font-family: 'Cinzel', serif; }
+        .tri-item p { font-size: 1rem; color: #ccc; line-height: 1.6; font-family: 'Manrope', sans-serif; text-align: justify; }
+
         .modal-body h2 { font-size: 3rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .modal-body p { font-size: 1.1rem; line-height: 1.8; color: #ddd; margin-bottom: 15px; }
         
@@ -182,7 +181,7 @@
         .btn-secondary { padding: 15px 30px; background-color: transparent; color: #aaa; border: 1px solid #444; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.9rem; transition: all 0.4s; flex: 1; text-align: center; }
         .btn-secondary:hover { border-color: var(--text-color); color: var(--text-color); }
         
-        /* BRAND MODAL (Estúdio Sims) */
+        /* BRAND MODAL */
         .brand-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
         .brand-modal.active { opacity: 1; pointer-events: all; }
         .brand-container { display: flex; width: 85%; max-width: 1200px; height: 80vh; background: rgba(15,15,15,0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); overflow: hidden; transform: scale(0.9); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative;}
@@ -211,9 +210,10 @@
         .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; transition: color 0.3s; }
         .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
         .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
-
-        .apresentacao-dica { position: absolute; bottom: 30px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.9rem; letter-spacing: 2px; opacity: 0; transition: opacity 1s; pointer-events: none; z-index: 10; text-shadow: 0 2px 4px rgba(0,0,0,1); }
-        .apresentacao-dica.show { animation: fadeInOut 3s infinite; }
+        
+        @media (max-width: 768px) {
+            .grid-tripartida { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -235,6 +235,7 @@
         </div>
     </div>
 
+    <!-- MAPA PRINCIPAL -->
     <div class="map-container" id="mapa-interativo">
         <div class="map-bg-container" id="parallax-bg">
             <div class="map-slice slice-1"></div>
@@ -255,6 +256,7 @@
             <p>"A ambição de transformar a herança num futuro vivo, onde o tempo amadurece experiências e a natureza acolhe a alma."</p>
         </div>
 
+        <!-- PAINEL ENQUADRAMENTO GEOGRÁFICO -->
         <div class="douro-card" id="douro-card">
             <div class="deck-wrapper hover-target" id="deck-container"></div>
             <div class="douro-text">
@@ -263,11 +265,8 @@
             </div>
         </div>
 
-        <div class="apresentacao-dica" id="map-hint">CONTINUE A PREMIR A BARRA DE ESPAÇOS</div>
-
         <!-- SVG DO RIO SINUOSO -->
         <svg id="river-path-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <!-- A curva Bézier ajustada para não tocar nas pontas e passar pelo centro dos pontos -->
             <path id="river-line" d="M 85 25 C 85 30, 80 35, 75 35 C 70 35, 70 48, 65 48 C 60 48, 55 65, 50 65 C 45 65, 40 48, 35 48 C 30 48, 25 25, 20 25" fill="none" stroke="rgba(212, 175, 55, 0.8)" stroke-width="0.3" stroke-dasharray="100" stroke-dashoffset="100" pathLength="100"/>
         </svg>
 
@@ -314,16 +313,16 @@
         </div>
     </div>
 
-    <!-- MODAL DO ESTÚDIO DA MARCA (Em Branco no Início) -->
+    <!-- MODAL DE IDENTIDADE VISUAL (Estúdio Sims em Branco) -->
     <div class="brand-modal" id="brand-modal">
         <div class="brand-container">
             <button class="close-brand hover-target" onclick="closeBrandModal()">FECHAR ✕</button>
             
             <div class="brand-left">
-                <img src="" alt="Logotipo" class="big-logo hover-target" id="floating-logo" style="opacity: 0;">
+                <img src="" alt="Logotipo em Preview" class="big-logo hover-target" id="floating-logo" style="opacity: 0;">
                 <div class="brand-preview-text">
-                    <h2 id="preview-name" style="opacity: 0;"></h2>
-                    <p id="preview-slogan" style="opacity: 0;"></p>
+                    <h2 id="preview-name" style="opacity: 0.4;">[Selecione um Nome]</h2>
+                    <p id="preview-slogan" style="opacity: 0.4;">[Selecione um Slogan]</p>
                 </div>
             </div>
             
@@ -352,7 +351,7 @@
                 </div>
 
                 <div class="brand-section">
-                    <h3>Evolução Gráfica</h3>
+                    <h3>Evolução Gráfica (Logotipo)</h3>
                     <div class="logo-comparison">
                         <div class="logo-box hover-target" onclick="selectLogo(this, 'logo_antigo.png')" id="logo-box-esboco">
                             <span>Esboço / Inspiração</span>
@@ -394,7 +393,7 @@
             });
         };
 
-        // LÓGICA DO BARALHO DE MAPAS
+        // BARALHO DE MAPAS
         const deckContainer = document.getElementById('deck-container');
         let cardElements = [];
         
@@ -445,7 +444,7 @@
         });
 
         // ------------------------------------------------------------------
-        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO (Com a dinâmica de Abrir/Fechar a Linha)
+        // A MÁQUINA DE ESTADOS REFINADA (Com a lógica de abrir/fechar + rio)
         // ------------------------------------------------------------------
         let presentationPhase = 'preloader';
         let currentRiverNode = 0;
@@ -461,6 +460,7 @@
 
                 if (presentationPhase === 'preloader') {
                     presentationPhase = 'animating_splash';
+                    
                     const drop = document.getElementById('drop');
                     const ripple = document.getElementById('ripple');
                     const logoContainer = document.getElementById('logo-container');
@@ -477,22 +477,18 @@
                     setTimeout(() => {
                         document.getElementById('preloader').classList.add('hide');
                         mapaContainer.classList.add('assemble');
-                        setTimeout(() => { document.getElementById('map-hint').classList.add('show'); presentationPhase = 'initial_frame'; }, 2000);
+                        setTimeout(() => { presentationPhase = 'initial_frame'; }, 2000);
                     }, 4500);
 
                 } else if (presentationPhase === 'initial_frame') {
-                    document.getElementById('map-hint').style.display = 'none';
                     document.getElementById('motivation').classList.add('fade-out');
-                    document.getElementById('main-title').classList.add('fade-out'); 
+                    document.getElementById('main-title').classList.add('fade-out');
                     
                     document.getElementById('douro-card').classList.add('show');
                     mapaContainer.classList.add('card-open'); 
                     presentationPhase = 'douro_char';
                     
-                    setTimeout(() => { document.getElementById('map-hint').style.display = 'block'; }, 1500);
-                    
                 } else if (presentationPhase === 'douro_char') {
-                    document.getElementById('map-hint').style.display = 'none';
                     document.getElementById('douro-card').classList.add('fade-out');
                     mapaContainer.classList.remove('card-open');
                     
@@ -502,7 +498,7 @@
                     
                     setTimeout(() => {
                         riverNodes[0].classList.add('visible', 'active-node');
-                        riverLine.style.strokeDashoffset = 100; // Linha apagada no início
+                        riverLine.style.strokeDashoffset = 100 - (1 * (100 / 6)); 
                         currentRiverNode = 1;
                     }, 800);
 
@@ -520,19 +516,21 @@
                         isModalOpen = false;
                         
                         if (currentRiverNode < riverNodes.length) {
-                            // Tira o brilho do nó anterior
+                            // Retira o brilho do nó anterior
                             riverNodes[currentRiverNode - 1].classList.remove('active-node');
                             
-                            // Avança a linha (cada segmento é 20% da pathLength total)
-                            let nextOffset = 100 - (currentRiverNode * 20);
+                            // Avança a linha
+                            let nextOffset = 100 - ((currentRiverNode + 1) * (100 / 6));
                             riverLine.style.strokeDashoffset = nextOffset;
                             
+                            // Revela o próximo ponto após a linha começar a desenhar
                             setTimeout(() => {
                                 riverNodes[currentRiverNode].classList.add('visible', 'active-node');
                                 currentRiverNode++;
-                            }, 800); 
+                            }, 400); 
                             
                         } else {
+                            // Acabaram-se os pontos, transita para o site final
                             transitionToCommercial();
                         }
                     }
@@ -561,7 +559,7 @@
             }, 1000);
         }
 
-        // ESTÚDIO DE MARCA
+        // ESTÚDIO DE MARCA EM BRANCO
         const brandModal = document.getElementById('brand-modal');
         const previewName = document.getElementById('preview-name');
         const previewSlogan = document.getElementById('preview-slogan');
@@ -593,7 +591,23 @@
 
         // CONTEÚDO DOS TÓPICOS
         const modalData = {
-            river_missao: `<h2>Missão, Visão e Valores</h2><p>Prepara-te para enviar os conteúdos detalhados!</p>`,
+            river_missao: `
+                <h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
+                <div class="grid-tripartida hover-target">
+                    <div class="tri-item">
+                        <h3>Missão</h3>
+                        <p>Proporcionar experiências turísticas autênticas, valorizando a cultura vitivinícola do Douro, a produção local, o enoturismo, a sustentabilidade e o envolvimento da comunidade, com um serviço de elevada qualidade.</p>
+                    </div>
+                    <div class="tri-item">
+                        <h3>Visão</h3>
+                        <p>Ser uma referência no enoturismo nacional e internacional, reconhecida pela excelência das suas experiências, pela valorização da identidade duriense e pela ligação sustentável entre turismo, agricultura e cultura.</p>
+                    </div>
+                    <div class="tri-item">
+                        <h3>Valores</h3>
+                        <p>Valorizar a autenticidade, a qualidade, a excelência, a sustentabilidade e a identidade duriense, promovendo os produtos locais, apoiando a comunidade e preservando as tradições vitivinícolas da região.</p>
+                    </div>
+                </div>
+            `,
             river_publico: `<h2>Público-Alvo</h2><p>A aguardar o envio do conteúdo...</p>`,
             river_swot: `<h2>Análise SWOT</h2><p>A aguardar o envio do conteúdo...</p>`,
             river_4p: `<h2>Marketing-Mix (4 P's)</h2><p>A aguardar o envio do conteúdo...</p>`,
@@ -609,7 +623,7 @@
                     "Eu sou o(a) <input type="text" placeholder="o seu nome" style="width: 200px;" required>, e desejo refugiar-me a partir de <input type="date" required>."
                     <div class="action-buttons">
                         <button type="button" class="btn-primary hover-target" onclick="alert('Reserva submetida!')">Efetuar Pedido de Reserva</button>
-                        <button type="button" class="btn-secondary hover-target" onclick="alert('Funcionalidade de Login pronta para integração (Google/Telefone).')">Área de Cliente</button>
+                        <button type="button" class="btn-secondary hover-target" onclick="alert('Área de Cliente em atualização.')">Área de Cliente</button>
                     </div>
                 </form>
             `
