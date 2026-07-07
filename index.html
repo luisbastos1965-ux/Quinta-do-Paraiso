@@ -21,7 +21,7 @@
         body, html { width: 100%; height: 100vh; overflow: hidden; font-family: 'Manrope', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
         h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 
-        /* PRELOADER & SINCRONIZAÇÃO PERFEITA */
+        /* PRELOADER E ONDULAÇÃO */
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #000000; z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s; }
         #preloader.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
         
@@ -60,7 +60,7 @@
         .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-color); transition: width 0.2s, height 0.2s, background-color 0.2s; }
         .cursor-outline.expand { width: 80px; height: 80px; background-color: rgba(212, 175, 55, 0.15); backdrop-filter: blur(2px); }
 
-        /* MAPA INTERATIVO */
+        /* MAPA INTERATIVO & SLICES */
         .map-container { width: 100%; height: 100vh; position: relative; overflow: hidden; background-color: var(--bg-color); }
         
         .map-bg-container { 
@@ -69,13 +69,13 @@
             transition: filter 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* O BLUR DA FOCAGEM CINEMATOGRÁFICA */
-        .map-container.focus-mode .map-bg-container {
+        .map-container.focus-mode .map-bg-container, .map-container.card-open .map-bg-container {
             filter: blur(12px) brightness(0.4);
             transform: translate(var(--px), var(--py)) scale(1.05); 
         }
-        .map-container.focus-mode .hero-title,
-        .map-container.focus-mode .corner-logo {
+        .map-container.focus-mode .hero-title, .map-container.card-open .hero-title,
+        .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo,
+        .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase {
             opacity: 0 !important; filter: blur(5px);
         }
 
@@ -95,10 +95,32 @@
         .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)); pointer-events: none; z-index: 1; opacity: 0; transition: background 1.5s ease, opacity 2s ease 1s; }
         .map-container.assemble .map-overlay { opacity: 1; }
 
+        /* TÍTULO PRINCIPAL (Alterado) */
         .hero-title { position: absolute; top: 40px; right: 60px; text-align: right; z-index: 10; opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .hero-title h1 { font-size: 3.5rem; letter-spacing: 4px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: color 1s; }
         .hero-title p { font-size: 1.1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; transition: color 1s; }
         .map-container.assemble .hero-title { opacity: 1; transform: translateY(0); transition-delay: 1.5s; }
+
+        /* FRASE DE MOTIVAÇÃO */
+        .motivation-phrase { position: absolute; bottom: 15vh; left: 6vw; max-width: 650px; opacity: 0; transform: translateY(20px); transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; }
+        .map-container.assemble .motivation-phrase { opacity: 1; transform: translateY(0); transition-delay: 2s; }
+        .motivation-phrase p { font-family: 'Cinzel', serif; font-size: 2rem; line-height: 1.5; color: rgba(255, 255, 255, 0.95); border-left: 3px solid var(--accent-color); padding-left: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.9); }
+
+        /* PAINEL DE ENQUADRAMENTO GEOGRÁFICO (DOURO CHAR) */
+        .douro-card {
+            position: absolute; top: 50%; left: -100%; transform: translateY(-50%);
+            display: flex; width: 900px; height: 450px; background: var(--glass-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; overflow: hidden;
+            backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            transition: left 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s; opacity: 0; z-index: 30;
+        }
+        .douro-card.show { left: 10vw; opacity: 1; }
+        .douro-img-wrapper { flex: 1; overflow: hidden; position: relative; }
+        .douro-img { width: 100%; height: 100%; object-fit: cover; }
+        .douro-img-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, transparent, rgba(15,15,15,0.9)); }
+        .douro-text { flex: 1.2; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; }
+        .douro-text h3 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; }
+        .douro-text p { font-size: 1.15rem; line-height: 1.8; color: #ddd; }
 
         /* ========= FASE 1: DESIGN DOS PONTOS DA PAP (Visíveis por defeito) ========= */
         .pap-spot { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0) translateY(20px); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 20; pointer-events: none; }
@@ -112,48 +134,25 @@
         @keyframes pulse { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
 
         /* ========= FASE 2: DESIGN DOS PONTOS COMERCIAIS (Minimalistas e Dinâmicos) ========= */
-        .com-spot { 
-            position: absolute; display: flex; align-items: center; 
-            opacity: 0; transform: scale(0.8) translateY(20px); 
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); z-index: 20; pointer-events: none; 
-        }
+        .com-spot { position: absolute; display: flex; align-items: center; opacity: 0; transform: scale(0.8) translateY(20px); transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); z-index: 20; pointer-events: none; }
         .com-spot.visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
+        .com-dot { width: 14px; height: 14px; background: rgba(212, 175, 55, 0.6); border-radius: 50%; box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); transition: all 0.4s ease; }
         
-        .com-dot {
-            width: 14px; height: 14px; background: rgba(212, 175, 55, 0.6); border-radius: 50%;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); transition: all 0.4s ease;
-        }
-        
-        /* A etiqueta fica escondida e afastada inicialmente */
-        .com-spot-content {
-            position: absolute; left: 30px; 
-            background: rgba(15, 15, 15, 0.4); border: 1px solid rgba(212, 175, 55, 0.4);
-            backdrop-filter: blur(8px); padding: 10px 25px; border-radius: 50px;
-            font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff;
-            white-space: nowrap; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            opacity: 0; transform: translateX(-15px); pointer-events: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-        }
-
-        /* Efeito de desfoque nos pontos inativos quando há hover num deles */
+        .com-spot-content { position: absolute; left: 30px; background: rgba(15, 15, 15, 0.4); border: 1px solid rgba(212, 175, 55, 0.4); backdrop-filter: blur(8px); padding: 10px 25px; border-radius: 50px; font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; white-space: nowrap; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); opacity: 0; transform: translateX(-15px); pointer-events: none; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
         .map-container.focus-mode .com-spot:not(.active-focus) { opacity: 0; filter: blur(10px); pointer-events: none; }
-        
-        /* O Ponto em Foco (Hover) */
         .com-spot.active-focus { z-index: 900; }
         .com-spot.active-focus .com-dot { background: rgba(212, 175, 55, 1); transform: scale(1.5); box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
-        .com-spot.active-focus .com-spot-content {
-            opacity: 1; transform: translateX(0); background: rgba(212, 175, 55, 0.9); border-color: transparent; color: #000; font-weight: 600;
-        }
+        .com-spot.active-focus .com-spot-content { opacity: 1; transform: translateX(0); background: rgba(212, 175, 55, 0.9); border-color: transparent; color: #000; font-weight: 600; }
 
         /* POSIÇÕES */
         #pap-1 { top: 30%; left: 30%; }
         #pap-2 { top: 40%; left: 60%; }
         #pap-3 { top: 25%; left: 80%; }
 
-        #com-1 { top: 68%; left: 42%; } /* Aldeia */
-        #com-2 { top: 48%; left: 18%; } /* Socalcos */
-        #com-3 { top: 60%; left: 68%; } /* Rio */
-        #com-4 { top: 82%; left: 85%; } /* Reservas */
+        #com-1 { top: 68%; left: 42%; }
+        #com-2 { top: 48%; left: 18%; }
+        #com-3 { top: 60%; left: 68%; }
+        #com-4 { top: 82%; left: 85%; }
 
         /* MODAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
@@ -215,8 +214,24 @@
         <img src="Logo.png" alt="QP" class="corner-logo hover-target">
         
         <div class="hero-title" id="main-title">
-            <h1>A TESE</h1>
-            <p>Apresentação de Projeto</p>
+            <h1>O PROJETO</h1>
+            <p>Quinta do Paraíso</p>
+        </div>
+
+        <div class="motivation-phrase" id="motivation">
+            <p>"A ambição de transformar a herança num futuro vivo, onde o tempo amadurece experiências e a natureza acolhe a alma."</p>
+        </div>
+
+        <!-- PAINEL ENQUADRAMENTO GEOGRÁFICO -->
+        <div class="douro-card" id="douro-card">
+            <div class="douro-img-wrapper">
+                <img src="enqgeo.jpg" alt="Enquadramento Geográfico" class="douro-img">
+                <div class="douro-img-overlay"></div>
+            </div>
+            <div class="douro-text">
+                <h3>O Berço do Vinho</h3>
+                <p>O Alto Douro Vinhateiro é uma região marcada por vinhas em socalcos, paisagens deslumbrantes e pela produção do famoso Vinho do Porto. Classificada como Património Mundial, destaca-se pela harmonia entre a natureza e a intervenção humana ao longo dos séculos.</p>
+            </div>
         </div>
 
         <div class="apresentacao-dica" id="map-hint">CONTINUE A PREMIR A BARRA DE ESPAÇOS</div>
@@ -256,7 +271,6 @@
     <div class="cursor-outline"></div>
 
     <script>
-        // CURSORES E PARALLAX
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
         const mapBgContainer = document.getElementById('parallax-bg');
@@ -279,7 +293,6 @@
         };
         updateHoverTargets();
 
-        // LÓGICA DE FOCAGEM CINEMATOGRÁFICA
         const mapaContainer = document.getElementById('mapa-interativo');
         const comSpots = document.querySelectorAll('.com-spot');
 
@@ -294,7 +307,6 @@
             });
         });
 
-        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO
         let presentationPhase = 'preloader';
         let currentSpot = 0;
         const papSpots = document.querySelectorAll('.pap-spot');
@@ -313,7 +325,6 @@
 
                     drop.classList.add('falling');
 
-                    // Sincronização exata: O texto estilhaça aos 800ms, o tempo de queda
                     setTimeout(() => {
                         document.getElementById('start-hint').classList.add('hit');
                         drop.style.opacity = '0'; 
@@ -328,13 +339,31 @@
 
                         setTimeout(() => {
                             document.getElementById('map-hint').classList.add('show');
-                            presentationPhase = 'pap';
+                            presentationPhase = 'initial_frame';
                         }, 2000);
                     }, 4500);
 
-                } else if (presentationPhase === 'pap') {
+                } else if (presentationPhase === 'initial_frame') {
                     document.getElementById('map-hint').style.display = 'none';
+                    document.getElementById('motivation').style.opacity = '0';
+                    document.getElementById('douro-card').classList.add('show');
+                    mapaContainer.classList.add('card-open'); // Aplica o desfoque de fundo
+                    presentationPhase = 'douro_char';
                     
+                    setTimeout(() => { document.getElementById('map-hint').style.display = 'block'; }, 1500);
+                    
+                } else if (presentationPhase === 'douro_char') {
+                    document.getElementById('map-hint').style.display = 'none';
+                    document.getElementById('douro-card').classList.remove('show');
+                    mapaContainer.classList.remove('card-open');
+                    presentationPhase = 'pap';
+                    
+                    setTimeout(() => {
+                        papSpots[currentSpot].classList.add('visible');
+                        currentSpot++;
+                    }, 800);
+
+                } else if (presentationPhase === 'pap') {
                     if (currentSpot < papSpots.length) {
                         papSpots[currentSpot].classList.add('visible');
                         currentSpot++;
@@ -363,7 +392,6 @@
             }, 1000);
         }
 
-        // CONTEÚDO DOS MODAIS
         const modalData = {
             pap_conceito: `<h2>O Conceito</h2><p>O projeto centra-se na requalificação de antigos pombais existentes na propriedade, transformando-os em unidades de alojamento rural de elevada qualidade, com profundo respeito pela arquitetura e materiais da região.</p>`,
             pap_experiencia: `<h2>Tipologias de Turismo</h2><p>O empreendimento integra múltiplas tipologias num só ecossistema:</p><div class="grid-essencia"><div class="grid-item"><h3>Enoturismo</h3><p>Ligação direta à vinha.</p></div><div class="grid-item"><h3>Bem-Estar</h3><p>O exclusivo spa de vinoterapia.</p></div><div class="grid-item"><h3>Rio & Arqueologia</h3><p>Passeios fluviais e ligação ao Côa.</p></div></div>`,
@@ -379,7 +407,7 @@
                     Seremos <select><option>2 Adultos</option><option>1 Adulto</option></select> e a nossa experiência de eleição será <select><option>Enoturismo & Vinhos</option><option>Spa de Vinoterapia</option></select>."
                     <div class="action-buttons">
                         <button type="button" class="btn-primary hover-target" onclick="alert('Obrigado! A reserva simulada foi guardada.')">Efetuar Pedido de Reserva</button>
-                        <button type="button" class="btn-secondary hover-target" onclick="alert('Lembrete de Desenvolvimento: Quando o site for publicado oficialmente, aqui será feita a integração da autenticação com Firebase para gerir o login do cliente por Google, Email ou SMS.')">Área de Cliente</button>
+                        <button type="button" class="btn-secondary hover-target" onclick="alert('A infraestrutura do botão de Área de Cliente já está desenhada para receber a autenticação via Google, telemóvel ou outros provedores, escalando o projeto para uma plataforma totalmente funcional.')">Área de Cliente</button>
                     </div>
                 </form>
             `
