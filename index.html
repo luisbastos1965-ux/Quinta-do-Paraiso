@@ -101,35 +101,38 @@
         .map-container.assemble .motivation-phrase { opacity: 1; transform: translateY(0); transition-delay: 2s; }
         .motivation-phrase p { font-family: 'Cinzel', serif; font-size: 2rem; line-height: 1.5; color: rgba(255, 255, 255, 0.95); border-left: 3px solid var(--accent-color); padding-left: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.9); }
 
-        /* PAINEL DE ENQUADRAMENTO GEOGRÁFICO - ATUALIZADO */
+        /* PAINEL DE ENQUADRAMENTO GEOGRÁFICO - FORMATO HORIZONTAL FOTOGRÁFICO */
         .douro-card {
             position: absolute; top: 50%; left: -100%; transform: translateY(-50%);
-            display: flex; width: 1000px; height: 500px; background: var(--glass-bg);
+            display: flex; width: 1050px; height: 500px; background: var(--glass-bg);
             border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; overflow: hidden;
             backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.8);
             transition: left 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s; opacity: 0; z-index: 30;
         }
-        .douro-card.show { left: calc(50vw - 500px); opacity: 1; } /* Centrado no ecrã para maior impacto */
+        .douro-card.show { left: calc(50vw - 525px); opacity: 1; }
         
-        /* O Contentor do Baralho de Mapas */
-        .deck-wrapper { flex: 1.2; position: relative; perspective: 1500px; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; }
+        .deck-wrapper { flex: 1.3; position: relative; perspective: 1500px; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; }
         .deck-hint { position: absolute; bottom: 20px; width: 100%; text-align: center; color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px; animation: pulse 2s infinite; pointer-events: none; text-shadow: 0 2px 5px #000; z-index: 50;}
         
+        /* Ajuste crucial: Garantir o retângulo horizontal perfeito */
         .deck-card {
-            position: absolute; width: 75%; height: 75%; object-fit: cover; border-radius: 10px;
+            position: absolute; 
+            width: 480px; /* Força um retângulo panorâmico */
+            height: 320px; 
+            object-fit: cover; /* Preenche o retângulo sem distorcer as proporções */
+            border-radius: 10px;
             border: 2px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s, border-color 0.3s;
         }
         .deck-card:hover { border-color: rgba(212, 175, 55, 0.9); cursor: pointer; }
         
-        /* Classe de animação quando um mapa é deslizado para fora */
         .card-swipe-out { transform: translateX(-120%) rotate(-15deg) scale(0.8) !important; opacity: 0 !important; }
 
         .douro-text { flex: 1; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; }
         .douro-text h3 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; line-height: 1.3;}
         .douro-text p { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify;}
 
-        /* PONTOS DA PAP E COMERCIAIS (Mantidos intocados da versão anterior) */
+        /* PONTOS DA PAP E COMERCIAIS */
         .pap-spot { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0) translateY(20px); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 20; pointer-events: none; }
         .pap-spot.visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
         .pap-spot.fade-out { opacity: 0 !important; transform: scale(0) translateY(-20px) !important; pointer-events: none !important; }
@@ -148,7 +151,6 @@
         .com-spot.active-focus .com-dot { background: rgba(212, 175, 55, 1); transform: scale(1.5); box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
         .com-spot.active-focus .com-spot-content { opacity: 1; transform: translateX(0); background: rgba(212, 175, 55, 0.9); border-color: transparent; color: #000; font-weight: 600; }
 
-        /* POSIÇÕES */
         #pap-1 { top: 30%; left: 30%; } #pap-2 { top: 40%; left: 60%; } #pap-3 { top: 25%; left: 80%; }
         #com-1 { top: 68%; left: 42%; } #com-2 { top: 48%; left: 18%; } #com-3 { top: 60%; left: 68%; } #com-4 { top: 82%; left: 85%; }
 
@@ -223,7 +225,7 @@
         <div class="douro-card" id="douro-card">
             <div class="deck-wrapper hover-target" id="deck-container">
                 <div class="deck-hint">CLIQUE PARA FOLHEAR OS MAPAS</div>
-                </div>
+            </div>
             <div class="douro-text">
                 <h3>O Berço do Vinho</h3>
                 <p>O Alto Douro Vinhateiro é uma região marcada por vinhas em socalcos, paisagens deslumbrantes e pela produção do famoso Vinho do Porto. Classificada como Património Mundial, destaca-se pela harmonia entre a natureza e a intervenção humana ao longo dos séculos.</p>
@@ -267,7 +269,6 @@
     <div class="cursor-outline"></div>
 
     <script>
-        // CURSORES E PARALLAX
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
         const mapBgContainer = document.getElementById('parallax-bg');
@@ -289,63 +290,52 @@
             });
         };
 
-        // LÓGICA DO BARALHO 3D DE MAPAS (11 Imagens)
         const deckContainer = document.getElementById('deck-container');
         let cardElements = [];
         
-        // Gera os 11 mapas dinamicamente para não poluir o HTML
         for(let i = 1; i <= 11; i++) {
             let img = document.createElement('img');
-            img.src = `enqgeo${i}.jpg`; // Certifica-te que os nomes dos ficheiros estão corretos
+            img.src = `enqgeo${i}.jpg`; 
             img.className = 'deck-card';
-            // Coloca as imagens como alternativa visual temporária caso falhe o load
             img.alt = `Mapa ${i} do Douro`;
-            img.onerror = function() { this.src = 'fundo_douro.jpg'; }; // Previne erros se faltar um mapa
+            img.onerror = function() { this.src = 'fundo_douro.jpg'; }; 
             deckContainer.appendChild(img);
             cardElements.push(img);
         }
 
         function updateDeck() {
             cardElements.forEach((card, index) => {
-                // O index 0 é a carta que está no topo
                 let zIndex = 20 - index; 
                 card.style.zIndex = zIndex;
-                
-                // Cria a profundidade matemática (as cartas de baixo ficam menores e mais desfasadas)
                 let scale = 1 - (index * 0.04); 
                 let translateY = index * 12; 
-                
-                // Rotação subtil alternada para parecer um baralho pousado
                 let rotate = index % 2 === 0 ? index * 1.5 : -index * 1.5; 
                 
-                // Mostra apenas as 4 primeiras cartas para o ecrã não ficar confuso
                 if(index > 3) {
                     card.style.opacity = 0;
                     card.style.transform = `translateY(50px) scale(0.8)`;
                 } else {
-                    card.style.opacity = 1 - (index * 0.15); // A primeira tem opacidade 1, as de trás esbatem-se
+                    card.style.opacity = 1 - (index * 0.15); 
                     card.style.transform = `translateY(${translateY}px) scale(${scale}) rotate(${rotate}deg)`;
                 }
             });
         }
         
-        // Ao clicar no baralho, a carta do topo desliza para o fundo!
         deckContainer.addEventListener('click', () => {
             if(cardElements.length > 0) {
-                let topCard = cardElements.shift(); // Remove a carta da frente
-                topCard.classList.add('card-swipe-out'); // Ativa animação de deslize
+                let topCard = cardElements.shift(); 
+                topCard.classList.add('card-swipe-out'); 
                 
                 setTimeout(() => {
                     topCard.classList.remove('card-swipe-out');
-                    cardElements.push(topCard); // Coloca-a no fundo do baralho
+                    cardElements.push(topCard); 
                     updateDeck();
-                }, 600); // Tempo correspondente à transição CSS
+                }, 600); 
                 
-                updateDeck(); // Atualiza o layout imediatamente para o próximo mapa assumir o topo
+                updateDeck(); 
             }
         });
         
-        // Inicializa o baralho visualmente
         updateDeck();
 
         const mapaContainer = document.getElementById('mapa-interativo');
@@ -362,7 +352,6 @@
             });
         });
 
-        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO
         let presentationPhase = 'preloader';
         let currentSpot = 0;
         const papSpots = document.querySelectorAll('.pap-spot');
@@ -464,7 +453,7 @@
                     Seremos <select><option>2 Adultos</option><option>1 Adulto</option></select> e a nossa experiência de eleição será <select><option>Enoturismo & Vinhos</option><option>Spa de Vinoterapia</option></select>."
                     <div class="action-buttons">
                         <button type="button" class="btn-primary hover-target" onclick="alert('Obrigado! A reserva simulada foi guardada.')">Efetuar Pedido de Reserva</button>
-                        <button type="button" class="btn-secondary hover-target" onclick="alert('Área de Cliente em construção. No futuro, será integrada autenticação segura para gerir as reservas.')">Área de Cliente</button>
+                        <button type="button" class="btn-secondary hover-target" onclick="alert('Em futuras atualizações, a autenticação segura do utilizador ficará disponível aqui.')">Área de Cliente</button>
                     </div>
                 </form>
             `
@@ -482,7 +471,6 @@
         window.closeModal = function() { modalOverlay.classList.remove('active'); }
         modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
         
-        // Ativa os hover targets no arranque do site
         updateHoverTargets();
     </script>
 </body>
