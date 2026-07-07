@@ -49,6 +49,7 @@
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 10%; } 100% { top: -200%; } }
 
+        /* LOGO FIXO NO CANTO */
         .corner-logo { position: absolute; top: 30px; left: 40px; width: 90px; z-index: 50; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.4)); pointer-events: none; }
         .corner-logo.clickable { pointer-events: all; }
         .corner-logo.clickable:hover { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.9)); }
@@ -61,13 +62,22 @@
         .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-color); transition: width 0.2s, height 0.2s, background-color 0.2s; }
         .cursor-outline.expand { width: 80px; height: 80px; background-color: rgba(212, 175, 55, 0.15); backdrop-filter: blur(2px); }
 
-        /* MAPA INTERATIVO E PARALLAX */
+        /* MAPA INTERATIVO & SLICES */
         .map-container { width: 100%; height: 100vh; position: relative; overflow: hidden; background-color: var(--bg-color); }
-        .map-bg-container { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; transform: translate(var(--px), var(--py)) scale(1); transition: filter 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+        
+        .map-bg-container { 
+            position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; 
+            transform: translate(var(--px), var(--py)) scale(1);
+            transition: filter 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
         .map-container.focus-mode .map-bg-container, .map-container.card-open .map-bg-container { filter: blur(12px) brightness(0.4); transform: translate(var(--px), var(--py)) scale(1.05); }
-        .map-container.focus-mode .hero-title, .map-container.card-open .hero-title, .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo, .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase { opacity: 0 !important; filter: blur(5px); }
+        .map-container.focus-mode .hero-title, .map-container.card-open .hero-title,
+        .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo,
+        .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase { opacity: 0 !important; filter: blur(5px); transition: opacity 0.3s ease; }
 
         .map-slice { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('fundo_douro.jpg') center/cover no-repeat; transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1); }
+        
         .slice-1 { clip-path: polygon(0 0, 25.5% 0, 25.5% 100%, 0% 100%); transform: translateY(-100%); }
         .slice-2 { clip-path: polygon(24.5% 0, 50.5% 0, 50.5% 100%, 24.5% 100%); transform: translateY(100%); }
         .slice-3 { clip-path: polygon(49.5% 0, 75.5% 0, 75.5% 100%, 49.5% 100%); transform: translateY(-100%); }
@@ -82,22 +92,24 @@
         .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)); pointer-events: none; z-index: 1; opacity: 0; transition: background 1.5s ease, opacity 2s ease 1s; }
         .map-container.assemble .map-overlay { opacity: 1; }
 
-        /* TÍTULOS E FRASES */
-        .hero-title { position: absolute; top: 40px; right: 60px; text-align: right; z-index: 10; opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        /* TÍTULOS (Fade out rápido) */
+        .hero-title { position: absolute; top: 40px; right: 60px; text-align: right; z-index: 10; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .hero-title h1 { font-size: 3.5rem; letter-spacing: 4px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: color 1s; }
         .hero-title p { font-size: 1.1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; transition: color 1s; }
         .map-container.assemble .hero-title { opacity: 1; transform: translateY(0); transition-delay: 1.5s; }
 
-        .motivation-phrase { position: absolute; bottom: 15vh; left: 6vw; max-width: 650px; opacity: 0; transform: translateY(20px); transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; }
+        /* FRASE DE MOTIVAÇÃO (Fade out rápido) */
+        .motivation-phrase { position: absolute; bottom: 15vh; left: 6vw; max-width: 650px; opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; }
         .map-container.assemble .motivation-phrase { opacity: 1; transform: translateY(0); transition-delay: 2s; }
+        .motivation-phrase.fade-out { opacity: 0 !important; filter: blur(4px); transform: translateY(-10px); }
         .motivation-phrase p { font-family: 'Cinzel', serif; font-size: 2rem; line-height: 1.5; color: rgba(255, 255, 255, 0.95); border-left: 3px solid var(--accent-color); padding-left: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.9); }
 
         /* PAINEL DE ENQUADRAMENTO GEOGRÁFICO */
         .douro-card { position: absolute; top: 50%; left: -100%; transform: translateY(-50%); display: flex; width: 1050px; height: 500px; background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; overflow: hidden; backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.8); transition: left 1s cubic-bezier(0.19, 1, 0.22, 1), opacity 1s; opacity: 0; z-index: 30; }
         .douro-card.show { left: calc(50vw - 525px); opacity: 1; }
+        .douro-card.fade-out { left: -100% !important; opacity: 0 !important; transition: all 0.8s ease; }
         
         .deck-wrapper { flex: 1.3; position: relative; perspective: 1500px; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; }
-        .deck-hint { position: absolute; bottom: 20px; width: 100%; text-align: center; color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px; animation: pulse 2s infinite; pointer-events: none; text-shadow: 0 2px 5px #000; z-index: 50;}
         .deck-card { position: absolute; width: 480px; height: 320px; object-fit: contain; background: rgba(0,0,0,0.5); border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s, border-color 0.3s; }
         .deck-card:hover { border-color: rgba(212, 175, 55, 0.9); cursor: pointer; }
         .card-swipe-out { transform: translateX(-120%) rotate(-15deg) scale(0.8) !important; opacity: 0 !important; }
@@ -106,50 +118,33 @@
         .douro-text h3 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; line-height: 1.3;}
         .douro-text p { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: justify;}
 
-        /* MODAL DE IDENTIDADE VISUAL - "ESTÚDIO DE CRIAÇÃO" */
-        .brand-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
-        .brand-modal.active { opacity: 1; pointer-events: all; }
-        .brand-container { display: flex; width: 85%; max-width: 1200px; height: 80vh; background: rgba(15,15,15,0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); overflow: hidden; transform: scale(0.9); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative;}
-        .brand-modal.active .brand-container { transform: scale(1); }
-        .close-brand { position: absolute; top: 20px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 10; }
-        .close-brand:hover { color: var(--accent-color); }
+        /* ========= O FLUXO DO RIO (6 Pontos da PAP) ========= */
+        #river-path-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; opacity: 0; transition: opacity 1s ease; }
+        .map-container.river-mode #river-path-svg { opacity: 1; }
         
-        .brand-left { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); border-right: 1px solid rgba(212, 175, 55, 0.2); padding: 40px; text-align: center; }
-        .brand-left img.big-logo { width: 60%; max-height: 250px; object-fit: contain; filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6)); animation: floatLogo 4s ease-in-out infinite; transition: opacity 0.3s ease; }
-        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-        
-        /* O Texto gerado da seleção */
-        .brand-preview-text { margin-top: 40px; }
-        .brand-preview-text h2 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: opacity 0.3s; }
-        .brand-preview-text p { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #ddd; font-style: italic; letter-spacing: 1px; transition: opacity 0.3s; }
+        #river-line { transition: stroke-dashoffset 1s cubic-bezier(0.45, 0.05, 0.55, 0.95); }
 
-        .brand-right { flex: 1.5; padding: 50px 60px; overflow-y: auto; }
-        .brand-section { margin-bottom: 40px; }
-        .brand-section h3 { color: var(--accent-color); font-size: 1.6rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase;}
+        .river-node { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0) translateY(20px); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 25; pointer-events: none; }
+        .river-node.visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
+        .river-node.fade-out { opacity: 0 !important; transform: scale(0) translateY(-20px) !important; pointer-events: none !important; }
         
-        .ideas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; }
-        .idea-pill:hover { border-color: var(--accent-color); color: #fff; background: rgba(212, 175, 55, 0.1); }
-        .idea-pill.chosen { border-color: var(--accent-color); color: var(--accent-color); font-weight: 600; background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);}
+        .river-node.active-node .river-dot { transform: scale(1.5); background-color: #fff; box-shadow: 0 0 30px var(--accent-color); }
+        .river-node.active-node .river-label { background: var(--accent-color); color: #000; font-weight: 700; border-color: transparent; }
         
-        .logo-comparison { display: flex; gap: 30px; margin-top: 20px; }
-        .logo-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px dashed rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; cursor: none; }
-        .logo-box:hover { border-color: var(--accent-color); background: rgba(212, 175, 55, 0.05); }
-        .logo-box.chosen { border: 1px solid var(--accent-color); background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
-        .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; transition: color 0.3s; }
-        .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
-        .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
+        .river-dot { width: 16px; height: 16px; background-color: var(--accent-color); border-radius: 50%; box-shadow: 0 0 15px var(--accent-color); transition: transform 0.4s, background-color 0.4s; position: relative; }
+        .river-dot::after { content: ''; position: absolute; top: -6px; left: -6px; right: -6px; bottom: -6px; border: 1px dashed rgba(212, 175, 55, 0.7); border-radius: 50%; animation: pulse 2s infinite; }
+        .river-label { margin-top: 15px; font-family: 'Cinzel', serif; font-size: 1.1rem; background: rgba(0,0,0,0.85); padding: 6px 18px; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(212, 175, 55, 0.4); white-space: nowrap; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); transition: color 0.3s, background 0.3s, transform 0.3s; }
+        .river-node:hover .river-label { transform: translateY(-3px); }
 
-        /* PONTOS DA PAP E COMERCIAIS */
-        .pap-spot { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0) translateY(20px); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 20; pointer-events: none; }
-        .pap-spot.visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
-        .pap-spot.fade-out { opacity: 0 !important; transform: scale(0) translateY(-20px) !important; pointer-events: none !important; }
-        .pap-spot .hotspot-dot { width: 16px; height: 16px; background-color: var(--accent-color); border-radius: 50%; box-shadow: 0 0 20px var(--accent-color); position: relative; }
-        .pap-spot .hotspot-dot::before { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border: 1px solid var(--accent-color); border-radius: 50%; animation: pulse 2s infinite; }
-        .pap-spot .hotspot-label { margin-top: 15px; font-family: 'Cinzel', serif; font-size: 1.1rem; background: transparent; padding: 5px 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.6); white-space: nowrap; transition: color 0.3s, transform 0.3s; text-shadow: 0 2px 4px rgba(0,0,0,0.9); color: #ddd; }
-        .pap-spot:hover .hotspot-label { color: var(--accent-color); transform: translateY(-3px); }
-        @keyframes pulse { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+        /* Posições relativas aos 100x100 do SVG */
+        #node-1 { top: 20%; left: 85%; } 
+        #node-2 { top: 30%; left: 75%; } 
+        #node-3 { top: 45%; left: 60%; } 
+        #node-4 { top: 60%; left: 45%; } 
+        #node-5 { top: 42.5%; left: 30%; } 
+        #node-6 { top: 25%; left: 15%; } 
 
+        /* ========= FASE 3: SITE COMERCIAL ========= */
         .com-spot { position: absolute; display: flex; align-items: center; opacity: 0; transform: scale(0.8) translateY(20px); transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); z-index: 20; pointer-events: none; }
         .com-spot.visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: all; }
         .com-dot { width: 14px; height: 14px; background: rgba(212, 175, 55, 0.6); border-radius: 50%; box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); transition: all 0.4s ease; }
@@ -159,13 +154,12 @@
         .com-spot.active-focus .com-dot { background: rgba(212, 175, 55, 1); transform: scale(1.5); box-shadow: 0 0 20px rgba(212, 175, 55, 0.8); }
         .com-spot.active-focus .com-spot-content { opacity: 1; transform: translateX(0); background: rgba(212, 175, 55, 0.9); border-color: transparent; color: #000; font-weight: 600; }
 
-        #pap-1 { top: 30%; left: 30%; } #pap-2 { top: 40%; left: 60%; } #pap-3 { top: 25%; left: 80%; }
         #com-1 { top: 68%; left: 42%; } #com-2 { top: 48%; left: 18%; } #com-3 { top: 60%; left: 68%; } #com-4 { top: 82%; left: 85%; }
 
-        /* MODAL DOS PONTOS DE MAPA */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
+        /* MODAIS GERAIS */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 9990; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 800px; width: 90%; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 800px; width: 90%; transform: translateY(30px) scale(0.95); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
         .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; }
@@ -187,6 +181,36 @@
         .btn-secondary { padding: 15px 30px; background-color: transparent; color: #aaa; border: 1px solid #444; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 0.9rem; transition: all 0.4s; flex: 1; text-align: center; }
         .btn-secondary:hover { border-color: var(--text-color); color: var(--text-color); }
         
+        /* BRAND MODAL (Estúdio Sims - Inicialmente Vazio) */
+        .brand-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
+        .brand-modal.active { opacity: 1; pointer-events: all; }
+        .brand-container { display: flex; width: 85%; max-width: 1200px; height: 80vh; background: rgba(15,15,15,0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); overflow: hidden; transform: scale(0.9); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative;}
+        .brand-modal.active .brand-container { transform: scale(1); }
+        .close-brand { position: absolute; top: 20px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 10; }
+        .close-brand:hover { color: var(--accent-color); }
+        .brand-left { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); border-right: 1px solid rgba(212, 175, 55, 0.2); padding: 40px; text-align: center; }
+        .brand-left img.big-logo { width: 60%; max-height: 250px; object-fit: contain; filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6)); animation: floatLogo 4s ease-in-out infinite; transition: opacity 0.3s ease; }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .brand-preview-text { margin-top: 40px; min-height: 80px;}
+        .brand-preview-text h2 { font-size: 2.2rem; color: var(--accent-color); margin-bottom: 10px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: opacity 0.3s; }
+        .brand-preview-text p { font-family: 'Manrope', sans-serif; font-size: 1.1rem; color: #ddd; font-style: italic; letter-spacing: 1px; transition: opacity 0.3s; }
+        
+        .brand-right { flex: 1.5; padding: 50px 60px; overflow-y: auto; }
+        .brand-section { margin-bottom: 40px; }
+        .brand-section h3 { color: var(--accent-color); font-size: 1.6rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase;}
+        .ideas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; }
+        .idea-pill:hover { border-color: var(--accent-color); color: #fff; background: rgba(212, 175, 55, 0.1); }
+        .idea-pill.chosen { border-color: var(--accent-color); color: var(--accent-color); font-weight: 600; background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);}
+        
+        .logo-comparison { display: flex; gap: 30px; margin-top: 20px; }
+        .logo-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px dashed rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; cursor: none; }
+        .logo-box:hover { border-color: var(--accent-color); background: rgba(212, 175, 55, 0.05); }
+        .logo-box.chosen { border: 1px solid var(--accent-color); background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+        .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; transition: color 0.3s; }
+        .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
+        .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
+
         .apresentacao-dica { position: absolute; bottom: 30px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.9rem; letter-spacing: 2px; opacity: 0; transition: opacity 1s; pointer-events: none; z-index: 10; text-shadow: 0 2px 4px rgba(0,0,0,1); }
         .apresentacao-dica.show { animation: fadeInOut 3s infinite; }
     </style>
@@ -210,6 +234,7 @@
         </div>
     </div>
 
+    <!-- MAPA PRINCIPAL -->
     <div class="map-container" id="mapa-interativo">
         <div class="map-bg-container" id="parallax-bg">
             <div class="map-slice slice-1"></div>
@@ -219,7 +244,6 @@
         </div>
         
         <div class="map-overlay" id="main-overlay"></div>
-        
         <img src="Logo.png" alt="QP" class="corner-logo hover-target" id="nav-logo" onclick="openBrandModal()" title="Estúdio de Marca">
         
         <div class="hero-title" id="main-title">
@@ -231,10 +255,9 @@
             <p>"A ambição de transformar a herança num futuro vivo, onde o tempo amadurece experiências e a natureza acolhe a alma."</p>
         </div>
 
+        <!-- PAINEL ENQUADRAMENTO GEOGRÁFICO -->
         <div class="douro-card" id="douro-card">
-            <div class="deck-wrapper hover-target" id="deck-container">
-                <div class="deck-hint">CLIQUE PARA FOLHEAR OS MAPAS</div>
-            </div>
+            <div class="deck-wrapper hover-target" id="deck-container"></div>
             <div class="douro-text">
                 <h3>O Berço do Vinho</h3>
                 <p>O Alto Douro Vinhateiro é uma região marcada por vinhas em socalcos, paisagens deslumbrantes e pela produção do famoso Vinho do Porto. Classificada como Património Mundial, destaca-se pela harmonia entre a natureza e a intervenção humana ao longo dos séculos.</p>
@@ -243,16 +266,33 @@
 
         <div class="apresentacao-dica" id="map-hint">CONTINUE A PREMIR A BARRA DE ESPAÇOS</div>
 
-        <div class="pap-spot hover-target" id="pap-1" onclick="openModal('pap_conceito')">
-            <div class="hotspot-dot"></div><div class="hotspot-label">O Projeto</div>
+        <!-- SVG DO RIO (Desenhado com dashoffset) -->
+        <svg id="river-path-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <!-- A curva passa exatamente nas % dos nós -->
+            <path id="river-line" d="M 85 20 Q 60 40 45 60 Q 30 40 15 25" fill="none" stroke="rgba(212, 175, 55, 0.8)" stroke-width="0.3" stroke-dasharray="100" stroke-dashoffset="100" pathLength="100"/>
+        </svg>
+
+        <!-- FASE 2: OS 6 PONTOS DO RIO -->
+        <div class="river-node hover-target" id="node-1" onclick="openModal('river_missao')">
+            <div class="river-dot"></div><div class="river-label">Missão, Visão e Valores</div>
         </div>
-        <div class="pap-spot hover-target" id="pap-2" onclick="openModal('pap_experiencia')">
-            <div class="hotspot-dot"></div><div class="hotspot-label">Tipologias de Turismo</div>
+        <div class="river-node hover-target" id="node-2" onclick="openModal('river_publico')">
+            <div class="river-dot"></div><div class="river-label">Público-Alvo</div>
         </div>
-        <div class="pap-spot hover-target" id="pap-3" onclick="openModal('pap_visao')">
-            <div class="hotspot-dot"></div><div class="hotspot-label">Visão Estratégica</div>
+        <div class="river-node hover-target" id="node-3" onclick="openModal('river_swot')">
+            <div class="river-dot"></div><div class="river-label">Análise SWOT</div>
+        </div>
+        <div class="river-node hover-target" id="node-4" onclick="openModal('river_4p')">
+            <div class="river-dot"></div><div class="river-label">Marketing-Mix (4 P's)</div>
+        </div>
+        <div class="river-node hover-target" id="node-5" onclick="openModal('river_org')">
+            <div class="river-dot"></div><div class="river-label">Estrutura Organizacional</div>
+        </div>
+        <div class="river-node hover-target" id="node-6" onclick="openModal('river_reserva')">
+            <div class="river-dot"></div><div class="river-label">Portal de Hóspedes</div>
         </div>
 
+        <!-- FASE 3: SITE COMERCIAL -->
         <div class="com-spot hover-target" id="com-1" onclick="openModal('com_alojamento')">
             <div class="com-dot"></div><div class="com-spot-content">Os Pombais</div>
         </div>
@@ -267,6 +307,7 @@
         </div>
     </div>
 
+    <!-- MODAL GERAL -->
     <div class="modal-overlay" id="main-modal">
         <div class="modal-content">
             <button class="close-btn hover-target" onclick="closeModal()">FECHAR ✕</button>
@@ -274,28 +315,30 @@
         </div>
     </div>
 
+    <!-- MODAL DO ESTÚDIO DA MARCA -->
     <div class="brand-modal" id="brand-modal">
         <div class="brand-container">
             <button class="close-brand hover-target" onclick="closeBrandModal()">FECHAR ✕</button>
             
             <div class="brand-left">
-                <img src="Logo.png" alt="Logotipo em Preview" class="big-logo hover-target" id="floating-logo">
+                <!-- Começa transparente -->
+                <img src="" alt="Logotipo em Preview" class="big-logo hover-target" id="floating-logo" style="opacity: 0;">
                 <div class="brand-preview-text">
-                    <h2 id="preview-name">Quinta do Paraíso</h2>
-                    <p id="preview-slogan">"Experiências que amadurecem"</p>
+                    <h2 id="preview-name" style="opacity: 0;"></h2>
+                    <p id="preview-slogan" style="opacity: 0;"></p>
                 </div>
             </div>
             
             <div class="brand-right">
                 <div class="brand-section">
-                    <h3>Construção da Identidade</h3>
+                    <h3>Construção da Identidade (Nomes)</h3>
                     <div class="ideas-grid" id="names-grid">
                         <div class="idea-pill hover-target" onclick="selectName(this, 'Quinta dos Pombais')">Quinta dos Pombais</div>
                         <div class="idea-pill hover-target" onclick="selectName(this, 'Recanto do Douro')">Recanto do Douro</div>
                         <div class="idea-pill hover-target" onclick="selectName(this, 'Quinta do Socalco')">Quinta do Socalco</div>
                         <div class="idea-pill hover-target" onclick="selectName(this, 'Casa da Vinha Velha')">Casa da Vinha Velha</div>
                         <div class="idea-pill hover-target" onclick="selectName(this, 'Douro Nest / Ninho do Douro')">Douro Nest / Ninho do Douro</div>
-                        <div class="idea-pill chosen hover-target" onclick="selectName(this, 'Quinta do Paraíso')">Quinta do Paraíso</div>
+                        <div class="idea-pill hover-target" onclick="selectName(this, 'Quinta do Paraíso')">Quinta do Paraíso</div>
                     </div>
                 </div>
 
@@ -306,20 +349,20 @@
                         <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Douro. Natureza. Paraíso.')">"Douro. Natureza. Paraíso."</div>
                         <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Um refúgio entre vinhas')">"Um refúgio entre vinhas"</div>
                         <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Viva o Douro devagar')">"Viva o Douro devagar"</div>
-                        <div class="idea-pill chosen hover-target" onclick="selectSlogan(this, 'Experiências que amadurecem')">"Experiências que amadurecem"</div>
+                        <div class="idea-pill hover-target" onclick="selectSlogan(this, 'Experiências que amadurecem')">"Experiências que amadurecem"</div>
                     </div>
                 </div>
 
                 <div class="brand-section">
-                    <h3>Evolução Gráfica</h3>
+                    <h3>Evolução Gráfica (Logotipo)</h3>
                     <div class="logo-comparison">
                         <div class="logo-box hover-target" onclick="selectLogo(this, 'logo_antigo.png')" id="logo-box-esboco">
                             <span>Esboço / Inspiração</span>
-                            <img src="logo_antigo.png" alt="Logotipo Antigo" onerror="this.src='https://via.placeholder.com/200x150/1a1a1a/D4AF37?text=ESBOÇO'">
+                            <img src="logo_antigo.png" alt="Esboço" onerror="this.src='https://via.placeholder.com/200x150/1a1a1a/D4AF37?text=ESBOÇO'">
                         </div>
-                        <div class="logo-box chosen hover-target" onclick="selectLogo(this, 'Logo.png')" id="logo-box-final">
+                        <div class="logo-box hover-target" onclick="selectLogo(this, 'Logo.png')" id="logo-box-final">
                             <span>Versão Final</span>
-                            <img src="Logo.png" alt="Logotipo Atual">
+                            <img src="Logo.png" alt="Versão Final">
                         </div>
                     </div>
                 </div>
@@ -347,13 +390,13 @@
         });
 
         const updateHoverTargets = () => {
-            document.querySelectorAll('.hover-target, button, input, select, .com-spot').forEach(target => {
+            document.querySelectorAll('.hover-target, button, input, select, .com-spot, .river-node').forEach(target => {
                 target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
                 target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
             });
         };
 
-        // LÓGICA DO BARALHO DE MAPAS
+        // BARALHO DE MAPAS
         const deckContainer = document.getElementById('deck-container');
         let cardElements = [];
         
@@ -389,36 +432,29 @@
             if(cardElements.length > 0) {
                 let topCard = cardElements.shift(); 
                 topCard.classList.add('card-swipe-out'); 
-                
-                setTimeout(() => {
-                    topCard.classList.remove('card-swipe-out');
-                    cardElements.push(topCard); 
-                    updateDeck();
-                }, 600); 
-                
+                setTimeout(() => { topCard.classList.remove('card-swipe-out'); cardElements.push(topCard); updateDeck(); }, 600); 
                 updateDeck(); 
             }
         });
-        
         updateDeck();
 
         const mapaContainer = document.getElementById('mapa-interativo');
         const comSpots = document.querySelectorAll('.com-spot');
 
         comSpots.forEach(spot => {
-            spot.addEventListener('mouseenter', () => {
-                mapaContainer.classList.add('focus-mode');
-                spot.classList.add('active-focus');
-            });
-            spot.addEventListener('mouseleave', () => {
-                mapaContainer.classList.remove('focus-mode');
-                spot.classList.remove('active-focus');
-            });
+            spot.addEventListener('mouseenter', () => { mapaContainer.classList.add('focus-mode'); spot.classList.add('active-focus'); });
+            spot.addEventListener('mouseleave', () => { mapaContainer.classList.remove('focus-mode'); spot.classList.remove('active-focus'); });
         });
 
+        // ------------------------------------------------------------------
+        // A MÁQUINA DE ESTADOS REFINADA (Com a lógica de abrir/fechar + rio)
+        // ------------------------------------------------------------------
         let presentationPhase = 'preloader';
-        let currentSpot = 0;
-        const papSpots = document.querySelectorAll('.pap-spot');
+        let currentRiverNode = 0;
+        let isModalOpen = false;
+        
+        const riverNodes = document.querySelectorAll('.river-node');
+        const riverLine = document.getElementById('river-line');
         const cornerLogo = document.getElementById('nav-logo');
 
         window.addEventListener('keydown', (e) => {
@@ -437,25 +473,20 @@
 
                     setTimeout(() => {
                         document.getElementById('start-hint').classList.add('hit');
-                        drop.style.opacity = '0'; 
-                        ripple.classList.add('splash'); 
-                        logoContainer.classList.add('show'); 
-                        liquid.classList.add('animate'); 
+                        drop.style.opacity = '0'; ripple.classList.add('splash'); 
+                        logoContainer.classList.add('show'); liquid.classList.add('animate'); 
                     }, 800); 
 
                     setTimeout(() => {
                         document.getElementById('preloader').classList.add('hide');
                         mapaContainer.classList.add('assemble');
-
-                        setTimeout(() => {
-                            document.getElementById('map-hint').classList.add('show');
-                            presentationPhase = 'initial_frame';
-                        }, 2000);
+                        setTimeout(() => { document.getElementById('map-hint').classList.add('show'); presentationPhase = 'initial_frame'; }, 2000);
                     }, 4500);
 
                 } else if (presentationPhase === 'initial_frame') {
                     document.getElementById('map-hint').style.display = 'none';
-                    document.getElementById('motivation').style.opacity = '0';
+                    document.getElementById('motivation').classList.add('fade-out');
+                    document.getElementById('main-title').classList.add('fade-out');
                     
                     document.getElementById('douro-card').classList.add('show');
                     mapaContainer.classList.add('card-open'); 
@@ -465,25 +496,48 @@
                     
                 } else if (presentationPhase === 'douro_char') {
                     document.getElementById('map-hint').style.display = 'none';
-                    document.getElementById('douro-card').classList.remove('show');
+                    document.getElementById('douro-card').classList.add('fade-out');
                     mapaContainer.classList.remove('card-open');
                     
-                    // O Logo passa a ser clicável após o slide geográfico
                     cornerLogo.classList.add('clickable');
-
-                    presentationPhase = 'pap';
+                    mapaContainer.classList.add('river-mode'); 
+                    presentationPhase = 'river_flow';
                     
                     setTimeout(() => {
-                        papSpots[currentSpot].classList.add('visible');
-                        currentSpot++;
+                        // Revela o primeiro ponto
+                        riverNodes[0].classList.add('visible', 'active-node');
+                        riverLine.style.strokeDashoffset = 100 - (1 * (100 / 6)); 
+                        currentRiverNode = 1;
                     }, 800);
 
-                } else if (presentationPhase === 'pap') {
-                    if (currentSpot < papSpots.length) {
-                        papSpots[currentSpot].classList.add('visible');
-                        currentSpot++;
+                } else if (presentationPhase === 'river_flow') {
+                    
+                    if (isModalOpen) {
+                        // Fecha o modal atual E avança a linha para o próximo
+                        closeModal();
+                        
+                        if (currentRiverNode < riverNodes.length) {
+                            // Retira o brilho do nó anterior
+                            riverNodes[currentRiverNode - 1].classList.remove('active-node');
+                            
+                            // Avança a linha
+                            riverLine.style.strokeDashoffset = 100 - ((currentRiverNode + 1) * (100 / 6));
+                            
+                            // Revela o próximo ponto após a linha começar a desenhar
+                            setTimeout(() => {
+                                riverNodes[currentRiverNode].classList.add('visible', 'active-node');
+                                currentRiverNode++;
+                            }, 400); // Ligeiro delay para a linha ir à frente
+                            
+                        } else {
+                            // Acabaram-se os pontos, transita para o site final
+                            transitionToCommercial();
+                        }
                     } else {
-                        transitionToCommercial();
+                        // Abre o modal do ponto focado
+                        let nodeToOpen = riverNodes[currentRiverNode - 1];
+                        let modalType = nodeToOpen.getAttribute('onclick').match(/'([^']+)'/)[1];
+                        openModal(modalType);
                     }
                 }
             }
@@ -491,12 +545,15 @@
 
         function transitionToCommercial() {
             presentationPhase = 'commercial';
-            papSpots.forEach(spot => spot.classList.add('fade-out'));
+            riverNodes.forEach(node => node.classList.add('fade-out'));
+            document.getElementById('river-path-svg').style.opacity = '0';
+            mapaContainer.classList.remove('river-mode');
             
             const overlay = document.getElementById('main-overlay');
             overlay.style.background = "linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95))";
             
             const titleContainer = document.getElementById('main-title');
+            titleContainer.classList.remove('fade-out');
             titleContainer.style.opacity = '0';
             
             setTimeout(() => {
@@ -507,9 +564,7 @@
             }, 1000);
         }
 
-        // -----------------------------------------------------
-        // INTERATIVIDADE DO "ESTÚDIO DE CRIAÇÃO" (Brand Modal)
-        // -----------------------------------------------------
+        // ESTÚDIO DE MARCA EM BRANCO
         const brandModal = document.getElementById('brand-modal');
         const previewName = document.getElementById('preview-name');
         const previewSlogan = document.getElementById('preview-slogan');
@@ -518,62 +573,46 @@
         window.openBrandModal = function() { brandModal.classList.add('active'); }
         window.closeBrandModal = function() { brandModal.classList.remove('active'); }
 
-        // Função que altera o Nome em tempo real
         window.selectName = function(element, text) {
             document.querySelectorAll('#names-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
             element.classList.add('chosen');
-            
-            // Efeito de transição suave no texto
             previewName.style.opacity = '0';
-            setTimeout(() => {
-                previewName.innerText = text;
-                previewName.style.opacity = '1';
-            }, 300);
+            setTimeout(() => { previewName.innerText = text; previewName.style.opacity = '1'; }, 300);
         }
 
-        // Função que altera o Slogan em tempo real
         window.selectSlogan = function(element, text) {
             document.querySelectorAll('#slogans-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
             element.classList.add('chosen');
-            
             previewSlogan.style.opacity = '0';
-            setTimeout(() => {
-                previewSlogan.innerText = `"${text.replace(/"/g, '')}"`; // Garante aspas
-                previewSlogan.style.opacity = '1';
-            }, 300);
+            setTimeout(() => { previewSlogan.innerText = `"${text.replace(/"/g, '')}"`; previewSlogan.style.opacity = '1'; }, 300);
         }
 
-        // Função que altera o Logotipo (Esboço vs Final) em tempo real
         window.selectLogo = function(element, src) {
             document.querySelectorAll('.logo-comparison .logo-box').forEach(b => b.classList.remove('chosen'));
             element.classList.add('chosen');
-            
             floatingLogo.style.opacity = '0';
-            setTimeout(() => {
-                floatingLogo.src = src;
-                floatingLogo.style.opacity = '1';
-            }, 300);
+            setTimeout(() => { floatingLogo.src = src; floatingLogo.style.opacity = '1'; }, 300);
         }
 
-        // -----------------------------------------------------
-        // CONTEÚDO DOS MODAIS DA PAP E SITE COMERCIAL
-        // -----------------------------------------------------
+        // CONTEÚDO DOS TÓPICOS DA PAP (Dados de preenchimento temporário para discutirmos)
         const modalData = {
-            pap_conceito: `<h2>O Conceito</h2><p>O projeto centra-se na requalificação de antigos pombais existentes na propriedade, transformando-os em unidades de alojamento rural de elevada qualidade, com profundo respeito pela arquitetura e materiais da região.</p>`,
-            pap_experiencia: `<h2>Tipologias de Turismo</h2><p>O empreendimento integra múltiplas tipologias num só ecossistema:</p><div class="grid-essencia"><div class="grid-item"><h3>Enoturismo</h3><p>Ligação direta à vinha.</p></div><div class="grid-item"><h3>Bem-Estar</h3><p>O exclusivo spa de vinoterapia.</p></div><div class="grid-item"><h3>Rio & Arqueologia</h3><p>Passeios fluviais e ligação ao Côa.</p></div></div>`,
-            pap_visao: `<h2>Visão Estratégica</h2><p>Diferenciar a Quinta do Paraíso face à concorrência duriense, posicionando o visitante como participante ativo nas experiências (vindimas, passeios) e promovendo uma forte aposta na sustentabilidade.</p>`,
+            river_missao: `<h2>Missão, Visão e Valores</h2><p>Prepara-te para enviar os conteúdos detalhados!</p>`,
+            river_publico: `<h2>Público-Alvo</h2><p>A aguardar o envio do conteúdo...</p>`,
+            river_swot: `<h2>Análise SWOT</h2><p>A aguardar o envio do conteúdo...</p>`,
+            river_4p: `<h2>Marketing-Mix (4 P's)</h2><p>A aguardar o envio do conteúdo...</p>`,
+            river_org: `<h2>Estrutura Organizacional</h2><p>A aguardar o envio do conteúdo...</p>`,
+            river_reserva: `<h2>Portal de Hóspedes</h2><p>A aguardar o envio do conteúdo...</p>`,
 
-            com_alojamento: `<h2>Os Nossos Pombais</h2><p>Na tranquilidade da encosta duriense, transformámos o património esquecido num refúgio de luxo. Dispomos de unidades exclusivas de alojamento onde a pedra, o xisto e a madeira criam uma atmosfera de conforto absoluto.</p><p>Acorde com a neblina sobre o rio e termine o dia na sua piscina privativa, em total privacidade.</p>`,
-            com_vinhos: `<h2>Néctar das Encostas</h2><p>A cultura vitivinícola é a alma do nosso projeto. Caminhe connosco pelos socalcos milenares e conheça as nossas castas autóctones.</p><p>A experiência culmina na adega, onde as nossas provas de vinhos orientadas são harmonizadas de forma sublime com enchidos, compotas e queijos locais.</p>`,
-            com_rio: `<h2>Água & Bem-Estar</h2><p>Desça até às margens do rio Douro e embarque num cruzeiro fluvial privativo, explorando os imponentes vales a partir do leito.</p><p>No regresso à quinta, o nosso Spa aguarda por si. Experimente a verdadeira Vinoterapia: banhos de imersão antioxidantes que purificam o corpo.</p>`,
+            com_alojamento: `<h2>Os Nossos Pombais</h2><p>Na tranquilidade da encosta duriense, transformámos o património esquecido num refúgio de luxo. Dispomos de unidades exclusivas de alojamento onde a pedra, o xisto e a madeira criam uma atmosfera de conforto absoluto.</p>`,
+            com_vinhos: `<h2>Néctar das Encostas</h2><p>A cultura vitivinícola é a alma do nosso projeto. Caminhe connosco pelos socalcos milenares e conheça as nossas castas autóctones.</p>`,
+            com_rio: `<h2>Água & Bem-Estar</h2><p>Desça até às margens do rio Douro e embarque num cruzeiro fluvial privativo. No regresso à quinta, o nosso Spa de Vinoterapia aguarda por si.</p>`,
             com_reservas: `
                 <h2>O Seu Refúgio</h2>
                 <form class="narrative-form hover-target">
-                    "Eu sou o(a) <input type="text" placeholder="o seu nome" style="width: 200px;" required>, e desejo refugiar-me nos Pombais a partir de <input type="date" required>. 
-                    Seremos <select><option>2 Adultos</option><option>1 Adulto</option></select> e a nossa experiência de eleição será <select><option>Enoturismo & Vinhos</option><option>Spa de Vinoterapia</option></select>."
+                    "Eu sou o(a) <input type="text" placeholder="o seu nome" style="width: 200px;" required>, e desejo refugiar-me a partir de <input type="date" required>."
                     <div class="action-buttons">
-                        <button type="button" class="btn-primary hover-target" onclick="alert('Reserva iniciada! Aguardamos a sua visita.')">Efetuar Pedido de Reserva</button>
-                        <button type="button" class="btn-secondary hover-target" onclick="alert('Área de Cliente: Integração de login agendada para a próxima fase.')">Área de Cliente</button>
+                        <button type="button" class="btn-primary hover-target" onclick="alert('Reserva submetida!')">Efetuar Pedido de Reserva</button>
+                        <button type="button" class="btn-secondary hover-target" onclick="alert('Área de Cliente pronta a receber integração (Google, Telefone).')">Área de Cliente</button>
                     </div>
                 </form>
             `
@@ -585,10 +624,14 @@
         window.openModal = function(type) {
             modalBody.innerHTML = modalData[type];
             modalOverlay.classList.add('active');
+            isModalOpen = true;
             updateHoverTargets();
         }
 
-        window.closeModal = function() { modalOverlay.classList.remove('active'); }
+        window.closeModal = function() { 
+            modalOverlay.classList.remove('active'); 
+            isModalOpen = false;
+        }
         
         modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
         brandModal.addEventListener('click', (e) => { if(e.target === brandModal) closeBrandModal(); });
