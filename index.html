@@ -44,7 +44,7 @@
         .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.2; filter: grayscale(100%); }
         .logo-cheio-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .logo-cheio { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); }
-        .liquid-mask { position: absolute; top: 10%; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; }
+        .liquid-mask { position: absolute top: 10%; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; }
         .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 3s ease forwards; }
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 10%; } 100% { top: -200%; } }
@@ -68,7 +68,6 @@
         
         .map-container.focus-mode .map-bg-container, .map-container.card-open .map-bg-container { filter: blur(12px) brightness(0.35); transform: translate(var(--px), var(--py)) scale(1.05); }
         
-        /* O river-mode já não está aqui, portanto não desfoca o fundo */
         .map-container.focus-mode .hero-title, .map-container.card-open .hero-title, .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo, .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase { opacity: 0 !important; filter: blur(5px); transition: opacity 0.5s ease; }
 
         .map-slice { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('fundo_douro.jpg') center/cover no-repeat; transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1); }
@@ -107,6 +106,7 @@
         .douro-card.fade-out { left: -100% !important; opacity: 0 !important; transition: all 0.6s ease; }
         
         .deck-wrapper { flex: 1.3; position: relative; perspective: 1500px; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; }
+        .deck-hint { position: absolute; bottom: 20px; width: 100%; text-align: center; color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px; animation: pulse 2s infinite; pointer-events: none; text-shadow: 0 2px 5px #000; z-index: 50;}
         .deck-card { position: absolute; width: 480px; height: 320px; object-fit: contain; background: rgba(0,0,0,0.5); border-radius: 10px; border: 2px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 35px rgba(0,0,0,0.6); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s, border-color 0.3s; }
         .deck-card:hover { border-color: rgba(212, 175, 55, 0.9); cursor: pointer; }
         .card-swipe-out { transform: translateX(-120%) rotate(-15deg) scale(0.8) !important; opacity: 0 !important; }
@@ -139,10 +139,10 @@
         #node-5 { top: 48%; left: 35%; } 
         #node-6 { top: 25%; left: 20%; } 
 
-        /* MODAIS GERAIS E CONTEÚDOS */
+        /* MODAIS DOS PONTOS DE MAPA */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1000px; width: 90%; max-height: 85vh; overflow-y: auto; transform: translateY(30px) scale(0.95); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1000px; width: 90%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
         .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; }
@@ -390,11 +390,11 @@
                 <div class="brand-section">
                     <h3>Evolução Gráfica (Logotipo)</h3>
                     <div class="logo-comparison">
-                        <div class="logo-box hover-target" onclick="selectLogo(this, 'logo_antigo.png')">
+                        <div class="logo-box hover-target" onclick="selectLogo(this, 'logo_antigo.png')" id="logo-box-esboco">
                             <span>Esboço / Inspiração</span>
                             <img src="logo_antigo.png" alt="Esboço" onerror="this.src='https://via.placeholder.com/200x150/1a1a1a/D4AF37?text=ESBOÇO'">
                         </div>
-                        <div class="logo-box hover-target" onclick="selectLogo(this, 'Logo.png')">
+                        <div class="logo-box hover-target" onclick="selectLogo(this, 'Logo.png')" id="logo-box-final">
                             <span>Versão Final</span>
                             <img src="Logo.png" alt="Versão Final">
                         </div>
@@ -536,7 +536,7 @@
                     presentationPhase = 'douro_char';
                     
                 } else if (presentationPhase === 'douro_char') {
-                    // Limpa o cartão, Fundo nítido, Título reaparece
+                    // Limpa o cartão geográfico, Fundo Nítido e Título Reaparece
                     document.getElementById('douro-card').classList.add('fade-out');
                     mapaContainer.classList.remove('card-open');
                     document.getElementById('main-title').classList.remove('fade-out');
@@ -545,7 +545,7 @@
                     presentationPhase = 'brand_studio_wait';
                     
                 } else if (presentationPhase === 'brand_studio_wait' && !isBrandModalOpen) {
-                    // Inicia o rio no ecrã principal e limpo
+                    // Inicia a linha do rio no ecrã principal (Sem fundo baço)
                     mapaContainer.classList.add('river-mode'); 
                     presentationPhase = 'river_flow';
                     
