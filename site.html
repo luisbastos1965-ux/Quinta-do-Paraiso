@@ -11,7 +11,7 @@
             --bg-color: #050505;
             --text-color: #ffffff; 
             --accent-color: #D4AF37; 
-            --glass-bg: rgba(15, 15, 15, 0.88);
+            --glass-bg: rgba(15, 15, 15, 0.85);
             --px: 0px; 
             --py: 0px;
         }
@@ -29,29 +29,52 @@
         /* FUNDO E PARALLAX */
         .map-container { width: 100%; height: 100vh; position: relative; overflow: hidden; background-color: var(--bg-color); }
         .map-bg-container { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; transform: translate(var(--px), var(--py)) scale(1); transition: filter 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); background: url('fundo_douro.jpg') center/cover no-repeat; }
-        .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)); pointer-events: none; z-index: 1; transition: background 0.8s ease; }
+        .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)); pointer-events: none; z-index: 1; transition: background 0.8s ease; }
         
-        .map-container.menu-open .map-bg-container { filter: blur(8px) brightness(0.6); transform: translate(var(--px), var(--py)) scale(1.02); }
+        .map-container.menu-open .map-bg-container { filter: blur(12px) brightness(0.4); transform: translate(var(--px), var(--py)) scale(1.02); }
 
         /* LOGO CENTRALIZADO (O BOTÃO MESTRE) */
         .center-logo-wrapper { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; }
         .master-logo { width: 120px; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.5)); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .master-logo.active { transform: scale(0.9); filter: drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.9)); }
         .master-logo:hover { transform: scale(1.05); }
-        .logo-hint { margin-top: 10px; font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--accent-color); letter-spacing: 3px; animation: pulse 2s infinite; }
+        .logo-hint { margin-top: 10px; font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--accent-color); letter-spacing: 3px; animation: pulse 2s infinite; transition: opacity 0.4s; }
+        .map-container.menu-open .logo-hint { opacity: 0; pointer-events: none; }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        /* MARCA DE ÁGUA SARA REIS */
+        .watermark { position: absolute; bottom: 20px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-family: 'Manrope', sans-serif; font-size: 0.8rem; letter-spacing: 2px; z-index: 10; pointer-events: none; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
 
-        /* PONTOS DE MENU EXPANSÍVEIS (Big Bang Effect) */
-        .nav-node { position: absolute; top: 90px; left: 50%; transform: translate(-50%, -50%) scale(0); opacity: 0; display: flex; flex-direction: column; align-items: center; transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); z-index: 50; pointer-events: none; }
+        /* ================= PAINEL DE CONCIERGE CENTRAL (DISRUPTIVO) ================= */
+        .central-hub { 
+            position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); 
+            width: 850px; background: rgba(10, 10, 10, 0.55); border: 1px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 20px; backdrop-filter: blur(15px); padding: 40px; text-align: center; 
+            z-index: 40; transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+        }
+        .map-container.menu-open .central-hub { opacity: 0; transform: translate(-50%, -45%) scale(0.92); pointer-events: none; }
         
+        .hub-phrase { font-family: 'Cinzel', serif; font-size: 1.6rem; letter-spacing: 2px; color: #fff; margin-bottom: 30px; text-shadow: 0 4px 10px rgba(0,0,0,0.6); }
+        .hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 35px; }
+        
+        .hub-col { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 12px; padding: 20px; text-align: left; transition: border-color 0.3s; }
+        .hub-col:hover { border-color: rgba(212, 175, 55, 0.4); }
+        .hub-col h4 { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--accent-color); margin-bottom: 12px; letter-spacing: 1px; border-bottom: 1px dashed rgba(212,175,55,0.2); padding-bottom: 6px; }
+        .hub-col ul { list-style: none; }
+        .hub-col li { font-size: 0.85rem; color: #bbb; margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+        
+        .hub-btn { padding: 12px 35px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 30px; font-family: 'Manrope'; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; font-weight: 600; }
+        .hub-btn:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 20px rgba(212,175,55,0.4); transform: translateY(-2px); }
+
+        /* PONTOS DO MENU BIG BANG */
+        .nav-node { position: absolute; top: 90px; left: 50%; transform: translate(-50%, -50%) scale(0); opacity: 0; display: flex; flex-direction: column; align-items: center; transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); z-index: 50; pointer-events: none; }
         .nav-node.expanded { opacity: 1; pointer-events: all; }
-        /* Posições finais espalhadas pelo ecrã */
-        #nav-quem.expanded { top: 35%; left: 20%; transform: translate(-50%, -50%) scale(1); }
-        #nav-servicos.expanded { top: 55%; left: 35%; transform: translate(-50%, -50%) scale(1); }
-        #nav-loja.expanded { top: 40%; left: 75%; transform: translate(-50%, -50%) scale(1); }
-        #nav-reservas.expanded { top: 70%; left: 80%; transform: translate(-50%, -50%) scale(1); }
-        #nav-contactos.expanded { top: 80%; left: 50%; transform: translate(-50%, -50%) scale(1); }
+        
+        #nav-quem.expanded { top: 35%; left: 18%; transform: translate(-50%, -50%) scale(1); }
+        #nav-servicos.expanded { top: 60%; left: 30%; transform: translate(-50%, -50%) scale(1); }
+        #nav-loja.expanded { top: 40%; left: 82%; transform: translate(-50%, -50%) scale(1); }
+        #nav-reservas.expanded { top: 68%; left: 75%; transform: translate(-50%, -50%) scale(1); }
+        #nav-contactos.expanded { top: 82%; left: 50%; transform: translate(-50%, -50%) scale(1); }
 
         .nav-dot { width: 16px; height: 16px; background-color: var(--accent-color); border-radius: 50%; box-shadow: 0 0 20px var(--accent-color); transition: transform 0.4s; position: relative; }
         .nav-dot::before { content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px; border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 50%; transition: all 0.3s; }
@@ -85,46 +108,38 @@
         .modal-title { font-size: 3rem; color: var(--accent-color); margin-bottom: 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); text-align: center; }
         .modal-text { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: center; max-width: 800px; margin: 0 auto 30px; }
 
-        /* Serviços (3 Colunas) */
         .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
         .service-card { background: rgba(0,0,0,0.5); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 15px; padding: 30px; text-align: center; transition: all 0.3s; }
         .service-card:hover { transform: translateY(-5px); border-color: var(--accent-color); box-shadow: 0 10px 20px rgba(212,175,55,0.1); }
         .service-card h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Cinzel', serif; }
         .service-card p { font-size: 0.95rem; color: #ccc; line-height: 1.6; }
 
-        /* Loja Virtual */
         .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
         .product-card { background: rgba(255,255,255,0.03); border: 1px dashed rgba(212, 175, 55, 0.3); border-radius: 15px; padding: 25px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; }
         .product-card:hover { background: rgba(212, 175, 55, 0.05); border-style: solid; border-color: var(--accent-color); }
         .product-img { width: 100px; height: 180px; background: rgba(0,0,0,0.5); border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; color: rgba(212,175,55,0.5); font-size: 2rem; border: 1px solid rgba(255,255,255,0.1); }
         .product-title { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
         .product-price { color: var(--accent-color); font-size: 1.4rem; font-weight: 600; margin-bottom: 20px; }
-        .btn-buy { padding: 10px 25px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 30px; font-family: 'Manrope'; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s; }
-        .btn-buy:hover { background: var(--accent-color); color: #000; font-weight: 700; }
 
-        /* Formulários (Reservas / Contactos) */
         .narrative-form { font-size: 1.5rem; line-height: 2.2; color: #ccc; text-align: left; font-family: 'Cinzel', serif; max-width: 800px; margin: 0 auto; }
         .narrative-form input, .narrative-form select { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--accent-color); background: transparent; border: none; border-bottom: 1px dashed #666; padding: 0 5px; text-align: center; transition: border-color 0.3s; }
         .narrative-form input:focus { outline: none; border-bottom-color: var(--accent-color); }
-        .btn-submit { display: block; margin: 40px auto 0; padding: 15px 40px; background-color: var(--accent-color); color: #000; border: none; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; }
-        .btn-submit:hover { background-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.3); }
 
-        /* IA INTERFACE (Overlay Criativo) */
+        /* INTERFACE IA */
         .ai-interface { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); backdrop-filter: blur(25px); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
         .ai-interface.active { opacity: 1; pointer-events: all; }
         .ai-core { width: 120px; height: 120px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 50px var(--accent-color); margin-bottom: 40px; animation: aiBreathe 3s ease-in-out infinite alternate; position: relative; display: flex; justify-content: center; align-items: center; }
-        .ai-core::before { content: ''; position: absolute; width: 160px; height: 160px; border: 1px solid rgba(212,175,55,0.5); border-radius: 50%; animation: ping 2s infinite; }
+        .ai-core::before { content: ''; position: absolute; width: 160px; height: 160px; border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 50%; animation: ping 2s infinite; }
         @keyframes aiBreathe { 0% { transform: scale(1); filter: brightness(1); } 100% { transform: scale(1.1); filter: brightness(1.3); } }
         @keyframes ping { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
         
         .ai-chat-display { max-width: 700px; text-align: center; min-height: 100px; }
         .ai-message { font-family: 'Cinzel', serif; font-size: 2rem; color: #fff; line-height: 1.5; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
         .ai-suggestions { display: flex; gap: 15px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
-        .ai-pill { padding: 12px 25px; border: 1px solid rgba(212,175,55,0.4); border-radius: 30px; font-family: 'Manrope'; color: #ccc; transition: all 0.3s; background: rgba(255,255,255,0.05); }
+        .ai-pill { padding: 12px 25px; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 30px; font-family: 'Manrope'; color: #ccc; transition: all 0.3s; background: rgba(255,255,255,0.05); }
         .ai-pill:hover { background: var(--accent-color); color: #000; border-color: var(--accent-color); }
         .ai-close { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 1.2rem; background: none; border: none; font-family: 'Manrope'; opacity: 0.5; transition: opacity 0.3s; }
         .ai-close:hover { opacity: 1; color: var(--accent-color); }
-
     </style>
 </head>
 <body>
@@ -138,6 +153,41 @@
             <div class="logo-hint" id="logo-hint">EXPLORAR O REFÚGIO</div>
         </div>
 
+        <div class="central-hub" id="central-hub">
+            <div class="hub-phrase">"Entre vinhas centenárias e o silêncio solene do Douro."</div>
+            
+            <div class="hub-grid">
+                <div class="hub-col">
+                    <h4>Estado do Vale</h4>
+                    <ul>
+                        <li>☀️ Clima: 29°C (Céu Limpo)</li>
+                        <li>🍇 Casta Ativa: Touriga Nacional</li>
+                        <li>🍂 Estado: Vindima em preparação</li>
+                    </ul>
+                </div>
+                <div class="hub-col">
+                    <h4>A Propriedade</h4>
+                    <ul>
+                        <li>✨ 120 ha de vinha protegida</li>
+                        <li>🏺 12 gerações de tradição familiar</li>
+                        <li>🏆 18 vinhos medalhados</li>
+                    </ul>
+                </div>
+                <div class="hub-col">
+                    <h4>Hoje no Refúgio</h4>
+                    <ul>
+                        <li>🍷 15h00 – Prova de Adega Premium</li>
+                        <li>🧺 17h00 – Colheita Guiada</li>
+                        <li>🌅 20h30 – Sunset no Miradouro</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="hub-btn hover-target" onclick="toggleMenu()">Descobrir a Quinta</button>
+        </div>
+
+        <div class="watermark">®Quinta do Paraíso, by Sara Reis</div>
+
         <div class="nav-node hover-target" id="nav-quem" onclick="openSection('quem')">
             <div class="nav-dot"></div><div class="nav-label">Quem Somos</div>
         </div>
@@ -148,7 +198,7 @@
             <div class="nav-dot"></div><div class="nav-label">Loja Vínica</div>
         </div>
         <div class="nav-node hover-target" id="nav-reservas" onclick="openSection('reservas')">
-            <div class="nav-dot"></div><div class="nav-label">O Seu Refúgio (Reservas)</div>
+            <div class="nav-dot"></div><div class="nav-label">Reservas</div>
         </div>
         <div class="nav-node hover-target" id="nav-contactos" onclick="openSection('contactos')">
             <div class="nav-dot"></div><div class="nav-label">Contactos</div>
@@ -180,14 +230,9 @@
         </div>
     </div>
 
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
     <script>
-        // CURSORES E PARALLAX
         const cursorDot = document.querySelector('.cursor-dot');
         const cursorOutline = document.querySelector('.cursor-outline');
-        const mapBgContainer = document.getElementById('parallax-bg');
         
         window.addEventListener('mousemove', (e) => {
             cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
@@ -200,13 +245,13 @@
         });
 
         const updateHoverTargets = () => {
-            document.querySelectorAll('.hover-target, button, input').forEach(target => {
+            document.querySelectorAll('.hover-target, button, input, select, .nav-node, .build-option').forEach(target => {
                 target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
                 target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
             });
         };
 
-        // LÓGICA DO MENU BIG BANG
+        // CONTROLO DE ESTADO DO MENU BIG BANG
         let menuOpen = false;
         const navNodes = document.querySelectorAll('.nav-node');
         const mapaContainer = document.getElementById('mapa-interativo');
@@ -220,7 +265,7 @@
                 masterLogo.classList.add('active');
                 logoHint.style.opacity = '0';
                 navNodes.forEach((node, index) => {
-                    setTimeout(() => { node.classList.add('expanded'); }, index * 100);
+                    setTimeout(() => { node.classList.add('expanded'); }, index * 80);
                 });
             } else {
                 mapaContainer.classList.remove('menu-open');
@@ -230,70 +275,66 @@
             }
         }
 
-        // CONTEÚDOS DAS SECÇÕES
         const sectionData = {
             quem: `
                 <h2 class="modal-title">A Nossa Essência</h2>
                 <p class="modal-text">"Mais do que um projeto turístico, a Quinta do Paraíso nasce de uma forte ligação familiar ao Douro e do desejo de preservar a sua identidade, criando experiências únicas para quem o visita."</p>
-                <p class="modal-text" style="color: #aaa; font-family: 'Manrope';">A requalificação dos nossos pombais não foi apenas uma obra arquitetónica, foi um compromisso com a história. Resgatámos as pedras, o xisto e as memórias da nossa família, fundindo o conforto contemporâneo com o respeito solene pela paisagem duriense.</p>
+                <p class="modal-text" style="color: #aaa; font-family: 'Manrope';">A requalificação dos nossos pombais não foi apenas uma obra arquitetónica, foi um compromisso de honra com a nossa história. Resgatámos as pedras de xisto e as memórias da nossa família, unindo o máximo luxo contemporâneo com o respeito solene pelo ecossistema.</p>
             `,
             servicos: `
                 <h2 class="modal-title">Atividades & Serviços</h2>
                 <div class="services-grid hover-target">
                     <div class="service-card">
                         <h3>Dormidas</h3>
-                        <p>Os Pombais exclusivos com piscina privativa, pequenos-almoços com vista para os socalcos e total integração com a natureza local.</p>
+                        <p>Alojamento de charme em pombais requalificados, equipados com piscina privativa, lareiras suspensas e total isolamento acústico e visual nas encostas.</p>
                     </div>
                     <div class="service-card" style="background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.5);">
-                        <h3>Recreativo & Bem-Estar</h3>
-                        <p>Cruzeiros fluviais em barcos privados, passeios de jipe pelas vinhas e o nosso luxuoso Spa com tratamentos de Vinoterapia.</p>
+                        <h3>Recreativo</h3>
+                        <p>Passeios fluviais privativos em barcos clássicos de madeira, rotas de jipe todo-o-terreno pelos vinhedos e rituais relaxantes no Spa de Vinoterapia.</p>
                     </div>
                     <div class="service-card">
                         <h3>Vinhos</h3>
-                        <p>Visitas guiadas às adegas, provas comentadas e harmonizações com a gastronomia típica da região de Vila Nova de Foz Côa.</p>
+                        <p>Acesso exclusivo à adega antiga, vindima participativa ao longo da época e provas comentadas de vinhos premiados com emparelhamento regional.</p>
                     </div>
                 </div>
             `,
             loja: `
                 <h2 class="modal-title">Loja Vínica</h2>
-                <p class="modal-text">Leve o Paraíso consigo. A nossa seleção de colheitas da propriedade.</p>
+                <p class="modal-text">Selecção limitada e numerada de referências colhidas e engarrafadas na propriedade.</p>
                 <div class="shop-grid hover-target">
                     <div class="product-card">
                         <div class="product-img">🍷</div>
-                        <h4 class="product-title">Paraíso Reserva Tinto</h4>
+                        <h4 class="product-title">Paraíso Grande Reserva</h4>
                         <div class="product-price">28,00€</div>
-                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao Carrinho!')">Adicionar</button>
+                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao seu cesto!')">Adicionar</button>
                     </div>
                     <div class="product-card">
                         <div class="product-img">🍾</div>
                         <h4 class="product-title">Colheita Tardia (Vintage)</h4>
                         <div class="product-price">45,00€</div>
-                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao Carrinho!')">Adicionar</button>
+                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao seu cesto!')">Adicionar</button>
                     </div>
                     <div class="product-card">
                         <div class="product-img">🫒</div>
                         <h4 class="product-title">Azeite Virgem Extra Premium</h4>
                         <div class="product-price">18,50€</div>
-                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao Carrinho!')">Adicionar</button>
+                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao seu cesto!')">Adicionar</button>
                     </div>
                 </div>
             `,
             reservas: `
-                <h2 class="modal-title">Portal de Reservas</h2>
-                <form class="narrative-form hover-target" onsubmit="event.preventDefault(); alert('Pedido registado no sistema central!');">
+                <h2 class="modal-title">O Seu Refúgio</h2>
+                <form class="narrative-form hover-target" onsubmit="event.preventDefault(); alert('Pedido de reserva enviado diretamente para os sistemas centrais da Quinta!');">
                     "Pretendo refugiar-me na Quinta do Paraíso a partir de <input type="date" required>. 
-                    Serei acompanhado(a) e no total seremos <input type="number" min="1" max="10" value="2" style="width: 60px;"> pessoas. 
-                    A nossa prioridade será <select><option>O Descanso nos Pombais</option><option>A Experiência Vínica</option><option>O Spa e Rio</option></select>. 
-                    Contactem-me pelo email <input type="email" placeholder="seu@email.com" required style="width:250px;">."
-                    <button type="submit" class="btn-submit hover-target">Efetuar Pedido de Reserva</button>
+                    No total seremos <input type="number" min="1" max="10" value="2" style="width: 60px;"> hóspedes. 
+                    A nossa prioridade será desfrutar de <select><option>Dormida nos Pombais</option><option>Experiências de Enoturismo</option><option>Bem-Estar & Vinoterapia</option></select>. 
+                    Entrem em contacto através do email <input type="email" placeholder="seu@email.com" required style="width:250px;">."
+                    <button type="submit" style="display:block; margin:40px auto 0;" class="hub-btn hover-target">Submeter Pedido</button>
                 </form>
-                <div style="text-align: center; margin-top: 30px;">
-                    <a href="#" style="color: var(--accent-color); font-family: 'Manrope'; font-size: 0.9rem;" onclick="alert('Integração de Login / Área de Cliente (Google Auth) preparada para back-office.')">Já tem reserva? Aceda à Área de Cliente</a>
-                </div>
             `,
             contactos: `
-                <h2 class="modal-title">Fale Connosco</h2>
-                <div style="display: flex; gap: 40px; justify-content: center; text-align: left; max-width: 800px; margin: 0 auto;">
+                <h2 class="modal-title">Canais de Contacto</h2>
+                <div style="display: flex; gap: 40px; justify-content: center; text-align: left; max-width: 800px; margin: 0 auto;" class="hover-target">
                     <div style="flex: 1; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 15px; border-left: 2px solid var(--accent-color);">
                         <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 15px;">Localização</h3>
                         <p style="color: #ccc; line-height: 1.8;">Quinta do Paraíso<br>Alto Douro Vinhateiro<br>Vila Nova de Foz Côa, Portugal</p>
@@ -314,36 +355,26 @@
             modalOverlay.classList.add('active');
             updateHoverTargets();
         }
+        function closeSection() { modalOverlay.classList.remove('active'); }
 
-        function closeSection() {
-            modalOverlay.classList.remove('active');
-        }
-
-        // LÓGICA DA IA SOMMELIER
+        // MÓDULO DA IA SOMMELIER
         const aiInterface = document.getElementById('ai-interface');
         const aiMessage = document.getElementById('ai-message');
         const aiMessagesDict = {
-            "Que vinho acompanha bem polvo à lagareiro?": "Para a textura rica e o alho do polvo à lagareiro, recomendo vivamente o nosso **Reserva Branco**. A sua acidez equilibrada e ligeiro estágio em barrica cortam a untuosidade do azeite na perfeição.",
-            "Quais as atividades relaxantes para amanhã?": "A manhã no Douro é mágica. Sugiro começar com o pequeno-almoço no terraço, seguido de um **banho de imersão antioxidante no nosso Spa de Vinoterapia**. À tarde, um passeio de barco privativo no rio.",
-            "Conta-me a história do vosso vinho Reserva.": "O nosso Reserva nasce das vinhas mais antigas da propriedade, plantadas em socalcos de xisto. Estagia 12 meses em carvalho francês, absorvendo a resiliência e a alma do tempo que caracteriza esta família."
+            "Que vinho acompanha bem polvo à lagareiro?": "Para a textura rica e o alho do polvo à lagareiro, recomendo vivamente o nosso **Grande Reserva Tinto**. A sua estrutura firme e taninos redondos equilibram a gordura do azeite com precisão majestosa.",
+            "Quais as atividades relaxantes para amanhã?": "O amanhecer nas encostas é terapêutico. Recomendo começar com uma caminhada pelas vinhas velhas, seguida de um **tratamento antioxidantede Vinoterapia no nosso Spa**. À tarde, um cruzeiro fluvial privado.",
+            "Conta-me a história do vosso vinho Reserva.": "O nosso Reserva é uma homenagem à resiliência da família. É produzido exclusivamente com as uvas dos socalcos mais antigos e íngremes da propriedade, estagiando 12 meses sob o silêncio e repouso das nossas caves."
         };
 
-        function openAI() {
-            aiInterface.classList.add('active');
-            aiMessage.innerHTML = "Bem-vindo. Sou a essência da Quinta. O que deseja descobrir hoje sobre os nossos vinhos ou o nosso vale?";
-        }
-
-        function closeAI() {
-            aiInterface.classList.remove('active');
-        }
+        function openAI() { aiInterface.classList.add('active'); }
+        function closeAI() { aiInterface.classList.remove('active'); }
 
         function askAI(question) {
             aiMessage.style.opacity = 0;
             setTimeout(() => {
                 aiMessage.style.color = "var(--accent-color)";
-                aiMessage.innerHTML = "A consultar as caves e a meteorologia do vale...";
+                aiMessage.innerHTML = "A analisar as castas e notas de prova do vale...";
                 aiMessage.style.opacity = 1;
-                
                 setTimeout(() => {
                     aiMessage.style.opacity = 0;
                     setTimeout(() => {
@@ -351,7 +382,7 @@
                         aiMessage.innerHTML = aiMessagesDict[question];
                         aiMessage.style.opacity = 1;
                     }, 400);
-                }, 1500); // Simulando "pensamento" de 1.5s
+                }, 1200);
             }, 300);
         }
 
