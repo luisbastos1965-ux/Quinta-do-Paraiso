@@ -261,9 +261,14 @@
         .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; transition: color 0.3s; }
         .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
         .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
-        
-        .apresentacao-dica { position: absolute; bottom: 30px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.9rem; letter-spacing: 2px; opacity: 0; transition: opacity 1s; pointer-events: none; z-index: 10; text-shadow: 0 2px 4px rgba(0,0,0,1); }
-        .apresentacao-dica.show { animation: fadeInOut 3s infinite; }
+
+        @media (max-width: 768px) {
+            .grid-tripartida { grid-template-columns: 1fr; }
+            .swot-grid { grid-template-columns: 1fr; }
+            .mix-grid { grid-template-columns: 1fr; }
+            .org-bottom { flex-wrap: wrap; justify-content: center; }
+            .org-bottom::before { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -423,7 +428,7 @@
                 </div>
             </div>
             
-            <button class="btn-launch hover-target" onclick="alert('Funcionalidade de Transição: Esta ação redirecionará para site.html')">Gerar Website</button>
+            <button class="btn-launch hover-target" onclick="window.location.href='site.html';">Gerar Website</button>
         </div>
     </div>
 
@@ -447,7 +452,7 @@
         });
 
         const updateHoverTargets = () => {
-            document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box').forEach(target => {
+            document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option').forEach(target => {
                 target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
                 target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
             });
@@ -490,7 +495,7 @@
         updateDeck();
 
         // ------------------------------------------------------------------
-        // MÁQUINA DE ESTADOS
+        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO
         // ------------------------------------------------------------------
         let presentationPhase = 'preloader';
         let currentRiverNode = 0;
