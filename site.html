@@ -12,8 +12,6 @@
             --text-color: #ffffff; 
             --accent-color: #D4AF37; 
             --glass-bg: rgba(12, 12, 12, 0.92);
-            --px: 0px; 
-            --py: 0px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
@@ -28,71 +26,66 @@
 
         /* FUNDO E PARALLAX */
         .map-container { width: 100%; height: 100vh; position: relative; overflow: hidden; background-color: var(--bg-color); perspective: 1400px; }
-        .map-bg-container { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; transform: translate(var(--px), var(--py)) scale(1); transition: filter 1s ease, transform 0.8s ease; background: url('fundo_douro.jpg') center/cover no-repeat; }
-        .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.85)); pointer-events: none; z-index: 1; transition: background 0.8s ease; }
-        .map-container.menu-open .map-bg-container { filter: blur(14px) brightness(0.3); transform: translate(var(--px), var(--py)) scale(1.08); }
+        .map-bg-container { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; transition: filter 1s ease, transform 0.8s ease; background: url('fundo_douro.jpg') center/cover no-repeat; }
+        .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.75)); pointer-events: none; z-index: 1; transition: background 0.8s ease; }
+        .map-container.menu-open .map-bg-container { filter: blur(14px) brightness(0.3); transform: scale(1.05); }
 
-        /* LOGO MESTRE NO CENTRO (Desaparece totalmente quando o menu abre) */
+        /* LOGO MESTRE NO CENTRO */
         .center-logo-wrapper { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; display: flex; flex-direction: column; align-items: center; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .map-container.menu-open .center-logo-wrapper { opacity: 0 !important; visibility: hidden; pointer-events: none; transform: translate(-50%, -50%) scale(0); }
-        
         .master-logo { width: 160px; filter: drop-shadow(0px 0px 35px rgba(212, 175, 55, 0.7)); transition: all 0.5s ease; pointer-events: all; }
-        .master-logo:hover { transform: scale(1.1); filter: drop-shadow(0px 0px 50px rgba(212, 175, 55, 1)); }
+        .master-logo:hover { transform: scale(1.08); filter: drop-shadow(0px 0px 50px rgba(212, 175, 55, 1)); }
 
-        /* ================= ÍCONES FLUTUANTES RÁPIDOS & LIVRES ================= */
+        /* ================= MARCADORES GEOMÉTRICOS DE LUXO (Em vez de Emojis) ================= */
         .float-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 40; transition: opacity 0.5s; pointer-events: none; }
         .map-container.menu-open .float-container { opacity: 0; pointer-events: none !important; }
         
-        .lone-icon { position: absolute; font-size: 3.5rem; pointer-events: all; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.8)); cursor: pointer; }
-        .lone-icon:hover { transform: scale(1.5) rotate(5deg) !important; z-index: 60; filter: drop-shadow(0 0 30px var(--accent-color)); }
+        .lone-icon { position: absolute; font-size: 1.8rem; color: var(--accent-color); pointer-events: all; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s, color 0.3s; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5)); cursor: pointer; opacity: 0.6;}
+        .lone-icon:hover { transform: scale(2) !important; z-index: 60; filter: drop-shadow(0 0 25px var(--accent-color)); color: #fff; opacity: 1;}
+        .lone-icon.flee { transform: scale(0) translate(100px, -100px) !important; opacity: 0 !important; pointer-events: none; }
 
-        /* Trajetórias amplas e dinâmicas */
+        /* Movimentos fluidos */
         .li-1 { animation: fly1 18s infinite alternate ease-in-out; }
         .li-2 { animation: fly2 22s infinite alternate-reverse ease-in-out; }
         .li-3 { animation: fly3 15s infinite alternate ease-in-out; }
         .li-4 { animation: fly4 25s infinite alternate-reverse ease-in-out; }
         .li-5 { animation: fly5 20s infinite alternate ease-in-out; }
-        .li-6 { animation: fly6 19s infinite alternate-reverse ease-in-out; }
-        .li-7 { animation: fly7 24s infinite alternate ease-in-out; }
-        .li-8 { animation: fly8 21s infinite alternate-reverse ease-in-out; }
 
-        @keyframes fly1 { 0% { top: 15%; left: 10%; } 100% { top: 80%; left: 30%; } }
-        @keyframes fly2 { 0% { top: 75%; left: 15%; } 100% { top: 20%; left: 45%; } }
-        @keyframes fly3 { 0% { top: 20%; right: 15%; } 100% { top: 60%; right: 40%; } }
-        @keyframes fly4 { 0% { top: 80%; right: 10%; } 100% { top: 10%; right: 30%; } }
-        @keyframes fly5 { 0% { top: 40%; left: 5%; } 100% { top: 15%; left: 50%; } }
-        @keyframes fly6 { 0% { top: 60%; right: 5%; } 100% { top: 85%; right: 50%; } }
-        @keyframes fly7 { 0% { top: 10%; left: 70%; } 100% { top: 90%; left: 20%; } }
-        @keyframes fly8 { 0% { top: 90%; right: 70%; } 100% { top: 10%; right: 20%; } }
+        @keyframes fly1 { 0% { top: 25%; left: 15%; } 100% { top: 70%; left: 25%; } }
+        @keyframes fly2 { 0% { top: 65%; left: 20%; } 100% { top: 30%; left: 40%; } }
+        @keyframes fly3 { 0% { top: 30%; right: 20%; } 100% { top: 60%; right: 35%; } }
+        @keyframes fly4 { 0% { top: 75%; right: 15%; } 100% { top: 20%; right: 25%; } }
+        @keyframes fly5 { 0% { top: 15%; left: 50%; } 100% { top: 85%; left: 45%; } }
 
-        /* ================= TELA GIGANTE DE DESTAQUE (Aparece no hover do ícone) ================= */
-        .huge-info-screen { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); opacity: 0; pointer-events: none; z-index: 90; text-align: center; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); width: 100%; }
-        .huge-info-screen.active { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        .huge-info-screen h2 { font-size: 5rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 10px 30px rgba(0,0,0,0.9); margin-bottom: 20px; }
-        .huge-info-screen p { font-size: 1.8rem; color: #fff; text-shadow: 0 5px 15px rgba(0,0,0,0.9); font-weight: 300; }
+        /* ================= TELA DE DESTAQUE CINEMATOGRÁFICO ================= */
+        .huge-info-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 90; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; text-align: center; padding: 40px; }
+        .huge-info-screen.active { opacity: 1; }
+        .huge-info-screen h2 { font-size: 4rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 10px 30px rgba(0,0,0,0.9); margin-bottom: 20px; transform: translateY(20px); transition: transform 0.5s; }
+        .huge-info-screen p { font-size: 1.6rem; color: #fff; text-shadow: 0 5px 15px rgba(0,0,0,0.9); font-weight: 300; max-width: 800px; line-height: 1.6; transform: translateY(20px); transition: transform 0.6s; }
+        .huge-info-screen.active h2, .huge-info-screen.active p { transform: translateY(0); }
 
-        /* ================= CARROSSEL 3D CENTRALIZADO (Draggable) ================= */
+        /* ================= CARROSSEL 3D ================= */
         .carousel-container { position: absolute; top: 50%; left: 50%; width: 320px; height: 420px; transform: translate(-50%, -50%); z-index: 80; perspective: 1600px; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
         .map-container.menu-open .carousel-container { pointer-events: all; opacity: 1; }
         .carousel { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; transform: rotateX(-5deg); pointer-events: all; }
         
-        .carousel-card { position: absolute; width: 300px; height: 380px; left: 10px; top: 20px; background: rgba(12, 12, 12, 0.85); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 15px; backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px; transition: border-color 0.4s, box-shadow 0.4s, background 0.4s; }
-        .carousel-card:hover { border-color: rgba(212, 175, 55, 1); box-shadow: 0 0 45px rgba(212, 175, 55, 0.7); background: rgba(212, 175, 55, 0.15); }
-        .card-icon { font-size: 3rem; margin-bottom: 15px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.8); pointer-events: none; }
-        .carousel-card h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 10px; font-family: 'Cinzel', serif; pointer-events: none; }
-        .carousel-card p { color: #ccc; font-size: 0.95rem; line-height: 1.5; pointer-events: none; }
+        .carousel-card { position: absolute; width: 290px; height: 360px; left: 15px; top: 30px; background: rgba(12, 12, 12, 0.85); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 15px; backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px; transition: border-color 0.4s, box-shadow 0.4s, background 0.4s; }
+        .carousel-card:hover { border-color: rgba(212, 175, 55, 1); box-shadow: 0 0 45px rgba(212, 175, 55, 0.7); background: rgba(212, 175, 55, 0.12); }
+        .card-icon { font-size: 2.8rem; margin-bottom: 15px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.8); pointer-events: none; }
+        .carousel-card h3 { color: var(--accent-color); font-size: 1.4rem; margin-bottom: 10px; font-family: 'Cinzel', serif; pointer-events: none; }
+        .carousel-card p { color: #ccc; font-size: 0.9rem; line-height: 1.5; pointer-events: none; }
 
-        /* BOTÃO DE FECHAR MENU */
+        /* BOTÃO FECHAR MENU */
         .close-menu-btn { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); font-family: 'Cinzel', serif; color: var(--accent-color); background: rgba(0,0,0,0.6); border: 1px solid rgba(212,175,55,0.4); padding: 10px 30px; border-radius: 30px; z-index: 105; opacity: 0; pointer-events: none; transition: opacity 0.4s; letter-spacing: 2px;}
         .map-container.menu-open .close-menu-btn { opacity: 1; pointer-events: all; }
 
-        /* MARCA DE ÁGUA SARA REIS */
+        /* MARCA DE ÁGUA */
         .watermark { position: absolute; bottom: 20px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-family: 'Manrope', sans-serif; font-size: 0.8rem; letter-spacing: 2px; z-index: 10; pointer-events: none; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
 
-        /* MODAIS GERAIS (Para as abas) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.9); backdrop-filter: blur(25px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
+        /* MODAIS GERAIS (Ecrã de Conteúdos) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); backdrop-filter: blur(25px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1200px; width: 95%; max-height: 85vh; overflow-y: auto; transform: translateY(30px) scale(0.95); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1200px; width: 95%; max-height: 88vh; overflow-y: auto; transform: translateY(30px) scale(0.95); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; pointer-events: all; }
         .close-btn:hover { color: var(--accent-color); }
@@ -102,10 +95,11 @@
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
 
         .modal-title { font-size: 3rem; color: var(--accent-color); margin-bottom: 25px; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); text-align: center; font-family: 'Cinzel', serif; }
+        .modal-text { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: center; max-width: 800px; margin: 0 auto 30px; }
 
-        /* ================= ESTILOS LUXUOSOS (LOJA, GALERIA, JOGOS, REVIEWS) ================= */
+        /* ================= ESTILOS ESPECÍFICOS DAS ABAS ================= */
         
-        /* 1. Loja Estilo Expositor de Luxo */
+        /* Loja Haute Couture */
         .shop-showcase { display: flex; gap: 30px; justify-content: center; margin-top: 40px; flex-wrap: wrap;}
         .wine-vessel { width: 320px; background: linear-gradient(180deg, rgba(20,20,20,0.9), rgba(5,5,5,0.95)); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 40px 25px; text-align: center; position: relative; overflow: hidden; pointer-events: all; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
         .wine-vessel:hover { border-color: var(--accent-color); transform: translateY(-15px); box-shadow: 0 20px 40px rgba(212,175,55,0.15); }
@@ -115,10 +109,8 @@
         .wine-name { font-family: 'Cinzel', serif; font-size: 1.6rem; color: #fff; margin-bottom: 15px; }
         .wine-desc { font-size: 0.95rem; color: #aaa; line-height: 1.6; margin-bottom: 25px; min-height: 60px; }
         .wine-pricing { font-size: 1.8rem; color: var(--accent-color); font-weight: 700; margin-bottom: 25px; font-family: 'Cinzel', serif; }
-        .btn-reserve-shop { padding: 15px 35px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 30px; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; pointer-events: all; transition: all 0.3s; }
-        .btn-reserve-shop:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
-
-        /* 2. Galeria 3D Inclinada */
+        
+        /* Galeria Cover Flow */
         .dynamic-gallery { display: flex; gap: 20px; overflow-x: auto; padding: 40px 20px; perspective: 1000px; justify-content: center; }
         .gal-card { min-width: 250px; height: 350px; border-radius: 15px; background-size: cover; background-position: center; transition: all 0.5s; filter: grayscale(80%) brightness(0.6); cursor: pointer; pointer-events: all; transform: rotateY(15deg); border: 1px solid rgba(212,175,55,0.3); box-shadow: -10px 10px 20px rgba(0,0,0,0.8);}
         .gal-card:hover { filter: grayscale(0%) brightness(1); transform: rotateY(0deg) scale(1.1) translateZ(50px); z-index: 10; box-shadow: 0 20px 40px rgba(212,175,55,0.3); border-color: var(--accent-color); }
@@ -127,16 +119,7 @@
         .lightbox img { max-width: 90%; max-height: 90%; border: 2px solid var(--accent-color); border-radius: 12px; box-shadow: 0 0 50px rgba(212,175,55,0.3); }
         .lb-close { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 2rem; cursor: pointer; pointer-events:all; }
 
-        /* 3. Jogos (Apanha a Uva Renovado) */
-        .game-zone { text-align: center; }
-        .game-dashboard { display: flex; justify-content: center; gap: 50px; margin-bottom: 20px; font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--accent-color); }
-        .play-area { width: 100%; height: 400px; background: url('fundo_douro.jpg') center/cover; position: relative; border-radius: 15px; border: 2px solid var(--accent-color); overflow: hidden; display: none; }
-        .play-area::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); pointer-events:none; }
-        .falling-grape { position: absolute; font-size: 3rem; cursor: pointer; pointer-events: all; animation: fall linear forwards; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8)); z-index: 10; }
-        .falling-grape:hover { transform: scale(1.2); }
-        @keyframes fall { to { top: 110%; } }
-
-        /* 4. Testemunhos com Filtro de Estrelas Visuais */
+        /* Testemunhos (Com Filtro) */
         .star-filter-container { text-align: center; margin-bottom: 40px; }
         .filter-star { font-size: 4rem; color: #444; cursor: pointer; transition: all 0.3s; display: inline-block; pointer-events: all; text-shadow: 0 5px 10px rgba(0,0,0,0.8); }
         .filter-star.active, .filter-star:hover, .filter-star:hover ~ .filter-star { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color); transform: scale(1.1); }
@@ -149,7 +132,41 @@
         .rev-text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-style: italic; color: #fff; line-height: 1.6; margin-bottom: 15px; }
         .rev-author { font-size: 1rem; color: var(--accent-color); text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
 
-        /* ================= A IA HOLOGRÁFICA (Sommelier por Clique) ================= */
+        /* Mural Social Estilo Instagram Original */
+        .insta-header { display: flex; align-items: center; gap: 30px; margin-bottom: 40px; justify-content: center; }
+        .insta-profile { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent-color); background: url('Logo.png') center/cover; }
+        .insta-stats { display: flex; gap: 30px; color: #fff; font-family: 'Manrope'; }
+        .insta-stats div { text-align: center; }
+        .insta-stats strong { display: block; font-size: 1.5rem; font-family: 'Cinzel'; }
+        .insta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 900px; margin: 0 auto;}
+        .insta-post { position: relative; aspect-ratio: 1; background: #222; border-radius: 10px; overflow: hidden; pointer-events: all; }
+        .insta-post img { width: 100%; height: 100%; object-fit: cover; }
+        .insta-overlay { position: absolute; top:0;left:0;width:100%;height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; opacity:0; transition: opacity 0.3s; color:#fff; font-size: 1.5rem; font-family:'Manrope'; gap: 15px;}
+        .insta-post:hover .insta-overlay { opacity: 1; }
+
+        /* Jogos Interativos */
+        .game-zone { text-align: center; }
+        .game-tab-buttons { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
+        .game-selector-pill { padding: 10px 25px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; border-radius: 30px; cursor: pointer; pointer-events: all; transition: all 0.3s; font-family: 'Cinzel', serif; }
+        .game-selector-pill.active, .game-selector-pill:hover { background: var(--accent-color); color: #000; font-weight: 700; }
+        .game-panel { display: none; background: rgba(0,0,0,0.6); border: 1px solid rgba(212,175,55,0.4); border-radius: 15px; padding: 30px; min-height: 280px; position: relative; }
+        .game-panel.active { display: block; }
+        
+        .interactive-grape { font-size: 3rem; position: absolute; cursor: pointer; pointer-events: all; transition: transform 0.2s; animation: dropG 2s infinite linear; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));}
+        .interactive-grape:hover { transform: scale(1.2); }
+        @keyframes dropG { 0% { top: -10%; } 100% { top: 90%; } }
+        .quiz-option { display: block; width: 80%; margin: 0 auto 10px; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; border-radius: 10px; font-family: 'Manrope'; cursor: pointer; pointer-events: all; transition: all 0.3s;}
+        .quiz-option:hover { background: var(--accent-color); color: #000; }
+        
+        .memory-grid { display: grid; grid-template-columns: repeat(4, 80px); gap: 10px; justify-content: center; margin-top: 20px;}
+        .mem-card { width: 80px; height: 80px; background: rgba(212,175,55,0.2); border: 1px solid var(--accent-color); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 2rem; cursor: pointer; pointer-events: all; transition: transform 0.3s; color: transparent; }
+        .mem-card.flipped { background: rgba(0,0,0,0.8); color: #fff; transform: rotateY(180deg); }
+
+        /* Botões Base */
+        .btn-submit { display: block; margin: 30px auto 0; padding: 14px 40px; background-color: var(--accent-color); color: #000; border: none; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; pointer-events: all; }
+        .btn-submit:hover { background-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+
+        /* ================= A IA HOLOGRÁFICA ================= */
         .ai-orb-wrapper { position: absolute; bottom: 40px; right: 50px; z-index: 100; display: flex; align-items: center; gap: 15px; transition: transform 0.3s; pointer-events: all; cursor: pointer;}
         .ai-orb-wrapper:hover { transform: scale(1.1); }
         .ai-label { font-family: 'Manrope', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.9); text-align: right; text-shadow: 0 2px 5px #000; }
@@ -157,7 +174,7 @@
         .ai-orb::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.6) 20%, transparent 40%); animation: spinOrb 3s linear infinite; }
         @keyframes spinOrb { 100% { transform: rotate(360deg); } }
 
-        .ai-interface { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); backdrop-filter: blur(25px); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
+        .ai-interface { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); backdrop-filter: blur(25px); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 100000; }
         .ai-interface.active { opacity: 1; pointer-events: all; }
         .ai-core { width: 150px; height: 150px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 80px var(--accent-color); margin-bottom: 40px; animation: aiBreathe 3s ease-in-out infinite alternate; position: relative; display: flex; justify-content: center; align-items: center; }
         .ai-core::before { content: ''; position: absolute; width: 200px; height: 200px; border: 2px solid rgba(212,175,55,0.5); border-radius: 50%; animation: ping 2s infinite; }
@@ -167,15 +184,8 @@
         .ai-suggestions { display: flex; gap: 15px; margin-top: 50px; flex-wrap: wrap; justify-content: center; max-width: 1000px;}
         .ai-pill { padding: 15px 30px; border: 1px solid rgba(212,175,55,0.4); border-radius: 30px; font-family: 'Manrope'; font-size: 1rem; color: #fff; transition: all 0.3s; background: rgba(255,255,255,0.05); pointer-events: all; cursor: pointer; }
         .ai-pill:hover { background: var(--accent-color); color: #000; border-color: var(--accent-color); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.3);}
-        .ai-close { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 1.2rem; background: none; border: none; font-family: 'Manrope'; opacity: 0.5; transition: opacity 0.3s; pointer-events: all; }
+        .ai-close { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 1.2rem; background: none; border: none; font-family: 'Manrope'; opacity: 0.5; transition: opacity 0.3s; pointer-events: all; cursor: pointer;}
         .ai-close:hover { opacity: 1; color: var(--accent-color); }
-        
-        /* Formulários Comuns */
-        .narrative-form { font-size: 1.5rem; line-height: 2.2; color: #ccc; text-align: center; font-family: 'Cinzel', serif; max-width: 800px; margin: 0 auto; }
-        .narrative-form input, .narrative-form select { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--accent-color); background: transparent; border: none; border-bottom: 1px dashed #666; padding: 0 5px; text-align: center; transition: border-color 0.3s; }
-        .narrative-form input:focus { outline: none; border-bottom-color: var(--accent-color); }
-        .btn-submit { display: block; margin: 40px auto 0; padding: 15px 40px; background-color: var(--accent-color); color: #000; border: none; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; pointer-events: all; }
-        .btn-submit:hover { background-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.3); transform: translateY(-3px);}
     </style>
 </head>
 <body>
@@ -185,14 +195,11 @@
         <div class="map-overlay"></div>
         
         <div class="float-container" id="float-container">
-            <div class="lone-icon li-1 hover-target" data-t="O Clima do Vale" data-d="29°C com Céu Limpo. O cenário ideal para a maturação dos bagos de uva.">☀️</div>
-            <div class="lone-icon li-2 hover-target" data-t="Época de Vindimas" data-d="Preparação avançada para a colheita manual da nossa Touriga Nacional.">🍇</div>
-            <div class="lone-icon li-3 hover-target" data-t="Tradição Secular" data-d="12 gerações dedicadas à preservação do património histórico do Douro.">🏺</div>
-            <div class="lone-icon li-4 hover-target" data-t="Excelência Comprovada" data-d="18 referências de vinho distinguidas e premiadas a nível mundial.">🍷</div>
-            <div class="lone-icon li-5 hover-target" data-t="Descanso Absoluto" data-d="Os Pombais: Refúgios de luxo isolados com vista panorâmica e piscina privativa.">🛏️</div>
-            <div class="lone-icon li-6 hover-target" data-t="Património UNESCO" data-d="Localizados em Vila Nova de Foz Côa, no coração do Alto Douro Vinhateiro.">🧭</div>
-            <div class="lone-icon li-7 hover-target" data-t="Respeito pela Terra" data-d="Práticas ecológicas que preservam o solo rico em xisto e a água do nosso rio.">🌱</div>
-            <div class="lone-icon li-8 hover-target" data-t="A Gastronomia" data-d="Restaurante exclusivo onde os sabores regionais encontram a alta cozinha.">🍽️</div>
+            <div class="lone-icon li-1 hover-target" data-t="O Clima do Vale" data-d="29°C com Céu Limpo. O cenário ideal para a maturação dos bagos de uva.">⟡</div>
+            <div class="lone-icon li-2 hover-target" data-t="Época de Vindimas" data-d="Preparação avançada para a colheita manual da nossa Touriga Nacional.">⟡</div>
+            <div class="lone-icon li-3 hover-target" data-t="Tradição Secular" data-d="12 gerações dedicadas à preservação do património histórico do Douro.">⟡</div>
+            <div class="lone-icon li-4 hover-target" data-t="Excelência Comprovada" data-d="18 referências de vinho distinguidas e premiadas a nível mundial.">⟡</div>
+            <div class="lone-icon li-5 hover-target" data-t="Descanso Absoluto" data-d="Os Pombais: Refúgios de luxo isolados com vista panorâmica e piscina privativa.">⟡</div>
         </div>
 
         <div class="huge-info-screen" id="info-display">
@@ -224,7 +231,7 @@
                     <div class="card-icon">📜</div><h3>Contactos</h3><p>Fale diretamente connosco.</p>
                 </div>
                 <div class="carousel-card card-6 hover-target" onclick="openSection('jogos')">
-                    <div class="card-icon">🧩</div><h3>Jogos Didáticos</h3><p>Para futuros viticultores.</p>
+                    <div class="card-icon">🧩</div><h3>Academia</h3><p>Jogos e aprendizagem.</p>
                 </div>
                 <div class="carousel-card card-7 hover-target" onclick="openSection('galeria')">
                     <div class="card-icon">📸</div><h3>Galeria</h3><p>A Quinta em alta definição.</p>
@@ -233,7 +240,7 @@
                     <div class="card-icon">⭐</div><h3>Testemunhos</h3><p>A voz de quem nos visita.</p>
                 </div>
                 <div class="carousel-card card-9 hover-target" onclick="openSection('mural')">
-                    <div class="card-icon">🌐</div><h3>Mural Social</h3><p>O Feed da nossa comunidade.</p>
+                    <div class="card-icon">🌐</div><h3>Mural Social</h3><p>Comunidade #QuintaDoParaiso.</p>
                 </div>
             </div>
         </div>
@@ -295,7 +302,7 @@
         });
 
         const updateHoverTargets = () => {
-            document.querySelectorAll('.hover-target, button, input, select, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star').forEach(target => {
+            document.querySelectorAll('.hover-target, button, input, select, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-selector-pill, .quiz-option').forEach(target => {
                 target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
                 target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
             });
@@ -313,7 +320,6 @@
                 infoDesc.innerText = icon.getAttribute('data-d');
                 infoScreen.classList.add('active');
                 
-                // Os outros fogem
                 loneIcons.forEach(other => {
                     if (other !== icon) other.classList.add('flee');
                 });
@@ -324,7 +330,7 @@
             });
         });
 
-        // CARROSSEL 3D (Desaparece Logo, Aparece Carrossel e Menu)
+        // CARROSSEL 3D (Desaparece Logo e Centra)
         let menuOpen = false;
         const mapaContainer = document.getElementById('mapa-interativo');
         const carousel = document.getElementById('carousel');
@@ -337,8 +343,10 @@
         function toggleMenu() {
             menuOpen = !menuOpen;
             if(menuOpen) {
+                // Ao abrir, removemos o conteúdo anterior de imediato se existir (Bug Fix)
+                document.getElementById('modal-body-content').innerHTML = ''; 
+                
                 mapaContainer.classList.add('menu-open');
-                // Coloca as cartas em posição
                 const cards = document.querySelectorAll('.carousel-card');
                 const angleStep = 360 / cards.length;
                 cards.forEach((card, i) => {
@@ -366,7 +374,7 @@
         window.addEventListener('mousemove', (e) => {
             if(!isDragging) return;
             const deltaX = e.clientX - startX;
-            currAngle += deltaX * 0.3; // Roda mais rápido ao arrastar
+            currAngle += deltaX * 0.3;
             carousel.style.transform = `rotateX(-5deg) rotateY(${currAngle}deg)`;
             startX = e.clientX;
         });
@@ -379,7 +387,7 @@
                 <div style="display:flex; justify-content:center; gap:30px; margin-top:40px;">
                     <div style="background:rgba(0,0,0,0.5); border:1px solid var(--accent-color); padding:40px; border-radius:15px; text-align:center; width:300px;">
                         <h3 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.8rem; margin-bottom:15px;">Dormidas</h3>
-                        <p style="color:#ccc; line-height:1.6;">Os Pombais exclusivos com piscina privativa, pequenos-almoços com vista para os socalcos e total integração com a natureza local.</p>
+                        <p style="color:#ccc; line-height:1.6;">Os Pombais exclusivos com piscina privativa, pequenos-almoços com vista para os socalcos e total integração com a natureza.</p>
                     </div>
                     <div style="background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.5); padding:40px; border-radius:15px; text-align:center; width:300px; transform:translateY(-20px);">
                         <h3 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.8rem; margin-bottom:15px;">Bem-Estar</h3>
@@ -401,7 +409,7 @@
                         <h4 class="wine-name">Paraíso Grande Reserva</h4>
                         <p class="wine-desc">Notas intensas de frutos vermelhos silvestres e especiarias de barrica francesa. Acabamento longo.</p>
                         <div class="wine-pricing">28,00€</div>
-                        <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px;">Adicionar</button>
+                        <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px;" onclick="alert('Adicionado!')">Adicionar</button>
                     </div>
                     <div class="wine-vessel hover-target" style="border-color:var(--accent-color);">
                         <div class="wine-bottle-art">🍾</div>
@@ -409,7 +417,7 @@
                         <h4 class="wine-name">Colheita Tardia Vintage</h4>
                         <p class="wine-desc">Aroma complexo a figo secos, mel e notas subtis de xisto profundo. Uma sobremesa engarrafada.</p>
                         <div class="wine-pricing">45,00€</div>
-                        <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px; background:#fff;">Adicionar</button>
+                        <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px; background:#fff;" onclick="alert('Adicionado!')">Adicionar</button>
                     </div>
                     <div class="wine-vessel hover-target">
                         <div class="wine-bottle-art">🫒</div>
@@ -417,7 +425,7 @@
                         <h4 class="wine-name">Lágrimas do Douro Extra</h4>
                         <p class="wine-desc">Extração a frio de olival secular com acidez extremamente baixa. Sabor frutado intenso.</p>
                         <div class="wine-pricing">18,50€</div>
-                        <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px;">Adicionar</button>
+                        <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px;" onclick="alert('Adicionado!')">Adicionar</button>
                     </div>
                 </div>
             `,
@@ -446,14 +454,34 @@
             `,
             jogos: `
                 <h2 class="modal-title">Academia da Vinha</h2>
-                <p class="modal-text">Para os futuros viticultores. Inicie a vindima e tente bater o recorde!</p>
                 <div class="game-zone">
-                    <button class="btn-submit hover-target" style="margin-bottom:20px;" onclick="initGrapeGame()">Começar a Vindima Virtual</button>
-                    <div class="game-dashboard">
-                        <div>Tempo: <span id="time" style="color:#fff;">15</span>s</div>
-                        <div>Cestos: <span id="score" style="color:#fff;">0</span></div>
+                    <div class="game-tab-buttons">
+                        <button class="game-selector-pill active hover-target" onclick="switchGame('clicker')">Apanha a Uva</button>
+                        <button class="game-selector-pill hover-target" onclick="switchGame('quiz')">Quiz D'Ouro</button>
+                        <button class="game-selector-pill hover-target" onclick="switchGame('memory')">Jogo de Memória</button>
                     </div>
-                    <div class="play-area hover-target" id="play-area"></div>
+                    
+                    <div class="game-panel active" id="g-clicker">
+                        <h4 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.3rem;">Vindima Express</h4>
+                        <p style="color:#bbb; margin-bottom:15px;">Clique nas uvas que caem para abastecer a adega!</p>
+                        <button class="btn-submit hover-target" style="padding:10px 20px; margin:0 auto;" onclick="initGrapeGame()">Iniciar Jogo</button>
+                        <div id="grape-drop-field" style="position:relative; height:200px; margin-top:15px; border:1px dashed rgba(212,175,55,0.3); border-radius:10px; overflow:hidden;"></div>
+                    </div>
+                    
+                    <div class="game-panel" id="g-quiz">
+                        <h4 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.3rem;">Desafio dos Socalcos</h4>
+                        <p style="color:#fff; margin-bottom:15px;">Qual é a casta rainha do Alto Douro para vinhos de grande guarda?</p>
+                        <button class="quiz-option hover-target" onclick="alert('Incorreto!')">Arinto</button>
+                        <button class="quiz-option hover-target" onclick="this.style.background='#4CAF50'; alert('Correto! A Touriga Nacional é a verdadeira rainha.')">Touriga Nacional</button>
+                        <button class="quiz-option hover-target" onclick="alert('Incorreto!')">Moscatel</button>
+                    </div>
+
+                    <div class="game-panel" id="g-memory">
+                        <h4 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.3rem;">Pares da Quinta</h4>
+                        <p style="color:#bbb; margin-bottom:15px;">Encontre as garrafas e os cachos idênticos!</p>
+                        <button class="btn-submit hover-target" style="padding:10px 20px; margin:0 auto;" onclick="initMemoryGame()">Baralhar e Jogar</button>
+                        <div class="memory-grid" id="mem-grid"></div>
+                    </div>
                 </div>
             `,
             galeria: `
@@ -467,7 +495,7 @@
                 </div>
             `,
             reviews: `
-                <h2 class="modal-title">O Que Dizem de Nós</h2>
+                <h2 class="modal-title">Testemunhos Editoriais</h2>
                 <div class="star-filter-container hover-target">
                     <span class="filter-star s1" onmouseover="filterRev(1)">★</span>
                     <span class="filter-star s2" onmouseover="filterRev(2)">★</span>
@@ -483,23 +511,21 @@
                 </div>
             `,
             mural: `
-                <h2 class="modal-title">Mural da Comunidade</h2>
-                <div class="insta-container-feed">
-                    <div class="insta-top-row hover-target">
-                        <div class="insta-avatar"></div>
-                        <div class="insta-metrics">
-                            <div><strong>56</strong> Partilhas</div>
-                            <div><strong>12.4k</strong> Amantes de Vinho</div>
-                            <button class="btn-submit hover-target" style="margin:0; padding:10px 30px; font-size:0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
-                        </div>
+                <h2 class="modal-title">O Nosso Mural</h2>
+                <div class="insta-header">
+                    <div class="insta-profile"></div>
+                    <div class="insta-stats">
+                        <div><strong>56</strong> Publicações</div>
+                        <div><strong>12.5k</strong> Seguidores</div>
+                        <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
                     </div>
-                    <div class="insta-photo-grid">
-                        <div class="insta-grid-cell hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-cell-hover">❤️ 340</div></div>
-                        <div class="insta-grid-cell hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-cell-hover">❤️ 512</div></div>
-                        <div class="insta-grid-cell hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-cell-hover">❤️ 890</div></div>
-                        <div class="insta-grid-cell hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
-                            <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
-                        </div>
+                </div>
+                <div class="insta-grid">
+                    <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 340 💬 12</div></div>
+                    <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 512 💬 45</div></div>
+                    <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 890 💬 112</div></div>
+                    <div class="insta-post hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
+                        <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
                     </div>
                 </div>
             `
@@ -516,7 +542,7 @@
 
         window.closeSection = function() {
             modalOverlay.classList.remove('active');
-            if(clickerInterval) clearInterval(clickerInterval); // Para o jogo
+            if(clickerInterval) clearInterval(clickerInterval);
         }
 
         // LÓGICA DE REVIEWS (ESTRELAS)
@@ -539,47 +565,88 @@
         // LÓGICA LIGHTBOX
         window.openLb = function(el) {
             let bgImage = el.style.backgroundImage;
-            let url = bgImage.slice(4, -1).replace(/"/g, ""); // Extrai a URL limpa
+            let url = bgImage.slice(4, -1).replace(/"/g, ""); 
             document.getElementById('lb-img').src = url;
             document.getElementById('lightbox').classList.add('active');
         }
         window.closeLb = function() { document.getElementById('lightbox').classList.remove('active'); }
 
-        // LÓGICA JOGO APANHA A UVA
+        // JOGOS (MUDANÇA DE ABA)
+        window.switchGame = function(g) {
+            document.querySelectorAll('.game-selector-pill').forEach(p=>p.classList.remove('active'));
+            document.querySelectorAll('.game-panel').forEach(p=>p.classList.remove('active'));
+            document.getElementById('g-' + g).classList.add('active'); 
+            event.target.classList.add('active');
+            if(clickerInterval) clearInterval(clickerInterval);
+            updateHoverTargets();
+        }
+
+        // JOGO 1: APANHA A UVA
         let clickerInterval;
         window.initGrapeGame = function() {
-            const area = document.getElementById('play-area');
-            area.style.display = 'block';
-            area.innerHTML = '';
+            const field = document.getElementById('grape-drop-field');
+            field.innerHTML = '<div style="display:flex; justify-content:space-between; padding:10px 20px; font-family:Cinzel; font-size:1.2rem; color:var(--accent-color); border-bottom:1px solid #444;"><span>Tempo: <span id="time">15</span>s</span><span>Cestos: <span id="score">0</span></span></div>';
             let score = 0; let timeLeft = 15;
-            document.getElementById('score').innerText = score;
-            document.getElementById('time').innerText = timeLeft;
             
             clickerInterval = setInterval(() => {
                 timeLeft--; document.getElementById('time').innerText = timeLeft;
                 if(timeLeft <= 0) { 
                     clearInterval(clickerInterval); 
-                    area.innerHTML = `<h2 style="color:var(--accent-color); font-family:'Cinzel'; padding-top:150px; font-size:3rem; text-shadow:0 5px 10px #000;">Fim! Apanhou ${score} uvas!</h2>`; 
+                    field.innerHTML = `<h2 style="color:var(--accent-color); font-family:'Cinzel'; padding-top:60px; font-size:2rem;">Fim da Vindima!</h2><p>Conseguiu encher ${score} cestos!</p>`; 
                 }
             }, 1000);
 
             let spawner = setInterval(() => {
                 if(timeLeft <= 0) { clearInterval(spawner); return; }
                 const g = document.createElement('div');
-                g.className = 'falling-grape hover-target'; g.innerText = '🍇';
-                g.style.left = Math.random() * 90 + '%';
-                // Velocidade de queda aleatória entre 1.5s e 3s
-                g.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+                g.className = 'interactive-grape hover-target'; g.innerText = '🍇';
+                g.style.left = Math.random() * 85 + 5 + '%';
+                g.style.animationDuration = (Math.random() * 1 + 1.5) + 's'; // Cai entre 1.5s e 2.5s
                 g.onclick = function() { score++; document.getElementById('score').innerText = score; this.remove(); };
-                area.appendChild(g);
+                field.appendChild(g);
                 updateHoverTargets();
-                
-                // Limpa uvas que caem fora da área para não encher a memória
-                setTimeout(() => { if(g.parentElement) g.remove(); }, 3000);
-            }, 600);
+                setTimeout(() => { if(g.parentElement) g.remove(); }, 2500);
+            }, 500);
         }
 
-        // LÓGICA DA IA SOMMELIER FALANTE
+        // JOGO 3: MEMÓRIA
+        let memCards = ['🍷','🍷','🍇','🍇','🏺','🏺','🫒','🫒'];
+        let firstCard = null; let lockBoard = false; let matched = 0;
+        
+        window.initMemoryGame = function() {
+            const grid = document.getElementById('mem-grid');
+            grid.innerHTML = ''; firstCard = null; lockBoard = false; matched = 0;
+            memCards.sort(() => Math.random() - 0.5); // Baralhar
+            
+            memCards.forEach((icon, i) => {
+                let card = document.createElement('div');
+                card.className = 'mem-card hover-target';
+                card.dataset.icon = icon;
+                card.onclick = function() {
+                    if(lockBoard || this === firstCard || this.classList.contains('flipped')) return;
+                    this.innerText = this.dataset.icon;
+                    this.classList.add('flipped');
+                    
+                    if(!firstCard) { firstCard = this; return; }
+                    
+                    if(firstCard.dataset.icon === this.dataset.icon) {
+                        firstCard = null; matched++;
+                        if(matched === 4) setTimeout(() => alert('Parabéns! Encontrou todos os pares.'), 500);
+                    } else {
+                        lockBoard = true;
+                        setTimeout(() => {
+                            this.innerText = ''; this.classList.remove('flipped');
+                            firstCard.innerText = ''; firstCard.classList.remove('flipped');
+                            firstCard = null; lockBoard = false;
+                        }, 1000);
+                    }
+                };
+                grid.appendChild(card);
+            });
+            updateHoverTargets();
+        }
+
+        // IA SOMMELIER FALANTE
         const aiInterface = document.getElementById('ai-interface');
         const aiMessage = document.getElementById('ai-message');
         const aiTextMap = {
@@ -587,16 +654,17 @@
             "Quais as atividades relaxantes para amanhã?": "Amanhã as temperaturas estão perfeitas. Sugiro começar com o pequeno-almoço no terraço, seguido de uma sessão de relaxamento no nosso Spa de Vinoterapia.",
             "Conta-me a história do vosso vinho Reserva.": "O nosso Reserva é uma homenagem à família. Nasce das vinhas mais antigas da propriedade em socalcos de xisto, e estagia 12 meses em barrica francesa.",
             "Qual a melhor altura do ano para visitar as vinhas?": "A altura das vindimas, entre setembro e outubro, oferece a vivência mais rica, autêntica e aromática de todo o ecossistema da nossa quinta.",
-            "Aceitam crianças na Quinta?": "Absolutamente. Desenvolvemos o módulo 'Pequenos Viticultores' com atividades lúdicas seguras para que toda a família possa aproveitar o Douro.",
-            "Qual o melhor vinho para acompanhar uma sobremesa doce?": "Sem dúvida o nosso Vintage de Colheita Tardia. As suas notas de figos secos e mel harmonizam de forma celestial com doçaria tradicional portuguesa.",
-            "Como funcionam as provas de vinho na adega?": "As provas são guiadas pela nossa Sommelier principal. Ocorrem diariamente às 15 horas na adega antiga e incluem uma degustação rigorosa de três referências com queijos locais."
+            "Aceitam crianças na Quinta?": "Absolutamente. Desenvolvemos a Academia da Vinha com jogos didáticos seguros para que toda a família possa aproveitar o Douro.",
+            "Qual o melhor vinho para acompanhar uma sobremesa doce?": "Sem dúvida o nosso Vintage de Colheita Tardia. As suas notas de figos secos harmonizam de forma celestial com doçaria tradicional.",
+            "Como funcionam as provas de vinho na adega?": "As provas são guiadas pela nossa Sommelier. Ocorrem diariamente às 15 horas na adega antiga e incluem uma degustação rigorosa de três referências com queijos locais."
         };
 
         function openAI() {
             aiInterface.classList.add('active');
-            let welcome = "Olá. Sou a assistente de Inteligência Artificial da Quinta do Paraíso. Em que posso ajudar a harmonizar o seu dia?";
+            let welcome = "Olá. Sou a assistente da Quinta do Paraíso. Em que posso ajudar a harmonizar o seu dia?";
             aiMessage.innerText = `"${welcome}"`;
-            speakText(welcome);
+            // Cancelar falas anteriores
+            if('speechSynthesis' in window) window.speechSynthesis.cancel();
         }
 
         function closeAI() {
@@ -630,10 +698,9 @@
                 let utter = new SpeechSynthesisUtterance(txt);
                 utter.lang = 'pt-PT';
                 utter.pitch = 1.1; 
-                utter.rate = 0.95; // Fala um pouco mais devagar para soar elegante
+                utter.rate = 0.95; 
                 
                 let voices = window.speechSynthesis.getVoices();
-                // Tenta apanhar vozes femininas portuguesas
                 let v = voices.find(vo => vo.lang === 'pt-PT' && (vo.name.includes('Female') || vo.name.includes('Raquel') || vo.name.includes('Joana')));
                 if(!v) v = voices.find(vo => vo.lang.includes('pt'));
                 if(v) utter.voice = v;
@@ -642,7 +709,6 @@
             }
         }
 
-        // Garante que o Chrome/Edge carregam as vozes
         if ('speechSynthesis' in window) {
             window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
         }
