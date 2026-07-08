@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinta do Paraíso | Plataforma Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff; 
+            --accent-color: #D4AF37; 
+            --glass-bg: rgba(15, 15, 15, 0.88);
+            --px: 0px; 
+            --py: 0px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body, html { width: 100%; height: 100vh; overflow: hidden; font-family: 'Manrope', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
+        h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
+
+        /* CURSORES */
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
+        .cursor-dot { width: 8px; height: 8px; background-color: var(--accent-color); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-color); transition: width 0.2s, height 0.2s, background-color 0.2s; }
+        .cursor-outline.expand { width: 80px; height: 80px; background-color: rgba(212, 175, 55, 0.15); backdrop-filter: blur(2px); }
+
+        /* FUNDO E PARALLAX */
+        .map-container { width: 100%; height: 100vh; position: relative; overflow: hidden; background-color: var(--bg-color); }
+        .map-bg-container { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; transform: translate(var(--px), var(--py)) scale(1); transition: filter 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); background: url('fundo_douro.jpg') center/cover no-repeat; }
+        .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.8)); pointer-events: none; z-index: 1; transition: background 0.8s ease; }
+        
+        .map-container.menu-open .map-bg-container { filter: blur(8px) brightness(0.6); transform: translate(var(--px), var(--py)) scale(1.02); }
+
+        /* LOGO CENTRALIZADO (O BOTÃO MESTRE) */
+        .center-logo-wrapper { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; align-items: center; }
+        .master-logo { width: 120px; filter: drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.5)); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .master-logo.active { transform: scale(0.9); filter: drop-shadow(0px 0px 30px rgba(212, 175, 55, 0.9)); }
+        .master-logo:hover { transform: scale(1.05); }
+        .logo-hint { margin-top: 10px; font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--accent-color); letter-spacing: 3px; animation: pulse 2s infinite; }
+
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        /* PONTOS DE MENU EXPANSÍVEIS (Big Bang Effect) */
+        .nav-node { position: absolute; top: 90px; left: 50%; transform: translate(-50%, -50%) scale(0); opacity: 0; display: flex; flex-direction: column; align-items: center; transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); z-index: 50; pointer-events: none; }
+        
+        .nav-node.expanded { opacity: 1; pointer-events: all; }
+        /* Posições finais espalhadas pelo ecrã */
+        #nav-quem.expanded { top: 35%; left: 20%; transform: translate(-50%, -50%) scale(1); }
+        #nav-servicos.expanded { top: 55%; left: 35%; transform: translate(-50%, -50%) scale(1); }
+        #nav-loja.expanded { top: 40%; left: 75%; transform: translate(-50%, -50%) scale(1); }
+        #nav-reservas.expanded { top: 70%; left: 80%; transform: translate(-50%, -50%) scale(1); }
+        #nav-contactos.expanded { top: 80%; left: 50%; transform: translate(-50%, -50%) scale(1); }
+
+        .nav-dot { width: 16px; height: 16px; background-color: var(--accent-color); border-radius: 50%; box-shadow: 0 0 20px var(--accent-color); transition: transform 0.4s; position: relative; }
+        .nav-dot::before { content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px; border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 50%; transition: all 0.3s; }
+        .nav-label { margin-top: 15px; font-family: 'Cinzel', serif; font-size: 1.3rem; background: rgba(0,0,0,0.7); padding: 8px 25px; border-radius: 30px; backdrop-filter: blur(8px); border: 1px solid rgba(212, 175, 55, 0.3); white-space: nowrap; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); transition: all 0.3s; }
+        
+        .nav-node:hover .nav-dot { transform: scale(1.5); background-color: #fff; }
+        .nav-node:hover .nav-dot::before { transform: scale(1.3); border-color: #fff; }
+        .nav-node:hover .nav-label { background: var(--accent-color); color: #000; font-weight: 700; transform: translateY(-5px); }
+
+        /* A IA HOLOGRÁFICA (Sommelier) */
+        .ai-orb-wrapper { position: absolute; bottom: 40px; right: 50px; z-index: 100; display: flex; align-items: center; gap: 15px; transition: transform 0.3s; }
+        .ai-orb-wrapper:hover { transform: scale(1.05); }
+        .ai-label { font-family: 'Manrope', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.7); text-align: right; }
+        .ai-orb { width: 50px; height: 50px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,1) 0%, var(--accent-color) 40%, rgba(0,0,0,1) 100%); box-shadow: 0 0 30px var(--accent-color), inset 0 0 15px rgba(255,255,255,0.8); position: relative; overflow: hidden; }
+        .ai-orb::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.4) 20%, transparent 40%); animation: spinOrb 4s linear infinite; }
+        @keyframes spinOrb { 100% { transform: rotate(360deg); } }
+
+        /* MODAL DE CONTEÚDOS GERAIS */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1100px; width: 90%; max-height: 85vh; overflow-y: auto; transform: translateY(30px) scale(0.95); transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
+        .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; }
+        .close-btn:hover { color: var(--accent-color); }
+        
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
+
+        /* COMPONENTES DOS MODAIS */
+        .modal-title { font-size: 3rem; color: var(--accent-color); margin-bottom: 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); text-align: center; }
+        .modal-text { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: center; max-width: 800px; margin: 0 auto 30px; }
+
+        /* Serviços (3 Colunas) */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
+        .service-card { background: rgba(0,0,0,0.5); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 15px; padding: 30px; text-align: center; transition: all 0.3s; }
+        .service-card:hover { transform: translateY(-5px); border-color: var(--accent-color); box-shadow: 0 10px 20px rgba(212,175,55,0.1); }
+        .service-card h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Cinzel', serif; }
+        .service-card p { font-size: 0.95rem; color: #ccc; line-height: 1.6; }
+
+        /* Loja Virtual */
+        .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
+        .product-card { background: rgba(255,255,255,0.03); border: 1px dashed rgba(212, 175, 55, 0.3); border-radius: 15px; padding: 25px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; }
+        .product-card:hover { background: rgba(212, 175, 55, 0.05); border-style: solid; border-color: var(--accent-color); }
+        .product-img { width: 100px; height: 180px; background: rgba(0,0,0,0.5); border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: center; align-items: center; color: rgba(212,175,55,0.5); font-size: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .product-title { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
+        .product-price { color: var(--accent-color); font-size: 1.4rem; font-weight: 600; margin-bottom: 20px; }
+        .btn-buy { padding: 10px 25px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 30px; font-family: 'Manrope'; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s; }
+        .btn-buy:hover { background: var(--accent-color); color: #000; font-weight: 700; }
+
+        /* Formulários (Reservas / Contactos) */
+        .narrative-form { font-size: 1.5rem; line-height: 2.2; color: #ccc; text-align: left; font-family: 'Cinzel', serif; max-width: 800px; margin: 0 auto; }
+        .narrative-form input, .narrative-form select { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--accent-color); background: transparent; border: none; border-bottom: 1px dashed #666; padding: 0 5px; text-align: center; transition: border-color 0.3s; }
+        .narrative-form input:focus { outline: none; border-bottom-color: var(--accent-color); }
+        .btn-submit { display: block; margin: 40px auto 0; padding: 15px 40px; background-color: var(--accent-color); color: #000; border: none; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; }
+        .btn-submit:hover { background-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+
+        /* IA INTERFACE (Overlay Criativo) */
+        .ai-interface { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); backdrop-filter: blur(25px); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; }
+        .ai-interface.active { opacity: 1; pointer-events: all; }
+        .ai-core { width: 120px; height: 120px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 50px var(--accent-color); margin-bottom: 40px; animation: aiBreathe 3s ease-in-out infinite alternate; position: relative; display: flex; justify-content: center; align-items: center; }
+        .ai-core::before { content: ''; position: absolute; width: 160px; height: 160px; border: 1px solid rgba(212,175,55,0.5); border-radius: 50%; animation: ping 2s infinite; }
+        @keyframes aiBreathe { 0% { transform: scale(1); filter: brightness(1); } 100% { transform: scale(1.1); filter: brightness(1.3); } }
+        @keyframes ping { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+        
+        .ai-chat-display { max-width: 700px; text-align: center; min-height: 100px; }
+        .ai-message { font-family: 'Cinzel', serif; font-size: 2rem; color: #fff; line-height: 1.5; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        .ai-suggestions { display: flex; gap: 15px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
+        .ai-pill { padding: 12px 25px; border: 1px solid rgba(212,175,55,0.4); border-radius: 30px; font-family: 'Manrope'; color: #ccc; transition: all 0.3s; background: rgba(255,255,255,0.05); }
+        .ai-pill:hover { background: var(--accent-color); color: #000; border-color: var(--accent-color); }
+        .ai-close { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 1.2rem; background: none; border: none; font-family: 'Manrope'; opacity: 0.5; transition: opacity 0.3s; }
+        .ai-close:hover { opacity: 1; color: var(--accent-color); }
+
+    </style>
+</head>
+<body>
+
+    <div class="map-container" id="mapa-interativo">
+        <div class="map-bg-container" id="parallax-bg"></div>
+        <div class="map-overlay"></div>
+        
+        <div class="center-logo-wrapper hover-target" onclick="toggleMenu()">
+            <img src="Logo.png" alt="Quinta do Paraíso" class="master-logo" id="master-logo" onerror="this.src='https://via.placeholder.com/150x150/000/D4AF37?text=QP'">
+            <div class="logo-hint" id="logo-hint">EXPLORAR O REFÚGIO</div>
+        </div>
+
+        <div class="nav-node hover-target" id="nav-quem" onclick="openSection('quem')">
+            <div class="nav-dot"></div><div class="nav-label">Quem Somos</div>
+        </div>
+        <div class="nav-node hover-target" id="nav-servicos" onclick="openSection('servicos')">
+            <div class="nav-dot"></div><div class="nav-label">Atividades & Serviços</div>
+        </div>
+        <div class="nav-node hover-target" id="nav-loja" onclick="openSection('loja')">
+            <div class="nav-dot"></div><div class="nav-label">Loja Vínica</div>
+        </div>
+        <div class="nav-node hover-target" id="nav-reservas" onclick="openSection('reservas')">
+            <div class="nav-dot"></div><div class="nav-label">O Seu Refúgio (Reservas)</div>
+        </div>
+        <div class="nav-node hover-target" id="nav-contactos" onclick="openSection('contactos')">
+            <div class="nav-dot"></div><div class="nav-label">Contactos</div>
+        </div>
+
+        <div class="ai-orb-wrapper hover-target" onclick="openAI()">
+            <div class="ai-label">Sommelier<br>Inteligente</div>
+            <div class="ai-orb"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="main-modal">
+        <div class="modal-content custom-scroll">
+            <button class="close-btn hover-target" onclick="closeSection()">FECHAR ✕</button>
+            <div id="modal-body-content"></div>
+        </div>
+    </div>
+
+    <div class="ai-interface" id="ai-interface">
+        <button class="ai-close hover-target" onclick="closeAI()">Desligar Sommelier ✕</button>
+        <div class="ai-core"></div>
+        <div class="ai-chat-display">
+            <div class="ai-message" id="ai-message">"Bem-vindo. Sou a essência da Quinta. O que deseja descobrir hoje sobre os nossos vinhos ou o nosso vale?"</div>
+        </div>
+        <div class="ai-suggestions">
+            <button class="ai-pill hover-target" onclick="askAI('Que vinho acompanha bem polvo à lagareiro?')">Que vinho acompanha bem polvo?</button>
+            <button class="ai-pill hover-target" onclick="askAI('Quais as atividades relaxantes para amanhã?')">Sugerir atividades relaxantes</button>
+            <button class="ai-pill hover-target" onclick="askAI('Conta-me a história do vosso vinho Reserva.')">A história do vinho Reserva</button>
+        </div>
+    </div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <script>
+        // CURSORES E PARALLAX
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        const mapBgContainer = document.getElementById('parallax-bg');
+        
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+            
+            const x = (window.innerWidth - e.pageX * 2) / 90;
+            const y = (window.innerHeight - e.pageY * 2) / 90;
+            document.documentElement.style.setProperty('--px', `${x}px`);
+            document.documentElement.style.setProperty('--py', `${y}px`);
+        });
+
+        const updateHoverTargets = () => {
+            document.querySelectorAll('.hover-target, button, input').forEach(target => {
+                target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
+                target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
+            });
+        };
+
+        // LÓGICA DO MENU BIG BANG
+        let menuOpen = false;
+        const navNodes = document.querySelectorAll('.nav-node');
+        const mapaContainer = document.getElementById('mapa-interativo');
+        const masterLogo = document.getElementById('master-logo');
+        const logoHint = document.getElementById('logo-hint');
+
+        function toggleMenu() {
+            menuOpen = !menuOpen;
+            if(menuOpen) {
+                mapaContainer.classList.add('menu-open');
+                masterLogo.classList.add('active');
+                logoHint.style.opacity = '0';
+                navNodes.forEach((node, index) => {
+                    setTimeout(() => { node.classList.add('expanded'); }, index * 100);
+                });
+            } else {
+                mapaContainer.classList.remove('menu-open');
+                masterLogo.classList.remove('active');
+                logoHint.style.opacity = '1';
+                navNodes.forEach(node => node.classList.remove('expanded'));
+            }
+        }
+
+        // CONTEÚDOS DAS SECÇÕES
+        const sectionData = {
+            quem: `
+                <h2 class="modal-title">A Nossa Essência</h2>
+                <p class="modal-text">"Mais do que um projeto turístico, a Quinta do Paraíso nasce de uma forte ligação familiar ao Douro e do desejo de preservar a sua identidade, criando experiências únicas para quem o visita."</p>
+                <p class="modal-text" style="color: #aaa; font-family: 'Manrope';">A requalificação dos nossos pombais não foi apenas uma obra arquitetónica, foi um compromisso com a história. Resgatámos as pedras, o xisto e as memórias da nossa família, fundindo o conforto contemporâneo com o respeito solene pela paisagem duriense.</p>
+            `,
+            servicos: `
+                <h2 class="modal-title">Atividades & Serviços</h2>
+                <div class="services-grid hover-target">
+                    <div class="service-card">
+                        <h3>Dormidas</h3>
+                        <p>Os Pombais exclusivos com piscina privativa, pequenos-almoços com vista para os socalcos e total integração com a natureza local.</p>
+                    </div>
+                    <div class="service-card" style="background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.5);">
+                        <h3>Recreativo & Bem-Estar</h3>
+                        <p>Cruzeiros fluviais em barcos privados, passeios de jipe pelas vinhas e o nosso luxuoso Spa com tratamentos de Vinoterapia.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Vinhos</h3>
+                        <p>Visitas guiadas às adegas, provas comentadas e harmonizações com a gastronomia típica da região de Vila Nova de Foz Côa.</p>
+                    </div>
+                </div>
+            `,
+            loja: `
+                <h2 class="modal-title">Loja Vínica</h2>
+                <p class="modal-text">Leve o Paraíso consigo. A nossa seleção de colheitas da propriedade.</p>
+                <div class="shop-grid hover-target">
+                    <div class="product-card">
+                        <div class="product-img">🍷</div>
+                        <h4 class="product-title">Paraíso Reserva Tinto</h4>
+                        <div class="product-price">28,00€</div>
+                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao Carrinho!')">Adicionar</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img">🍾</div>
+                        <h4 class="product-title">Colheita Tardia (Vintage)</h4>
+                        <div class="product-price">45,00€</div>
+                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao Carrinho!')">Adicionar</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img">🫒</div>
+                        <h4 class="product-title">Azeite Virgem Extra Premium</h4>
+                        <div class="product-price">18,50€</div>
+                        <button class="btn-buy hover-target" onclick="alert('Adicionado ao Carrinho!')">Adicionar</button>
+                    </div>
+                </div>
+            `,
+            reservas: `
+                <h2 class="modal-title">Portal de Reservas</h2>
+                <form class="narrative-form hover-target" onsubmit="event.preventDefault(); alert('Pedido registado no sistema central!');">
+                    "Pretendo refugiar-me na Quinta do Paraíso a partir de <input type="date" required>. 
+                    Serei acompanhado(a) e no total seremos <input type="number" min="1" max="10" value="2" style="width: 60px;"> pessoas. 
+                    A nossa prioridade será <select><option>O Descanso nos Pombais</option><option>A Experiência Vínica</option><option>O Spa e Rio</option></select>. 
+                    Contactem-me pelo email <input type="email" placeholder="seu@email.com" required style="width:250px;">."
+                    <button type="submit" class="btn-submit hover-target">Efetuar Pedido de Reserva</button>
+                </form>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#" style="color: var(--accent-color); font-family: 'Manrope'; font-size: 0.9rem;" onclick="alert('Integração de Login / Área de Cliente (Google Auth) preparada para back-office.')">Já tem reserva? Aceda à Área de Cliente</a>
+                </div>
+            `,
+            contactos: `
+                <h2 class="modal-title">Fale Connosco</h2>
+                <div style="display: flex; gap: 40px; justify-content: center; text-align: left; max-width: 800px; margin: 0 auto;">
+                    <div style="flex: 1; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 15px; border-left: 2px solid var(--accent-color);">
+                        <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 15px;">Localização</h3>
+                        <p style="color: #ccc; line-height: 1.8;">Quinta do Paraíso<br>Alto Douro Vinhateiro<br>Vila Nova de Foz Côa, Portugal</p>
+                    </div>
+                    <div style="flex: 1; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 15px; border-left: 2px solid var(--accent-color);">
+                        <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 15px;">Linha Direta</h3>
+                        <p style="color: #ccc; line-height: 1.8;">Email: refugio@quintadoparaiso.pt<br>Telefone: +351 279 000 000</p>
+                    </div>
+                </div>
+            `
+        };
+
+        const modalOverlay = document.getElementById('main-modal');
+        const modalBody = document.getElementById('modal-body-content');
+
+        function openSection(type) {
+            modalBody.innerHTML = sectionData[type];
+            modalOverlay.classList.add('active');
+            updateHoverTargets();
+        }
+
+        function closeSection() {
+            modalOverlay.classList.remove('active');
+        }
+
+        // LÓGICA DA IA SOMMELIER
+        const aiInterface = document.getElementById('ai-interface');
+        const aiMessage = document.getElementById('ai-message');
+        const aiMessagesDict = {
+            "Que vinho acompanha bem polvo à lagareiro?": "Para a textura rica e o alho do polvo à lagareiro, recomendo vivamente o nosso **Reserva Branco**. A sua acidez equilibrada e ligeiro estágio em barrica cortam a untuosidade do azeite na perfeição.",
+            "Quais as atividades relaxantes para amanhã?": "A manhã no Douro é mágica. Sugiro começar com o pequeno-almoço no terraço, seguido de um **banho de imersão antioxidante no nosso Spa de Vinoterapia**. À tarde, um passeio de barco privativo no rio.",
+            "Conta-me a história do vosso vinho Reserva.": "O nosso Reserva nasce das vinhas mais antigas da propriedade, plantadas em socalcos de xisto. Estagia 12 meses em carvalho francês, absorvendo a resiliência e a alma do tempo que caracteriza esta família."
+        };
+
+        function openAI() {
+            aiInterface.classList.add('active');
+            aiMessage.innerHTML = "Bem-vindo. Sou a essência da Quinta. O que deseja descobrir hoje sobre os nossos vinhos ou o nosso vale?";
+        }
+
+        function closeAI() {
+            aiInterface.classList.remove('active');
+        }
+
+        function askAI(question) {
+            aiMessage.style.opacity = 0;
+            setTimeout(() => {
+                aiMessage.style.color = "var(--accent-color)";
+                aiMessage.innerHTML = "A consultar as caves e a meteorologia do vale...";
+                aiMessage.style.opacity = 1;
+                
+                setTimeout(() => {
+                    aiMessage.style.opacity = 0;
+                    setTimeout(() => {
+                        aiMessage.style.color = "#fff";
+                        aiMessage.innerHTML = aiMessagesDict[question];
+                        aiMessage.style.opacity = 1;
+                    }, 400);
+                }, 1500); // Simulando "pensamento" de 1.5s
+            }, 300);
+        }
+
+        updateHoverTargets();
+    </script>
+</body>
+</html>
