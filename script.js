@@ -9,7 +9,6 @@ window.addEventListener('mousemove', (e) => {
     cursorDot.style.top = `${e.clientY}px`;
     cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
     
-    // Parallax suave no fundo
     const x = (window.innerWidth - e.pageX * 2) / 90;
     const y = (window.innerHeight - e.pageY * 2) / 90;
     document.documentElement.style.setProperty('--px', `${x}px`);
@@ -24,32 +23,34 @@ const updateHoverTargets = () => {
 };
 
 // ==========================================================================
-// 2. ÍCONES FLUTUANTES (FUGA E DESTAQUE CINEMATOGRÁFICO)
+// 2. ÍCONES FLUTUANTES (FUGA, DESTAQUE INFERIOR E LOGO SOBE)
 // ==========================================================================
 const loneIcons = document.querySelectorAll('.lone-icon');
 const infoScreen = document.getElementById('info-display');
 const infoTitle = document.getElementById('info-title');
 const infoDesc = document.getElementById('info-desc');
+const logoMestreWrapper = document.getElementById('logo-mestre-wrapper');
 
 loneIcons.forEach(icon => {
     icon.addEventListener('mouseenter', () => {
         infoTitle.innerText = icon.getAttribute('data-t');
         infoDesc.innerText = icon.getAttribute('data-d');
         infoScreen.classList.add('active');
+        if(logoMestreWrapper) logoMestreWrapper.classList.add('shift-up');
         
-        // Fuga dos restantes ícones
         loneIcons.forEach(other => {
             if (other !== icon) other.classList.add('flee');
         });
     });
     icon.addEventListener('mouseleave', () => {
         infoScreen.classList.remove('active');
+        if(logoMestreWrapper) logoMestreWrapper.classList.remove('shift-up');
         loneIcons.forEach(other => other.classList.remove('flee'));
     });
 });
 
 // ==========================================================================
-// 3. CARROSSEL 3D DRAGGABLE (Menu Principal)
+// 3. CARROSSEL 3D DRAGGABLE COM PAUSA AUTOMÁTICA NO HOVER
 // ==========================================================================
 let menuOpen = false;
 const mapaContainer = document.getElementById('mapa-interativo');
@@ -63,10 +64,8 @@ let autoSpin = true;
 window.toggleMenu = function() {
     menuOpen = !menuOpen;
     if(menuOpen) {
-        document.getElementById('modal-body-content').innerHTML = ''; // Limpa o modal para evitar bugs
+        document.getElementById('modal-body-content').innerHTML = ''; 
         mapaContainer.classList.add('menu-open');
-        
-        // Posicionar cartões em círculo 3D (360 / 9 = 40 graus)
         const cards = document.querySelectorAll('.carousel-card');
         const angleStep = 360 / cards.length;
         cards.forEach((card, i) => {
@@ -88,25 +87,38 @@ function animateCarousel() {
 }
 animateCarousel();
 
+// Pausa da rotação ao passar o rato (Hover) sobre os cartões
+document.querySelectorAll('.carousel-card').forEach(card => {
+    card.addEventListener('mouseenter', () => { autoSpin = false; });
+    card.addEventListener('mouseleave', () => { if (!isDragging) autoSpin = true; });
+});
+
 // Arrastar com o rato (Drag)
 const carContainer = document.getElementById('carousel-container');
 carContainer.addEventListener('mousedown', (e) => { isDragging = true; autoSpin = false; startX = e.clientX; });
 window.addEventListener('mouseup', () => { isDragging = false; setTimeout(() => { autoSpin = true; }, 1500); });
-window.addEventListener('mousemove', (e) => {
+carContainer.addEventListener('mousemove', (e) => {
     if(!isDragging) return;
     const deltaX = e.clientX - startX;
-    currAngle += deltaX * 0.3; // Sensibilidade
+    currAngle += deltaX * 0.3;
     carousel.style.transform = `rotateX(-5deg) rotateY(${currAngle}deg)`;
     startX = e.clientX;
 });
 
 // ==========================================================================
-// 4. BASE DE DADOS DE CONTEÚDOS (Secções do Site)
+// 4. CONTEÚDOS DOS MODAIS
 // ==========================================================================
 const sectionData = {
     quem: `
-        <h2 class="modal-title">A Nossa Essência</h2>
-        <p class="modal-text" style="font-size: 1.25rem; line-height: 2; max-width: 900px;">Na Quinta do Paraíso acreditamos que as melhores experiências nascem da autenticidade. Situada no coração do Alto Douro Vinhateiro, a nossa quinta combina a tradição vitivinícola com o conforto, a natureza e a hospitalidade, proporcionando momentos únicos a todos os que nos visitam. Mais do que um alojamento, somos um espaço onde o vinho, a cultura, a gastronomia e a tranquilidade se unem para criar memórias que perduram no tempo.</p>
+        <h2 class="modal-title">Quem Somos</h2>
+        <div class="about-split-container hover-target">
+            <div class="about-split-left">
+                <h3>Tradição,<br>Natureza &<br>Hospitalidade</h3>
+            </div>
+            <div class="about-split-right">
+                <p>Na Quinta do Paraíso acreditamos que as melhores experiências nascem da autenticidade. Situada no coração do Alto Douro Vinhateiro, a nossa quinta combina a tradição vitivinícola com o conforto, a natureza e a hospitalidade, proporcionando momentos únicos a todos os que nos visitam. Mais do que um alojamento, somos um space onde o vinho, a cultura, a gastronomia e a tranquilidade se unem para criar memórias que perduram no tempo.</p>
+            </div>
+        </div>
     `,
     servicos: `
         <h2 class="modal-title">Atividades & Serviços</h2>
@@ -145,40 +157,40 @@ const sectionData = {
     loja: `
         <h2 class="modal-title">Garrafeira Haute Couture</h2>
         <p class="modal-text">A seleção oficial da nossa cave. Explore as referências e encomende online.</p>
-        <div class="shop-showcase">
-            <div class="wine-vessel hover-target">
+        <div class="shop-grid-luxury">
+            <div class="luxury-wine-card hover-target">
                 <img src="Vinho1.png" alt="Tavedo Rosé" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho1'">
                 <span class="wine-type">Rosé</span><h4 class="wine-name">Tavedo Rosé</h4>
                 <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/tavedo-rose/', '_blank')">Ver Detalhes</button>
             </div>
-            <div class="wine-vessel hover-target">
+            <div class="luxury-wine-card hover-target">
                 <img src="Vinho2.png" alt="Burmester Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho2'">
                 <span class="wine-type">Branco</span><h4 class="wine-name">Branco Clássico</h4>
                 <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/burmester-branco/', '_blank')">Ver Detalhes</button>
             </div>
-            <div class="wine-vessel hover-target">
+            <div class="luxury-wine-card hover-target">
                 <img src="Vinho3.png" alt="Casa Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho3'">
                 <span class="wine-type">Branco Reserva</span><h4 class="wine-name">Casa Branco</h4>
                 <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/casa-burmester-branco/', '_blank')">Ver Detalhes</button>
             </div>
-            <div class="wine-vessel hover-target" style="border-color:var(--accent-color);">
+            <div class="luxury-wine-card hover-target" style="border-color:var(--accent-color);">
                 <img src="Vinho4.png" alt="Casa Touriga Nacional" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho4'">
                 <span class="wine-type">Tinto Reserva</span><h4 class="wine-name">Casa Touriga Nacional</h4>
                 <button class="btn-buy hover-target" style="background:var(--accent-color); color:#000;" onclick="window.open('https://burmester.pt/vinhos/casa-burmester-touriga-nacional-2018/', '_blank')">Ver Detalhes</button>
             </div>
-            <div class="wine-vessel hover-target">
+            <div class="luxury-wine-card hover-target">
                 <img src="Vinho5.png" alt="Casa Tinto" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho5'">
                 <span class="wine-type">Tinto</span><h4 class="wine-name">Casa Tinto</h4>
                 <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/casa-burmester-tinto/', '_blank')">Ver Detalhes</button>
             </div>
-            <div class="wine-vessel hover-target">
+            <div class="luxury-wine-card hover-target">
                 <img src="Vinho6.png" alt="Tawny Port" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho6'">
                 <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Tawny Clássico</h4>
                 <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/burmester-tawny-port/', '_blank')">Ver Detalhes</button>
             </div>
-            <div class="wine-vessel hover-target" style="border-color:var(--accent-color);">
+            <div class="luxury-wine-card hover-target" style="border-color:var(--accent-color);">
                 <img src="Vinho7.png" alt="Vintage 2019" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
-                <span class="wine-type">Vintage Port</span><h4 class="wine-name">Quinta do Paraíso Vintage</h4>
+                <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Paraíso Vintage 2019</h4>
                 <button class="btn-buy hover-target" style="background:var(--accent-color); color:#000;" onclick="window.open('https://burmester.pt/vinhos/vintage-2018-quinta-do-arnozelo/', '_blank')">Ver Detalhes</button>
             </div>
         </div>
@@ -233,7 +245,7 @@ const sectionData = {
                 <p style="color: #ccc; line-height: 1.8;">Email: refugio@quintadoparaiso.pt<br>Telefone: +351 279 000 000</p>
             </div>
             <div class="map-embed-container hover-target">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000.320490123!2d-7.140880000000001!3d41.08051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDA0JzQ5LjgiTiA3wrAwOCcyNy4yIlc!5e0!3m2!1spt-PT!2spt!4v1615468759328!5m2!1spt-PT!2spt" width="100%" height="100%" style="border:0; min-height: 350px;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed" width="100%" height="100%" style="border:0; min-height: 350px;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     `,
@@ -245,14 +257,12 @@ const sectionData = {
                 <button class="game-selector-pill hover-target" onclick="switchGame('quiz')">Quiz D'Ouro</button>
                 <button class="game-selector-pill hover-target" onclick="switchGame('memory')">Jogo de Memória</button>
             </div>
-            
             <div class="game-panel active" id="g-clicker">
                 <h4 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.3rem;">Vindima Express</h4>
                 <p style="color:#bbb; margin-bottom:15px;">Clique nas uvas que caem para abastecer a adega!</p>
                 <button class="btn-submit hover-target" style="padding:10px 20px; margin:0 auto;" onclick="initGrapeGame()">Iniciar Jogo</button>
                 <div id="grape-drop-field" style="position:relative; height:200px; margin-top:15px; border:1px dashed rgba(212,175,55,0.3); border-radius:10px; overflow:hidden;"></div>
             </div>
-            
             <div class="game-panel" id="g-quiz">
                 <h4 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.3rem;">Desafio dos Socalcos</h4>
                 <p style="color:#fff; margin-bottom:15px;">Qual é a casta rainha do Alto Douro para vinhos de grande guarda?</p>
@@ -260,7 +270,6 @@ const sectionData = {
                 <button class="quiz-option hover-target" onclick="this.style.background='#4CAF50'; alert('Correto! A Touriga Nacional é a verdadeira rainha.')">Touriga Nacional</button>
                 <button class="quiz-option hover-target" onclick="alert('Incorreto!')">Moscatel</button>
             </div>
-
             <div class="game-panel" id="g-memory">
                 <h4 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.3rem;">Pares da Quinta</h4>
                 <p style="color:#bbb; margin-bottom:15px;">Encontre as garrafas e os cachos idênticos!</p>
@@ -297,22 +306,20 @@ const sectionData = {
     `,
     mural: `
         <h2 class="modal-title">O Nosso Mural</h2>
-        <div class="insta-container-feed">
-            <div class="insta-top-row hover-target">
-                <div class="insta-avatar"></div>
-                <div class="insta-metrics">
-                    <div><strong>56</strong> Publicações</div>
-                    <div><strong>12.5k</strong> Seguidores</div>
-                    <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
-                </div>
+        <div class="insta-header">
+            <div class="insta-profile"></div>
+            <div class="insta-stats">
+                <div><strong>56</strong> Publicações</div>
+                <div><strong>12.5k</strong> Seguidores</div>
+                <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
             </div>
-            <div class="insta-grid">
-                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 340 💬 12</div></div>
-                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 512 💬 45</div></div>
-                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 890 💬 112</div></div>
-                <div class="insta-post hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
-                    <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
-                </div>
+        </div>
+        <div class="insta-grid">
+            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 340 💬 12</div></div>
+            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 512 💬 45</div></div>
+            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 890 💬 112</div></div>
+            <div class="insta-post hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
+                <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
             </div>
         </div>
     `
@@ -321,7 +328,6 @@ const sectionData = {
 const modalOverlay = document.getElementById('main-modal');
 const modalBody = document.getElementById('modal-body-content');
 
-// Abrir e Fechar Secções
 window.openSection = function(type) {
     modalBody.innerHTML = sectionData[type];
     modalOverlay.classList.add('active');
@@ -330,38 +336,27 @@ window.openSection = function(type) {
 
 window.closeSection = function() {
     modalOverlay.classList.remove('active');
-    if(clickerInterval) clearInterval(clickerInterval); // Para os jogos se estiverem a correr
+    if(clickerInterval) clearInterval(clickerInterval);
 }
 
-// ==========================================================================
-// 5. LÓGICA DE REVIEWS (ESTRELAS)
-// ==========================================================================
+// LÓGICA DE REVIEWS (ESTRELAS)
 window.filterRev = function(stars) {
     const starEls = document.querySelectorAll('.filter-star');
     starEls.forEach((el, index) => {
-        if(index < stars) { 
-            el.style.color = 'var(--accent-color)'; 
-            el.style.textShadow = '0 0 20px var(--accent-color)'; 
-        } else { 
-            el.style.color = '#444'; 
-            el.style.textShadow = '0 5px 10px rgba(0,0,0,0.8)'; 
-        }
+        if(index < stars) { el.style.color = 'var(--accent-color)'; el.style.textShadow = '0 0 20px var(--accent-color)'; } 
+        else { el.style.color = '#444'; el.style.textShadow = '0 5px 10px rgba(0,0,0,0.8)'; }
     });
     const cards = document.querySelectorAll('.review-card');
     cards.forEach(card => card.classList.remove('show'));
-    
     const targetCards = document.querySelectorAll('.r' + stars);
-    if(targetCards.length > 0) { 
-        targetCards.forEach(card => card.classList.add('show')); 
-    } else { 
+    if(targetCards.length > 0) { targetCards.forEach(card => card.classList.add('show')); }
+    else { 
         document.getElementById('reviews-container').innerHTML += `<p class="rev-text r-temp" style="text-align:center; color:#888;">Ainda não existem avaliações de ${stars} estrelas. A excelência é a nossa regra!</p>`;
         setTimeout(() => { document.querySelectorAll('.r-temp').forEach(el=>el.remove())}, 2000);
     }
 }
 
-// ==========================================================================
-// 6. LÓGICA LIGHTBOX DA GALERIA
-// ==========================================================================
+// LÓGICA LIGHTBOX DA GALERIA
 window.openLb = function(el) {
     let bgImage = el.style.backgroundImage;
     let url = bgImage.slice(4, -1).replace(/"/g, ""); 
@@ -370,9 +365,7 @@ window.openLb = function(el) {
 }
 window.closeLb = function() { document.getElementById('lightbox').classList.remove('active'); }
 
-// ==========================================================================
-// 7. ACADEMIA DE JOGOS (Mudança de Aba e Execução)
-// ==========================================================================
+// LÓGICA DAS ABAS DA ACADEMIA DE JOGOS
 window.switchGame = function(g) {
     document.querySelectorAll('.game-selector-pill').forEach(p=>p.classList.remove('active'));
     document.querySelectorAll('.game-panel').forEach(p=>p.classList.remove('active'));
@@ -382,7 +375,7 @@ window.switchGame = function(g) {
     updateHoverTargets();
 }
 
-// Jogo 1: Vindima (Clicker de Queda)
+// JOGO 1: APANHA A UVA
 let clickerInterval;
 window.initGrapeGame = function() {
     const field = document.getElementById('grape-drop-field');
@@ -414,7 +407,7 @@ window.initGrapeGame = function() {
     }, 600);
 }
 
-// Jogo 3: Jogo da Memória
+// JOGO 3: MEMÓRIA
 let memCards = ['🍷','🍷','🍇','🍇','🏺','🏺','🫒','🫒'];
 let firstCard = null; let lockBoard = false; let matched = 0;
 
@@ -451,19 +444,17 @@ window.initMemoryGame = function() {
     updateHoverTargets();
 }
 
-// ==========================================================================
-// 8. IA SOMMELIER FALANTE ON-DEMAND (Texto-para-Voz)
-// ==========================================================================
+// IA SOMMELIER FALANTE
 const aiInterface = document.getElementById('ai-interface');
 const aiMessage = document.getElementById('ai-message');
 const aiTextMap = {
     "Que vinho acompanha bem polvo à lagareiro?": "Para a textura rica e o alho do polvo à lagareiro, recomendo vivamente o nosso Reserva Branco. A sua acidez equilibrada corta a gordura do azeite na perfeição.",
     "Quais as atividades relaxantes para amanhã?": "Amanhã as temperaturas estão perfeitas. Sugiro começar com o pequeno-almoço no terraço, seguido de uma sessão de relaxamento no nosso Spa de Vinoterapia.",
-    "Conta-me a história do vosso vinho Reserva.": "O nosso Reserva é uma homenagem à família. Nasce das vinhas mais antigas da propriedade em socalcos de xisto, e estagia doze meses em barrica francesa.",
+    "Conta-me a história do vosso vinho Reserva.": "O nosso Reserva é uma homenagem à família. Nasce das vinhas mais antigas da propriedade em socalcos de xisto, e estagia 12 meses em barrica francesa.",
     "Qual a melhor altura do ano para visitar as vinhas?": "A altura das vindimas, entre setembro e outubro, oferece a vivência mais rica, autêntica e aromática de todo o ecossistema da nossa quinta.",
     "Aceitam crianças na Quinta?": "Absolutamente. Desenvolvemos o módulo Academia da Vinha com jogos didáticos seguros para que toda a família possa aproveitar o Douro.",
-    "Qual o melhor vinho para acompanhar uma sobremesa doce?": "Sem dúvida o nosso Vintage de Colheita Tardia. As suas notas de figo seco harmonizam de forma celestial com doçaria tradicional.",
-    "Como funcionam as provas de vinho na adega?": "As provas são guiadas pela nossa Sommelier. Ocorrem diariamente às quinze horas na adega antiga e incluem uma degustação rigorosa de três referências com queijos locais."
+    "Qual o melhor vinho para acompanhar uma sobremesa doce?": "Sem dúvida o nosso Vintage de Colheita Tardia. As suas notas de figos secos harmonizam de forma celestial com doçaria tradicional.",
+    "Como funcionam as provas de vinho na adega?": "As provas são guiadas pela nossa Sommelier. Ocorrem diariamente às 15 horas na adega antiga e incluem uma degustação rigorosa de três referências com queijos locais."
 };
 
 window.openAI = function() {
@@ -499,15 +490,13 @@ window.askAI = function(q) {
     }, 300);
 }
 
-// Função para invocar a voz do navegador
 function speakText(txt) {
     if ('speechSynthesis' in window) {
         let utter = new SpeechSynthesisUtterance(txt);
         utter.lang = 'pt-PT';
         utter.pitch = 1.1; 
-        utter.rate = 0.95; // Velocidade mais elegante
+        utter.rate = 0.95; 
         
-        // Procura voz feminina em PT-PT
         let voices = window.speechSynthesis.getVoices();
         let v = voices.find(vo => vo.lang === 'pt-PT' && (vo.name.includes('Female') || vo.name.includes('Raquel') || vo.name.includes('Joana')));
         if(!v) v = voices.find(vo => vo.lang.includes('pt'));
@@ -517,10 +506,8 @@ function speakText(txt) {
     }
 }
 
-// Carregar o pacote de vozes logo no carregamento
 if ('speechSynthesis' in window) {
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
 
-// Chamada inicial para garantir cursores
 updateHoverTargets();
