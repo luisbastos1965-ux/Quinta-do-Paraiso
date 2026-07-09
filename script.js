@@ -14,13 +14,13 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const updateHoverTargets = () => {
-    document.querySelectorAll('.hover-target, button, input, select, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-selector-pill, .quiz-option, .mem-card, .btn-submit, .map-overlay').forEach(target => {
+    document.querySelectorAll('.hover-target, button, input, select, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-selector-pill, .quiz-option, .mem-card, .btn-submit').forEach(target => {
         target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
         target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
     });
 };
 
-// ÍCONES FLUTUANTES (FUGA E DESTAQUE CINEMATOGRÁFICO)
+// ÍCONES FLUTUANTES (FUGA E DESTAQUE NO CENTRO)
 const loneIcons = document.querySelectorAll('.lone-icon');
 const infoScreen = document.getElementById('info-display');
 const infoTitle = document.getElementById('info-title');
@@ -42,7 +42,7 @@ loneIcons.forEach(icon => {
     });
 });
 
-// CARROSSEL 3D (Com clique no overlay para fechar)
+// CARROSSEL 3D (Desaparece Logo, Aparece Carrossel Draggeable)
 let menuOpen = false;
 const mapaContainer = document.getElementById('mapa-interativo');
 const carousel = document.getElementById('carousel');
@@ -88,12 +88,15 @@ window.addEventListener('mousemove', (e) => {
     startX = e.clientX;
 });
 
-// CONTEÚDOS DOS MODAIS
+// CONTEÚDOS DOS MODAIS (Páginas do Site)
 const sectionData = {
-    quem: `<h2 class="modal-title">A Nossa Essência</h2><p class="modal-text">Mais do que um projeto turístico, a Quinta do Paraíso nasce de uma forte ligação familiar ao Douro e do desejo de preservar a sua identidade, criando experiências únicas para quem o visita. A requalificação dos pombais funde o luxo contemporâneo com o respeito solene pela paisagem duriense.</p>`,
+    quem: `
+        <h2 class="modal-title">A Nossa Essência</h2>
+        <p class="modal-text" style="font-size: 1.2rem; line-height: 2;">Na Quinta do Paraíso acreditamos que as melhores experiências nascem da autenticidade. Situada no coração do Alto Douro Vinhateiro, a nossa quinta combina a tradição vitivinícola com o conforto, a natureza e a hospitalidade, proporcionando momentos únicos a todos os que nos visitam. Mais do que um alojamento, somos um espaço onde o vinho, a cultura, a gastronomia e a tranquilidade se unem para criar memórias que perduram no tempo.</p>
+    `,
     servicos: `
         <h2 class="modal-title">Atividades & Serviços</h2>
-        <div style="display:flex; justify-content:center; gap:30px; margin-top:40px;">
+        <div style="display:flex; justify-content:center; gap:30px; margin-top:40px; flex-wrap:wrap;">
             <div style="background:rgba(0,0,0,0.5); border:1px solid var(--accent-color); padding:40px; border-radius:15px; text-align:center; width:300px;">
                 <h3 style="color:var(--accent-color); font-family:'Cinzel'; font-size:1.8rem; margin-bottom:15px;">Dormidas</h3>
                 <p style="color:#ccc; line-height:1.6;">Os Pombais exclusivos com piscina privativa, pequenos-almoços com vista para os socalcos e total integração com a natureza.</p>
@@ -110,54 +113,97 @@ const sectionData = {
     `,
     loja: `
         <h2 class="modal-title">Garrafeira Haute Couture</h2>
-        <p class="modal-text">Seleção exclusiva de colheitas engarrafadas na propriedade. O esplendor do Douro na sua mesa.</p>
-        <div class="shop-showcase">
-            <div class="wine-vessel hover-target">
-                <div class="wine-bottle-art">🍷</div>
-                <div class="wine-vintage">Colheita 2021</div>
-                <h4 class="wine-name">Paraíso Grande Reserva</h4>
-                <p class="wine-desc">Notas intensas de frutos vermelhos silvestres e especiarias de barrica francesa. Acabamento longo.</p>
-                <div class="wine-pricing">28,00€</div>
-                <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px;" onclick="alert('Adicionado!')">Adicionar</button>
+        <p class="modal-text">As nossas colheitas exclusivas.</p>
+        <div class="shop-grid-luxury">
+            <div class="luxury-wine-card hover-target">
+                <img src="Vinho1.png" alt="Tavedo Rosé" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho1'">
+                <span class="wine-type">Rosé</span><h4 class="wine-name">Tavedo Rosé</h4><div class="wine-price">12,00€</div>
+                <button class="btn-buy hover-target" onclick="alert('Adicionado ao cesto!')">Adicionar</button>
             </div>
-            <div class="wine-vessel hover-target" style="border-color:var(--accent-color);">
-                <div class="wine-bottle-art">🍾</div>
-                <div class="wine-vintage">Edição Limitada</div>
-                <h4 class="wine-name">Colheita Tardia Vintage</h4>
-                <p class="wine-desc">Aroma complexo a figo secos, mel e notas subtis de xisto profundo. Uma sobremesa engarrafada.</p>
-                <div class="wine-pricing">45,00€</div>
-                <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px; background:#fff;" onclick="alert('Adicionado!')">Adicionar</button>
+            <div class="luxury-wine-card hover-target">
+                <img src="Vinho2.png" alt="Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho2'">
+                <span class="wine-type">Branco</span><h4 class="wine-name">Burmester Branco</h4><div class="wine-price">14,50€</div>
+                <button class="btn-buy hover-target" onclick="alert('Adicionado ao cesto!')">Adicionar</button>
             </div>
-            <div class="wine-vessel hover-target">
-                <div class="wine-bottle-art">🫒</div>
-                <div class="wine-vintage">Azeite Biológico</div>
-                <h4 class="wine-name">Lágrimas do Douro Extra</h4>
-                <p class="wine-desc">Extração a frio de olival secular com acidez extremamente baixa. Sabor frutado intenso.</p>
-                <div class="wine-pricing">18,50€</div>
-                <button class="btn-submit hover-target" style="margin:0 auto; padding: 10px 30px;" onclick="alert('Adicionado!')">Adicionar</button>
+            <div class="luxury-wine-card hover-target">
+                <img src="Vinho3.png" alt="Casa Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho3'">
+                <span class="wine-type">Branco</span><h4 class="wine-name">Casa Burmester Branco</h4><div class="wine-price">16,00€</div>
+                <button class="btn-buy hover-target" onclick="alert('Adicionado ao cesto!')">Adicionar</button>
+            </div>
+            <div class="luxury-wine-card hover-target">
+                <img src="Vinho4.png" alt="Casa Touriga Nacional" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho4'">
+                <span class="wine-type">Tinto</span><h4 class="wine-name">Casa Touriga Nacional</h4><div class="wine-price">22,00€</div>
+                <button class="btn-buy hover-target" onclick="alert('Adicionado ao cesto!')">Adicionar</button>
+            </div>
+            <div class="luxury-wine-card hover-target">
+                <img src="Vinho5.png" alt="Casa Tinto" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho5'">
+                <span class="wine-type">Tinto</span><h4 class="wine-name">Casa Burmester Tinto</h4><div class="wine-price">20,00€</div>
+                <button class="btn-buy hover-target" onclick="alert('Adicionado ao cesto!')">Adicionar</button>
+            </div>
+            <div class="luxury-wine-card hover-target">
+                <img src="Vinho6.png" alt="Tawny" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho6'">
+                <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Burmester Tawny</h4><div class="wine-price">28,00€</div>
+                <button class="btn-buy hover-target" onclick="alert('Adicionado ao cesto!')">Adicionar</button>
+            </div>
+            <div class="luxury-wine-card hover-target" style="border-color:var(--accent-color);">
+                <img src="Vinho7.png" alt="Vintage 2019" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
+                <span class="wine-type">Vintage</span><h4 class="wine-name">Quinta do Paraíso Vintage 2019</h4><div class="wine-price">65,00€</div>
+                <button class="btn-buy hover-target" style="background:#fff;" onclick="alert('Adicionado ao cesto!')">Adicionar</button>
             </div>
         </div>
     `,
     reservas: `
-        <h2 class="modal-title">O Seu Refúgio</h2>
-        <form class="narrative-form hover-target" onsubmit="event.preventDefault(); alert('A sua reserva foi registada! (Pronto a integrar login Google/Phone).');">
-            "Desejo refugiar-me na Quinta a partir de <input type="date" required>. 
-            No total seremos <input type="number" min="1" max="10" value="2" style="width: 60px;"> pessoas. 
-            A nossa prioridade será <select><option>O Alojamento Pombais</option><option>Experiência Vínica</option><option>Spa e Bem-Estar</option></select>. 
-            Contactem-me pelo email <input type="email" placeholder="seu@email.com" required style="width:250px;">."
-            <button type="submit" class="btn-submit hover-target">Efetuar Pedido de Reserva</button>
-        </form>
+        <h2 class="modal-title">O Seu Passaporte para o Paraíso</h2>
+        <div class="booking-card hover-target">
+            <form onsubmit="event.preventDefault(); alert('Reserva Solicitada com Sucesso!');">
+                <div class="booking-grid">
+                    <div class="input-group">
+                        <label>Hóspede (Nome)</label>
+                        <input type="text" required placeholder="O seu nome completo">
+                    </div>
+                    <div class="input-group">
+                        <label>Correio Eletrónico</label>
+                        <input type="email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Check-in</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Check-out</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Acompanhantes</label>
+                        <input type="number" min="1" max="10" value="2">
+                    </div>
+                    <div class="input-group">
+                        <label>Refúgio (Alojamento)</label>
+                        <select required>
+                            <option value="rose">Casa Rosé</option>
+                            <option value="branco">Casa Branco</option>
+                            <option value="tinto">Casa Tinto</option>
+                            <option value="ruby">Casa Ruby</option>
+                            <option value="tawny">Casa Tawny</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit hover-target">Confirmar Reserva</button>
+            </form>
+        </div>
     `,
     contactos: `
         <h2 class="modal-title">Fale Connosco</h2>
-        <div style="display: flex; gap: 40px; justify-content: center; text-align: left; max-width: 800px; margin: 0 auto;">
-            <div style="flex: 1; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 15px; border-left: 2px solid var(--accent-color);">
+        <div class="contacts-wrapper">
+            <div class="contacts-info hover-target">
                 <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 15px;">Localização</h3>
-                <p style="color: #ccc; line-height: 1.8;">Quinta do Paraíso<br>Alto Douro Vinhateiro<br>Vila Nova de Foz Côa</p>
-            </div>
-            <div style="flex: 1; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 15px; border-left: 2px solid var(--accent-color);">
+                <p style="color: #ccc; line-height: 1.8; margin-bottom: 30px;">Quinta do Paraíso<br>Alto Douro Vinhateiro<br>Vila Nova de Foz Côa</p>
                 <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 15px;">Linha Direta</h3>
                 <p style="color: #ccc; line-height: 1.8;">Email: refugio@quintadoparaiso.pt<br>Telefone: +351 279 000 000</p>
+            </div>
+            <div class="map-embed-container hover-target">
+                <!-- Mapa Dinâmico do Google com Filtro Noturno -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47871.39343714247!2d-7.1852504!3d41.0827299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3c9b7365c19793%3A0xeab5e83a45cce616!2sVila%20Nova%20de%20Foz%20C%C3%B4a!5e1!3m2!1spt-PT!2spt!4v1700000000000!5m2!1spt-PT!2spt" width="100%" height="100%" style="border:0; min-height: 350px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     `,
@@ -221,22 +267,20 @@ const sectionData = {
     `,
     mural: `
         <h2 class="modal-title">O Nosso Mural</h2>
-        <div class="insta-container-feed">
-            <div class="insta-top-row hover-target">
-                <div class="insta-avatar"></div>
-                <div class="insta-metrics">
-                    <div><strong>56</strong> Publicações</div>
-                    <div><strong>12.5k</strong> Seguidores</div>
-                    <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
-                </div>
+        <div class="insta-header">
+            <div class="insta-profile"></div>
+            <div class="insta-stats">
+                <div><strong>56</strong> Publicações</div>
+                <div><strong>12.5k</strong> Seguidores</div>
+                <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
             </div>
-            <div class="insta-grid">
-                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 340 💬 12</div></div>
-                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 512 💬 45</div></div>
-                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 890 💬 112</div></div>
-                <div class="insta-post hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
-                    <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
-                </div>
+        </div>
+        <div class="insta-grid">
+            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 340 💬 12</div></div>
+            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 512 💬 45</div></div>
+            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 890 💬 112</div></div>
+            <div class="insta-post hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
+                <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
             </div>
         </div>
     `
@@ -361,7 +405,7 @@ window.initMemoryGame = function() {
     updateHoverTargets();
 }
 
-// IA SOMMELIER FALANTE
+// IA SOMMELIER FALANTE ON-DEMAND
 const aiInterface = document.getElementById('ai-interface');
 const aiMessage = document.getElementById('ai-message');
 const aiTextMap = {
@@ -423,6 +467,7 @@ function speakText(txt) {
     }
 }
 
+// Carregar vozes logo
 if ('speechSynthesis' in window) {
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
