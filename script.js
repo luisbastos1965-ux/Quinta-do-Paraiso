@@ -1,4 +1,4 @@
-// CURSORES DOURADOS E PARALLAX
+// CURSORES E PARALLAX
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
 
@@ -14,13 +14,13 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const updateHoverTargets = () => {
-    document.querySelectorAll('.hover-target, button, input, select, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-selector-pill, .quiz-option, .mem-card, .btn-submit').forEach(target => {
+    document.querySelectorAll('.hover-target, button, input, select, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-selector-pill, .quiz-option, .mem-card, .btn-submit, .map-overlay').forEach(target => {
         target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
         target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
     });
 };
 
-// ÍCONES FLUTUANTES (FUGA E DESTAQUE NO CENTRO)
+// ÍCONES FLUTUANTES (FUGA E DESTAQUE CINEMATOGRÁFICO)
 const loneIcons = document.querySelectorAll('.lone-icon');
 const infoScreen = document.getElementById('info-display');
 const infoTitle = document.getElementById('info-title');
@@ -42,7 +42,7 @@ loneIcons.forEach(icon => {
     });
 });
 
-// CARROSSEL 3D (Desaparece Logo, Aparece Carrossel Draggeable)
+// CARROSSEL 3D (Com clique no overlay para fechar)
 let menuOpen = false;
 const mapaContainer = document.getElementById('mapa-interativo');
 const carousel = document.getElementById('carousel');
@@ -60,7 +60,7 @@ window.toggleMenu = function() {
         const cards = document.querySelectorAll('.carousel-card');
         const angleStep = 360 / cards.length;
         cards.forEach((card, i) => {
-            card.style.transform = `rotateY(${i * angleStep}deg) translateZ(450px)`;
+            card.style.transform = `rotateY(${i * angleStep}deg) translateZ(380px)`;
         });
     } else {
         mapaContainer.classList.remove('menu-open');
@@ -88,7 +88,7 @@ window.addEventListener('mousemove', (e) => {
     startX = e.clientX;
 });
 
-// CONTEÚDOS DOS MODAIS (Páginas do Site)
+// CONTEÚDOS DOS MODAIS
 const sectionData = {
     quem: `<h2 class="modal-title">A Nossa Essência</h2><p class="modal-text">Mais do que um projeto turístico, a Quinta do Paraíso nasce de uma forte ligação familiar ao Douro e do desejo de preservar a sua identidade, criando experiências únicas para quem o visita. A requalificação dos pombais funde o luxo contemporâneo com o respeito solene pela paisagem duriense.</p>`,
     servicos: `
@@ -196,11 +196,11 @@ const sectionData = {
     galeria: `
         <h2 class="modal-title">Galeria 3D Dinâmica</h2>
         <div class="dynamic-gallery">
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&w=600');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&w=600');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&w=600');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1437158941788-b210214c7dc9?ixlib=rb-1.2.1&w=600');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-1.2.1&w=600');" onclick="openLb(this)"></div>
+            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
+            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
+            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
+            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1437158941788-b210214c7dc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
+            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
         </div>
     `,
     reviews: `
@@ -220,21 +220,21 @@ const sectionData = {
         </div>
     `,
     mural: `
-        <h2 class="modal-title">Mural da Comunidade</h2>
+        <h2 class="modal-title">O Nosso Mural</h2>
         <div class="insta-container-feed">
             <div class="insta-top-row hover-target">
                 <div class="insta-avatar"></div>
                 <div class="insta-metrics">
-                    <div><strong>48</strong> Postais</div>
-                    <div><strong>14.2k</strong> Amantes de Vinho</div>
-                    <button class="btn-submit hover-target" style="margin:0; padding:10px 30px; font-size:0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
+                    <div><strong>56</strong> Publicações</div>
+                    <div><strong>12.5k</strong> Seguidores</div>
+                    <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="alert('Começou a seguir @QuintaDoParaiso!')">Seguir</button>
                 </div>
             </div>
-            <div class="insta-photo-grid">
-                <div class="insta-grid-cell hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&w=400"><div class="insta-cell-hover">❤️ 340</div></div>
-                <div class="insta-grid-cell hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&w=400"><div class="insta-cell-hover">❤️ 512</div></div>
-                <div class="insta-grid-cell hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&w=400"><div class="insta-cell-hover">❤️ 890</div></div>
-                <div class="insta-grid-cell hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
+            <div class="insta-grid">
+                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 340 💬 12</div></div>
+                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 512 💬 45</div></div>
+                <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 890 💬 112</div></div>
+                <div class="insta-post hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto.')">
                     <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
                 </div>
             </div>
@@ -312,7 +312,7 @@ window.initGrapeGame = function() {
         const g = document.createElement('div');
         g.className = 'interactive-grape hover-target'; g.innerText = '🍇';
         g.style.left = Math.random() * 85 + 5 + '%';
-        g.style.top = '-20%'; // Inicia de cima
+        g.style.top = '-20%'; 
         
         let dur = (Math.random() * 1.5 + 1.5);
         g.style.animation = `dropG ${dur}s linear forwards`;
@@ -361,7 +361,7 @@ window.initMemoryGame = function() {
     updateHoverTargets();
 }
 
-// IA SOMMELIER FALANTE ON-DEMAND
+// IA SOMMELIER FALANTE
 const aiInterface = document.getElementById('ai-interface');
 const aiMessage = document.getElementById('ai-message');
 const aiTextMap = {
@@ -423,7 +423,6 @@ function speakText(txt) {
     }
 }
 
-// Carregar vozes logo
 if ('speechSynthesis' in window) {
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
