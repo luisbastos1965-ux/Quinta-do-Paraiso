@@ -9,32 +9,36 @@
 </head>
 <body>
 
-    <!-- MAPA PRINCIPAL E FUNDO -->
     <div class="map-container" id="mapa-interativo">
         <div class="map-bg-container" id="parallax-bg"></div>
         <div class="map-overlay" id="main-overlay" onclick="if(menuOpen) toggleMenu()"></div>
         
-        <!-- ÍCONES SOLITÁRIOS GEOMÉTRICOS FLUTUANTES -->
+        <div class="hero-title" id="main-title">
+            <h1>QUINTA DO PARAÍSO</h1>
+            <p>Experiências que amadurecem</p>
+        </div>
+
         <div class="float-container" id="float-container">
             <div class="lone-icon li-1 hover-target" data-t="O Clima do Vale" data-d="29°C com Céu Limpo. O cenário ideal para a maturação dos bagos de uva.">⟡</div>
             <div class="lone-icon li-2 hover-target" data-t="Época de Vindimas" data-d="Preparação avançada para a colheita manual da nossa Touriga Nacional.">⟡</div>
             <div class="lone-icon li-3 hover-target" data-t="Tradição Secular" data-d="12 gerações dedicadas à preservação do património histórico do Douro.">⟡</div>
             <div class="lone-icon li-4 hover-target" data-t="Excelência Comprovada" data-d="18 referências de vinho distinguidas e premiadas a nível mundial.">⟡</div>
             <div class="lone-icon li-5 hover-target" data-t="Descanso Absoluto" data-d="Os Pombais: Refúgios de luxo isolados com vista panorâmica e piscina privativa.">⟡</div>
+            <div class="lone-icon li-6 hover-target" data-t="Património UNESCO" data-d="Localizados em Vila Nova de Foz Côa, no coração do Alto Douro Vinhateiro.">⟡</div>
+            <div class="lone-icon li-7 hover-target" data-t="Respeito pela Terra" data-d="Práticas ecológicas que preservam o solo rico em xisto e a água do nosso rio.">⟡</div>
+            <div class="lone-icon li-8 hover-target" data-t="A Gastronomia" data-d="Restaurante exclusivo onde os sabores regionais encontram a alta cozinha.">⟡</div>
+            <div class="lone-icon li-9 hover-target" data-t="Pontuação Premium" data-d="94 Pontos Robert Parker alcançados na nossa última colheita de Grande Reserva.">⟡</div>
         </div>
 
-        <!-- TELA DE DESTAQUE FLUTUANTE -->
         <div class="huge-info-screen" id="info-display">
             <h2 id="info-title">Título</h2>
             <p id="info-desc">Descrição</p>
         </div>
 
-        <!-- LOGO MESTRE NO CENTRO -->
-        <div class="center-logo-wrapper hover-target" onclick="toggleMenu()">
+        <div class="center-logo-wrapper hover-target" id="logo-mestre-wrapper" onclick="toggleMenu()">
             <img src="Logo.png" alt="Quinta do Paraíso" class="master-logo" id="master-logo" onerror="this.src='https://via.placeholder.com/150x150/000/D4AF37?text=QP'">
         </div>
 
-        <!-- CARROSSEL 3D DRAGGABLE (9 FACES) -->
         <div class="carousel-container" id="carousel-container">
             <div class="carousel" id="carousel">
                 <div class="carousel-card card-1 hover-target" onclick="openSection('quem')">
@@ -69,14 +73,12 @@
 
         <div class="watermark">®Quinta do Paraíso, by Sara Reis</div>
 
-        <!-- SOMMELIER COM VOZ -->
         <div class="ai-orb-wrapper hover-target" onclick="openAI()">
-            <div class="ai-label">Falar com a<br>Sommelier IA</div>
+            <div class="ai-label">Sommelier IA</div>
             <div class="ai-orb"></div>
         </div>
     </div>
 
-    <!-- MODAL GERAL (Páginas Internas) -->
     <div class="modal-overlay" id="main-modal">
         <div class="modal-content custom-scroll">
             <button class="close-btn hover-target" onclick="closeSection()">FECHAR ✕</button>
@@ -84,18 +86,16 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX GALERIA -->
     <div class="lightbox hover-target" id="lightbox" onclick="closeLb()">
         <span class="lb-close hover-target">✕</span>
         <img src="" id="lb-img">
     </div>
 
-    <!-- INTERFACE IA -->
     <div class="ai-interface" id="ai-interface">
         <button class="ai-close hover-target" onclick="closeAI()">Encerrar Ligação ✕</button>
         <div class="ai-core"></div>
         <div class="ai-chat-display">
-            <div class="ai-message" id="ai-message">"Olá. Sou a inteligência da Quinta do Paraíso. O que gostaria de explorar hoje?"</div>
+            <div class="ai-message" id="ai-message">"Olá. Sou a inteligência da Quinta do Paraíso. Escolha uma questão para darmos início à nossa conversa."</div>
         </div>
         <div class="ai-suggestions">
             <button class="ai-pill hover-target" onclick="askAI('Que vinho acompanha bem polvo à lagareiro?')">Vinho para polvo à lagareiro?</button>
