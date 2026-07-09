@@ -20,12 +20,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .map-bg-container { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; transition: filter 1s ease, transform 0.8s ease; background: url('fundo_douro.jpg') center/cover no-repeat; }
 .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.75)); pointer-events: none; z-index: 1; transition: background 0.8s ease; }
 .map-container.menu-open .map-bg-container { filter: blur(14px) brightness(0.3); transform: scale(1.05); }
-
-/* TÍTULO SUPERIOR DIREITO */
-.hero-title { position: absolute; top: 40px; right: 50px; text-align: right; z-index: 50; transition: opacity 0.5s; pointer-events: none;}
-.hero-title h1 { font-size: 2.5rem; letter-spacing: 3px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); color: #fff;}
-.hero-title p { font-size: 1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; }
-.map-container.menu-open .hero-title { opacity: 0; }
+.map-container.menu-open .map-overlay { pointer-events: all; cursor: pointer; }
 
 /* LOGO MESTRE NO CENTRO */
 .center-logo-wrapper { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; display: flex; flex-direction: column; align-items: center; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
@@ -37,7 +32,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .float-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 40; transition: opacity 0.5s; pointer-events: none; }
 .map-container.menu-open .float-container { opacity: 0; pointer-events: none !important; }
 
-.lone-icon { position: absolute; font-size: 2rem; color: var(--accent-color); pointer-events: all; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s, color 0.3s; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5)); cursor: pointer; opacity: 0.6;}
+.lone-icon { position: absolute; font-size: 1.8rem; color: var(--accent-color); pointer-events: all; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s, color 0.3s; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5)); cursor: pointer; opacity: 0.6;}
 .lone-icon:hover { transform: scale(2) !important; z-index: 60; filter: drop-shadow(0 0 25px var(--accent-color)); color: #fff; opacity: 1;}
 .lone-icon.flee { transform: scale(0) translate(100px, -100px) !important; opacity: 0 !important; pointer-events: none; }
 
@@ -60,31 +55,22 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .huge-info-screen p { font-size: 1.6rem; color: #fff; text-shadow: 0 5px 15px rgba(0,0,0,0.9); font-weight: 300; max-width: 800px; line-height: 1.6; transform: translateY(20px); transition: transform 0.6s; }
 .huge-info-screen.active h2, .huge-info-screen.active p { transform: translateY(0); }
 
-/* ================= CARROSSEL 3D ================= */
-.map-container.menu-open .map-overlay { pointer-events: all; cursor: pointer; }
-
-.carousel-container { position: absolute; top: 48%; left: 50%; width: 100%; height: 420px; transform: translate(-50%, -50%); z-index: 80; perspective: 1800px; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
+/* CARROSSEL 3D CENTRALIZADO */
+.carousel-container { position: absolute; top: 50%; left: 50%; width: 320px; height: 420px; transform: translate(-50%, -50%); z-index: 80; perspective: 1600px; pointer-events: none; opacity: 0; transition: opacity 0.6s ease; }
 .map-container.menu-open .carousel-container { pointer-events: all; opacity: 1; }
 .carousel { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; transform: rotateX(-5deg); display: flex; justify-content: center; align-items: center;}
 
-/* Cartões com a nova lógica Visual (Ícone central -> Texto sobe) */
 .carousel-card { position: absolute; width: 240px; height: 340px; background: rgba(12, 12, 12, 0.85); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 15px; backdrop-filter: blur(15px); display: flex; flex-direction: column; align-items: center; text-align: center; padding: 30px 20px; transition: border-color 0.4s, box-shadow 0.4s, background 0.4s; overflow: hidden; cursor: pointer;}
 .carousel-card:hover { border-color: rgba(212, 175, 55, 1); box-shadow: 0 0 45px rgba(212, 175, 55, 0.7); background: rgba(212, 175, 55, 0.12); }
-
-/* O ícone começa no meio e sobe no hover */
 .card-icon { font-size: 3.5rem; text-shadow: 0 0 15px rgba(212, 175, 55, 0.8); pointer-events: none; transform: translateY(80px); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); margin-bottom: 0;}
 .carousel-card:hover .card-icon { transform: translateY(-40px); }
-
-/* O texto começa invisível em baixo e sobe no hover */
 .card-text { position: absolute; bottom: 30px; left: 0; width: 100%; padding: 0 20px; opacity: 0; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none;}
 .carousel-card:hover .card-text { opacity: 1; transform: translateY(0); }
-
 .card-text h3 { color: var(--accent-color); font-size: 1.3rem; margin-bottom: 8px; font-family: 'Cinzel', serif; }
 .card-text p { color: #ccc; font-size: 0.85rem; line-height: 1.5; }
 
-/* SOMMELIER E MARCA DE ÁGUA */
+/* MARCA DE ÁGUA E IA */
 .watermark { position: absolute; bottom: 20px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-family: 'Manrope', sans-serif; font-size: 0.8rem; letter-spacing: 2px; z-index: 10; pointer-events: none; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
-
 .ai-orb-wrapper { position: absolute; bottom: 40px; right: 50px; z-index: 120; display: flex; align-items: center; gap: 15px; transition: transform 0.3s; pointer-events: all; cursor: pointer;}
 .ai-orb-wrapper:hover { transform: scale(1.1); }
 .ai-label { font-family: 'Manrope', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.9); text-align: right; text-shadow: 0 2px 5px #000; }
@@ -99,60 +85,65 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
 .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; pointer-events: all; }
 .close-btn:hover { color: var(--accent-color); }
+
 .custom-scroll::-webkit-scrollbar { width: 6px; }
 .custom-scroll::-webkit-scrollbar-track { background: transparent; }
 .custom-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
-
 .modal-title { font-size: 3rem; color: var(--accent-color); margin-bottom: 25px; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); text-align: center; font-family: 'Cinzel', serif; }
 .modal-text { font-size: 1.1rem; line-height: 1.8; color: #ddd; text-align: center; max-width: 800px; margin: 0 auto 30px; }
 
-/* ================= DESIGN ESPECÍFICO DAS SECÇÕES ================= */
+/* ================= LOJA VÍNICA ================= */
+.shop-grid-luxury { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; padding: 20px; }
+.luxury-wine-card { background: rgba(10,10,10,0.8); border: 1px solid rgba(212,175,55,0.2); border-radius: 15px; padding: 30px 20px; text-align: center; transition: all 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: space-between; pointer-events: all;}
+.luxury-wine-card:hover { border-color: var(--accent-color); transform: translateY(-10px); box-shadow: 0 15px 30px rgba(212,175,55,0.15); }
+.wine-bottle-img { height: 250px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)); transition: transform 0.4s; }
+.luxury-wine-card:hover .wine-bottle-img { transform: scale(1.08); }
+.wine-type { color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; display: block; }
+.wine-name { color: #fff; font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 15px; }
+.wine-price { font-size: 1.5rem; color: #fff; font-weight: 600; margin-bottom: 20px; }
+.btn-buy { padding: 10px 25px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 30px; font-family: 'Manrope'; font-size: 0.9rem; text-transform: uppercase; transition: all 0.3s; pointer-events: all;}
+.btn-buy:hover { background: var(--accent-color); color: #000; font-weight: 700; box-shadow: 0 0 15px var(--accent-color);}
 
-/* Loja Haute Couture */
-.shop-showcase { display: flex; gap: 30px; justify-content: center; margin-top: 40px; flex-wrap: wrap;}
-.wine-vessel { width: 320px; background: linear-gradient(180deg, rgba(20,20,20,0.9), rgba(5,5,5,0.95)); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 40px 25px; text-align: center; position: relative; overflow: hidden; pointer-events: all; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
-.wine-vessel:hover { border-color: var(--accent-color); transform: translateY(-15px); box-shadow: 0 20px 40px rgba(212,175,55,0.15); }
-.wine-bottle-art { font-size: 6rem; margin-bottom: 15px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)); transition: transform 0.4s; }
-.wine-vessel:hover .wine-bottle-art { transform: scale(1.1); }
-.wine-vintage { color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-.wine-name { font-family: 'Cinzel', serif; font-size: 1.6rem; color: #fff; margin-bottom: 15px; }
-.wine-desc { font-size: 0.95rem; color: #aaa; line-height: 1.6; margin-bottom: 25px; min-height: 60px; }
-.wine-pricing { font-size: 1.8rem; color: var(--accent-color); font-weight: 700; margin-bottom: 25px; font-family: 'Cinzel', serif; }
+/* ================= RESERVAS (Card de Luxo) ================= */
+.booking-card { background: linear-gradient(135deg, rgba(20,20,20,0.9), rgba(5,5,5,0.95)); border: 1px solid rgba(212,175,55,0.3); border-radius: 20px; padding: 40px; max-width: 800px; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5); pointer-events: all;}
+.booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; text-align: left; }
+.input-group { display: flex; flex-direction: column; gap: 8px; pointer-events: all;}
+.input-group label { color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; }
+.input-group input, .input-group select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 15px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 1rem; transition: all 0.3s; pointer-events: all;}
+.input-group input:focus, .input-group select:focus { border-color: var(--accent-color); outline: none; background: rgba(212,175,55,0.05); }
+.btn-submit { display: block; margin: 40px auto 0; padding: 15px 40px; background-color: var(--accent-color); color: #000; border: none; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; pointer-events: all; }
+.btn-submit:hover { background-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.5); transform: translateY(-3px);}
 
-/* Galeria Cover Flow */
+/* ================= CONTACTOS E MAPA ================= */
+.contacts-wrapper { display: flex; gap: 40px; justify-content: center; text-align: left; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
+.contacts-info { flex: 1; min-width: 300px; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 15px; border-left: 2px solid var(--accent-color); }
+.map-embed-container { flex: 1.5; min-width: 400px; border-radius: 15px; overflow: hidden; border: 2px solid rgba(212, 175, 55, 0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+/* Oculta cores berrantes do google maps para dar ar de luxo noturno */
+.map-embed-container iframe { filter: grayscale(80%) invert(90%) hue-rotate(180deg) contrast(90%); }
+
+/* ================= GALERIA COVER FLOW ================= */
 .dynamic-gallery { display: flex; gap: 20px; overflow-x: auto; padding: 40px 20px; perspective: 1000px; justify-content: center; }
 .gal-card { min-width: 250px; height: 350px; border-radius: 15px; background-size: cover; background-position: center; transition: all 0.5s; filter: grayscale(80%) brightness(0.6); cursor: pointer; pointer-events: all; transform: rotateY(15deg); border: 1px solid rgba(212,175,55,0.3); box-shadow: -10px 10px 20px rgba(0,0,0,0.8);}
 .gal-card:hover { filter: grayscale(0%) brightness(1); transform: rotateY(0deg) scale(1.1) translateZ(50px); z-index: 10; box-shadow: 0 20px 40px rgba(212,175,55,0.3); border-color: var(--accent-color); }
+
 .lightbox { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.96); z-index: 100000; display:flex; justify-content:center; align-items:center; opacity:0; pointer-events:none; transition: opacity 0.4s ease; }
 .lightbox.active { opacity:1; pointer-events:all; }
 .lightbox img { max-width: 90%; max-height: 90%; border: 2px solid var(--accent-color); border-radius: 12px; box-shadow: 0 0 50px rgba(212,175,55,0.3); }
 .lb-close { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 2rem; cursor: pointer; pointer-events:all; }
 
-/* Testemunhos (Com Filtro) */
-.star-filter-container { text-align: center; margin-bottom: 40px; }
-.filter-star { font-size: 4rem; color: #444; cursor: pointer; transition: all 0.3s; display: inline-block; pointer-events: all; text-shadow: 0 5px 10px rgba(0,0,0,0.8); }
-.filter-star.active, .filter-star:hover, .filter-star:hover ~ .filter-star { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color); transform: scale(1.1); }
-.reviews-wrapper { display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto; }
-.review-card { display: none; background: rgba(20,20,20,0.8); padding: 35px; border-radius: 15px; border-left: 4px solid var(--accent-color); animation: fadeInRev 0.5s forwards; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-.review-card.show { display: block; }
-@keyframes fadeInRev { from{opacity:0; transform:translateX(-20px);} to{opacity:1; transform:translateX(0);} }
-.rev-stars { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; }
-.rev-text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-style: italic; color: #fff; line-height: 1.6; margin-bottom: 15px; }
-.rev-author { font-size: 1rem; color: var(--accent-color); text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
+/* ================= MURAL SOCIAL ================= */
+.insta-header { display: flex; align-items: center; gap: 30px; margin-bottom: 40px; justify-content: center; }
+.insta-profile { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent-color); background: url('Logo.png') center/cover; }
+.insta-stats { display: flex; gap: 30px; color: #fff; font-family: 'Manrope'; }
+.insta-stats div { text-align: center; }
+.insta-stats strong { display: block; font-size: 1.5rem; font-family: 'Cinzel'; }
+.insta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 900px; margin: 0 auto;}
+.insta-post { position: relative; aspect-ratio: 1; background: #222; border-radius: 10px; overflow: hidden; pointer-events: all; }
+.insta-post img { width: 100%; height: 100%; object-fit: cover; }
+.insta-overlay { position: absolute; top:0;left:0;width:100%;height:100%; background:rgba(0,0,0,0.65); display:flex; justify-content:center; align-items:center; opacity:0; transition: opacity 0.3s; color:#fff; font-size: 1.5rem; font-family:'Manrope'; gap: 15px;}
+.insta-post:hover .insta-overlay { opacity: 1; }
 
-/* Mural Social */
-.insta-container-feed { max-width: 900px; margin: 0 auto; }
-.insta-top-row { display: flex; align-items: center; gap: 40px; margin-bottom: 35px; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 25px; }
-.insta-avatar { width: 110px; height: 110px; border-radius: 50%; border: 2px solid var(--accent-color); background: url('Logo.png') center/cover; }
-.insta-metrics { display: flex; gap: 30px; font-size: 1rem; color: #ddd; }
-.insta-metrics strong { color: #fff; font-family: 'Cinzel', serif; display: block; font-size: 1.4rem; }
-.insta-photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.insta-grid-cell { aspect-ratio: 1; border-radius: 10px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.1); pointer-events: all; }
-.insta-grid-cell img { width: 100%; height: 100%; object-fit: cover; }
-.insta-cell-hover { position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); display:flex; justify-content:center; align-items:center; gap: 20px; color:#fff; font-weight:700; opacity:0; transition: opacity 0.3s; }
-.insta-grid-cell:hover .insta-cell-hover { opacity: 1; }
-
-/* Jogos Interativos */
+/* ================= JOGOS ================= */
 .game-zone { text-align: center; }
 .game-tab-buttons { display: flex; gap: 15px; justify-content: center; margin-bottom: 25px; }
 .game-selector-pill { padding: 10px 25px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; border-radius: 30px; cursor: pointer; pointer-events: all; transition: all 0.3s; font-family: 'Cinzel', serif; }
@@ -168,14 +159,19 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .mem-card { width: 80px; height: 80px; background: rgba(212,175,55,0.2); border: 1px solid var(--accent-color); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 2rem; cursor: pointer; pointer-events: all; transition: transform 0.3s; color: transparent; }
 .mem-card.flipped { background: rgba(0,0,0,0.8); color: #fff; transform: rotateY(180deg); }
 
-/* Botões e Formulários */
-.btn-submit { display: block; margin: 30px auto 0; padding: 14px 40px; background-color: var(--accent-color); color: #000; border: none; border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; pointer-events: all; }
-.btn-submit:hover { background-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.5); transform: translateY(-3px);}
-.narrative-form { font-size: 1.4rem; line-height: 2.2; color: #ccc; text-align: center; font-family: 'Cinzel', serif; max-width: 800px; margin: 0 auto; }
-.narrative-form input, .narrative-form select { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--accent-color); background: transparent; border: none; border-bottom: 1px dashed #666; padding: 0 5px; text-align: center; transition: border-color 0.3s; }
-.narrative-form input:focus { outline: none; border-bottom-color: var(--accent-color); }
+/* ================= REVIEWS COM FILTRO DE ESTRELAS ================= */
+.star-filter-container { text-align: center; margin-bottom: 40px; }
+.filter-star { font-size: 4rem; color: #444; cursor: pointer; transition: all 0.3s; display: inline-block; pointer-events: all; text-shadow: 0 5px 10px rgba(0,0,0,0.8); }
+.filter-star.active, .filter-star:hover, .filter-star:hover ~ .filter-star { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color); transform: scale(1.1); }
+.reviews-wrapper { display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: 0 auto; }
+.review-card { display: none; background: rgba(20,20,20,0.8); padding: 35px; border-radius: 15px; border-left: 4px solid var(--accent-color); animation: fadeInRev 0.5s forwards; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+.review-card.show { display: block; }
+@keyframes fadeInRev { from{opacity:0; transform:translateX(-20px);} to{opacity:1; transform:translateX(0);} }
+.rev-stars { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; }
+.rev-text { font-family: 'Cinzel', serif; font-size: 1.3rem; font-style: italic; color: #fff; line-height: 1.6; margin-bottom: 15px; }
+.rev-author { font-size: 1rem; color: var(--accent-color); text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
 
-/* INTERFACE IA */
+/* ================= IA SOMMELIER INTERFACE ================= */
 .ai-interface { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.92); backdrop-filter: blur(25px); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 100000; }
 .ai-interface.active { opacity: 1; pointer-events: all; }
 .ai-core { width: 150px; height: 150px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 80px var(--accent-color); margin-bottom: 40px; animation: aiBreathe 3s ease-in-out infinite alternate; position: relative; display: flex; justify-content: center; align-items: center; }
