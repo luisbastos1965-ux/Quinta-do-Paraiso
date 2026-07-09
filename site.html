@@ -9,72 +9,92 @@
 </head>
 <body>
 
+    <!-- MAPA PRINCIPAL E FUNDO -->
     <div class="map-container" id="mapa-interativo">
         <div class="map-bg-container" id="parallax-bg"></div>
-        <div class="map-overlay"></div>
         
+        <!-- O fundo serve como botão para fechar o menu -->
+        <div class="map-overlay" id="main-overlay" onclick="if(menuOpen) toggleMenu()"></div>
+        
+        <!-- TÍTULO SUPERIOR DIREITO -->
+        <div class="hero-title" id="main-title">
+            <h1>QUINTA DO PARAÍSO</h1>
+            <p>Experiências que amadurecem</p>
+        </div>
+
+        <!-- ÍCONES SOLITÁRIOS GEOMÉTRICOS FLUTUANTES -->
         <div class="float-container" id="float-container">
             <div class="lone-icon li-1 hover-target" data-t="O Clima do Vale" data-d="29°C com Céu Limpo. O cenário ideal para a maturação dos bagos de uva.">⟡</div>
             <div class="lone-icon li-2 hover-target" data-t="Época de Vindimas" data-d="Preparação avançada para a colheita manual da nossa Touriga Nacional.">⟡</div>
             <div class="lone-icon li-3 hover-target" data-t="Tradição Secular" data-d="12 gerações dedicadas à preservação do património histórico do Douro.">⟡</div>
             <div class="lone-icon li-4 hover-target" data-t="Excelência Comprovada" data-d="18 referências de vinho distinguidas e premiadas a nível mundial.">⟡</div>
             <div class="lone-icon li-5 hover-target" data-t="Descanso Absoluto" data-d="Os Pombais: Refúgios de luxo isolados com vista panorâmica e piscina privativa.">⟡</div>
-            <div class="lone-icon li-6 hover-target" data-t="Património UNESCO" data-d="Localizados em Vila Nova de Foz Côa, no coração do Alto Douro Vinhateiro.">⟡</div>
-            <div class="lone-icon li-7 hover-target" data-t="Respeito pela Terra" data-d="Práticas ecológicas que preservam o solo rico em xisto e a água do nosso rio.">⟡</div>
-            <div class="lone-icon li-8 hover-target" data-t="A Gastronomia" data-d="Restaurante exclusivo onde os sabores regionais encontram a alta cozinha.">⟡</div>
         </div>
 
+        <!-- TELA DE DESTAQUE FLUTUANTE DO ÍCONE -->
         <div class="huge-info-screen" id="info-display">
             <h2 id="info-title">Título</h2>
             <p id="info-desc">Descrição</p>
         </div>
 
+        <!-- LOGO MESTRE NO CENTRO -->
         <div class="center-logo-wrapper hover-target" onclick="toggleMenu()">
             <img src="Logo.png" alt="Quinta do Paraíso" class="master-logo" id="master-logo" onerror="this.src='https://via.placeholder.com/150x150/000/D4AF37?text=QP'">
         </div>
 
-        <button class="close-menu-btn hover-target" onclick="toggleMenu()">FECHAR MENU ✕</button>
-
+        <!-- ================= CARROSSEL 3D DRAGGABLE (9 FACES) ================= -->
+        <!-- Sem sobreposição e com efeito mágico no Hover -->
         <div class="carousel-container" id="carousel-container">
             <div class="carousel" id="carousel">
                 <div class="carousel-card card-1 hover-target" onclick="openSection('quem')">
-                    <div class="card-icon">🗝️</div><h3>Quem Somos</h3><p>A essência familiar e a ligação ao Douro.</p>
+                    <div class="card-icon">🗝️</div>
+                    <div class="card-text"><h3>Quem Somos</h3><p>A essência familiar e a ligação ao Douro.</p></div>
                 </div>
                 <div class="carousel-card card-2 hover-target" onclick="openSection('servicos')">
-                    <div class="card-icon">✨</div><h3>Serviços & Atividades</h3><p>Alojamento, Rio e Vinoterapia.</p>
+                    <div class="card-icon">✨</div>
+                    <div class="card-text"><h3>Atividades</h3><p>Alojamento, Rio e Vinoterapia.</p></div>
                 </div>
                 <div class="carousel-card card-3 hover-target" onclick="openSection('loja')">
-                    <div class="card-icon">🍷</div><h3>Loja Vínica</h3><p>Colheitas exclusivas e Azeite.</p>
+                    <div class="card-icon">🍷</div>
+                    <div class="card-text"><h3>Loja Vínica</h3><p>Colheitas exclusivas e Azeite.</p></div>
                 </div>
                 <div class="carousel-card card-4 hover-target" onclick="openSection('reservas')">
-                    <div class="card-icon">🛎️</div><h3>Reservas</h3><p>O seu refúgio no vale.</p>
+                    <div class="card-icon">🛎️</div>
+                    <div class="card-text"><h3>Reservas</h3><p>O seu refúgio no vale.</p></div>
                 </div>
                 <div class="carousel-card card-5 hover-target" onclick="openSection('contactos')">
-                    <div class="card-icon">📜</div><h3>Contactos</h3><p>Fale diretamente connosco.</p>
+                    <div class="card-icon">📜</div>
+                    <div class="card-text"><h3>Contactos</h3><p>Fale diretamente connosco.</p></div>
                 </div>
                 <div class="carousel-card card-6 hover-target" onclick="openSection('jogos')">
-                    <div class="card-icon">🧩</div><h3>Academia</h3><p>Jogos didáticos da vinha.</p>
+                    <div class="card-icon">🧩</div>
+                    <div class="card-text"><h3>Academia</h3><p>Jogos didáticos da vinha.</p></div>
                 </div>
                 <div class="carousel-card card-7 hover-target" onclick="openSection('galeria')">
-                    <div class="card-icon">📸</div><h3>Galeria</h3><p>A Quinta em alta definição.</p>
+                    <div class="card-icon">📸</div>
+                    <div class="card-text"><h3>Galeria</h3><p>A Quinta em alta definição.</p></div>
                 </div>
                 <div class="carousel-card card-8 hover-target" onclick="openSection('reviews')">
-                    <div class="card-icon">⭐</div><h3>Testemunhos</h3><p>A voz de quem nos visita.</p>
+                    <div class="card-icon">⭐</div>
+                    <div class="card-text"><h3>Testemunhos</h3><p>A voz de quem nos visita.</p></div>
                 </div>
                 <div class="carousel-card card-9 hover-target" onclick="openSection('mural')">
-                    <div class="card-icon">🌐</div><h3>Mural Social</h3><p>Comunidade #QuintaDoParaiso.</p>
+                    <div class="card-icon">🌐</div>
+                    <div class="card-text"><h3>Mural Social</h3><p>Comunidade #QuintaDoParaiso.</p></div>
                 </div>
             </div>
         </div>
 
         <div class="watermark">®Quinta do Paraíso, by Sara Reis</div>
 
+        <!-- SOMMELIER COM VOZ NO CANTO INFERIOR DIREITO -->
         <div class="ai-orb-wrapper hover-target" onclick="openAI()">
             <div class="ai-label">Falar com a<br>Sommelier IA</div>
             <div class="ai-orb"></div>
         </div>
     </div>
 
+    <!-- MODAL GERAL (Páginas Internas) -->
     <div class="modal-overlay" id="main-modal">
         <div class="modal-content custom-scroll">
             <button class="close-btn hover-target" onclick="closeSection()">FECHAR ✕</button>
@@ -82,11 +102,13 @@
         </div>
     </div>
 
+    <!-- LIGHTBOX GALERIA -->
     <div class="lightbox hover-target" id="lightbox" onclick="closeLb()">
         <span class="lb-close hover-target">✕</span>
         <img src="" id="lb-img">
     </div>
 
+    <!-- INTERFACE IA (Sommelier Expandido) -->
     <div class="ai-interface" id="ai-interface">
         <button class="ai-close hover-target" onclick="closeAI()">Encerrar Ligação ✕</button>
         <div class="ai-core"></div>
