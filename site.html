@@ -12,16 +12,8 @@
     <!-- MAPA PRINCIPAL E FUNDO -->
     <div class="map-container" id="mapa-interativo">
         <div class="map-bg-container" id="parallax-bg"></div>
-        
-        <!-- O fundo serve como botão para fechar o menu -->
         <div class="map-overlay" id="main-overlay" onclick="if(menuOpen) toggleMenu()"></div>
         
-        <!-- TÍTULO SUPERIOR DIREITO -->
-        <div class="hero-title" id="main-title">
-            <h1>QUINTA DO PARAÍSO</h1>
-            <p>Experiências que amadurecem</p>
-        </div>
-
         <!-- ÍCONES SOLITÁRIOS GEOMÉTRICOS FLUTUANTES -->
         <div class="float-container" id="float-container">
             <div class="lone-icon li-1 hover-target" data-t="O Clima do Vale" data-d="29°C com Céu Limpo. O cenário ideal para a maturação dos bagos de uva.">⟡</div>
@@ -31,7 +23,7 @@
             <div class="lone-icon li-5 hover-target" data-t="Descanso Absoluto" data-d="Os Pombais: Refúgios de luxo isolados com vista panorâmica e piscina privativa.">⟡</div>
         </div>
 
-        <!-- TELA DE DESTAQUE FLUTUANTE DO ÍCONE -->
+        <!-- TELA DE DESTAQUE FLUTUANTE -->
         <div class="huge-info-screen" id="info-display">
             <h2 id="info-title">Título</h2>
             <p id="info-desc">Descrição</p>
@@ -42,52 +34,42 @@
             <img src="Logo.png" alt="Quinta do Paraíso" class="master-logo" id="master-logo" onerror="this.src='https://via.placeholder.com/150x150/000/D4AF37?text=QP'">
         </div>
 
-        <!-- ================= CARROSSEL 3D DRAGGABLE (9 FACES) ================= -->
-        <!-- Sem sobreposição e com efeito mágico no Hover -->
+        <!-- CARROSSEL 3D DRAGGABLE (9 FACES) -->
         <div class="carousel-container" id="carousel-container">
             <div class="carousel" id="carousel">
                 <div class="carousel-card card-1 hover-target" onclick="openSection('quem')">
-                    <div class="card-icon">🗝️</div>
-                    <div class="card-text"><h3>Quem Somos</h3><p>A essência familiar e a ligação ao Douro.</p></div>
+                    <div class="card-icon">🗝️</div><div class="card-text"><h3>Quem Somos</h3><p>A essência familiar e a ligação ao Douro.</p></div>
                 </div>
                 <div class="carousel-card card-2 hover-target" onclick="openSection('servicos')">
-                    <div class="card-icon">✨</div>
-                    <div class="card-text"><h3>Atividades</h3><p>Alojamento, Rio e Vinoterapia.</p></div>
+                    <div class="card-icon">✨</div><div class="card-text"><h3>Atividades</h3><p>Alojamento, Rio e Vinoterapia.</p></div>
                 </div>
                 <div class="carousel-card card-3 hover-target" onclick="openSection('loja')">
-                    <div class="card-icon">🍷</div>
-                    <div class="card-text"><h3>Loja Vínica</h3><p>Colheitas exclusivas e Azeite.</p></div>
+                    <div class="card-icon">🍷</div><div class="card-text"><h3>Loja Vínica</h3><p>Colheitas exclusivas e Azeite.</p></div>
                 </div>
                 <div class="carousel-card card-4 hover-target" onclick="openSection('reservas')">
-                    <div class="card-icon">🛎️</div>
-                    <div class="card-text"><h3>Reservas</h3><p>O seu refúgio no vale.</p></div>
+                    <div class="card-icon">🛎️</div><div class="card-text"><h3>Reservas</h3><p>O seu refúgio no vale.</p></div>
                 </div>
                 <div class="carousel-card card-5 hover-target" onclick="openSection('contactos')">
-                    <div class="card-icon">📜</div>
-                    <div class="card-text"><h3>Contactos</h3><p>Fale diretamente connosco.</p></div>
+                    <div class="card-icon">📜</div><div class="card-text"><h3>Contactos</h3><p>Fale diretamente connosco.</p></div>
                 </div>
                 <div class="carousel-card card-6 hover-target" onclick="openSection('jogos')">
-                    <div class="card-icon">🧩</div>
-                    <div class="card-text"><h3>Academia</h3><p>Jogos didáticos da vinha.</p></div>
+                    <div class="card-icon">🧩</div><div class="card-text"><h3>Academia</h3><p>Jogos didáticos da vinha.</p></div>
                 </div>
                 <div class="carousel-card card-7 hover-target" onclick="openSection('galeria')">
-                    <div class="card-icon">📸</div>
-                    <div class="card-text"><h3>Galeria</h3><p>A Quinta em alta definição.</p></div>
+                    <div class="card-icon">📸</div><div class="card-text"><h3>Galeria</h3><p>A Quinta em alta definição.</p></div>
                 </div>
                 <div class="carousel-card card-8 hover-target" onclick="openSection('reviews')">
-                    <div class="card-icon">⭐</div>
-                    <div class="card-text"><h3>Testemunhos</h3><p>A voz de quem nos visita.</p></div>
+                    <div class="card-icon">⭐</div><div class="card-text"><h3>Testemunhos</h3><p>A voz de quem nos visita.</p></div>
                 </div>
                 <div class="carousel-card card-9 hover-target" onclick="openSection('mural')">
-                    <div class="card-icon">🌐</div>
-                    <div class="card-text"><h3>Mural Social</h3><p>Comunidade #QuintaDoParaiso.</p></div>
+                    <div class="card-icon">🌐</div><div class="card-text"><h3>Mural Social</h3><p>Comunidade #QuintaDoParaiso.</p></div>
                 </div>
             </div>
         </div>
 
         <div class="watermark">®Quinta do Paraíso, by Sara Reis</div>
 
-        <!-- SOMMELIER COM VOZ NO CANTO INFERIOR DIREITO -->
+        <!-- SOMMELIER COM VOZ -->
         <div class="ai-orb-wrapper hover-target" onclick="openAI()">
             <div class="ai-label">Falar com a<br>Sommelier IA</div>
             <div class="ai-orb"></div>
@@ -108,7 +90,7 @@
         <img src="" id="lb-img">
     </div>
 
-    <!-- INTERFACE IA (Sommelier Expandido) -->
+    <!-- INTERFACE IA -->
     <div class="ai-interface" id="ai-interface">
         <button class="ai-close hover-target" onclick="closeAI()">Encerrar Ligação ✕</button>
         <div class="ai-core"></div>
