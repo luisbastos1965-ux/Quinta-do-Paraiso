@@ -141,14 +141,14 @@
         #node-6 { top: 25%; left: 20%; } 
 
         /* MODAIS DOS PONTOS DE MAPA */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 9990; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
         .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1000px; width: 90%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
         .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; pointer-events: all;}
         .close-btn:hover { color: var(--accent-color); }
-        .modal-body h2 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); text-align: center;}
+        .modal-body h2 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .modal-body p { font-size: 1.05rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
         
         .custom-scroll::-webkit-scrollbar { width: 8px; }
@@ -197,16 +197,12 @@
         .mix-card h3 { color: var(--accent-color); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px;}
         .mix-card p { font-size: 0.95rem; color: #ccc; line-height: 1.7; margin-bottom: 15px; text-align: justify; }
         
-        .promo-assets { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center;}
-        .promo-asset { width: 65px; height: 65px; background: rgba(212,175,55,0.1); border: 1px dashed var(--accent-color); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; text-align: center; color: var(--accent-color); cursor: pointer; transition: all 0.3s;}
-        .promo-asset:hover { background: var(--accent-color); color: #000; transform: scale(1.1);}
-        
-        /* Grelha Preços 4P */
+        /* Preços 4P's Minimalistas */
         .price-list-4p { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;}
         .price-item-4p { background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; border-left: 2px solid var(--accent-color); font-size: 0.85rem;}
         .price-item-4p strong { display: block; color: var(--accent-color); font-family: 'Cinzel', serif;}
 
-        /* Estrutura Org e Hover Panel FIXED HEIGHT */
+        /* Estrutura Org - Painel Fechado para evitar bugs de altura */
         .org-layout { display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; }
         .org-wrapper { flex: 1.5; display: flex; flex-direction: column; align-items: center; padding: 10px 0; }
         .org-node { background: rgba(0,0,0,0.7); border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.8rem; color: #ccc; text-align: center; width: 140px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; z-index: 2; position: relative; cursor: pointer;}
@@ -242,7 +238,7 @@
         .btn-launch { padding: 18px 50px; background: var(--accent-color); color: #000; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; border: none; border-radius: 50px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); pointer-events: all;}
         .btn-launch:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); background: #fff; }
 
-        /* BRAND MODAL (Estúdio Sims em Branco) */
+        /* BRAND MODAL (Estúdio Sims) */
         .brand-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 9995; }
         .brand-modal.active { opacity: 1; pointer-events: all; }
         .brand-container { display: flex; width: 85%; max-width: 1200px; height: 80vh; background: rgba(15,15,15,0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); overflow: hidden; transform: scale(0.9); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative;}
@@ -269,6 +265,8 @@
         .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; transition: color 0.3s; }
         .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
         .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
+        .btn-primary { padding: 15px 40px; background-color: var(--accent-color); color: #111; border: 1px solid var(--accent-color); border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; pointer-events: all;}
+        .btn-primary:hover { background-color: transparent; color: var(--accent-color); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
 
         @media (max-width: 768px) {
             .grid-tripartida { grid-template-columns: 1fr; }
