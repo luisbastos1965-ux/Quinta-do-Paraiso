@@ -44,14 +44,14 @@
         .wine-ripple.splash { animation: rippleEffect 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
         @keyframes rippleEffect { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; border-width: 4px; } 50% { opacity: 0.5; border-width: 2px; } 100% { transform: translate(-50%, -50%) scale(30); opacity: 0; border-width: 0px; } }
 
-        /* LOGO A ENCHER (MATEMÁTICA CORRIGIDA A 100%) */
+        /* LOGO A ENCHER */
         .logo-wrapper { position: relative; width: 280px; height: 280px; overflow: hidden; opacity: 0; transition: opacity 0.5s; }
         .logo-wrapper.show { opacity: 1; }
         .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.2; filter: grayscale(100%); }
         .logo-cheio-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
         .logo-cheio { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); position: relative; z-index: 1;}
         .liquid-mask { position: absolute; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; z-index: 2; top: 0%; }
-        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 3.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
+        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 0%; } 100% { top: -220%; } }
 
@@ -385,7 +385,7 @@
     <!-- JANELA DO INSTAGRAM FLUTUANTE -->
     <div class="insta-modal-overlay" id="insta-modal" onclick="closeInsta()">
         <div class="insta-modal-content custom-scroll" onclick="event.stopPropagation()">
-            <button class="hover-target" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:1.4rem; color:#888; cursor:pointer; pointer-events:all;" onclick="closeInsta()">✕</button>
+            <button class="hover-target" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:1.4rem; color:#888; cursor:pointer;" onclick="closeInsta()">✕</button>
             <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px; border-bottom:1px solid #efefef; padding-bottom:20px;">
                 <div style="width:75px; height:75px; border-radius:50%; background:url('Logo.png') center/cover; border:2px solid #ddd; background-color:#111;"></div>
                 <div>
@@ -549,218 +549,10 @@
         updateDeck();
 
         // ------------------------------------------------------------------
-        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO
+        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO E MODAIS
         // ------------------------------------------------------------------
-        let presentationPhase = 'preloader';
-        let currentRiverNode = 0;
-        let isModalOpen = false;
-        let isBrandModalOpen = false;
         
-        const riverNodes = document.querySelectorAll('.river-node');
-        const riverLine = document.getElementById('river-line');
-        const cornerLogo = document.getElementById('nav-logo');
-        const mapaContainer = document.getElementById('mapa-interativo');
-
-        window.addEventListener('keydown', (e) => {
-            // Suporta Barra de Espaços OU a Seta Direita do passador de slides!
-            if (e.code === 'Space' || e.code === 'ArrowRight') {
-                e.preventDefault();
-
-                if (presentationPhase === 'preloader') {
-                    presentationPhase = 'animating_splash';
-                    
-                    document.getElementById('logo-top').style.opacity = '0';
-                    document.getElementById('logo-bottom').style.opacity = '0';
-                    document.getElementById('drop').classList.add('falling');
-                    
-                    setTimeout(() => {
-                        document.getElementById('start-hint').classList.add('hit');
-                        document.getElementById('drop').style.opacity = '0'; 
-                        document.getElementById('ripple').classList.add('splash'); 
-                        document.getElementById('logo-container').classList.add('show'); 
-                        document.getElementById('liquid').classList.add('animate'); 
-                    }, 800); 
-                    
-                    // Com a máscara ajustada, garantimos os 5 segundos totais para um efeito fluido e completo
-                    setTimeout(() => {
-                        document.getElementById('preloader').classList.add('hide');
-                        mapaContainer.classList.add('assemble');
-                        setTimeout(() => { presentationPhase = 'initial_frame'; }, 2000);
-                    }, 5000); 
-
-                } else if (presentationPhase === 'initial_frame') {
-                    document.getElementById('motivation').classList.add('fade-out');
-                    document.getElementById('main-title').classList.add('fade-out');
-                    
-                    document.getElementById('douro-card').classList.add('show');
-                    mapaContainer.classList.add('card-open'); 
-                    presentationPhase = 'douro_char';
-                    
-                } else if (presentationPhase === 'douro_char') {
-                    document.getElementById('douro-card').classList.add('fade-out');
-                    mapaContainer.classList.remove('card-open');
-                    document.getElementById('main-title').classList.remove('fade-out');
-                    cornerLogo.classList.add('clickable');
-                    
-                    presentationPhase = 'brand_studio_wait'; 
-                    
-                } else if (presentationPhase === 'brand_studio_wait') {
-                    // SE NÃO ABRIU O LOGO, A TECLA FORÇA O AVANÇO PARA A FASE RIO!
-                    presentationPhase = 'river_interaction'; 
-                    mapaContainer.classList.add('river-mode'); 
-                    
-                    setTimeout(() => {
-                        riverNodes[0].classList.add('visible', 'active-node');
-                        riverLine.style.strokeDashoffset = 100 - (1 * (100 / 6)); 
-                        currentRiverNode = 1;
-                    }, 800);
-
-                } else if (presentationPhase === 'river_interaction') {
-                    // Se o Rio está visível:
-                    if (!isModalOpen) {
-                        let activeNode = document.querySelector('.river-node.active-node');
-                        if (activeNode) {
-                            let match = activeNode.getAttribute('onclick').match(/'([^']+)'/);
-                            if (match) {
-                                handleNodeClick(currentRiverNode, match[1]);
-                            }
-                        }
-                    } else {
-                        // Se já houver um modal aberto, fecha-o e isso aciona automaticamente o avanço
-                        closeModal();
-                    }
-                }
-            }
-        });
-
-        // ------------------------------------------------------------------
-        // NAVEGAÇÃO TOUCH / CLICK DA LINHA DE RIO E SLIDESHOW
-        // ------------------------------------------------------------------
-        let viewingNode = 0;
-        let microSlideInterval;
-        let currentSlideIdx = 0;
-        
-        window.handleNodeClick = function(nodeNum, modalType) {
-            viewingNode = nodeNum;
-            openModal(modalType);
-        }
-
-        window.closeModal = function() { 
-            modalOverlay.classList.remove('active'); 
-            isModalOpen = false;
-            clearInterval(microSlideInterval);
-
-            // Avança o rio automaticamente se for a aba que acabou de fechar
-            if (presentationPhase === 'river_interaction' && viewingNode === currentRiverNode) {
-                let currentNodeEl = riverNodes[currentRiverNode - 1];
-                if (currentNodeEl) currentNodeEl.classList.remove('active-node');
-                
-                if (currentRiverNode < riverNodes.length) {
-                    let nextOffset = 100 - ((currentRiverNode + 1) * (100 / 6));
-                    riverLine.style.strokeDashoffset = nextOffset;
-                    
-                    setTimeout(() => {
-                        riverNodes[currentRiverNode].classList.add('visible', 'active-node');
-                        currentRiverNode++;
-                    }, 800); 
-                } else {
-                    setTimeout(() => {
-                        transitionToSiteBuilder();
-                    }, 800);
-                }
-            }
-        }
-
-        window.showMicroSlide = function(n) {
-            const slides = document.querySelectorAll('.micro-slide');
-            const dots = document.querySelectorAll('.slide-dot');
-            if(!slides.length) return;
-
-            slides.forEach(s => s.classList.remove('active-slide'));
-            dots.forEach(d => d.classList.remove('active-dot'));
-
-            currentSlideIdx = (n + slides.length) % slides.length;
-            slides[currentSlideIdx].classList.add('active-slide');
-            dots[currentSlideIdx].classList.add('active-dot');
-        }
-
-        window.currentMicroSlide = function(n) {
-            clearInterval(microSlideInterval);
-            showMicroSlide(n);
-            startMicroSlideshow();
-        }
-
-        window.startMicroSlideshow = function() {
-            clearInterval(microSlideInterval);
-            microSlideInterval = setInterval(() => {
-                showMicroSlide(currentSlideIdx + 1);
-            }, 4000); 
-        }
-
-        // FUNÇÃO DE TRANSIÇÃO PARA O "SITE BUILDER"
-        function transitionToSiteBuilder() {
-            presentationPhase = 'builder';
-            document.getElementById('site-builder').classList.add('active');
-            updateHoverTargets();
-        }
-
-        // FUNÇÕES DO ESTÚDIO DE MARCA
-        const brandModal = document.getElementById('brand-modal');
-        const previewName = document.getElementById('preview-name');
-        const previewSlogan = document.getElementById('preview-slogan');
-        const floatingLogo = document.getElementById('floating-logo');
-
-        window.openBrandModal = function() { brandModal.classList.add('active'); isBrandModalOpen = true; updateHoverTargets(); }
-        
-        window.closeBrandModal = function() { 
-            brandModal.classList.remove('active'); 
-            isBrandModalOpen = false; 
-            
-            // Avança para a animação do Rio depois do Estúdio de Marca fechar
-            if (presentationPhase === 'brand_studio_wait') {
-                presentationPhase = 'river_interaction'; 
-                mapaContainer.classList.add('river-mode'); 
-                
-                setTimeout(() => {
-                    riverNodes[0].classList.add('visible', 'active-node');
-                    riverLine.style.strokeDashoffset = 100 - (1 * (100 / 6)); 
-                    currentRiverNode = 1;
-                }, 800);
-            }
-        }
-
-        window.selectName = function(element, text) {
-            document.querySelectorAll('#names-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
-            element.classList.add('chosen');
-            previewName.style.opacity = '0';
-            setTimeout(() => { previewName.innerText = text; previewName.style.opacity = '1'; }, 300);
-        }
-
-        window.selectSlogan = function(element, text) {
-            document.querySelectorAll('#slogans-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
-            element.classList.add('chosen');
-            previewSlogan.style.opacity = '0';
-            setTimeout(() => { previewSlogan.innerText = `"${text.replace(/"/g, '')}"`; previewSlogan.style.opacity = '1'; }, 300);
-        }
-
-        window.selectLogo = function(element, src) {
-            document.querySelectorAll('.logo-comparison .logo-box').forEach(b => b.classList.remove('chosen'));
-            element.classList.add('chosen');
-            floatingLogo.style.opacity = '0';
-            setTimeout(() => { floatingLogo.src = src; floatingLogo.style.opacity = '1'; }, 300);
-        }
-
-        // ATUALIZAÇÃO DO INFO-BOX DA ESTRUTURA ORGANIZACIONAL
-        window.updateOrgInfo = function(title, desc) {
-            document.getElementById('org-info-title').innerText = title;
-            document.getElementById('org-info-desc').innerText = desc;
-        }
-
-        // FUNCIONALIDADE INSTAGRAM SUSPENSO
-        window.openInsta = function() { document.getElementById('insta-modal').classList.add('active'); }
-        window.closeInsta = function() { document.getElementById('insta-modal').classList.remove('active'); }
-
-        // CONTEÚDOS DOS MODAIS
+        // RECUPERAÇÃO DAS VARIÁVEIS APAGADAS (CRUCIAL PARA OS MODAIS ABRIREM)
         const modalData = {
             river_missao: `
                 <h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
@@ -977,6 +769,27 @@
             `
         };
 
+        const modalOverlay = document.getElementById('main-modal');
+        const modalBody = document.getElementById('modal-body-content');
+
+        let presentationPhase = 'preloader';
+        let currentRiverNode = 0;
+        let isModalOpen = false;
+        let isBrandModalOpen = false;
+        let viewingNode = 0;
+        let microSlideInterval;
+        let currentSlideIdx = 0;
+        
+        const riverNodes = document.querySelectorAll('.river-node');
+        const riverLine = document.getElementById('river-line');
+        const cornerLogo = document.getElementById('nav-logo');
+        const mapaContainer = document.getElementById('mapa-interativo');
+
+        window.handleNodeClick = function(nodeNum, modalType) {
+            viewingNode = nodeNum;
+            openModal(modalType);
+        }
+
         window.openModal = function(type) {
             modalBody.innerHTML = modalData[type];
             modalOverlay.classList.add('active');
@@ -988,7 +801,128 @@
                 setTimeout(startMicroSlideshow, 100);
             }
         }
-        
+
+        window.closeModal = function() { 
+            modalOverlay.classList.remove('active'); 
+            isModalOpen = false;
+            clearInterval(microSlideInterval);
+
+            if (presentationPhase === 'river_interaction' && viewingNode === currentRiverNode) {
+                let currentNodeEl = riverNodes[currentRiverNode - 1];
+                if (currentNodeEl) currentNodeEl.classList.remove('active-node');
+                
+                if (currentRiverNode < riverNodes.length) {
+                    let nextOffset = 100 - ((currentRiverNode + 1) * (100 / 6));
+                    riverLine.style.strokeDashoffset = nextOffset;
+                    
+                    setTimeout(() => {
+                        riverNodes[currentRiverNode].classList.add('visible', 'active-node');
+                        currentRiverNode++;
+                    }, 800); 
+                } else {
+                    setTimeout(() => {
+                        transitionToSiteBuilder();
+                    }, 800);
+                }
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowRight') {
+                e.preventDefault();
+
+                if (presentationPhase === 'preloader') {
+                    presentationPhase = 'animating_splash';
+                    document.getElementById('logo-top').style.opacity = '0';
+                    document.getElementById('logo-bottom').style.opacity = '0';
+                    document.getElementById('drop').classList.add('falling');
+                    
+                    setTimeout(() => {
+                        document.getElementById('start-hint').classList.add('hit');
+                        document.getElementById('drop').style.opacity = '0'; 
+                        document.getElementById('ripple').classList.add('splash'); 
+                        document.getElementById('logo-container').classList.add('show'); 
+                        document.getElementById('liquid').classList.add('animate'); 
+                    }, 800); 
+                    
+                    setTimeout(() => {
+                        document.getElementById('preloader').classList.add('hide');
+                        mapaContainer.classList.add('assemble');
+                        setTimeout(() => { presentationPhase = 'initial_frame'; }, 2000);
+                    }, 5000); 
+
+                } else if (presentationPhase === 'initial_frame') {
+                    document.getElementById('motivation').classList.add('fade-out');
+                    document.getElementById('main-title').classList.add('fade-out');
+                    document.getElementById('douro-card').classList.add('show');
+                    mapaContainer.classList.add('card-open'); 
+                    presentationPhase = 'douro_char';
+                    
+                } else if (presentationPhase === 'douro_char') {
+                    document.getElementById('douro-card').classList.add('fade-out');
+                    mapaContainer.classList.remove('card-open');
+                    document.getElementById('main-title').classList.remove('fade-out');
+                    cornerLogo.classList.add('clickable');
+                    presentationPhase = 'brand_studio_wait'; 
+                    
+                } else if (presentationPhase === 'brand_studio_wait') {
+                    presentationPhase = 'river_interaction'; 
+                    mapaContainer.classList.add('river-mode'); 
+                    
+                    setTimeout(() => {
+                        riverNodes[0].classList.add('visible', 'active-node');
+                        riverLine.style.strokeDashoffset = 100 - (1 * (100 / 6)); 
+                        currentRiverNode = 1;
+                    }, 800);
+
+                } else if (presentationPhase === 'river_interaction') {
+                    if (!isModalOpen) {
+                        let activeNode = document.querySelector('.river-node.active-node');
+                        if (activeNode) {
+                            let match = activeNode.getAttribute('onclick').match(/'([^']+)'/);
+                            if (match) {
+                                handleNodeClick(currentRiverNode, match[1]);
+                            }
+                        }
+                    } else {
+                        closeModal();
+                    }
+                }
+            }
+        });
+
+        window.showMicroSlide = function(n) {
+            const slides = document.querySelectorAll('.micro-slide');
+            const dots = document.querySelectorAll('.slide-dot');
+            if(!slides.length) return;
+
+            slides.forEach(s => s.classList.remove('active-slide'));
+            dots.forEach(d => d.classList.remove('active-dot'));
+
+            currentSlideIdx = (n + slides.length) % slides.length;
+            slides[currentSlideIdx].classList.add('active-slide');
+            dots[currentSlideIdx].classList.add('active-dot');
+        }
+
+        window.currentMicroSlide = function(n) {
+            clearInterval(microSlideInterval);
+            showMicroSlide(n);
+            startMicroSlideshow();
+        }
+
+        window.startMicroSlideshow = function() {
+            clearInterval(microSlideInterval);
+            microSlideInterval = setInterval(() => {
+                showMicroSlide(currentSlideIdx + 1);
+            }, 4000); 
+        }
+
+        function transitionToSiteBuilder() {
+            presentationPhase = 'builder';
+            document.getElementById('site-builder').classList.add('active');
+            updateHoverTargets();
+        }
+
         modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
         brandModal.addEventListener('click', (e) => { if(e.target === brandModal) closeBrandModal(); });
         
