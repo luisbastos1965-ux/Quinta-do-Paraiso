@@ -25,7 +25,7 @@
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #000000; z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s; }
         #preloader.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
         
-        /* LOGOS DAS ESCOLAS */
+        /* LOGOS DAS ESCOLAS (ESTÁTICOS E MAIS PEQUENOS) */
         .school-logo-top { position: absolute; top: 12%; max-height: 80px; object-fit: contain; z-index: 20; transition: opacity 0.5s ease; }
         .school-logo-bottom { position: absolute; bottom: 12%; max-height: 80px; object-fit: contain; z-index: 20; transition: opacity 0.5s ease; }
 
@@ -44,16 +44,16 @@
         .wine-ripple.splash { animation: rippleEffect 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
         @keyframes rippleEffect { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; border-width: 4px; } 50% { opacity: 0.5; border-width: 2px; } 100% { transform: translate(-50%, -50%) scale(30); opacity: 0; border-width: 0px; } }
 
-        /* LOGO A ENCHER */
+        /* LOGO A ENCHER (MATEMÁTICA CORRIGIDA PARA ENCHER A 100%) */
         .logo-wrapper { position: relative; width: 280px; height: 280px; overflow: hidden; opacity: 0; transition: opacity 0.5s; }
         .logo-wrapper.show { opacity: 1; }
         .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.2; filter: grayscale(100%); }
         .logo-cheio-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
         .logo-cheio { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); position: relative; z-index: 1;}
-        .liquid-mask { position: absolute; top: 10%; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; z-index: 2; }
-        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
+        .liquid-mask { position: absolute; top: -100%; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; z-index: 2; }
+        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes fillWine { 0% { top: 10%; } 100% { top: -150%; } }
+        @keyframes fillWine { 0% { top: -100%; } 100% { top: -220%; } }
 
         /* LOGO FIXO NO CANTO */
         .corner-logo { position: absolute; top: 30px; left: 40px; width: 90px; z-index: 50; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; visibility: hidden; filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.4)); pointer-events: none; }
@@ -62,7 +62,7 @@
         .map-container.assemble .corner-logo { animation: fadeInLogo 1s ease forwards 1.5s; visibility: visible; }
         @keyframes fadeInLogo { to { opacity: 1; } }
 
-        /* CURSORES ILUMINADOS */
+        /* CURSORES (NOVOS E ILUMINADOS) */
         .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; z-index: 99999; pointer-events: none; }
         .cursor-dot { width: 6px; height: 6px; background-color: var(--accent-color); border-radius: 2px; transform: translate(-50%, -50%) rotate(45deg); box-shadow: 0 0 12px var(--accent-color); transition: background-color 0.2s;}
         .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--accent-color); border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); transition: width 0.2s, height 0.2s, background-color 0.2s, box-shadow 0.2s; }
@@ -74,7 +74,7 @@
         
         .map-container.focus-mode .map-bg-container, .map-container.card-open .map-bg-container { filter: blur(12px) brightness(0.35); transform: translate(var(--px), var(--py)) scale(1.05); }
         
-        .map-container.focus-mode .hero-title, .map-container.card-open .hero-title, .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo, .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase { opacity: 0 !important; filter: blur(5px); transition: opacity 0.5s ease; }
+        .map-container.focus-mode .hero-title, .map-container.card-open .hero-title, .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo, .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase { opacity: 0 !important; filter: blur(5px); pointer-events: none !important; transition: opacity 0.5s ease; }
 
         .map-slice { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('fundo_douro.jpg') center/cover no-repeat; transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1); }
         .slice-1 { clip-path: polygon(0 0, 25.5% 0, 25.5% 100%, 0% 100%); transform: translateY(-100%); }
@@ -93,14 +93,14 @@
 
         /* TÍTULOS E FRASES INICIAIS */
         .hero-title { position: absolute; top: 40px; right: 60px; text-align: right; z-index: 10; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .hero-title.fade-out { opacity: 0 !important; filter: blur(5px); transform: translateY(-10px); transition: all 0.4s ease !important; }
+        .hero-title.fade-out { opacity: 0 !important; filter: blur(5px); pointer-events: none !important; transform: translateY(-10px); transition: all 0.4s ease !important; }
         .hero-title h1 { font-size: 3.5rem; letter-spacing: 4px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transition: color 1s; }
         .hero-title p { font-size: 1.1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; transition: color 1s; }
         .map-container.assemble .hero-title { opacity: 1; transform: translateY(0); transition-delay: 1.5s; }
 
         .motivation-phrase { position: absolute; bottom: 15vh; left: 6vw; max-width: 750px; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 10; }
         .map-container.assemble .motivation-phrase { opacity: 1; transform: translateY(0); transition-delay: 2s; }
-        .motivation-phrase.fade-out { opacity: 0 !important; filter: blur(5px); transform: translateY(-10px); transition: all 0.4s ease !important; }
+        .motivation-phrase.fade-out { opacity: 0 !important; filter: blur(5px); pointer-events: none !important; transform: translateY(-10px); transition: all 0.4s ease !important; }
         .motivation-phrase p { font-family: 'Cinzel', serif; font-size: 1.6rem; line-height: 1.6; color: rgba(255, 255, 255, 0.95); border-left: 3px solid var(--accent-color); padding-left: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.9); }
 
         /* MARCA DE ÁGUA SARA REIS */
@@ -108,8 +108,8 @@
 
         /* PAINEL DE ENQUADRAMENTO GEOGRÁFICO */
         .douro-card { position: absolute; top: 50%; left: -100%; transform: translateY(-50%); display: flex; width: 1050px; height: 500px; background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; overflow: hidden; backdrop-filter: blur(15px); box-shadow: 0 30px 60px rgba(0,0,0,0.8); transition: left 0.8s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s; opacity: 0; z-index: 30; }
-        .douro-card.show { left: calc(50vw - 525px); opacity: 1; }
-        .douro-card.fade-out { left: -100% !important; opacity: 0 !important; transition: all 0.6s ease; }
+        .douro-card.show { left: calc(50vw - 525px); opacity: 1; pointer-events: all; }
+        .douro-card.fade-out { left: -100% !important; opacity: 0 !important; pointer-events: none !important; transition: all 0.6s ease; }
         
         .deck-wrapper { flex: 1.3; position: relative; perspective: 1500px; background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center; }
         .deck-hint { position: absolute; bottom: 20px; width: 100%; text-align: center; color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 3px; animation: pulse 2s infinite; pointer-events: none; text-shadow: 0 2px 5px #000; z-index: 50;}
@@ -127,7 +127,7 @@
         #river-line { transition: stroke-dashoffset 0.8s ease-in-out; }
 
         .river-node { position: absolute; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 25; pointer-events: none; width: 250px; margin-left: -125px; margin-top: -9px; }
-        .river-node.visible { opacity: 1; transform: scale(1); pointer-events: all; cursor: pointer; }
+        .river-node.visible { opacity: 1; transform: scale(1); pointer-events: all !important; cursor: pointer; }
         .river-node.fade-out { opacity: 0 !important; transform: scale(0) !important; pointer-events: none !important; transition: all 0.6s ease; }
         
         .river-node.active-node .river-dot { transform: scale(1.6); background-color: #fff; box-shadow: 0 0 30px var(--accent-color); }
@@ -151,7 +151,7 @@
         .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1000px; width: 90%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
-        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; cursor: pointer; }
+        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; cursor: pointer; pointer-events: all !important;}
         .close-btn:hover { color: var(--accent-color); }
         .modal-body h2 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .modal-body p { font-size: 1.05rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
@@ -382,7 +382,6 @@
         </div>
     </div>
 
-    <!-- JANELA DO INSTAGRAM FLUTUANTE -->
     <div class="insta-modal-overlay" id="insta-modal" onclick="closeInsta()">
         <div class="insta-modal-content custom-scroll" onclick="event.stopPropagation()">
             <button class="hover-target" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:1.4rem; color:#888; cursor:pointer;" onclick="closeInsta()">✕</button>
@@ -504,8 +503,11 @@
 
         const updateHoverTargets = () => {
             document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option').forEach(target => {
-                target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
-                target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
+                if (target.dataset.hoverBound !== 'true') {
+                    target.dataset.hoverBound = 'true';
+                    target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
+                    target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
+                }
             });
         };
 
@@ -559,7 +561,7 @@
         const mapaContainer = document.getElementById('mapa-interativo');
 
         window.addEventListener('keydown', (e) => {
-            // Agora a barra de espaços OU a seta direita funcionam sempre para avançar, perfeito para clickers!
+            // Suporta Barra de Espaços e a Seta Direita do passador de slides!
             if (e.code === 'Space' || e.code === 'ArrowRight') {
                 e.preventDefault();
 
@@ -601,11 +603,11 @@
                     presentationPhase = 'brand_studio_wait'; 
                     
                 } else if (presentationPhase === 'river_interaction') {
-                    // Quando chega ao rio, a tecla avança para abrir ou fecha
+                    // Quando a linha do rio está ativa e carrega no espaço (abre ou fecha conforme o estado do modal)
                     if (!isModalOpen) {
-                        let nodeToOpen = riverNodes[currentRiverNode - 1];
-                        if (nodeToOpen) {
-                            let match = nodeToOpen.getAttribute('onclick').match(/'([^']+)'/);
+                        let activeNode = document.querySelector('.river-node.active-node');
+                        if (activeNode) {
+                            let match = activeNode.getAttribute('onclick').match(/'([^']+)'/);
                             if (match) {
                                 handleNodeClick(currentRiverNode, match[1]);
                             }
@@ -634,9 +636,10 @@
             isModalOpen = false;
             clearInterval(microSlideInterval);
 
-            // Avança o rio automaticamente se for a aba correta e atual
+            // Avança o rio automaticamente se for a aba que acabou de fechar
             if (presentationPhase === 'river_interaction' && viewingNode === currentRiverNode) {
-                riverNodes[currentRiverNode - 1].classList.remove('active-node');
+                let currentNodeEl = riverNodes[currentRiverNode - 1];
+                if (currentNodeEl) currentNodeEl.classList.remove('active-node');
                 
                 if (currentRiverNode < riverNodes.length) {
                     let nextOffset = 100 - ((currentRiverNode + 1) * (100 / 6));
@@ -966,7 +969,6 @@
             isModalOpen = true;
             updateHoverTargets();
             
-            // Inicia o slideshow caso seja o MicroProjeto
             if (type === 'river_microprojeto') {
                 currentSlideIdx = 0;
                 setTimeout(startMicroSlideshow, 100);
