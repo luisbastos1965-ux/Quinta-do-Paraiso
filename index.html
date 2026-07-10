@@ -21,16 +21,14 @@
         body, html { width: 100%; height: 100vh; overflow: hidden; font-family: 'Manrope', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
         h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 
-        /* PRELOADER COM LOGOS DA ESCOLA */
+        /* PRELOADER E ONDULAÇÃO */
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: #000000; z-index: 999999; display: flex; justify-content: center; align-items: center; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s; }
         #preloader.hide { transform: translateY(-100%); opacity: 0; pointer-events: none; }
         
-        #start-hint { position: absolute; text-align: center; z-index: 20; animation: fadeInOutHint 3s infinite; transition: all 0.1s ease-out; display: flex; flex-direction: column; align-items: center; }
+        #start-hint { position: absolute; text-align: center; z-index: 20; animation: fadeInOutHint 3s infinite; transition: all 0.1s ease-out; }
         #start-hint.hit { transform: scale(1.1) translateY(10px); opacity: 0 !important; filter: blur(10px); animation: none !important; }
-        #start-hint h2 { color: rgba(212, 175, 55, 0.9); letter-spacing: 4px; font-size: 2rem; margin: 20px 0 10px; }
-        #start-hint p { color: rgba(255, 255, 255, 0.6); font-family: 'Manrope', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 20px; }
-        .escola-logo { max-width: 250px; opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255,255,255,0.1)); }
-        
+        #start-hint h2 { color: rgba(212, 175, 55, 0.9); letter-spacing: 4px; font-size: 2rem; margin-bottom: 10px; }
+        #start-hint p { color: rgba(255, 255, 255, 0.6); font-family: 'Manrope', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; }
         @keyframes fadeInOutHint { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
         .wine-drop { position: absolute; top: -50px; width: 14px; height: 14px; background: var(--accent-color); border-radius: 0 50% 50% 50%; transform: rotate(45deg); opacity: 0; z-index: 10; left: 50%; margin-left: -7px; }
@@ -46,7 +44,7 @@
         .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.2; filter: grayscale(100%); }
         .logo-cheio-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .logo-cheio { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); }
-        .liquid-mask { position: absolute; top: 10%; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; }
+        .liquid-mask { position: absolute top: 10%; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; }
         .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 3s ease forwards; }
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 10%; } 100% { top: -200%; } }
@@ -99,6 +97,7 @@
         .motivation-phrase.fade-out { opacity: 0 !important; filter: blur(5px); transform: translateY(-10px); transition: all 0.4s ease !important; }
         .motivation-phrase p { font-family: 'Cinzel', serif; font-size: 1.6rem; line-height: 1.6; color: rgba(255, 255, 255, 0.95); border-left: 3px solid var(--accent-color); padding-left: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.9); }
 
+        /* MARCA DE ÁGUA SARA REIS */
         .watermark { position: absolute; bottom: 20px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-family: 'Manrope', sans-serif; font-size: 0.8rem; letter-spacing: 2px; z-index: 10; pointer-events: none; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
 
         /* PAINEL DE ENQUADRAMENTO GEOGRÁFICO */
@@ -146,7 +145,7 @@
         .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1000px; width: 90%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
-        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; pointer-events: all;}
+        .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; }
         .close-btn:hover { color: var(--accent-color); }
         .modal-body h2 { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .modal-body p { font-size: 1.05rem; line-height: 1.7; color: #ddd; margin-bottom: 15px; }
@@ -192,17 +191,14 @@
         .swot-box.threats li::before { background: #FF9800; }
 
         .mix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .mix-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px; border-radius: 15px; transition: border-color 0.3s; }
+        .mix-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px; border-radius: 15px; max-height: 280px; overflow-y: auto; transition: border-color 0.3s; }
         .mix-card:hover { border-color: var(--accent-color); }
         .mix-card h3 { color: var(--accent-color); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px;}
         .mix-card p { font-size: 0.95rem; color: #ccc; line-height: 1.7; margin-bottom: 15px; text-align: justify; }
-        
-        /* Preços 4P's Minimalistas */
-        .price-list-4p { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;}
-        .price-item-4p { background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px; border-left: 2px solid var(--accent-color); font-size: 0.85rem;}
-        .price-item-4p strong { display: block; color: var(--accent-color); font-family: 'Cinzel', serif;}
+        .price-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .price-tags span { background: rgba(212, 175, 55, 0.15); color: var(--accent-color); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); }
 
-        /* Estrutura Org - Painel Fechado para evitar bugs de altura */
+        /* Estrutura Org e Hover Panel */
         .org-layout { display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; }
         .org-wrapper { flex: 1.5; display: flex; flex-direction: column; align-items: center; padding: 10px 0; }
         .org-node { background: rgba(0,0,0,0.7); border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.8rem; color: #ccc; text-align: center; width: 140px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; z-index: 2; position: relative; cursor: pointer;}
@@ -218,7 +214,7 @@
         .org-col::before { content: ''; width: 2px; height: 20px; background: var(--accent-color); display: block; }
         .org-connector { width: 2px; height: 15px; background: rgba(212, 175, 55, 0.4); display: block; }
 
-        .org-info-panel { flex: 1; background: rgba(0,0,0,0.5); border: 1px solid rgba(212, 175, 55, 0.3); padding: 30px; border-radius: 15px; height: 280px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; transition: all 0.3s; }
+        .org-info-panel { flex: 1; background: rgba(0,0,0,0.5); border: 1px solid rgba(212, 175, 55, 0.3); padding: 30px; border-radius: 15px; min-height: 250px; display: flex; flex-direction: column; justify-content: center; transition: all 0.3s; }
         .org-info-panel h4 { color: var(--accent-color); font-size: 1.4rem; font-family: 'Cinzel', serif; margin-bottom: 15px; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px; }
         .org-info-panel p { font-size: 0.95rem; color: #ccc; line-height: 1.6; }
         
@@ -235,15 +231,15 @@
         .build-option.selected .checkbox { background: var(--accent-color); }
         .build-option.selected .checkbox::after { content: '✓'; color: #000; font-weight: bold; font-size: 14px;}
         .build-option span { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; }
-        .btn-launch { padding: 18px 50px; background: var(--accent-color); color: #000; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; border: none; border-radius: 50px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); pointer-events: all;}
+        .btn-launch { padding: 18px 50px; background: var(--accent-color); color: #000; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; border: none; border-radius: 50px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
         .btn-launch:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); background: #fff; }
 
-        /* BRAND MODAL (Estúdio Sims) */
+        /* BRAND MODAL (Estúdio Sims em Branco) */
         .brand-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 9995; }
         .brand-modal.active { opacity: 1; pointer-events: all; }
         .brand-container { display: flex; width: 85%; max-width: 1200px; height: 80vh; background: rgba(15,15,15,0.6); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.9); overflow: hidden; transform: scale(0.9); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative;}
         .brand-modal.active .brand-container { transform: scale(1); }
-        .close-brand { position: absolute; top: 20px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 10; pointer-events: all;}
+        .close-brand { position: absolute; top: 20px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 10; }
         .close-brand:hover { color: var(--accent-color); }
         .brand-left { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); border-right: 1px solid rgba(212, 175, 55, 0.2); padding: 40px; text-align: center; }
         .brand-left img.big-logo { width: 60%; max-height: 250px; object-fit: contain; filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6)); animation: floatLogo 4s ease-in-out infinite; transition: opacity 0.3s ease; }
@@ -255,18 +251,16 @@
         .brand-section { margin-bottom: 40px; }
         .brand-section h3 { color: var(--accent-color); font-size: 1.6rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase;}
         .ideas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; pointer-events: all;}
+        .idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; }
         .idea-pill:hover { border-color: var(--accent-color); color: #fff; background: rgba(212, 175, 55, 0.1); }
         .idea-pill.chosen { border-color: var(--accent-color); color: var(--accent-color); font-weight: 600; background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);}
         .logo-comparison { display: flex; gap: 30px; margin-top: 20px; }
-        .logo-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px dashed rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; cursor: none; pointer-events: all;}
+        .logo-box { flex: 1; background: rgba(0,0,0,0.4); border: 1px dashed rgba(255,255,255,0.2); border-radius: 15px; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; transition: all 0.3s; cursor: none; }
         .logo-box:hover { border-color: var(--accent-color); background: rgba(212, 175, 55, 0.05); }
         .logo-box.chosen { border: 1px solid var(--accent-color); background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
         .logo-box span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #aaa; margin-bottom: 15px; transition: color 0.3s; }
         .logo-box.chosen span { color: var(--accent-color); font-weight: 600; }
         .logo-box img { max-width: 80%; max-height: 100px; object-fit: contain; }
-        .btn-primary { padding: 15px 40px; background-color: var(--accent-color); color: #111; border: 1px solid var(--accent-color); border-radius: 50px; font-family: 'Manrope', sans-serif; font-size: 1rem; text-transform: uppercase; transition: all 0.4s; font-weight: 700; pointer-events: all;}
-        .btn-primary:hover { background-color: transparent; color: var(--accent-color); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
 
         @media (max-width: 768px) {
             .grid-tripartida { grid-template-columns: 1fr; }
@@ -281,10 +275,8 @@
 
     <div id="preloader">
         <div id="start-hint">
-            <img src="barra_sup.png" class="escola-logo" alt="Logo Escola" onerror="this.style.display='none';">
             <h2>Dê "Espaço" ao descanso</h2>
             <p>Prima a barra para deixar a experiência respirar</p>
-            <img src="barra_inf.png" class="escola-logo" alt="Logo Escola" onerror="this.style.display='none';">
         </div>
         <div class="wine-drop" id="drop"></div>
         <div class="wine-ripple" id="ripple"></div>
@@ -356,17 +348,6 @@
         <div class="modal-content custom-scroll">
             <button class="close-btn hover-target" onclick="closeModal()">FECHAR ✕</button>
             <div class="modal-body" id="modal-body-content"></div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="insta-modal">
-        <div class="modal-content custom-scroll" style="max-width: 600px; text-align:center; padding: 30px;">
-            <button class="close-btn hover-target" onclick="closeInsta()">FECHAR ✕</button>
-            <h2 style="color:var(--accent-color); font-family:'Cinzel'; margin-bottom: 20px;">@quintadoparaiso_2026</h2>
-            <div style="background:rgba(0,0,0,0.5); border:1px dashed var(--accent-color); border-radius:15px; padding:40px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                <p style="color:#ccc; font-family:'Manrope'; margin-bottom:30px;">Visite a nossa página oficial no Instagram para acompanhar o dia a dia e as novidades da Quinta.</p>
-                <a href="https://www.instagram.com/quintadoparaiso_2026/" target="_blank" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff; padding: 15px 30px; border-radius:30px; text-decoration:none; font-weight:bold; font-family:'Manrope'; pointer-events:all;" class="hover-target">Abrir Instagram Oficial</a>
-            </div>
         </div>
     </div>
 
@@ -471,7 +452,7 @@
         });
 
         const updateHoverTargets = () => {
-            document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option, a, .promo-asset').forEach(target => {
+            document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option').forEach(target => {
                 target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
                 target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
             });
@@ -524,6 +505,7 @@
         const riverNodes = document.querySelectorAll('.river-node');
         const riverLine = document.getElementById('river-line');
         const cornerLogo = document.getElementById('nav-logo');
+        const mapaContainer = document.getElementById('mapa-interativo');
 
         window.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
@@ -554,6 +536,7 @@
                     presentationPhase = 'douro_char';
                     
                 } else if (presentationPhase === 'douro_char') {
+                    // Limpa o cartão geográfico, Fundo Nítido e Título Reaparece
                     document.getElementById('douro-card').classList.add('fade-out');
                     mapaContainer.classList.remove('card-open');
                     document.getElementById('main-title').classList.remove('fade-out');
@@ -562,6 +545,7 @@
                     presentationPhase = 'brand_studio_wait';
                     
                 } else if (presentationPhase === 'brand_studio_wait' && !isBrandModalOpen) {
+                    // Inicia a linha do rio no ecrã principal (Sem fundo baço)
                     mapaContainer.classList.add('river-mode'); 
                     presentationPhase = 'river_flow';
                     
@@ -572,17 +556,12 @@
                     }, 800);
 
                 } else if (presentationPhase === 'river_flow') {
-                    
                     if (!isModalOpen) {
                         let nodeToOpen = riverNodes[currentRiverNode - 1];
                         let modalType = nodeToOpen.getAttribute('onclick').match(/'([^']+)'/)[1];
                         openModal(modalType);
                         isModalOpen = true;
                     } else {
-                        // Evita fechar no modal do Insta
-                        if (document.getElementById('insta-modal').classList.contains('active')) {
-                            return; 
-                        }
                         closeModal();
                         isModalOpen = false;
                         
@@ -609,7 +588,7 @@
             updateHoverTargets();
         }
 
-        // FUNÇÕES DO ESTÚDIO DE MARCA E INSTA
+        // FUNÇÕES DO ESTÚDIO DE MARCA
         const brandModal = document.getElementById('brand-modal');
         const previewName = document.getElementById('preview-name');
         const previewSlogan = document.getElementById('preview-slogan');
@@ -617,9 +596,6 @@
 
         window.openBrandModal = function() { brandModal.classList.add('active'); isBrandModalOpen = true; updateHoverTargets(); }
         window.closeBrandModal = function() { brandModal.classList.remove('active'); isBrandModalOpen = false; }
-        
-        window.openInsta = function() { document.getElementById('insta-modal').classList.add('active'); updateHoverTargets(); }
-        window.closeInsta = function() { document.getElementById('insta-modal').classList.remove('active'); }
 
         window.selectName = function(element, text) {
             document.querySelectorAll('#names-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
@@ -673,7 +649,7 @@
                     <div class="target-pill">Adultos entre os 30 e os 60 anos (Nacional e Internacional)</div>
                     <div class="target-pill">Casais, pequenos grupos de amigos e viajantes individuais</div>
                     <div class="target-pill">Interessados em turismo rural, enoturismo, natureza, cultura e bem-estar</div>
-                    <div class="target-pill">Nacional e Internacional (Americanos, Canadianos, Europeus do Norte e Centro)</div>
+                    <div class="target-pill">Rendimento médio a médio-alto (valorizam conforto e exclusividade)</div>
                     <div class="target-pill">Procuram experiências autênticas e contacto com o património do Douro</div>
                     <div class="target-pill">Amantes de provas de vinho e experiências vitivinícolas</div>
                     <div class="target-pill">Jovens adultos (25-35 anos) focados em atividades diferenciadoras</div>
@@ -738,40 +714,28 @@
                 <div class="mix-grid hover-target">
                     <div class="mix-card custom-scroll">
                         <h3>Produto</h3>
-                        <p>Alojamento turístico focado em enoturismo, valorizando a propriedade tradicional. O empreendimento oferece restaurante exclusivo para hóspedes, receção 24h, quartos familiares e piscinas privativas.</p>
-                        <p>Forte aposta na acessibilidade com infraestruturas adaptadas, postos elétricos, lavanderia, serviço pet friendly, equipamentos para bebés e um luxuoso cabaz de boas-vindas.</p>
+                        <p>O projeto consiste na criação de uma unidade de alojamento turístico dedicada ao enoturismo, valorizando a propriedade tradicional. O empreendimento oferece restaurante exclusivo para hóspedes, receção 24h, quartos familiares e piscinas privativas.</p>
+                        <p>Aposta na acessibilidade com infraestruturas adaptadas, buggy de circulação interna, postos elétricos, Wi-Fi, lavanderia, serviço pet friendly, equipamentos para bebés e um luxuoso cabaz de boas-vindas.</p>
                     </div>
                     <div class="mix-card custom-scroll" style="background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.5);">
                         <h3>Preço</h3>
-                        <p>O preçário reflete o posicionamento premium e sustentável do refúgio:</p>
-                        <div class="price-list-4p">
-                            <div class="price-item-4p"><strong>Alojamentos</strong> Pombais: Sob Consulta</div>
-                            <div class="price-item-4p"><strong>Passeio de Barco</strong> 1h30 - 45€/pax</div>
-                            <div class="price-item-4p"><strong>Passeio de Jipe</strong> 2h00 - 40€/pax</div>
-                            <div class="price-item-4p"><strong>Piquenique na Vinha</strong> Até 3h00 - 35€/pax</div>
-                            <div class="price-item-4p"><strong>Spa de Vinoterapia</strong> 1h00 - 65€/pax</div>
-                            <div class="price-item-4p"><strong>Visita à Adega</strong> 45 min - 15€/pax</div>
-                            <div class="price-item-4p"><strong>Degustação Vinhos</strong> 1h00 - 25€/pax</div>
-                            <div class="price-item-4p"><strong>Visita + Degustação</strong> 1h30 - 35€/pax</div>
+                        <p><em>(Estrutura de preçário em fase de definição)</em></p>
+                        <p>A estratégia refletirá o posicionamento premium da quinta, segmentada de forma rentável para as seguintes áreas:</p>
+                        <div class="price-tags">
+                            <span>Casas e Pombais</span>
+                            <span>Atividades & Enoturismo</span>
+                            <span>Vinhos (Provas e Venda)</span>
                         </div>
                     </div>
-                    <div class="mix-card custom-scroll" style="grid-column: 1 / -1; display:flex; flex-direction:column; justify-content:space-between;">
-                        <div>
-                            <h3>Promoção</h3>
-                            <p>Estratégia multicanal e presencial: forte presença digital através das Redes Sociais, alavancada por parcerias estratégicas. A comunicação será solidificada no plano físico com materiais de comunicação de luxo (Cartões de Visita, Flyers e oferta de Tote Bags exclusivos).</p>
-                        </div>
-                        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; justify-content: center;">
-                            <div style="width: 70px; height: 70px; background: rgba(212,175,55,0.1); border: 1px dashed var(--accent-color); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; text-align: center; color: var(--accent-color);">Flyer</div>
-                            <div style="width: 70px; height: 70px; background: rgba(212,175,55,0.1); border: 1px dashed var(--accent-color); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; text-align: center; color: var(--accent-color);">Cartão</div>
-                            <div style="width: 70px; height: 70px; background: rgba(212,175,55,0.1); border: 1px dashed var(--accent-color); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; text-align: center; color: var(--accent-color);">Tote<br>Bag</div>
-                            <div style="width: 70px; height: 70px; background: rgba(212,175,55,0.1); border: 1px dashed var(--accent-color); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; text-align: center; color: var(--accent-color);">Parcerias</div>
-                            <button class="btn-primary hover-target" style="padding: 10px 20px; font-size: 0.8rem; margin:0;" onclick="openInsta()">Ver Instagram</button>
-                        </div>
+                    <div class="mix-card custom-scroll">
+                        <h3>Promoção</h3>
+                        <p>Estratégia integrada focada na valorização da identidade rural. Website multilingue, conteúdos que promovem tradições durienses e forte comunicação nas redes sociais (vindimas, paisagem).</p>
+                        <p>A diferenciação promocional será garantida por experiências como passeios de jipe, barcos privados e rituais de vinoterapia.</p>
                     </div>
-                    <div class="mix-card custom-scroll" style="grid-column: 1 / -1;">
-                        <h3>Distribuição</h3>
-                        <p>Adoção de estratégia multicanal combinando venda direta e indireta. O canal primário será o website oficial com motor de reservas integrado, pagamentos diretos e seguros.</p>
-                        <p>Numa fase inicial, integração tática com a plataforma Booking para garantir liquidez e atração. A longo prazo, a marca focará unicamente na venda direta e redução progressiva das comissões aos intermediários de mercado.</p>
+                    <div class="mix-card custom-scroll">
+                        <h3>Distribuição (Praça)</h3>
+                        <p>Adoção de estratégia multicanal combinando venda direta e indireta. O canal primário será o website oficial com motor de reservas e pagamentos diretos.</p>
+                        <p>Numa fase inicial, integração tática nas plataformas Booking e Airbnb. A longo prazo, a marca focará na venda direta e redução de comissões aos intermediários de mercado.</p>
                     </div>
                 </div>
             `,
@@ -789,7 +753,7 @@
                                 <div class="org-node" onmouseover="updateOrgInfo('Rececionistas', 'Prestação de assistência 24h, prestando informações turísticas, efetuando o atendimento telefónico e garantindo as boas-vindas.')">Rececionistas</div>
                             </div>
                             <div class="org-col">
-                                <div class="org-node dept" onmouseover="updateOrgInfo('Housekeeping', 'Garante o conforto, limpeza e as excelentes condições dos quartos, áreas comuns e pombais.')">Housekeeping</div>
+                                <div class="org-node dept" onmouseover="updateOrgInfo('Alojamento', 'Garante o conforto, limpeza e as excelentes condições dos quartos, áreas comuns e pombais.')">Alojamento</div>
                                 <div class="org-connector"></div>
                                 <div class="org-node" onmouseover="updateOrgInfo('Governanta', 'Coordena as equipas de limpeza e supervisiona os padrões de higiene, lavandaria e reposição de consumíveis no alojamento.')">Governanta</div>
                                 <div class="org-connector"></div>
@@ -817,7 +781,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-info-panel custom-scroll" id="org-info">
+                    <div class="org-info-panel" id="org-info">
                         <h4 id="org-info-title">Estrutura e Funções</h4>
                         <p id="org-info-desc">Passe o rato sobre os quadros organizacionais à esquerda para visualizar a descrição e responsabilidades detalhadas de cada departamento ou cargo dentro da Quinta do Paraíso.</p>
                     </div>
