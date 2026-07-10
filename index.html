@@ -44,14 +44,15 @@
         .wine-ripple.splash { animation: rippleEffect 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
         @keyframes rippleEffect { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; border-width: 4px; } 50% { opacity: 0.5; border-width: 2px; } 100% { transform: translate(-50%, -50%) scale(30); opacity: 0; border-width: 0px; } }
 
-        /* LOGO A ENCHER */
+        /* LOGO A ENCHER (ACELERADO) */
         .logo-wrapper { position: relative; width: 280px; height: 280px; overflow: hidden; opacity: 0; transition: opacity 0.5s; }
         .logo-wrapper.show { opacity: 1; }
         .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.2; filter: grayscale(100%); }
         .logo-cheio-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
         .logo-cheio { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); position: relative; z-index: 1;}
         .liquid-mask { position: absolute; top: 10%; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; z-index: 2; }
-        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 3.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
+        /* Tempo da subida (fillWine) ajustado para 2s para terminar muito antes do ecrã desaparecer */
+        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 10%; } 100% { top: -150%; } }
 
@@ -228,6 +229,14 @@
         .org-info-panel h4 { color: var(--accent-color); font-size: 1.4rem; font-family: 'Cinzel', serif; margin-bottom: 15px; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px; }
         .org-info-panel p { font-size: 0.95rem; color: #ccc; line-height: 1.6; }
         
+        /* SLIDESHOW DO MICROPROJETO */
+        .micro-slide { display: none; width: 100%; height: 350px; object-fit: cover; }
+        .micro-slide.active-slide { display: block; animation: fadeSlide 1s ease-in-out; }
+        @keyframes fadeSlide { from { opacity: 0.3; transform: scale(1.05); } to { opacity: 1; transform: scale(1); } }
+        .slide-controls { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .slide-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; border: 1px solid rgba(212, 175, 55, 0.5); }
+        .slide-dot.active-dot { background: var(--accent-color); box-shadow: 0 0 10px var(--accent-color); transform: scale(1.2); }
+
         /* BUILDER DE SITE (Fase de Transição) */
         .builder-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.9); backdrop-filter: blur(25px); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; z-index: 10000; flex-direction: column; }
         .builder-overlay.active { opacity: 1; pointer-events: all; }
@@ -362,8 +371,8 @@
         <div class="river-node hover-target" id="node-5" onclick="handleNodeClick(5, 'river_org')">
             <div class="river-dot"></div><div class="river-label">Estrutura Organizacional</div>
         </div>
-        <div class="river-node hover-target" id="node-6" onclick="handleNodeClick(6, 'river_evento')">
-            <div class="river-dot"></div><div class="river-label">Evento</div>
+        <div class="river-node hover-target" id="node-6" onclick="handleNodeClick(6, 'river_microprojeto')">
+            <div class="river-dot"></div><div class="river-label">MicroProjeto</div>
         </div>
     </div>
 
@@ -569,11 +578,12 @@
                         document.getElementById('liquid').classList.add('animate'); 
                     }, 800); 
                     
+                    // Com a animação de preenchimento acelerada para 2s, 3.8s no total é perfeito para esconder a tela preta e avançar
                     setTimeout(() => {
                         document.getElementById('preloader').classList.add('hide');
                         mapaContainer.classList.add('assemble');
                         setTimeout(() => { presentationPhase = 'initial_frame'; }, 2000);
-                    }, 5500); // 5.5s para garantir que o líquido tem tempo suficiente para encher o logo e ficar estático antes de subir.
+                    }, 3800); 
 
                 } else if (presentationPhase === 'initial_frame') {
                     document.getElementById('motivation').classList.add('fade-out');
@@ -596,9 +606,11 @@
         });
 
         // ------------------------------------------------------------------
-        // NAVEGAÇÃO TOUCH / CLICK DA LINHA DE RIO (Nova Mecânica)
+        // NAVEGAÇÃO TOUCH / CLICK DA LINHA DE RIO E SLIDESHOW
         // ------------------------------------------------------------------
         let viewingNode = 0;
+        let microSlideInterval;
+        let currentSlideIdx = 0;
         
         window.handleNodeClick = function(nodeNum, modalType) {
             viewingNode = nodeNum;
@@ -608,6 +620,7 @@
         window.closeModal = function() { 
             modalOverlay.classList.remove('active'); 
             isModalOpen = false;
+            clearInterval(microSlideInterval);
 
             // Avança o rio automaticamente se for a aba correta e atual
             if (presentationPhase === 'river_interaction' && viewingNode === currentRiverNode) {
@@ -627,6 +640,32 @@
                     }, 800);
                 }
             }
+        }
+
+        window.showMicroSlide = function(n) {
+            const slides = document.querySelectorAll('.micro-slide');
+            const dots = document.querySelectorAll('.slide-dot');
+            if(!slides.length) return;
+
+            slides.forEach(s => s.classList.remove('active-slide'));
+            dots.forEach(d => d.classList.remove('active-dot'));
+
+            currentSlideIdx = (n + slides.length) % slides.length;
+            slides[currentSlideIdx].classList.add('active-slide');
+            dots[currentSlideIdx].classList.add('active-dot');
+        }
+
+        window.currentMicroSlide = function(n) {
+            clearInterval(microSlideInterval);
+            showMicroSlide(n);
+            startMicroSlideshow();
+        }
+
+        window.startMicroSlideshow = function() {
+            clearInterval(microSlideInterval);
+            microSlideInterval = setInterval(() => {
+                showMicroSlide(currentSlideIdx + 1);
+            }, 4000); 
         }
 
         // FUNÇÃO DE TRANSIÇÃO PARA O "SITE BUILDER"
@@ -876,29 +915,50 @@
                     </div>
                 </div>
             `,
-            river_evento: `
-                <h2 style="text-align: center; margin-bottom: 30px;">Evento Temático</h2>
-                <p style="text-align: center; color: #ccc; font-size: 1.1rem; max-width: 800px; margin: 0 auto 30px; line-height: 1.7;">Uma experiência imersiva de degustação que celebra as colheitas do Douro. O evento "Harmonia D'Ouro" foi desenhado para ligar os hóspedes às raízes da quinta através de uma prova comentada de vinhos acompanhada por uma curadoria exclusiva de gastronomia local.</p>
-                
-                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px;" class="hover-target">
-                    <div style="flex: 1; border-radius: 15px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
-                        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Prova de Vinhos" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            river_microprojeto: `
+                <h2 style="text-align: center; margin-bottom: 20px;">MicroProjeto</h2>
+                <div style="display: flex; gap: 40px; align-items: center; margin-top: 10px;" class="hover-target">
+                    <div style="flex: 1; text-align: justify; color: #ccc; font-size: 1.05rem; line-height: 1.8;">
+                        <p style="margin-bottom: 15px;">Foi desenvolvido um microprojeto com o objetivo de aprofundar conhecimentos na área do enoturismo e reforçar a componente prática do projeto Quinta do Paraíso. Para tal, foi organizada uma sessão, dinamizada pelo professor José Pereira, membro da Confraria dos Vinhos Verdes.</p>
+                        <p>Durante a sessão foram abordados temas como a história da Região Demarcada dos Vinhos Verdes, as principais castas, os métodos de produção e as características dos diferentes tipos de vinho. Esta atividade proporcionou uma aprendizagem mais prática e interativa, contribuindo para uma melhor compreensão do vinho enquanto produto turístico.</p>
                     </div>
-                    <div style="flex: 1; border-radius: 15px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
-                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Vinha no Douro" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="flex: 1.2; display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 100%; border-radius: 15px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.6);">
+                            <img class="micro-slide active-slide" src="proj1.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+1'">
+                            <img class="micro-slide" src="proj2.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+2'">
+                            <img class="micro-slide" src="proj3.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+3'">
+                            <img class="micro-slide" src="proj4.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+4'">
+                            <img class="micro-slide" src="proj5.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+5'">
+                            <img class="micro-slide" src="proj6.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+6'">
+                            <img class="micro-slide" src="proj7.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+7'">
+                            <img class="micro-slide" src="proj8.jpg" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+8'">
+                        </div>
+                        <div class="slide-controls">
+                            <span class="slide-dot active-dot" onclick="currentMicroSlide(0)"></span>
+                            <span class="slide-dot" onclick="currentMicroSlide(1)"></span>
+                            <span class="slide-dot" onclick="currentMicroSlide(2)"></span>
+                            <span class="slide-dot" onclick="currentMicroSlide(3)"></span>
+                            <span class="slide-dot" onclick="currentMicroSlide(4)"></span>
+                            <span class="slide-dot" onclick="currentMicroSlide(5)"></span>
+                            <span class="slide-dot" onclick="currentMicroSlide(6)"></span>
+                            <span class="slide-dot" onclick="currentMicroSlide(7)"></span>
+                        </div>
                     </div>
                 </div>
             `
         };
-
-        const modalOverlay = document.getElementById('main-modal');
-        const modalBody = document.getElementById('modal-body-content');
 
         window.openModal = function(type) {
             modalBody.innerHTML = modalData[type];
             modalOverlay.classList.add('active');
             isModalOpen = true;
             updateHoverTargets();
+            
+            // Inicia o slideshow caso seja o MicroProjeto
+            if (type === 'river_microprojeto') {
+                currentSlideIdx = 0;
+                setTimeout(startMicroSlideshow, 100);
+            }
         }
         
         modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
