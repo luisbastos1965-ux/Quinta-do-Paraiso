@@ -549,10 +549,8 @@
         updateDeck();
 
         // ------------------------------------------------------------------
-        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO E MODAIS
+        // DADOS E FUNÇÕES DOS MODAIS
         // ------------------------------------------------------------------
-        
-        // RECUPERAÇÃO DAS VARIÁVEIS APAGADAS (CRUCIAL PARA OS MODAIS ABRIREM)
         const modalData = {
             river_missao: `
                 <h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
@@ -771,6 +769,14 @@
 
         const modalOverlay = document.getElementById('main-modal');
         const modalBody = document.getElementById('modal-body-content');
+        const brandModal = document.getElementById('brand-modal');
+        const previewName = document.getElementById('preview-name');
+        const previewSlogan = document.getElementById('preview-slogan');
+        const floatingLogo = document.getElementById('floating-logo');
+        const riverNodes = document.querySelectorAll('.river-node');
+        const riverLine = document.getElementById('river-line');
+        const cornerLogo = document.getElementById('nav-logo');
+        const mapaContainer = document.getElementById('mapa-interativo');
 
         let presentationPhase = 'preloader';
         let currentRiverNode = 0;
@@ -780,11 +786,9 @@
         let microSlideInterval;
         let currentSlideIdx = 0;
         
-        const riverNodes = document.querySelectorAll('.river-node');
-        const riverLine = document.getElementById('river-line');
-        const cornerLogo = document.getElementById('nav-logo');
-        const mapaContainer = document.getElementById('mapa-interativo');
-
+        // ------------------------------------------------------------------
+        // FUNÇÕES DA LINHA DE RIO E MODAIS
+        // ------------------------------------------------------------------
         window.handleNodeClick = function(nodeNum, modalType) {
             viewingNode = nodeNum;
             openModal(modalType);
@@ -807,6 +811,7 @@
             isModalOpen = false;
             clearInterval(microSlideInterval);
 
+            // Avança o rio automaticamente se for a aba correta e atual
             if (presentationPhase === 'river_interaction' && viewingNode === currentRiverNode) {
                 let currentNodeEl = riverNodes[currentRiverNode - 1];
                 if (currentNodeEl) currentNodeEl.classList.remove('active-node');
@@ -827,7 +832,11 @@
             }
         }
 
+        // ------------------------------------------------------------------
+        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO
+        // ------------------------------------------------------------------
         window.addEventListener('keydown', (e) => {
+            // Suporta Barra de Espaço OU Seta para a Direita
             if (e.code === 'Space' || e.code === 'ArrowRight') {
                 e.preventDefault();
 
@@ -849,7 +858,7 @@
                         document.getElementById('preloader').classList.add('hide');
                         mapaContainer.classList.add('assemble');
                         setTimeout(() => { presentationPhase = 'initial_frame'; }, 2000);
-                    }, 5000); 
+                    }, 4500); 
 
                 } else if (presentationPhase === 'initial_frame') {
                     document.getElementById('motivation').classList.add('fade-out');
@@ -866,6 +875,7 @@
                     presentationPhase = 'brand_studio_wait'; 
                     
                 } else if (presentationPhase === 'brand_studio_wait') {
+                    // SE NÃO ABRIU O LOGO E CLICOU NO ESPAÇO, ARRANCA O RIO!
                     presentationPhase = 'river_interaction'; 
                     mapaContainer.classList.add('river-mode'); 
                     
@@ -891,6 +901,9 @@
             }
         });
 
+        // ------------------------------------------------------------------
+        // FUNÇÕES DO SLIDESHOW E BUILDER
+        // ------------------------------------------------------------------
         window.showMicroSlide = function(n) {
             const slides = document.querySelectorAll('.micro-slide');
             const dots = document.querySelectorAll('.slide-dot');
@@ -923,9 +936,69 @@
             updateHoverTargets();
         }
 
+        // ------------------------------------------------------------------
+        // FUNÇÕES DO ESTÚDIO DE MARCA
+        // ------------------------------------------------------------------
+        window.openBrandModal = function() { 
+            brandModal.classList.add('active'); 
+            isBrandModalOpen = true; 
+            updateHoverTargets(); 
+        }
+        
+        window.closeBrandModal = function() { 
+            brandModal.classList.remove('active'); 
+            isBrandModalOpen = false; 
+            
+            // Avança para a animação do Rio depois do Estúdio de Marca fechar
+            if (presentationPhase === 'brand_studio_wait') {
+                presentationPhase = 'river_interaction'; 
+                mapaContainer.classList.add('river-mode'); 
+                
+                setTimeout(() => {
+                    riverNodes[0].classList.add('visible', 'active-node');
+                    riverLine.style.strokeDashoffset = 100 - (1 * (100 / 6)); 
+                    currentRiverNode = 1;
+                }, 800);
+            }
+        }
+
+        window.selectName = function(element, text) {
+            document.querySelectorAll('#names-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
+            element.classList.add('chosen');
+            previewName.style.opacity = '0';
+            setTimeout(() => { previewName.innerText = text; previewName.style.opacity = '1'; }, 300);
+        }
+
+        window.selectSlogan = function(element, text) {
+            document.querySelectorAll('#slogans-grid .idea-pill').forEach(p => p.classList.remove('chosen'));
+            element.classList.add('chosen');
+            previewSlogan.style.opacity = '0';
+            setTimeout(() => { previewSlogan.innerText = `"${text.replace(/"/g, '')}"`; previewSlogan.style.opacity = '1'; }, 300);
+        }
+
+        window.selectLogo = function(element, src) {
+            document.querySelectorAll('.logo-comparison .logo-box').forEach(b => b.classList.remove('chosen'));
+            element.classList.add('chosen');
+            floatingLogo.style.opacity = '0';
+            setTimeout(() => { floatingLogo.src = src; floatingLogo.style.opacity = '1'; }, 300);
+        }
+
+        // ------------------------------------------------------------------
+        // UTILITÁRIOS (INSTA E INFO ORG)
+        // ------------------------------------------------------------------
+        window.updateOrgInfo = function(title, desc) {
+            document.getElementById('org-info-title').innerText = title;
+            document.getElementById('org-info-desc').innerText = desc;
+        }
+
+        window.openInsta = function() { document.getElementById('insta-modal').classList.add('active'); }
+        window.closeInsta = function() { document.getElementById('insta-modal').classList.remove('active'); }
+
+        // LISTENERS DE FECHO FORA DA CAIXA
         modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
         brandModal.addEventListener('click', (e) => { if(e.target === brandModal) closeBrandModal(); });
         
+        // INICIA CURSORES PERSONALIZADOS
         updateHoverTargets();
     </script>
 </body>
