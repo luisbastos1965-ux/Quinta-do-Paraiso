@@ -145,10 +145,10 @@
         #node-5 { top: 48%; left: 35%; } 
         #node-6 { top: 25%; left: 20%; } 
 
-        /* MODAIS DOS PONTOS DE MAPA (BLINDADOS) */
+        /* MODAIS DOS PONTOS DE MAPA (ALARGADO PARA 1150px) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease, visibility 0.5s; z-index: 9990; }
         .modal-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
-        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1000px; width: 90%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); pointer-events: all; }
+        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1150px; width: 95%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); pointer-events: all; }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
         .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; cursor: pointer; pointer-events: all !important;}
@@ -169,11 +169,10 @@
         .tri-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px; border-radius: 15px; transition: transform 0.3s, border-color 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .tri-item:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.6); }
         .tri-item h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px; text-align: center; }
-        .tri-item p { font-size: 0.95rem; color: #ccc; line-height: 1.7; text-align: justify; margin: 0; }
 
-        /* TAGS DE PALAVRAS-CHAVE (MISSÃO, VISÃO, VALORES) */
-        .kw-tag { display: inline-block; padding: 8px 16px; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.4); border-radius: 25px; font-size: 0.95rem; margin: 6px; font-family: 'Manrope', sans-serif; color: #eee; transition: all 0.3s; cursor: default; }
-        .kw-tag:hover { background: var(--accent-color); color: #000; font-weight: 600; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
+        /* TAGS DE PALAVRAS-CHAVE (MISSÃO, VISÃO, VALORES) - DESIGN PREMIUM */
+        .kw-tag { display: block; width: 100%; padding: 12px 15px; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3); border-radius: 8px; font-size: 0.95rem; margin-bottom: 10px; font-family: 'Manrope', sans-serif; color: #eee; transition: all 0.3s; cursor: default; text-align: center; box-sizing: border-box; }
+        .kw-tag:hover { background: rgba(212,175,55,0.2); border-color: var(--accent-color); color: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.2); }
 
         /* Design de Público Alvo (Personas) */
         .target-personas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
@@ -204,22 +203,22 @@
         .swot-box.opportunities li::before { background: #2196F3; }
         .swot-box.threats li::before { background: #FF9800; }
 
-        /* MARKETING MIX GRID (3 Colunas Topo, Promoção no Fundo) */
+        /* MARKETING MIX GRID (3 Colunas Topo, Promoção Larga no Fundo) */
         .mix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
         .mix-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px; border-radius: 15px; transition: border-color 0.3s; }
         .mix-card:hover { border-color: var(--accent-color); }
         .mix-card h3 { color: var(--accent-color); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px;}
         .mix-card p { font-size: 0.95rem; color: #ccc; line-height: 1.7; margin-bottom: 15px; text-align: justify; }
-        .promo-card { grid-column: 1 / -1; display: flex; flex-direction: column; }
+        .promo-card { grid-column: 1 / -1; display: flex; flex-direction: row; gap: 30px; align-items: center; padding: 25px 40px !important; }
         .price-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-        .price-tags span { background: rgba(212, 175, 55, 0.15); color: var(--accent-color); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); }
+        .price-tags span { background: rgba(212, 175, 55, 0.15); color: var(--accent-color); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); display: inline-block; width: 100%; box-sizing: border-box; }
         
-        .promo-btn { display: inline-block; padding: 6px 14px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; font-size: 0.9rem; margin: 5px; font-family: 'Manrope', sans-serif; color: #ddd; transition: all 0.3s; cursor: pointer; pointer-events: all; }
+        .promo-btn { display: inline-block; padding: 10px 15px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 8px; font-size: 0.9rem; margin: 5px; font-family: 'Manrope', sans-serif; color: #ddd; transition: all 0.3s; cursor: pointer; pointer-events: all; text-align: center; flex: 1 1 calc(50% - 10px); box-sizing: border-box;}
         .promo-btn:hover { background: var(--accent-color); color: #000; font-weight: 600; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
 
-        /* Estrutura Org e Hover Panel */
-        .org-layout { display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; }
-        .org-wrapper { flex: 1.5; display: flex; flex-direction: column; align-items: center; padding: 10px 0; }
+        /* Estrutura Org e Hover Panel (ALARGADO PARA EVITAR CORTES) */
+        .org-layout { display: flex; gap: 30px; align-items: stretch; margin-top: 20px; flex-wrap: nowrap; }
+        .org-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px 0; overflow-x: auto; }
         .org-node { background: rgba(0,0,0,0.7); border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 0.8rem; color: #ccc; text-align: center; width: 140px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; z-index: 2; position: relative; cursor: pointer;}
         .org-node:hover { border-color: var(--accent-color); color: #fff; transform: translateY(-3px); background: rgba(212, 175, 55, 0.15); }
         .org-node.manager { font-weight: 700; color: var(--accent-color); border-color: var(--accent-color); width: 200px; font-size: 1rem; }
@@ -233,8 +232,7 @@
         .org-col::before { content: ''; width: 2px; height: 20px; background: var(--accent-color); display: block; }
         .org-connector { width: 2px; height: 15px; background: rgba(212, 175, 55, 0.4); display: block; }
 
-        /* ALARGAMENTO DO PAINEL DA ESTRUTURA ORGANIZACIONAL */
-        .org-info-panel { flex: none; width: 440px; height: 350px; background: rgba(0,0,0,0.5); border: 1px solid rgba(212, 175, 55, 0.3); padding: 30px; border-radius: 15px; display: flex; flex-direction: column; justify-content: flex-start; transition: all 0.3s; overflow-y: auto; }
+        .org-info-panel { flex: 0 0 340px; height: auto; background: rgba(0,0,0,0.5); border: 1px solid rgba(212, 175, 55, 0.3); padding: 30px; border-radius: 15px; display: flex; flex-direction: column; justify-content: flex-start; transition: all 0.3s; overflow-y: auto; }
         .org-info-panel h4 { color: var(--accent-color); font-size: 1.4rem; font-family: 'Cinzel', serif; margin-bottom: 15px; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px; }
         .org-info-panel p { font-size: 0.95rem; color: #ccc; line-height: 1.6; }
         
@@ -513,7 +511,7 @@
         });
 
         const updateHoverTargets = () => {
-            document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option, .kw-tag').forEach(target => {
+            document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option, .kw-tag, .promo-btn').forEach(target => {
                 if (target.dataset.hoverBound !== 'true') {
                     target.dataset.hoverBound = 'true';
                     target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
@@ -559,32 +557,31 @@
         updateDeck();
 
         // ------------------------------------------------------------------
-        // MÁQUINA DE ESTADOS DA APRESENTAÇÃO E MODAIS
+        // DADOS DOS MODAIS
         // ------------------------------------------------------------------
-        
         const modalData = {
             river_missao: `
                 <h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
                 <div class="grid-tripartida hover-target">
-                    <div class="tri-item" style="text-align:center;">
+                    <div class="tri-item">
                         <h3>Missão</h3>
-                        <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+                        <div style="display:flex; flex-direction:column; gap:5px; margin-top: 15px;">
                             <span class="kw-tag hover-target">Autenticidade Turística</span>
                             <span class="kw-tag hover-target">Cultura Vitivinícola</span>
                             <span class="kw-tag hover-target">Envolvimento da Comunidade</span>
                         </div>
                     </div>
-                    <div class="tri-item" style="text-align:center;">
+                    <div class="tri-item">
                         <h3>Visão</h3>
-                        <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+                        <div style="display:flex; flex-direction:column; gap:5px; margin-top: 15px;">
                             <span class="kw-tag hover-target">Referência Internacional</span>
                             <span class="kw-tag hover-target">Identidade Duriense</span>
                             <span class="kw-tag hover-target">Turismo Sustentável</span>
                         </div>
                     </div>
-                    <div class="tri-item" style="text-align:center;">
+                    <div class="tri-item">
                         <h3>Valores</h3>
-                        <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+                        <div style="display:flex; flex-direction:column; gap:5px; margin-top: 15px;">
                             <span class="kw-tag hover-target">Qualidade & Excelência</span>
                             <span class="kw-tag hover-target">Preservação da Tradição</span>
                             <span class="kw-tag hover-target">Respeito pela Terra</span>
@@ -680,8 +677,8 @@
                         <p>Estratégia focada no posicionamento de valor e luxo:</p>
                         <div class="price-tags" style="display:flex; flex-direction:column; gap:8px;">
                             <span>Casas & Pombais: 150€ - 250€ / Noite</span>
-                            <span>Barco: 45€ / pax | Spa Vinoterapia: 65€ / pax</span>
-                            <span>Passeio Jipe: 40€ / pax | Piquenique: 35€ / pax</span>
+                            <span>Barco: 45€ | Spa Vinoterapia: 65€</span>
+                            <span>Passeio Jipe: 40€ | Piquenique: 35€</span>
                             <span>Adega + Degustação: 35€ / pax</span>
                         </div>
                     </div>
@@ -692,24 +689,21 @@
                     </div>
                     
                     <div class="mix-card promo-card">
-                        <h3>Promoção</h3>
-                        <div style="display:flex; justify-content: space-between; gap: 20px; align-items: center;">
-                            <div style="flex:1;">
-                                <p style="margin-bottom: 15px;">Estratégia omnicanal focada na valorização da nossa identidade duriense.</p>
-                                <div style="display:flex; flex-wrap:wrap; gap:8px;">
-                                    <span class="promo-btn" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Redes Sociais</span>
-                                    <span class="promo-btn" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1556761175-5973dc0f32b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Parcerias</span>
-                                    <span class="promo-btn" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1563986768494-4dee2763ff0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Flyers & Cartões</span>
-                                    <span class="promo-btn" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1583314872846-9d554a93883a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Tote Bags</span>
-                                </div>
+                        <div class="promo-left">
+                            <h3>Promoção</h3>
+                            <p style="margin-bottom: 15px;">Estratégia omnicanal focada na valorização da nossa identidade duriense.</p>
+                            <div style="display:flex; flex-wrap:wrap;">
+                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Redes Sociais</span>
+                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1556761175-5973dc0f32b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Parcerias</span>
+                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1563986768494-4dee2763ff0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Flyers & Cartões</span>
+                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1583314872846-9d554a93883a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Tote Bags</span>
                             </div>
-                            <div style="flex:1.2; display:flex; gap:15px; align-items: stretch; justify-content: flex-end;">
-                                <img id="promo-img" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" style="width:55%; height:150px; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4); transition: all 0.4s ease;" alt="Promo">
-                                
-                                <div style="width:40%; background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); border-radius:10px; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; pointer-events:all; transition:background 0.3s;" onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'" onclick="openInsta()">
-                                    <span style="font-size:2.5rem; margin-bottom:10px;">📱</span>
-                                    <span style="font-family:'Manrope'; font-size:0.95rem; text-align:center;">Insta Oficial</span>
-                                </div>
+                        </div>
+                        <div class="promo-right">
+                            <img id="promo-img" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" style="width:55%; height:160px; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4); transition: all 0.4s ease;" alt="Estratégia">
+                            <div style="width:40%; background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); border-radius:10px; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; pointer-events:all; transition:background 0.3s;" class="hover-target" onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'" onclick="openInsta()">
+                                <span style="font-size:2.5rem; margin-bottom:10px; pointer-events:none;">📱</span>
+                                <span style="font-family:'Manrope'; font-size:0.95rem; text-align:center; pointer-events:none;">Insta Oficial</span>
                             </div>
                         </div>
                     </div>
@@ -718,7 +712,7 @@
             river_org: `
                 <h2 style="text-align: center; margin-bottom: 20px;">Estrutura Organizacional</h2>
                 <div class="org-layout">
-                    <div class="org-wrapper hover-target">
+                    <div class="org-wrapper hover-target custom-scroll">
                         <div class="org-top">
                             <div class="org-node manager" onmouseover="updateOrgInfo('Gerente', 'Responsável máximo do projeto. Gere as operações diárias, assegura a qualidade do serviço, aprova orçamentos e define a estratégia de crescimento do negócio no mercado do Douro.')">Gerente</div>
                         </div>
@@ -757,7 +751,7 @@
                         </div>
                     </div>
                     
-                    <div class="org-info-panel" id="org-info">
+                    <div class="org-info-panel custom-scroll" id="org-info">
                         <h4 id="org-info-title">Estrutura e Funções</h4>
                         <p id="org-info-desc">Passe o rato sobre os quadros organizacionais à esquerda para visualizar a descrição e responsabilidades detalhadas de cada departamento ou cargo dentro da Quinta do Paraíso.</p>
                     </div>
@@ -781,7 +775,6 @@
                             <img class="micro-slide" src="proj7.jpg" alt="Projeto 7" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+7'">
                             <img class="micro-slide" src="proj8.jpg" alt="Projeto 8" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+8'">
                             <img class="micro-slide" src="proj9.jpg" alt="Projeto 9" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+9'">
-                            <img class="micro-slide" src="proj10.jpg" alt="Projeto 10" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+10'">
                         </div>
                         <div class="slide-controls">
                             <span class="slide-dot active-dot" onclick="currentMicroSlide(0)"></span>
@@ -793,7 +786,6 @@
                             <span class="slide-dot" onclick="currentMicroSlide(6)"></span>
                             <span class="slide-dot" onclick="currentMicroSlide(7)"></span>
                             <span class="slide-dot" onclick="currentMicroSlide(8)"></span>
-                            <span class="slide-dot" onclick="currentMicroSlide(9)"></span>
                         </div>
                     </div>
                 </div>
@@ -844,6 +836,7 @@
             isModalOpen = false;
             clearInterval(microSlideInterval);
 
+            // Avança o rio automaticamente se for a aba correta e atual
             if (presentationPhase === 'river_interaction' && viewingNode === currentRiverNode) {
                 let currentNodeEl = riverNodes[currentRiverNode - 1];
                 if (currentNodeEl) currentNodeEl.classList.remove('active-node');
@@ -857,9 +850,8 @@
                         currentRiverNode++;
                     }, 800); 
                 } else {
-                    setTimeout(() => {
-                        transitionToSiteBuilder();
-                    }, 800);
+                    // Após fechar o último nó, o rio está completo e fica à espera de um comando de espaço para mostrar o Builder
+                    presentationPhase = 'ready_for_builder';
                 }
             }
         }
@@ -927,6 +919,9 @@
                     } else {
                         closeModal();
                     }
+                } else if (presentationPhase === 'ready_for_builder') {
+                    // Após acabar o rio, o próximo clique no Espaço abre o menu de gerar o site
+                    transitionToSiteBuilder();
                 }
             }
         });
