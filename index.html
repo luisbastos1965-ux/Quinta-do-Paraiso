@@ -44,14 +44,15 @@
         .wine-ripple.splash { animation: rippleEffect 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
         @keyframes rippleEffect { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; border-width: 4px; } 50% { opacity: 0.5; border-width: 2px; } 100% { transform: translate(-50%, -50%) scale(30); opacity: 0; border-width: 0px; } }
 
-        /* LOGO A ENCHER */
+        /* LOGO A ENCHER (ABRANDADO) */
         .logo-wrapper { position: relative; width: 280px; height: 280px; overflow: hidden; opacity: 0; transition: opacity 0.5s; }
         .logo-wrapper.show { opacity: 1; }
         .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.2; filter: grayscale(100%); }
         .logo-cheio-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
         .logo-cheio { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)); position: relative; z-index: 1;}
         .liquid-mask { position: absolute; left: -50%; width: 200%; height: 200%; background-color: #000; border-radius: 40%; z-index: 2; top: 0%; }
-        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
+        /* Aumentado de 2.5s para 4s */
+        .liquid-mask.animate { animation: waves 3s infinite linear, fillWine 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
         @keyframes waves { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fillWine { 0% { top: 0%; } 100% { top: -220%; } }
 
@@ -145,10 +146,10 @@
         #node-5 { top: 48%; left: 35%; } 
         #node-6 { top: 25%; left: 20%; } 
 
-        /* MODAIS DOS PONTOS DE MAPA (ALARGADO PARA 1150px) */
+        /* MODAIS DOS PONTOS DE MAPA (ALARGADO PARA 1250px) */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease, visibility 0.5s; z-index: 9990; }
         .modal-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
-        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1150px; width: 95%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); pointer-events: all; }
+        .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1250px; width: 95%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); pointer-events: all; }
         .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
         
         .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; cursor: pointer; pointer-events: all !important;}
@@ -210,11 +211,18 @@
         .mix-card h3 { color: var(--accent-color); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px;}
         .mix-card p { font-size: 0.95rem; color: #ccc; line-height: 1.7; margin-bottom: 15px; text-align: justify; }
         .promo-card { grid-column: 1 / -1; display: flex; flex-direction: row; gap: 30px; align-items: center; padding: 25px 40px !important; }
-        .price-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-        .price-tags span { background: rgba(212, 175, 55, 0.15); color: var(--accent-color); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); display: inline-block; width: 100%; box-sizing: border-box; }
+        
+        .price-list { display: flex; flex-direction: column; gap: 8px; margin-top: 15px; }
+        .price-list span { display: flex; justify-content: space-between; align-items: center; background: rgba(212, 175, 55, 0.08); padding: 8px 15px; border-radius: 8px; font-size: 0.9rem; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .price-list span b { font-weight: 600; color: #ddd; }
+        .price-list span i { color: var(--accent-color); font-style: normal; font-weight: 700; font-family: 'Cinzel'; font-size: 1rem;}
         
         .promo-btn { display: inline-block; padding: 10px 15px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 8px; font-size: 0.9rem; margin: 5px; font-family: 'Manrope', sans-serif; color: #ddd; transition: all 0.3s; cursor: pointer; pointer-events: all; text-align: center; flex: 1 1 calc(50% - 10px); box-sizing: border-box;}
         .promo-btn:hover { background: var(--accent-color); color: #000; font-weight: 600; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
+
+        .promo-content { display: none; width: 100%; height: 100%; align-items: center; justify-content: flex-end; gap: 15px; }
+        .promo-content.active { display: flex; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
 
         /* Estrutura Org e Hover Panel (ALARGADO PARA EVITAR CORTES) */
         .org-layout { display: flex; gap: 30px; align-items: stretch; margin-top: 20px; flex-wrap: nowrap; }
@@ -244,19 +252,22 @@
         .slide-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; border: 1px solid rgba(212, 175, 55, 0.5); pointer-events: all;}
         .slide-dot.active-dot { background: var(--accent-color); box-shadow: 0 0 10px var(--accent-color); transform: scale(1.2); }
 
+        /* BOTÃO CRIAR SITE (PÓS-RIO) */
+        #create-site-btn-container { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); opacity: 0; pointer-events: none; z-index: 100; transition: opacity 0.8s ease; }
+
         /* BUILDER DE SITE (Fase de Transição) */
         .builder-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.9); backdrop-filter: blur(25px); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.6s ease, visibility 0.6s; z-index: 10000; flex-direction: column; }
         .builder-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
-        .builder-content { width: 800px; text-align: center; }
+        .builder-content { width: 850px; text-align: center; }
         .builder-content h2 { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 10px; }
         .builder-content p { font-size: 1.1rem; color: #aaa; margin-bottom: 40px; }
-        .builder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-bottom: 40px;}
-        .build-option { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.3); padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: all 0.3s; cursor: none; }
+        .builder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; margin-bottom: 30px;}
+        .build-option { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.3); padding: 15px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: all 0.3s; cursor: pointer; pointer-events: all;}
         .build-option:hover, .build-option.selected { border-color: var(--accent-color); background: rgba(212, 175, 55, 0.1); }
         .build-option .checkbox { width: 24px; height: 24px; border: 2px solid var(--accent-color); border-radius: 6px; display: flex; justify-content: center; align-items: center; transition: all 0.2s; }
         .build-option.selected .checkbox { background: var(--accent-color); }
         .build-option.selected .checkbox::after { content: '✓'; color: #000; font-weight: bold; font-size: 14px;}
-        .build-option span { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; }
+        .build-option span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #fff; }
         .btn-launch { padding: 18px 50px; background: var(--accent-color); color: #000; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; border: none; border-radius: 50px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); cursor: pointer; pointer-events: all;}
         .btn-launch:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); background: #fff; }
 
@@ -381,6 +392,10 @@
         <div class="river-node hover-target" id="node-6" onclick="handleNodeClick(6, 'river_microprojeto')">
             <div class="river-dot"></div><div class="river-label">MicroProjeto</div>
         </div>
+        
+        <div id="create-site-btn-container">
+            <button class="btn-launch hover-target" onclick="transitionToSiteBuilder()">Desenvolver Plataforma Digital</button>
+        </div>
     </div>
 
     <div class="modal-overlay" id="main-modal">
@@ -468,26 +483,43 @@
             <h2>Lançamento da Plataforma</h2>
             <p>Selecione os módulos a integrar no website comercial da Quinta do Paraíso.</p>
             
-            <div class="builder-grid">
+            <button class="promo-btn hover-target" style="margin-bottom: 25px; padding: 12px 25px; background: rgba(212,175,55,0.15); border-color: var(--accent-color); color: var(--accent-color); font-weight: bold;" onclick="selectAllModules()">Selecionar Todos os Módulos</button>
+            
+            <div class="builder-grid" id="builder-options">
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div>
-                    <span>Motor de Reservas (Alojamento)</span>
+                    <div class="checkbox"></div><span>Motor de Reservas (Alojamento)</span>
                 </div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div>
-                    <span>Integração de Enoturismo (Experiências)</span>
+                    <div class="checkbox"></div><span>Integração de Enoturismo (Experiências)</span>
                 </div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div>
-                    <span>Autenticação de Cliente (Google / Firebase)</span>
+                    <div class="checkbox"></div><span>Loja Vínica & E-commerce</span>
                 </div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div>
-                    <span>Assistente IA / Chatbot de Apoio</span>
+                    <div class="checkbox"></div><span>Assistente IA (Sommelier)</span>
+                </div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
+                    <div class="checkbox"></div><span>Academia (Jogos Didáticos)</span>
+                </div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
+                    <div class="checkbox"></div><span>Testemunhos Editoriais</span>
+                </div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
+                    <div class="checkbox"></div><span>Autenticação & Contactos</span>
+                </div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
+                    <div class="checkbox"></div><span>Galeria 3D Dinâmica</span>
                 </div>
             </div>
             
-            <button class="btn-launch hover-target" onclick="window.location.href='site.html';">Gerar Website</button>
+            <div id="loading-container" style="display:none; width:100%; max-width: 600px; margin: 0 auto 30px;">
+                <p style="color:var(--accent-color); margin-bottom:10px; font-family:'Cinzel'; font-size:1.2rem; letter-spacing: 2px;">A Compilar Módulos...</p>
+                <div style="width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden;">
+                    <div id="loading-bar" style="width:0%; height:100%; background:var(--accent-color); transition: width 0.1s linear; box-shadow: 0 0 15px var(--accent-color);"></div>
+                </div>
+            </div>
+
+            <button class="btn-launch hover-target" id="btn-gerar" onclick="generateWebsite()">Gerar Website</button>
         </div>
     </div>
 
@@ -672,39 +704,64 @@
                         <p>Alojamento turístico em propriedade tradicional com vertente vitivinícola premium. Oferta de restaurante exclusivo, quartos familiares e piscinas privativas.</p>
                         <p>Infraestruturas adaptadas, postos elétricos, lavanderia e luxuoso cabaz de boas-vindas.</p>
                     </div>
-                    <div class="mix-card custom-scroll" style="background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.5);">
+                    <div class="mix-card custom-scroll">
                         <h3>Preço</h3>
                         <p>Estratégia focada no posicionamento de valor e luxo:</p>
-                        <div class="price-tags" style="display:flex; flex-direction:column; gap:8px;">
-                            <span>Casas & Pombais: 150€ - 250€ / Noite</span>
-                            <span>Barco: 45€ | Spa Vinoterapia: 65€</span>
-                            <span>Passeio Jipe: 40€ | Piquenique: 35€</span>
-                            <span>Adega + Degustação: 35€ / pax</span>
+                        <div class="price-list">
+                            <span><b>Casas & Pombais</b> <i>150€ - 250€ / Noite</i></span>
+                            <span><b>Barco Privado</b> <i>45€ / pax</i></span>
+                            <span><b>Spa Vinoterapia</b> <i>65€ / pax</i></span>
+                            <span><b>Passeio Jipe</b> <i>40€ / pax</i></span>
+                            <span><b>Piquenique</b> <i>35€ / pax</i></span>
+                            <span><b>Adega + Degustação</b> <i>35€ / pax</i></span>
                         </div>
                     </div>
                     <div class="mix-card custom-scroll">
                         <h3>Distribuição</h3>
-                        <p>Estratégia multicanal (direta e indireta). Canal primário no website oficial (motor de reservas e pagamentos).</p>
+                        <p>Estratégia multicanal (direta e indireta). Canal primário no website oficial (motor de reservas e pagamentos diretos).</p>
                         <p>Integração tática no Booking inicialmente. A longo prazo, eliminação das comissões aos intermediários.</p>
                     </div>
                     
                     <div class="mix-card promo-card">
-                        <div class="promo-left">
+                        <div style="flex:1;">
                             <h3>Promoção</h3>
                             <p style="margin-bottom: 15px;">Estratégia omnicanal focada na valorização da nossa identidade duriense.</p>
                             <div style="display:flex; flex-wrap:wrap;">
-                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Redes Sociais</span>
-                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1556761175-5973dc0f32b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Parcerias</span>
-                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1563986768494-4dee2763ff0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Flyers & Cartões</span>
-                                <span class="promo-btn hover-target" onmouseover="document.getElementById('promo-img').src='https://images.unsplash.com/photo-1583314872846-9d554a93883a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">Tote Bags</span>
+                                <span class="promo-btn hover-target" onmouseover="showPromo('p-redes')">Redes Sociais</span>
+                                <span class="promo-btn hover-target" onmouseover="showPromo('p-parcerias')">Parcerias</span>
+                                <span class="promo-btn hover-target" onmouseover="showPromo('p-flyers')">Flyers & Cartões</span>
+                                <span class="promo-btn hover-target" onmouseover="showPromo('p-totebags')">Tote Bags</span>
                             </div>
                         </div>
-                        <div class="promo-right">
-                            <img id="promo-img" src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" style="width:55%; height:160px; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4); transition: all 0.4s ease;" alt="Estratégia">
-                            <div style="width:40%; background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); border-radius:10px; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; pointer-events:all; transition:background 0.3s;" class="hover-target" onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'" onclick="openInsta()">
-                                <span style="font-size:2.5rem; margin-bottom:10px; pointer-events:none;">📱</span>
-                                <span style="font-family:'Manrope'; font-size:0.95rem; text-align:center; pointer-events:none;">Insta Oficial</span>
+                        <div style="flex:1.5; position: relative; height: 160px;">
+                            
+                            <!-- Div das Redes Sociais -->
+                            <div id="p-redes" class="promo-content active">
+                                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" style="width:50%; height:100%; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);" alt="Redes Sociais">
+                                <div style="width:40%; height:100%; background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); border-radius:10px; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; pointer-events:all; transition:background 0.3s;" class="hover-target" onmouseover="this.style.background='rgba(212,175,55,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.5)'" onclick="openInsta()">
+                                    <span style="font-size:2.5rem; margin-bottom:10px; pointer-events:none;">📱</span>
+                                    <span style="font-family:'Manrope'; font-size:0.95rem; text-align:center; pointer-events:none;">Insta Oficial</span>
+                                </div>
                             </div>
+                            
+                            <!-- Div das Parcerias -->
+                            <div id="p-parcerias" class="promo-content">
+                                <img src="par1.jpg" onerror="this.src='https://via.placeholder.com/300x150/111/D4AF37?text=Parceria+1'" style="width:32%; height:100%; border-radius:8px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
+                                <img src="par2.jpg" onerror="this.src='https://via.placeholder.com/300x150/111/D4AF37?text=Parceria+2'" style="width:32%; height:100%; border-radius:8px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
+                                <img src="par3.jpg" onerror="this.src='https://via.placeholder.com/300x150/111/D4AF37?text=Parceria+3'" style="width:32%; height:100%; border-radius:8px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
+                            </div>
+
+                            <!-- Div dos Flyers -->
+                            <div id="p-flyers" class="promo-content">
+                                <img src="flyer1.jpg" onerror="this.src='https://via.placeholder.com/300x400/111/D4AF37?text=Flyer+1'" style="width:48%; height:100%; border-radius:8px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
+                                <img src="flyer2.jpg" onerror="this.src='https://via.placeholder.com/300x400/111/D4AF37?text=Flyer+2'" style="width:48%; height:100%; border-radius:8px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
+                            </div>
+
+                            <!-- Div dos Tote Bags -->
+                            <div id="p-totebags" class="promo-content">
+                                <img src="tote.jpg" onerror="this.src='https://via.placeholder.com/400x400/111/D4AF37?text=Tote+Bag'" style="height:100%; aspect-ratio:1; border-radius:8px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -850,8 +907,12 @@
                         currentRiverNode++;
                     }, 800); 
                 } else {
-                    // Após fechar o último nó, o rio está completo e fica à espera de um comando de espaço para mostrar o Builder
+                    // Após fechar o último nó, o rio está completo e mostra o botão
                     presentationPhase = 'ready_for_builder';
+                    setTimeout(() => {
+                        document.getElementById('create-site-btn-container').style.opacity = '1';
+                        document.getElementById('create-site-btn-container').style.pointerEvents = 'all';
+                    }, 800);
                 }
             }
         }
@@ -881,7 +942,7 @@
                         document.getElementById('preloader').classList.add('hide');
                         mapaContainer.classList.add('assemble');
                         setTimeout(() => { presentationPhase = 'initial_frame'; }, 2000);
-                    }, 4500); 
+                    }, 5000); 
 
                 } else if (presentationPhase === 'initial_frame') {
                     document.getElementById('motivation').classList.add('fade-out');
@@ -920,7 +981,7 @@
                         closeModal();
                     }
                 } else if (presentationPhase === 'ready_for_builder') {
-                    // Após acabar o rio, o próximo clique no Espaço abre o menu de gerar o site
+                    // Após acabar o rio, o próximo clique no Espaço chama também a criação do site
                     transitionToSiteBuilder();
                 }
             }
@@ -954,9 +1015,38 @@
                 showMicroSlide(currentSlideIdx + 1);
             }, 4000); 
         }
+        
+        window.showPromo = function(id) {
+            document.querySelectorAll('.promo-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
 
-        function transitionToSiteBuilder() {
+        window.selectAllModules = function() {
+            document.querySelectorAll('.build-option').forEach(opt => opt.classList.add('selected'));
+        }
+
+        window.generateWebsite = function() {
+            document.getElementById('builder-options').style.display = 'none';
+            document.querySelector('.promo-btn[onclick="selectAllModules()"]').style.display = 'none';
+            document.getElementById('btn-gerar').style.display = 'none';
+            
+            document.getElementById('loading-container').style.display = 'block';
+            let bar = document.getElementById('loading-bar');
+            let w = 0;
+            let interval = setInterval(() => {
+                w += 2;
+                bar.style.width = w + '%';
+                if(w >= 100) {
+                    clearInterval(interval);
+                    window.location.href = 'site.html';
+                }
+            }, 100); 
+        }
+
+        window.transitionToSiteBuilder = function() {
             presentationPhase = 'builder';
+            document.getElementById('create-site-btn-container').style.opacity = '0';
+            document.getElementById('create-site-btn-container').style.pointerEvents = 'none';
             document.getElementById('site-builder').classList.add('active');
             updateHoverTargets();
         }
