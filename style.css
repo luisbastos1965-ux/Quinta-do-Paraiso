@@ -20,7 +20,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .map-bg-container { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; z-index: 0; transition: filter 1s ease, transform 0.8s ease; background: url('fundo_douro.jpg') center/cover no-repeat; }
 .map-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.75)); pointer-events: none; z-index: 1; transition: background 0.8s ease; }
 .map-container.menu-open .map-bg-container { filter: blur(14px) brightness(0.3); transform: scale(1.05); }
-.map-container.menu-open .map-overlay { pointer-events: all; } /* Permite clicar no fundo para fechar */
+.map-container.menu-open .map-overlay { pointer-events: all; }
 
 /* TÍTULO SUPERIOR DIREITO */
 .hero-title { position: absolute; top: 40px; right: 50px; text-align: right; z-index: 50; transition: opacity 0.5s; pointer-events: none;}
@@ -28,17 +28,16 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .hero-title p { font-size: 1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; }
 .map-container.menu-open .hero-title { opacity: 0; }
 
-/* LOGO MESTRE NO CENTRO (Aumentado para 220px) */
+/* LOGO MESTRE NO CENTRO */
 .center-logo-wrapper { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; display: flex; flex-direction: column; align-items: center; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
 .center-logo-wrapper.shift-up { top: 20% !important; transform: translate(-50%, 0) scale(0.85); }
 .map-container.menu-open .center-logo-wrapper { opacity: 0 !important; visibility: hidden; pointer-events: none; transform: translate(-50%, -50%) scale(0); }
 .master-logo { width: 220px; filter: drop-shadow(0px 0px 35px rgba(212, 175, 55, 0.7)); transition: all 0.5s ease; pointer-events: all; }
 .master-logo:hover { transform: scale(1.08); filter: drop-shadow(0px 0px 50px rgba(212, 175, 55, 1)); }
 
-/* FLOQUINHO GEOMÉTRICO (Esferas Douradas Mágicas) */
+/* FLÓCOS MÁGICOS NO DOURO */
 .float-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 40; transition: opacity 0.5s; pointer-events: none; }
 .map-container.menu-open .float-container { opacity: 0; pointer-events: none !important; }
-
 .lone-icon { position: absolute; width: 15px; height: 15px; background: radial-gradient(circle, #fff 0%, var(--accent-color) 40%, transparent 100%); border-radius: 50%; pointer-events: all; transition: transform 0.4s ease, opacity 0.4s, box-shadow 0.3s; box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color); cursor: pointer; opacity: 0.7; }
 .lone-icon:hover { transform: scale(2) !important; z-index: 60; box-shadow: 0 0 25px #fff, 0 0 50px var(--accent-color); opacity: 1; }
 .lone-icon.flee { transform: scale(0) translate(100px, -100px) !important; opacity: 0 !important; pointer-events: none; }
@@ -131,7 +130,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .wine-bottle-img { height: 200px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)); transition: transform 0.4s; }
 .flip-card-front:hover .wine-bottle-img { transform: scale(1.08); }
 .wine-type { color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
-.wine-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #fff; margin-bottom: 15px; }
+.wine-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #fff; margin-bottom: 15px; line-height: 1.2;}
 .wine-price { font-size: 1.6rem; color: var(--accent-color); font-weight: 700; font-family: 'Cinzel', serif; }
 .flip-card-back h4 { color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 15px; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 10px; width: 100%; }
 .flip-card-back p { font-size: 0.95rem; color: #ccc; line-height: 1.6; margin-bottom: 25px; text-align: justify; }
@@ -151,16 +150,27 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .menu-item-info p { color: #aaa; font-size: 0.9rem; line-height: 1.4; }
 .menu-item-price { font-size: 1.2rem; font-family: 'Cinzel'; font-weight: bold; color: #fff; }
 
-/* ================= SERVIÇOS & RESERVAS PREMIUM ================= */
-.services-luxury-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-top: 30px; max-width: 1050px; margin-left: auto; margin-right: auto; }
-.service-item { display: flex; align-items: center; gap: 20px; background: rgba(10,10,10,0.8); border: 1px solid rgba(212,175,55,0.2); padding: 25px; border-radius: 15px; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: all; }
-.service-item:hover { border-color: var(--accent-color); transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 30px rgba(212,175,55,0.15); background: rgba(212,175,55,0.05); }
+/* ================= SERVIÇOS (ACORDEÃO E 3 COLUNAS) ================= */
+.services-luxury-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+.service-item { display: flex; flex-direction: column; align-items: stretch; justify-content: center; background: rgba(10,10,10,0.8); border: 1px solid rgba(212,175,55,0.2); padding: 25px; border-radius: 15px; transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: all; cursor: pointer; text-align: left; }
+.service-item:hover { border-color: var(--accent-color); background: rgba(212,175,55,0.05); }
+.service-item.active { background: rgba(212,175,55,0.1); border-color: var(--accent-color); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(212,175,55,0.15); }
+
+.si-header { display: flex; align-items: center; gap: 20px; width: 100%; }
 .si-icon { font-size: 2.8rem; filter: drop-shadow(0 0 10px rgba(212,175,55,0.4)); transition: transform 0.4s; }
 .service-item:hover .si-icon { transform: scale(1.15) rotate(5deg); }
-.si-details { text-align: left; }
+.si-details { flex: 1; }
 .si-details h4 { color: #fff; font-family: 'Cinzel', serif; font-size: 1.2rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);}
 .si-details p { color: var(--accent-color); font-size: 0.95rem; font-weight: 600; font-family: 'Manrope', sans-serif; letter-spacing: 1px; }
 
+.si-extra-info { display: none; margin-top: 15px; font-size: 0.95rem; color: #bbb; border-top: 1px dashed rgba(212,175,55,0.3); padding-top: 15px; line-height: 1.6; }
+.service-item.active .si-extra-info { display: block; animation: fadeInExtra 0.4s ease; }
+@keyframes fadeInExtra { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* A Visita Completa ocupa a linha toda */
+.service-highlight { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,0,0,0.8)); border-color: rgba(212,175,55,0.6); }
+
+/* ================= RESERVAS PREMIUM (DARK MODE) ================= */
 .booking-split { display: flex; gap: 0; background: linear-gradient(135deg, rgba(20,20,20,0.9), rgba(5,5,5,0.95)); border: 1px solid rgba(212,175,55,0.3); border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); pointer-events: all; max-width: 1000px; margin: 0 auto; }
 .booking-img-side { flex: 1; background: url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover; position: relative; }
 .booking-img-side::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to right, transparent, rgba(10,10,10,0.9)); }
@@ -169,8 +179,25 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .input-group { display: flex; flex-direction: column; gap: 8px; pointer-events: all; grid-column: span 1;}
 .input-group.full { grid-column: span 2; }
 .input-group label { color: var(--accent-color); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+
+/* Customização dos Inputs nativos para Dark Mode Luxuoso */
 .input-group input, .input-group select, .input-group textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 15px; border-radius: 8px; font-family: 'Manrope', sans-serif; font-size: 1rem; transition: all 0.3s; pointer-events: all;}
 .input-group input:focus, .input-group select:focus, .input-group textarea:focus { border-color: var(--accent-color); outline: none; background: rgba(212,175,55,0.05); }
+
+/* Calendários em Dark Mode */
+.input-group input[type="date"] { color-scheme: dark; }
+.input-group input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; filter: invert(0.8) sepia(1) hue-rotate(5deg) saturate(3) brightness(1.5); }
+
+/* Select (Dropdown) personalizado */
+.input-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23D4AF37%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px top 50%;
+    background-size: 12px auto;
+}
+.input-group select option { background-color: #111; color: #D4AF37; font-weight: 600; padding: 15px; }
+
 
 /* ================= CONTACTOS (MENSAGEM DIRETA) ================= */
 .contacts-wrapper { display: flex; gap: 40px; justify-content: center; text-align: left; max-width: 1100px; margin: 0 auto; align-items: stretch; }
@@ -240,4 +267,3 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 @keyframes ping { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
 @keyframes aiBreathe { 0% { transform: scale(0.95); box-shadow: 0 0 50px var(--accent-color); } 100% { transform: scale(1.05); box-shadow: 0 0 100px var(--accent-color); } }
-</style>
