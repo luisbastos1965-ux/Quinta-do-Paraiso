@@ -133,64 +133,59 @@ const sectionData = {
     `,
     servicos: `
         <h2 class="modal-title">Atividades & Serviços</h2>
-        <p class="modal-text">Experiências imersivas desenhadas para despertar os sentidos no Alto Douro Vinhateiro. Clique nas opções abaixo para descobrir mais.</p>
+        <p class="modal-text">Experiências imersivas desenhadas para despertar os sentidos no Alto Douro Vinhateiro. Clique nas atividades para saber mais.</p>
         <div class="services-luxury-grid">
-            <div class="service-item hover-target" onclick="toggleService(this)">
-                <div class="si-header">
-                    <div class="si-icon">🚤</div>
-                    <div class="si-details"><h4>Passeio de Barco</h4><p>1h30 <span>•</span> 45€ / pax</p></div>
+            <div class="service-item" onclick="this.classList.toggle('expanded')">
+                <div class="si-icon">🚤</div>
+                <div class="si-details">
+                    <h4>Passeio de Barco no Rio Douro</h4>
+                    <p>1h30 <span>•</span> 45€ / pax</p>
+                    <div class="si-extra">Navegue pelas águas calmas do Douro num barco rabelo privado. Inclui prova de vinhos a bordo e paragem num cais secreto para fotografias fantásticas.</div>
                 </div>
-                <div class="si-extra-info">Navegue pelas águas serenas do Douro num barco rabelo privado, acompanhado de um cálice do nosso melhor vinho do Porto enquanto o sol se põe.</div>
+                <div class="si-chevron">▼</div>
             </div>
-            <div class="service-item hover-target" onclick="toggleService(this)">
-                <div class="si-header">
-                    <div class="si-icon">🚙</div>
-                    <div class="si-details"><h4>Passeio de Jipe</h4><p>2h00 <span>•</span> 40€ / pax</p></div>
+            <div class="service-item" onclick="this.classList.toggle('expanded')">
+                <div class="si-icon">🚙</div>
+                <div class="si-details">
+                    <h4>Passeio de Jipe pelas Vinhas</h4>
+                    <p>2h00 <span>•</span> 40€ / pax</p>
+                    <div class="si-extra">Aventure-se pelos socalcos mais altos da quinta num veículo todo-o-terreno. A melhor forma de ver o pôr-do-sol entre as videiras centenárias.</div>
                 </div>
-                <div class="si-extra-info">Explore os socalcos mais íngremes e os miradouros secretos da quinta numa aventura todo-o-terreno inesquecível pelo nosso terroir.</div>
+                <div class="si-chevron">▼</div>
             </div>
-            <div class="service-item hover-target" onclick="toggleService(this)">
-                <div class="si-header">
-                    <div class="si-icon">🧺</div>
-                    <div class="si-details"><h4>Piquenique na Vinha</h4><p>Até 3h00 <span>•</span> 35€ / pax</p></div>
+            <div class="service-item" onclick="this.classList.toggle('expanded')">
+                <div class="si-icon">🧺</div>
+                <div class="si-details">
+                    <h4>Piquenique na Vinha</h4>
+                    <p>Até 3h00 <span>•</span> 35€ / pax</p>
+                    <div class="si-extra">Preparamos um cesto luxuoso com queijos, enchidos regionais e pão rústico, harmonizado com o nosso melhor vinho, num cenário idílico isolado.</div>
                 </div>
-                <div class="si-extra-info">Desfrute de uma cesta recheada de iguarias regionais sob a sombra das oliveiras seculares, com o conforto de mantas e almofadas no coração da vinha.</div>
+                <div class="si-chevron">▼</div>
             </div>
-            <div class="service-item hover-target" onclick="toggleService(this)">
-                <div class="si-header">
-                    <div class="si-icon">🧖‍♀️</div>
-                    <div class="si-details"><h4>Spa de Vinoterapia</h4><p>1h00 <span>•</span> 65€ / pax</p></div>
+            <div class="service-item" onclick="this.classList.toggle('expanded')">
+                <div class="si-icon">🧖‍♀️</div>
+                <div class="si-details">
+                    <h4>Spa de Vinoterapia</h4>
+                    <p>1h00 <span>•</span> 65€ / pax</p>
+                    <div class="si-extra">Tratamentos de relaxamento profundo utilizando as propriedades antioxidantes das nossas uvas. Um renascer do corpo e da mente.</div>
                 </div>
-                <div class="si-extra-info">Tratamentos exclusivos e relaxantes utilizando as propriedades antioxidantes das sementes de uva, garantindo uma revitalização profunda do corpo e da mente.</div>
+                <div class="si-chevron">▼</div>
             </div>
-            <div class="service-item hover-target" onclick="toggleService(this)">
-                <div class="si-header">
-                    <div class="si-icon">🏺</div>
-                    <div class="si-details"><h4>Visita à Adega</h4><p>45 min <span>•</span> 15€ / pax</p></div>
+            <div class="service-item service-highlight" onclick="this.classList.toggle('expanded')">
+                <div class="si-icon">🍇</div>
+                <div class="si-details">
+                    <h4>Visita à Adega + Degustação</h4>
+                    <p>1h30 <span>•</span> 35€ / pax</p>
+                    <div class="si-extra">Uma visita guiada ao coração da nossa produção. Desça às caves antigas, entenda o nosso processo de estágio em barrica e termine com uma prova de 3 vinhos Reserva acompanhados de iguarias durienses.</div>
                 </div>
-                <div class="si-extra-info">Conheça os lagares de granito e a cave escura onde as barricas de carvalho francês descansam. Onde o tempo e a tradição moldam os nossos vinhos.</div>
-            </div>
-            <div class="service-item hover-target" onclick="toggleService(this)">
-                <div class="si-header">
-                    <div class="si-icon">🍷</div>
-                    <div class="si-details"><h4>Degustação Premium</h4><p>1h00 <span>•</span> 25€ / pax</p></div>
-                </div>
-                <div class="si-extra-info">Uma prova detalhada e comentada pelos nossos enólogos, explorando as nuances e os aromas das colheitas mais emblemáticas da nossa propriedade.</div>
-            </div>
-            
-            <div class="service-item service-highlight hover-target" onclick="toggleService(this)">
-                <div class="si-header" style="justify-content: center;">
-                    <div class="si-icon">🍇</div>
-                    <div class="si-details" style="flex: none; text-align: center;"><h4>A Experiência Completa: Visita à Adega + Degustação</h4><p>1h30 <span>•</span> 35€ / pax</p></div>
-                </div>
-                <div class="si-extra-info" style="text-align: center;">O programa definitivo. Acompanhe todo o processo de vinificação e termine na sala de provas com uma seleção dos nossos Grandes Reservas perfeitamente harmonizada com uma tábua de enchidos finos e queijos artesanais da região.</div>
+                <div class="si-chevron">▼</div>
             </div>
         </div>
     `,
     loja: `
         <h2 class="modal-title">Garrafeira Haute Couture</h2>
-        <p class="modal-text">A seleção oficial da nossa cave. Passe o rato sobre as garrafas para descobrir as notas de prova exclusivas.</p>
-        <div class="shop-grid">
+        <p class="modal-text">A seleção oficial da nossa cave. Passe o rato sobre as garrafas para descobrir as notas de prova.</p>
+        <div class="shop-grid custom-scroll">
             <div class="flip-card hover-target">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -200,7 +195,7 @@ const sectionData = {
                     </div>
                     <div class="flip-card-back">
                         <h4>Notas de Prova</h4>
-                        <p>Fresco e elegante, marcado por aromas intensos de framboesa e morango silvestre. Final de boca persistente, sendo o parceiro ideal para pratos leves ou um final de tarde de verão.</p>
+                        <p>Fresco e elegante, marcado por aromas de framboesa e morango silvestre. Final de boca persistente, ideal para pratos leves ou aperitivo ao pôr do sol.</p>
                         <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/tavedo-rose/', '_blank')">Comprar Agora</button>
                     </div>
                 </div>
@@ -214,7 +209,7 @@ const sectionData = {
                     </div>
                     <div class="flip-card-back">
                         <h4>Notas de Prova</h4>
-                        <p>Notas cítricas e florais num blend excecional de Rabigato e Viosinho. A sua acidez vibrante e textura equilibrada harmonizam na perfeição com pratos de peixe grelhado e marisco.</p>
+                        <p>Notas cítricas e florais num blend excecional de Rabigato e Viosinho. A acidez vibrante harmoniza na perfeição com pratos de peixe e marisco.</p>
                         <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/burmester-branco/', '_blank')">Comprar Agora</button>
                     </div>
                 </div>
@@ -224,11 +219,11 @@ const sectionData = {
                     <div class="flip-card-front">
                         <img src="Vinho3.png" alt="Casa Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho3'">
                         <span class="wine-type">Branco Reserva</span><h4 class="wine-name">Casa Branco</h4>
-                        <p class="wine-price">28.00€</p>
+                        <p class="wine-price">35.00€</p>
                     </div>
                     <div class="flip-card-back">
                         <h4>Notas de Prova</h4>
-                        <p>Estágio sobre borras finas com batonnage. Aromas complexos de fruta de caroço madura e leves notas de tosta fina e baunilha. Untuoso, elegante e incrivelmente persistente.</p>
+                        <p>Vinho Branco Reserva com estágio em madeira. Acidez equilibrada com elegantes notas de baunilha e frutos de polpa branca. Muito gastronómico.</p>
                         <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/casa-burmester-branco/', '_blank')">Comprar Agora</button>
                     </div>
                 </div>
@@ -242,7 +237,7 @@ const sectionData = {
                     </div>
                     <div class="flip-card-back">
                         <h4>Notas de Prova</h4>
-                        <p>A rainha das castas a brilhar a solo. Estágio de 12 meses em barrica de carvalho francês. Desvenda notas de violeta, chocolate negro e taninos sedosos. Potencial de guarda imenso.</p>
+                        <p>A rainha das castas a brilhar. Estágio de 12 meses em barrica de carvalho francês. Notas de violeta, chocolate negro e taninos sedosos. Potencial de guarda elevado.</p>
                         <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/casa-burmester-touriga-nacional-2018/', '_blank')">Comprar Agora</button>
                     </div>
                 </div>
@@ -252,11 +247,11 @@ const sectionData = {
                     <div class="flip-card-front">
                         <img src="Vinho5.png" alt="Casa Tinto" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho5'">
                         <span class="wine-type">Tinto</span><h4 class="wine-name">Casa Tinto</h4>
-                        <p class="wine-price">25.00€</p>
+                        <p class="wine-price">28.00€</p>
                     </div>
                     <div class="flip-card-back">
                         <h4>Notas de Prova</h4>
-                        <p>O blend tradicional duriense por excelência. Vinho jovem, vibrante e cheio de explosão de fruta vermelha madura e esteva. A companhia perfeita e versátil para carnes brancas ou queijos curados.</p>
+                        <p>Tinto clásico duriense. Fruta vermelha madura com nuances de especiarias y toques balsâmicos. Perfeito para acompanhar pratos de carne no forno.</p>
                         <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/casa-burmester-tinto/', '_blank')">Comprar Agora</button>
                     </div>
                 </div>
@@ -266,11 +261,11 @@ const sectionData = {
                     <div class="flip-card-front">
                         <img src="Vinho6.png" alt="Tawny Clássico" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho6'">
                         <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Tawny Clássico</h4>
-                        <p class="wine-price">35.00€</p>
+                        <p class="wine-price">32.00€</p>
                     </div>
                     <div class="flip-card-back">
                         <h4>Notas de Prova</h4>
-                        <p>Lentamente envelhecido em velhos cascos de carvalho. Apresenta uma cor âmbar rica, com deliciosos e quentes aromas de frutos secos, figo, caramelo e um subtil toque de baunilha.</p>
+                        <p>Envelhecido em cascos de carvalho na tranquilidade da cave. Notas intensas de frutos secos, caramelo e um toque final de laranjeira. Ideal para sobremesas.</p>
                         <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/burmester-tawny-port/', '_blank')">Comprar Agora</button>
                     </div>
                 </div>
@@ -284,7 +279,7 @@ const sectionData = {
                     </div>
                     <div class="flip-card-back">
                         <h4>Notas de Prova</h4>
-                        <p>A joia da coroa. Um Porto Vintage nascido de um ano de colheita absolutamente excecional. Estrutura profunda, sabores opulentes de frutos pretos compotados, especiarias e urze. Um vinho memorável.</p>
+                        <p>A joia da coroa. Um Porto Vintage de colheita excecional. Estrutura profunda, sabores intensos de frutos pretos compotados e especiarias. Memorável.</p>
                         <button class="btn-buy hover-target" onclick="window.open('https://burmester.pt/vinhos/vintage-2018-quinta-do-arnozelo/', '_blank')">Comprar Agora</button>
                     </div>
                 </div>
@@ -328,7 +323,7 @@ const sectionData = {
                 <div class="menu-category">
                     <h3>Doçura Final</h3>
                     <div class="menu-item hover-target">
-                        <div class="menu-item-info"><h4>Pêra Bêbada</h4><p>Pêra rocha escalfada em tinto jovem, acompanhada de gelado de baunilha.</p></div>
+                        <div class="menu-item-info"><h4>Pêra Bêbada</h4><p>Pêra rocha escalfada em tinto jovem, com gelado de baunilha.</p></div>
                         <div class="menu-item-price">10€</div>
                     </div>
                     <div class="menu-item hover-target">
@@ -374,11 +369,11 @@ const sectionData = {
                         <div class="input-group">
                             <label>Tipologia do Refúgio</label>
                             <select required>
-                                <option value="" disabled selected>Selecione a sua morada de descanso...</option>
+                                <option value="" disabled selected>Escolha o seu alojamento...</option>
                                 <option value="branco">Casa Branco (Familiar, Vista Rio)</option>
-                                <option value="tinto">Casa Tinto (Premium, Lareira Central)</option>
-                                <option value="pombal1">Pombal Vintage (Isolado, Piscina Privada)</option>
-                                <option value="pombal2">Pombal Reserva (Isolado, Deck Privativo)</option>
+                                <option value="tinto">Casa Tinto (Premium, Lareira)</option>
+                                <option value="pombal1">Pombal Vintage (Piscina Privada)</option>
+                                <option value="pombal2">Pombal Reserva (Piscina Privada)</option>
                             </select>
                         </div>
                     </div>
@@ -399,7 +394,7 @@ const sectionData = {
             
             <div class="contact-form-box">
                 <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 20px; font-size: 1.4rem;">Envie-nos uma Mensagem</h3>
-                <form onsubmit="event.preventDefault(); alert('A sua mensagem foi enviada com sucesso! Responderemos num prazo máximo de 24h.');">
+                <form onsubmit="event.preventDefault(); alert('A sua mensagem foi enviada com sucesso! Responderemos num prazo de 24h.');">
                     <div class="input-group full" style="margin-bottom: 15px;">
                         <input type="text" required placeholder="O seu Nome">
                     </div>
@@ -410,7 +405,7 @@ const sectionData = {
                         <input type="text" required placeholder="Assunto da Mensagem">
                     </div>
                     <div class="input-group full" style="margin-bottom: 20px;">
-                        <textarea rows="4" required placeholder="Como podemos ajudar a planear a sua visita perfeita?"></textarea>
+                        <textarea rows="4" required placeholder="Como podemos ajudar a planear a sua estadia?"></textarea>
                     </div>
                     <button type="submit" class="btn-submit hover-target" style="width: 100%; padding: 12px;">Enviar Mensagem ✉️</button>
                 </form>
@@ -422,60 +417,55 @@ const sectionData = {
         </div>
     `,
     jogos: `
-        <h2 class="modal-title">A Jornada da Vindima</h2>
+        <h2 class="modal-title">Academia: A Jornada do Vinho</h2>
         <div class="game-zone">
             
-            <!-- FASE 1: Colheita -->
             <div id="vindima-1" class="vindima-stage active">
                 <div class="stage-icon">✂️</div>
                 <h3 class="stage-title">Fase 1: A Colheita Manual</h3>
-                <p class="stage-desc">As uvas Touriga Nacional atingiram a maturação perfeita sob o sol do Douro. Clique nos 4 cachos maduros para encher os cestos de vime e avançar!</p>
+                <p class="stage-desc">As uvas Touriga Nacional atingiram a maturação perfeita. Clique nas 4 uvas maduras para encher os cestos e avançar!</p>
                 <div class="interactive-game-area" id="grape-area">
-                    <span class="game-item grape" onclick="clickGrape(this)">🍇</span>
-                    <span class="game-item grape" onclick="clickGrape(this)">🍇</span>
-                    <span class="game-item grape" onclick="clickGrape(this)">🍇</span>
-                    <span class="game-item grape" onclick="clickGrape(this)">🍇</span>
+                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
+                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
+                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
+                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
                 </div>
             </div>
 
-            <!-- FASE 2: Pisar -->
             <div id="vindima-2" class="vindima-stage">
                 <div class="stage-icon">🦶</div>
                 <h3 class="stage-title">Fase 2: A Pisar no Lagar</h3>
-                <p class="stage-desc">Aqui respeitamos a tradição e tudo começa nos lagares de granito. Clique repetidamente no lagar para esmagar as uvas com os pés e libertar o precioso mosto.</p>
+                <p class="stage-desc">A tradição manda pisar a pé! Clique no lagar várias vezes para esmagar as uvas e extrair o mosto.</p>
                 <div class="interactive-game-area" style="flex-direction: column;">
                     <div class="game-progress-bar"><div class="game-progress-fill" id="lagar-bar"></div></div>
-                    <span class="game-item" onclick="clickLagar()" style="font-size: 5rem;">🏺</span>
+                    <span class="game-item hover-target" onclick="clickLagar()" style="font-size: 5rem;">🏺</span>
                 </div>
             </div>
 
-            <!-- FASE 3: Fermentação -->
             <div id="vindima-3" class="vindima-stage">
                 <div class="stage-icon">🌡️</div>
-                <h3 class="stage-title">Fase 3: Fermentação Alcoólica</h3>
-                <p class="stage-desc">Com a temperatura controlada, o açúcar das uvas transforma-se lentamente em álcool. Inicie o processo e aguarde que as leveduras façam a sua magia.</p>
-                <button class="btn-submit" id="btn-fermentar" onclick="startFermentation()">Iniciar Fermentação</button>
-                <div class="interactive-game-area" style="margin-top: 20px; min-height: auto;">
+                <h3 class="stage-title">Fase 3: Fermentação</h3>
+                <p class="stage-desc">O açúcar transforma-se em álcool. Inicie o processo e aguarde que as leveduras façam a sua magia.</p>
+                <button class="btn-submit hover-target" id="btn-fermentar" onclick="startFermentation()">Iniciar Fermentação</button>
+                <div class="interactive-game-area" style="margin-top: 20px;">
                     <div class="game-progress-bar"><div class="game-progress-fill" id="ferment-bar"></div></div>
                 </div>
             </div>
 
-            <!-- FASE 4: Estágio -->
             <div id="vindima-4" class="vindima-stage">
                 <div class="stage-icon">🪵</div>
                 <h3 class="stage-title">Fase 4: Estágio em Barrica</h3>
-                <p class="stage-desc">O vinho precisa agora de descansar no escuro e ganhar corpo, aromas e textura. Clique na barrica de carvalho francês para selá-la e iniciar o seu estágio.</p>
+                <p class="stage-desc">O vinho precisa de descansar e ganhar corpo. Clique na barrica de carvalho francês para selar e iniciar o estágio.</p>
                 <div class="interactive-game-area">
-                    <span class="game-item" onclick="advanceVindima(5)" style="font-size: 6rem;">🛢️</span>
+                    <span class="game-item hover-target" onclick="advanceVindima(5)" style="font-size: 6rem;">🛢️</span>
                 </div>
             </div>
 
-            <!-- FASE 5: Engarrafar -->
             <div id="vindima-5" class="vindima-stage">
                 <div class="stage-icon">🍷</div>
-                <h3 class="stage-title">Fase 5: Sucesso! É tempo de provar.</h3>
-                <p class="stage-desc">Parabéns! Dominou todos os processos de vinificação da Quinta do Paraíso. O seu vinho Grande Reserva está engarrafado e pronto a ser servido na nossa sala de provas.</p>
-                <button class="btn-submit" onclick="resetVindima()">Nova Colheita</button>
+                <h3 class="stage-title">Fase 5: Sucesso!</h3>
+                <p class="stage-desc">Parabéns! Dominou o processo de vinificação da Quinta do Paraíso. O seu vinho Grande Reserva está pronto a servir.</p>
+                <button class="btn-submit hover-target" onclick="resetVindima()">Jogar Novamente</button>
             </div>
 
         </div>
@@ -503,8 +493,8 @@ const sectionData = {
         <div class="reviews-wrapper" id="reviews-container">
             <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!"</p><p class="rev-author">— Sarah T., Londres</p></div>
             <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados."</p><p class="rev-author">— João P., Lisboa</p></div>
-            <div class="review-card r4"><div class="rev-stars">⭐⭐⭐⭐</div><p class="rev-text">"Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros baixos."</p><p class="rev-author">— Manuel G., Porto</p></div>
-            <div class="review-card r3"><div class="rev-stars">⭐⭐⭐</div><p class="rev-text">"A paisagem é incrivel, a adega é soberba, mas choveu a semana toda infelizmente."</p><p class="rev-author">— Carlos C., Braga</p></div>
+            <div class="review-card show r4"><div class="rev-stars">⭐⭐⭐⭐</div><p class="rev-text">"Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros baixos."</p><p class="rev-author">— Manuel G., Porto</p></div>
+            <div class="review-card show r3"><div class="rev-stars">⭐⭐⭐</div><p class="rev-text">"A paisagem é incrivel, a adega é soberba, mas choveu a semana toda infelizmente."</p><p class="rev-author">— Carlos C., Braga</p></div>
         </div>
     `,
     mural: `
@@ -541,12 +531,6 @@ window.closeSection = function() {
     modalOverlay.classList.remove('active');
 }
 
-// Expansão do Acordeão de Atividades
-window.toggleService = function(element) {
-    element.classList.toggle('active');
-    updateHoverTargets();
-}
-
 // ==========================================================================
 // 5. REVIEWS E LIGHTBOX
 // ==========================================================================
@@ -569,7 +553,7 @@ window.filterRev = function(stars) {
     if(targetCards.length > 0) { 
         targetCards.forEach(card => card.classList.add('show')); 
     } else { 
-        document.getElementById('reviews-container').innerHTML += `<p class="rev-text r-temp" style="text-align:center; color:#888;">Ainda não existem avaliações de ${stars} estrelas. A excelência é a nossa regra!</p>`;
+        document.getElementById('reviews-container').innerHTML += `<p class="rev-text r-temp" style="text-align:center; color:#888;">Ainda não existem avaliações de ${stars} estrelas.</p>`;
     }
 }
 
@@ -624,24 +608,28 @@ window.resetVindima = function() {
 }
 
 // ==========================================================================
-// 7. SOMMELIER IA
+// 7. SOMMELIER IA (CÉREBRO DO SITE - GUIA DE NAVEGAÇÃO E PRÉ-ESTADIA)
 // ==========================================================================
 const aiInterface = document.getElementById('ai-interface');
 const aiMessage = document.getElementById('ai-message');
-const aiTextMap = {
-    "Que vinho acompanha bem polvo à lagareiro?": "Para a textura rica e o alho do polvo à lagareiro, recomendo vivamente o nosso Reserva Branco. A sua acidez equilibrada corta a gordura do azeite na perfeição.",
-    "Quais as atividades relaxantes para amanhã?": "Amanhã as temperaturas estão perfeitas. Sugiro começar com o pequeno-almoço no terraço, seguido de uma sessão de relaxamento no nosso Spa de Vinoterapia.",
-    "Conta-me a história do vosso vinho Reserva.": "O nosso Reserva é uma homenagem à família. Nasce das vinhas mais antigas da propriedade em socalcos de xisto, e estagia 12 meses em barrica francesa.",
-    "Qual a melhor altura do ano para visitar as vinhas?": "A altura das vindimas, entre setembro e outubro, oferece a vivência mais rica, autêntica e aromática de todo o ecossistema da nossa quinta.",
-    "Aceitam crianças na Quinta?": "Absolutamente. Desenvolvemos o módulo Academia da Vinha com jogos didáticos seguros para que toda a família possa aproveitar o Douro.",
-    "Qual o melhor vinho para acompanhar uma sobremesa doce?": "Sem dúvida o nosso Vintage de Colheita Tardia. As suas notas de figos secos harmonizam de forma celestial com doçaria tradicional.",
-    "Como funcionam as provas de vinho na adega?": "As provas são guiadas pela nossa Sommelier. Ocorrem diariamente às 15 horas na adega antiga e incluem uma degustação rigorosa de três referências com queijos locais."
-};
+
+const siteBrain = [
+    { k: ['reserva', 'reservar', 'quarto', 'dormir', 'preço', 'alojamento', 'tarifa', 'estadia'], r: "Para garantir o seu refúgio, feche este assistente e selecione a carta 'Reservas' no carrossel central. Lá encontrará as nossas tipologias e o formulário de marcação." },
+    { k: ['vinho', 'loja', 'comprar', 'garrafa', 'rosé', 'branco', 'tinto', 'porto', 'compras'], r: "A nossa Garrafeira Haute Couture encontra-se na secção 'Loja Vínica' do menu principal. Pode rodar as garrafas em 3D para ler as notas de prova e encomendar." },
+    { k: ['restaurante', 'comer', 'jantar', 'almoço', 'menu', 'prato', 'fome', 'gastronomia'], r: "Servimos alta gastronomia com sabores durienses. Feche a IA e abra a carta 'Restaurante' no menu rotativo para descobrir a nossa carta de degustação e respetivos valores." },
+    { k: ['atividade', 'barco', 'jipe', 'spa', 'prova', 'massagem', 'piscina', 'tour'], r: "Temos dezenas de experiências imersivas, desde passeios no rio a provas na adega. Descubra os detalhes e preçários clicando na carta 'Atividades' no carrossel central." },
+    { k: ['onde fica', 'localização', 'morada', 'contactos', 'falar', 'mensagem', 'mapa', 'telefone', 'email'], r: "A Quinta do Paraíso fica no coração do Alto Douro, em Foz Côa. Pode consultar o nosso mapa interativo e enviar-nos uma mensagem direta selecionando a carta 'Contactos'." },
+    { k: ['quem', 'história', 'dona', 'gerente', 'sobre', 'família'], r: "Somos um projeto familiar com raízes profundas na região. Conheça a nossa história e a biografia da nossa fundadora abrindo a secção 'Quem Somos'." },
+    { k: ['jogo', 'vindima', 'academia', 'jogar', 'interativo'], r: "Quer testar as suas capacidades vitivinícolas? Feche o assistente e clique na carta 'Academia' para jogar à nossa Jornada Interativa da Vindima em 5 fases!" },
+    { k: ['testemunho', 'review', 'avaliação', 'opinião', 'estrelas', 'comentários'], r: "Gostamos de total transparência. Pode ler as opiniões reais de quem já nos visitou filtrando por estrelas na secção 'Testemunhos'." },
+    { k: ['galeria', 'fotos', 'imagens', 'ver', 'fotografia'], r: "Pode explorar os nossos espaços em alta definição. Selecione a carta 'Galeria' no carrossel para aceder a uma amostra 3D dinâmica da nossa quinta." }
+];
+
+const siteDefaultResp = "Sou o guia digital da plataforma. Posso ajudá-lo a encontrar reservas, o menu do restaurante, a loja de vinhos ou detalhes sobre as atividades no nosso site.";
 
 window.openAI = function() {
     aiInterface.classList.add('active');
-    let welcome = "Olá. Sou a assistente de Inteligência Artificial da Quinta do Paraíso. Em que posso ajudar a harmonizar o seu dia?";
-    aiMessage.innerText = `"${welcome}"`;
+    aiMessage.innerText = '"Olá. Sou o guia digital da plataforma. O que procura ou gostaria de saber sobre o nosso refúgio?"';
     if('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
 
@@ -651,25 +639,46 @@ window.closeAI = function() {
 }
 
 window.askAI = function(q) {
+    if(!q) return;
     if('speechSynthesis' in window) window.speechSynthesis.cancel();
     aiMessage.style.opacity = 0;
     
     setTimeout(() => {
         aiMessage.style.color = "var(--accent-color)";
-        aiMessage.innerHTML = "A processar harmonização de dados...";
+        aiMessage.innerHTML = "A pesquisar na plataforma...";
         aiMessage.style.opacity = 1;
         
         setTimeout(() => {
+            const pNormalizada = q.toLowerCase();
+            let respostaEncontrada = siteDefaultResp;
+
+            for (let i = 0; i < siteBrain.length; i++) {
+                if (siteBrain[i].k.some(kw => pNormalizada.includes(kw))) {
+                    respostaEncontrada = siteBrain[i].r;
+                    break;
+                }
+            }
+
             aiMessage.style.opacity = 0;
             setTimeout(() => {
                 aiMessage.style.color = "#fff";
-                aiMessage.innerHTML = `"${aiTextMap[q]}"`;
+                aiMessage.innerHTML = `"${respostaEncontrada}"`;
                 aiMessage.style.opacity = 1;
-                speakText(aiTextMap[q]); 
+                
+                const inputEl = document.getElementById('ai-input');
+                if(inputEl) inputEl.value = '';
+                
+                speakText(respostaEncontrada); 
             }, 400);
-        }, 1200);
+        }, 1000);
     }, 300);
 }
+
+document.getElementById('ai-input')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        askAI(this.value);
+    }
+});
 
 function speakText(txt) {
     if ('speechSynthesis' in window) {
@@ -685,10 +694,6 @@ function speakText(txt) {
         
         window.speechSynthesis.speak(utter);
     }
-}
-
-if ('speechSynthesis' in window) {
-    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
 
 updateHoverTargets();
