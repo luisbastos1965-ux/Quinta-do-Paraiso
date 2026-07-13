@@ -98,16 +98,20 @@
         <button class="ai-close hover-target" onclick="closeAI()">Encerrar Ligação ✕</button>
         <div class="ai-core"></div>
         <div class="ai-chat-display">
-            <div class="ai-message" id="ai-message">"Olá. Sou a inteligência da Quinta do Paraíso. Escolha uma questão para darmos início à nossa conversa."</div>
+            <div class="ai-message" id="ai-message">"Olá. Sou o guia digital da Quinta do Paraíso. O que procura na nossa plataforma?"</div>
         </div>
+        
+        <div class="input-area" style="display: flex; gap: 10px; margin-top: 30px; margin-bottom: 20px; width: 100%; max-width: 600px; padding: 0 20px;">
+            <input type="text" id="ai-input" placeholder="Pergunte onde encontrar algo no site..." style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 25px; padding: 15px 20px; color: #fff; font-size: 1rem; outline: none; font-family: 'Manrope', sans-serif;">
+            <button onclick="askAI(document.getElementById('ai-input').value)" class="hover-target" style="width: 50px; height: 50px; border-radius: 50%; background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.4); color: var(--accent-color); font-size: 1.2rem; cursor: pointer;">➤</button>
+        </div>
+
         <div class="ai-suggestions">
-            <button class="ai-pill hover-target" onclick="askAI('Que vinho acompanha bem polvo à lagareiro?')">Vinho para polvo à lagareiro?</button>
-            <button class="ai-pill hover-target" onclick="askAI('Quais as atividades relaxantes para amanhã?')">Sugestões relaxantes?</button>
-            <button class="ai-pill hover-target" onclick="askAI('Conta-me a história do vosso vinho Reserva.')">A história do vinho Reserva?</button>
-            <button class="ai-pill hover-target" onclick="askAI('Qual a melhor altura do ano para visitar as vinhas?')">Melhor época para visita?</button>
-            <button class="ai-pill hover-target" onclick="askAI('Aceitam crianças na Quinta?')">Aceitam crianças?</button>
-            <button class="ai-pill hover-target" onclick="askAI('Qual o melhor vinho para acompanhar uma sobremesa doce?')">Vinho para sobremesas?</button>
-            <button class="ai-pill hover-target" onclick="askAI('Como funcionam as provas de vinho na adega?')">Como funcionam as provas?</button>
+            <button class="ai-pill hover-target" onclick="askAI('Como faço uma reserva e quais os preços?')">Fazer reserva?</button>
+            <button class="ai-pill hover-target" onclick="askAI('Onde posso ver o menu do restaurante?')">Menu do restaurante?</button>
+            <button class="ai-pill hover-target" onclick="askAI('Gostava de ver os vinhos da garrafeira')">Loja e vinhos?</button>
+            <button class="ai-pill hover-target" onclick="askAI('Quais são as atividades e tours?')">Atividades e tours?</button>
+            <button class="ai-pill hover-target" onclick="askAI('Onde fica a quinta e contactos?')">Localização?</button>
         </div>
     </div>
 
