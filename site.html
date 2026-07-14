@@ -11,8 +11,80 @@
 
     <div class="map-container" id="mapa-interativo">
         <div class="map-bg-container" id="parallax-bg"></div>
-        <div class="map-overlay" id="main-overlay" onclick="if(menuOpen) toggleMenu()"></div>
+        <div class="map-overlay" id="main-overlay" onclick="if(menuOpen) toggleMenu(); if(curatorOpen) toggleCurator();"></div>
         
+        <!-- GATILHO DA COLEÇÃO DO CURADOR -->
+        <div class="curator-trigger hover-target" id="curator-trigger" onclick="toggleCurator()">
+            <span>COLEÇÃO DO CURADOR</span>
+        </div>
+
+        <!-- PAINEL DA COLEÇÃO DO CURADOR -->
+        <div class="curator-panel custom-scroll" id="curator-panel">
+            <button class="close-curator hover-target" onclick="toggleCurator()">✕</button>
+            
+            <h2 style="font-family:'Cinzel'; color:#fff; font-size:1.8rem; margin-top: 20px;">Coleção do Curador</h2>
+            <div style="width: 40px; height: 2px; background:var(--accent-color); margin: 15px 0 30px 0;"></div>
+
+            <p style="font-style:italic; color:#ccc; font-size:1.05rem; line-height:1.6; margin-bottom:40px;">"O Douro, Património Mundial. Um território moldado pelo homem ao longo de séculos, onde cada socalco conta uma história."</p>
+
+            <div class="curator-section">
+                <p class="curator-label">Reconhecido Por</p>
+                <div class="press-tags">
+                    <span class="hover-target">Decanter</span>
+                    <span class="hover-target">Wine Spectator</span>
+                    <span class="hover-target">Revista de Vinhos</span>
+                    <span class="hover-target">Falstaff</span>
+                </div>
+            </div>
+
+            <div class="curator-section">
+                <p class="curator-label">Inspire-se</p>
+                <div class="media-card hover-target">
+                    <span class="media-icon">🎥</span>
+                    <div>
+                        <h4>O Som do Xisto</h4>
+                        <p>Documentário sobre as raízes das vinhas centenárias (2024).</p>
+                    </div>
+                </div>
+                <div class="media-card hover-target">
+                    <span class="media-icon">🎙️</span>
+                    <div>
+                        <h4>Vozes do Douro</h4>
+                        <p>Podcast com a nossa enóloga principal sobre a vindima.</p>
+                    </div>
+                </div>
+                <div class="media-card hover-target">
+                    <span class="media-icon">📚</span>
+                    <div>
+                        <h4>O Guia da Adega</h4>
+                        <p>Livro de edição limitada da Quinta do Paraíso.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="curator-section" style="margin-bottom: 20px;">
+                <p class="curator-label">Linha de Tempo</p>
+                <ul class="mini-timeline">
+                    <li><strong>1932</strong> <span style="color:#aaa;">Fundação</span></li>
+                    <li><strong>1998</strong> <span style="color:#aaa;">Nova Adega</span></li>
+                    <li><strong>2026</strong> <span style="color:#aaa;">Experiências Imersivas</span></li>
+                </ul>
+            </div>
+
+            <!-- DADOS DE REVISTA EM TEMPO REAL NO FUNDO -->
+            <div class="curator-ambient">
+                <div>
+                    <span style="color:var(--accent-color);">COORDENADAS</span><br>
+                    41°09'31"N<br>7°39'48"W
+                </div>
+                <div style="text-align:right;">
+                    <span style="color:var(--accent-color);">HOJE</span><br>
+                    27°C | Vento 8 km/h<br>
+                    Vindima em Preparação
+                </div>
+            </div>
+        </div>
+
         <div class="hero-title" id="main-title">
             <h1>QUINTA DO PARAÍSO</h1>
             <p>Experiências que amadurecem</p>
