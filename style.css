@@ -22,11 +22,38 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .map-container.menu-open .map-bg-container { filter: blur(14px) brightness(0.3); transform: scale(1.05); }
 .map-container.menu-open .map-overlay { pointer-events: all; } 
 
+/* ================= COLEÇÃO DO CURADOR (PAINEL ESQUERDO) ================= */
+.curator-trigger { position: absolute; top: 0; left: 0; width: 35px; height: 100vh; z-index: 70; display: flex; align-items: center; justify-content: center; background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, transparent 100%); transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s; cursor: pointer; pointer-events: all; }
+.curator-trigger:hover { width: 65px; }
+.curator-trigger span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Cinzel', serif; color: var(--accent-color); letter-spacing: 4px; font-size: 0.95rem; opacity: 0.5; transition: opacity 0.4s; pointer-events: none; }
+.curator-trigger:hover span { opacity: 1; }
+.map-container.menu-open .curator-trigger { opacity: 0; pointer-events: none; }
+
+.curator-panel { position: absolute; top: 0; left: -450px; width: 400px; height: 100vh; background: rgba(8,8,8,0.85); backdrop-filter: blur(25px); border-right: 1px solid rgba(212,175,55,0.2); z-index: 75; transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1); padding: 40px; display: flex; flex-direction: column; pointer-events: all; box-shadow: 20px 0 50px rgba(0,0,0,0.5); }
+.curator-panel.active { left: 0; }
+.close-curator { position: absolute; top: 25px; right: 30px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; transition: color 0.3s; }
+.close-curator:hover { color: var(--accent-color); }
+.curator-section { margin-bottom: 35px; }
+.curator-label { text-transform: uppercase; font-size: 0.75rem; color: var(--accent-color); letter-spacing: 2px; margin-bottom: 15px; font-weight: 600; }
+.press-tags { display: flex; flex-wrap: wrap; gap: 15px; font-family: 'Cinzel', serif; color: #888; font-size: 1.1rem; }
+.press-tags span { transition: color 0.3s; cursor: pointer; }
+.press-tags span:hover { color: #fff; }
+.media-card { display: flex; gap: 15px; align-items: center; margin-bottom: 15px; cursor: pointer; transition: transform 0.3s; }
+.media-card:hover { transform: translateX(5px); }
+.media-icon { font-size: 1.8rem; }
+.media-card h4 { color: #fff; font-family: 'Cinzel', serif; margin-bottom: 3px; font-size: 1rem; }
+.media-card p { color: #aaa; font-size: 0.8rem; line-height: 1.4; }
+.mini-timeline { list-style: none; padding-left: 10px; border-left: 1px solid rgba(212,175,55,0.3); }
+.mini-timeline li { position: relative; margin-bottom: 10px; font-size: 0.9rem; padding-left: 15px; }
+.mini-timeline li::before { content: ''; position: absolute; left: -14px; top: 6px; width: 6px; height: 6px; background: var(--accent-color); border-radius: 50%; }
+.mini-timeline li strong { color: var(--accent-color); font-family: 'Cinzel', serif; margin-right: 5px; }
+.curator-ambient { margin-top: auto; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: flex-end; font-family: 'Manrope', sans-serif; font-size: 0.8rem; line-height: 1.6; color: #777; }
+
 /* TÍTULO SUPERIOR DIREITO */
 .hero-title { position: absolute; top: 40px; right: 50px; text-align: right; z-index: 50; transition: opacity 0.5s; pointer-events: none;}
 .hero-title h1 { font-size: 2.5rem; letter-spacing: 3px; text-shadow: 0 5px 15px rgba(0,0,0,0.8); color: #fff;}
 .hero-title p { font-size: 1rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; text-shadow: 0 2px 5px rgba(0,0,0,0.9); font-weight: 600; }
-.map-container.menu-open .hero-title { opacity: 0; }
+.map-container.menu-open .hero-title, .map-container.curator-open .hero-title { opacity: 0; }
 
 /* LOGO MESTRE NO CENTRO */
 .center-logo-wrapper { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 100; display: flex; flex-direction: column; align-items: center; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); }
@@ -120,7 +147,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .bio-text span { font-family: 'Manrope', sans-serif; color: var(--accent-color); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 15px; }
 .bio-text p { font-size: 1rem; color: #ccc; line-height: 1.6; }
 
-/* ================= LOJA VÍNICA (NOVA COM DETALHES) ================= */
+/* ================= LOJA VÍNICA ================= */
 .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 30px; padding: 20px; transition: all 0.4s ease;}
 .wine-card { background: linear-gradient(180deg, rgba(20,20,20,0.9), rgba(5,5,5,0.95)); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; text-align: center; padding: 25px; transition: all 0.4s ease; box-shadow: 0 15px 35px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: space-between;}
 .wine-card:hover { transform: translateY(-10px); border-color: var(--accent-color); box-shadow: 0 20px 45px rgba(212, 175, 55, 0.2); }
