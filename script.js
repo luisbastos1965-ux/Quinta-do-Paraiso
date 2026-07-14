@@ -53,6 +53,7 @@ loneIcons.forEach(icon => {
 });
 
 let menuOpen = false;
+let curatorOpen = false;
 const mapaContainer = document.getElementById('mapa-interativo');
 const carousel = document.getElementById('carousel');
 
@@ -74,6 +75,23 @@ window.toggleMenu = function() {
     } else {
         mapaContainer.classList.remove('menu-open');
         autoSpin = true;
+    }
+}
+
+window.toggleCurator = function() {
+    const panel = document.getElementById('curator-panel');
+    const trigger = document.getElementById('curator-trigger');
+    curatorOpen = !curatorOpen;
+    if(curatorOpen) {
+        panel.classList.add('active');
+        trigger.style.opacity = '0';
+        trigger.style.pointerEvents = 'none';
+        mapaContainer.classList.add('curator-open');
+    } else {
+        panel.classList.remove('active');
+        trigger.style.opacity = '1';
+        trigger.style.pointerEvents = 'all';
+        mapaContainer.classList.remove('curator-open');
     }
 }
 
@@ -365,7 +383,7 @@ const sectionData = {
             </div>
             
             <div class="contact-form-box">
-                <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 20px; font-size: 1.4rem;">Envie-nos una Mensagem</h3>
+                <h3 style="color: var(--accent-color); font-family: 'Cinzel'; margin-bottom: 20px; font-size: 1.4rem;">Envie-nos uma Mensagem</h3>
                 <form onsubmit="event.preventDefault(); alert('A sua mensagem foi enviada com sucesso! Responderemos num prazo de 24h.');">
                     <div class="input-group full" style="margin-bottom: 15px;">
                         <input type="text" required placeholder="O seu Nome">
@@ -614,7 +632,7 @@ window.resetVindima = function() {
 }
 
 // ==========================================================================
-// 7. SOMMELIER IA (CÉREBRO DO SITE)
+// 7. SOMMELIER IA (CÉREBRO DO SITE - GUIA DE NAVEGAÇÃO E PRÉ-ESTADIA)
 // ==========================================================================
 const aiInterface = document.getElementById('ai-interface');
 const aiMessage = document.getElementById('ai-message');
@@ -701,3 +719,5 @@ function speakText(txt) {
         window.speechSynthesis.speak(utter);
     }
 }
+
+updateHoverTargets();
