@@ -145,7 +145,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 #node-5 { top: 48%; left: 35%; } 
 #node-6 { top: 25%; left: 20%; } 
 
-/* MODAIS DOS PONTOS DE MAPA (ALARGADO PARA 1250px) */
+/* MODAIS DOS PONTOS DE MAPA (ALARGADO PARA 1400px) */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease, visibility 0.5s; z-index: 9990; }
 .modal-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
 .modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1400px; width: 95%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); pointer-events: all; }
@@ -161,9 +161,8 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .custom-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
 .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.8); }
 
-
         .active-mvv { border-color: var(--accent-color) !important; background: rgba(212, 175, 55, 0.15) !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3) !important; transform: translateY(-5px); }
-        .mvv-img-box { width: 31%; max-width: 250px; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .mvv-img-box { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: opacity 0.4s ease; opacity: 0.1; }
 
         /* Estruturas Internas Modais */
 .grid-tripartida { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
@@ -414,7 +413,6 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 </div>
 </div>
 
-<!-- JANELA DO INSTAGRAM FLUTUANTE -->
 <div class="insta-modal-overlay" id="insta-modal" onclick="closeInsta()">
 <div class="insta-modal-content custom-scroll" onclick="event.stopPropagation()">
 <button class="hover-target" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:1.4rem; color:#888; cursor:pointer; pointer-events:all;" onclick="closeInsta()">✕</button>
@@ -494,33 +492,19 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 
             <button class="promo-btn hover-target" style="margin-bottom: 25px; padding: 12px 25px; background: rgba(212,175,55,0.15); border-color: var(--accent-color); color: var(--accent-color); font-weight: bold;" onclick="selectAllModules()">Selecionar Todos os Módulos</button>
             
-            <div class="builder-grid" id="builder-options">
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Motor de Reservas (Alojamento)</span>
-                </div>
-<div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Integração de Enoturismo (Experiências)</span>
-</div>
-<div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Loja Vínica & E-commerce</span>
-</div>
-<div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Assistente IA (Sommelier)</span>
-</div>
-<div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Academia (Jogos Didáticos)</span>
-                </div>
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Testemunhos Editoriais</span>
-                </div>
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Autenticação & Contactos</span>
-                </div>
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')">
-                    <div class="checkbox"></div><span>Galeria 3D Dinâmica</span>
-</div>
-</div>
-
+            <div class="builder-grid" id="builder-options" style="margin-bottom: 30px;">
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Motor de Reservas (Alojamento)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Loja Vínica & E-commerce</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Restaurante (Menu de Autor)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Integração de Enoturismo (Atividades)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Assistente IA (Guia e Sommelier)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Academia (Jornada da Vindima)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Coleção do Curador (Imprensa/Timeline)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Galeria 3D Dinâmica</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Testemunhos Editoriais</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Mural Social (Instagram)</span></div>
+            </div>
+            
             <div id="loading-container" style="display:none; width:100%; max-width: 600px; margin: 0 auto 30px;">
                 <p style="color:var(--accent-color); margin-bottom:10px; font-family:'Cinzel'; font-size:1.2rem; letter-spacing: 2px;">A Compilar Módulos...</p>
                 <div style="width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden;">
@@ -597,43 +581,12 @@ updateDeck();
 });
 updateDeck();
 
-
-// FUNÇÃO PARA IMAGENS MVV
-window.showMVV = function(type, el) {
-    document.querySelectorAll('.tri-item').forEach(item => item.classList.remove('active-mvv'));
-    el.classList.add('active-mvv');
-    
-    const container = document.getElementById('mvv-images-container');
-    const img1 = document.getElementById('mvv-img-1');
-    const img2 = document.getElementById('mvv-img-2');
-    const img3 = document.getElementById('mvv-img-3');
-    
-    container.style.opacity = '0';
-    setTimeout(() => {
-        container.style.display = 'flex';
-        if(type === 'missao') {
-            img1.src = 'mis1.jpg'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+1';
-            img2.src = 'mis2.jpg'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+2';
-            img3.src = 'mis3.jpg'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+3';
-        } else if(type === 'visao') {
-            img1.src = 'vis1.jpg'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+1';
-            img2.src = 'vis2.jpg'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+2';
-            img3.src = 'vis3.jpg'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+3';
-        } else if(type === 'valores') {
-            img1.src = 'val1.jpg'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+1';
-            img2.src = 'val2.jpg'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+2';
-            img3.src = 'val3.jpg'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+3';
-        }
-        setTimeout(() => container.style.opacity = '1', 50);
-    }, 400);
-}
-
 // ------------------------------------------------------------------
 // DADOS DOS MODAIS
 // ------------------------------------------------------------------
 const modalData = {
 river_missao: `
-               <h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
+<h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
                <div class="grid-tripartida hover-target">
                    <div class="tri-item" onclick="showMVV('missao', this)" style="cursor: pointer; pointer-events: all;">
                        <h3>Missão</h3>
@@ -660,30 +613,41 @@ river_missao: `
                        </div>
                    </div>
                </div>
-               <div id="mvv-images-container" style="display:none; gap:20px; margin-top:35px; justify-content:center; opacity:0; transition:opacity 0.4s ease;">
-                   <img id="mvv-img-1" src="" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+1'">
-                   <img id="mvv-img-2" src="" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+2'">
-                   <img id="mvv-img-3" src="" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+3'">
+               <div class="grid-tripartida" id="mvv-images-container" style="margin-top: 25px;">
+                   <img id="mvv-img-1" src="Logo.png" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+1'">
+                   <img id="mvv-img-2" src="Logo.png" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+2'">
+                   <img id="mvv-img-3" src="Logo.png" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+3'">
                </div>
            `,
 river_publico: `
-               <h2 style="text-align: center; margin-bottom: 30px;">Público-Alvo</h2>
+<h2 style="text-align: center; margin-bottom: 30px;">Público-Alvo</h2>
                <div class="target-personas hover-target">
                    <div class="persona-card">
                        <div class="p-icon">🌍</div>
                        <h4>Origem Geográfica</h4>
-                       <p><strong>Nacional:</strong> Viajantes de todo o país.<br><strong>Internacional:</strong> Americanos, Canadenses, e turistas do Norte e Centro da Europa.</p>
+                       <p style="line-height: 1.8;">
+                           <strong>Nacional:</strong><br>Viajantes de todo o país.<br><br>
+                           <strong>Internacional:</strong><br>Americanos, Canadenses.<br>Turistas do Norte e Centro da Europa.
+                       </p>
                    </div>
                    <div class="persona-card">
                        <div class="p-icon">👥</div>
                        <h4>Perfil Demográfico</h4>
-                       <p>Adultos entre os <strong>30 e os 60 anos</strong>. Rendimento médio a médio-alto, que valorizam conforto, luxo e exclusividade. <em>(Inclui também jovens 25-35 focados no diferencial)</em>.</p>
+                       <p style="line-height: 1.8;">
+                           Adultos entre os <strong>30 e os 60 anos</strong>.<br><br>
+                           Rendimento médio a médio-alto.<br>Valorizam conforto, luxo e exclusividade.<br><br>
+                           <em>(Inclui também jovens 25-35 focados no diferencial)</em>.
+                       </p>
                    </div>
                    <div class="persona-card" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 20px;">
                        <div class="p-icon" style="font-size: 3.5rem; margin-bottom: 0;">🍷</div>
                        <div style="text-align: left;">
                            <h4>Psicografia e Motivações</h4>
-                           <p style="margin: 0;">Casais ou pequenos grupos interessados em turismo rural, enoturismo, natureza e bem-estar. Procuram <strong>experiências autênticas</strong>, contacto imersivo com o património duriense e são verdadeiros amantes de provas vínicas.</p>
+                           <p style="margin: 0; line-height: 1.8;">
+                               Casais ou pequenos grupos interessados em turismo rural, enoturismo, natureza e bem-estar.<br><br>
+                               Procuram <strong>experiências autênticas</strong> e contacto imersivo com o património duriense.<br><br>
+                               São verdadeiros amantes de provas vínicas.
+                           </p>
                        </div>
                    </div>
                </div>
@@ -742,29 +706,29 @@ river_swot: `
                </div>
            `,
 river_4p: `
-               <h2 style="text-align: center;">Marketing-Mix (4 P's)</h2>
+<h2 style="text-align: center;">Marketing-Mix (4 P's)</h2>
                <div class="mix-grid hover-target">
                    <div class="mix-card custom-scroll" style="text-align: center;">
                        <h3 style="text-align: center;">Produto</h3>
-                       <p style="text-align: center;">Alojamento turístico em propriedade tradicional com vertente vitivinícola premium. Oferta de restaurante exclusivo, quartos familiares e piscinas privativas.</p>
-                       <p style="text-align: center;">Infraestruturas adaptadas, postos elétricos, lavanderia e luxuoso cabaz de boas-vindas.</p>
+                       <p style="text-align: center; font-size: 1.05rem;">Alojamento turístico em propriedade tradicional com vertente vitivinícola premium. Oferta de restaurante exclusivo, quartos familiares e piscinas privativas.</p>
+                       <p style="text-align: center; font-size: 1.05rem;">Infraestruturas adaptadas, postos elétricos, lavanderia e luxuoso cabaz de boas-vindas.</p>
                    </div>
                    <div class="mix-card custom-scroll" style="text-align: center;">
                        <h3 style="text-align: center;">Distribuição</h3>
-                       <p style="text-align: center;">Estratégia multicanal (direta e indireta). Canal primário no website oficial (motor de reservas e pagamentos diretos).</p>
-                       <p style="text-align: center;">Integração tática no Booking inicialmente. A longo prazo, eliminação das comissões aos intermediários.</p>
+                       <p style="text-align: center; font-size: 1.05rem;">Estratégia multicanal (direta e indireta). Canal primário no website oficial (motor de reservas e pagamentos diretos).</p>
+                       <p style="text-align: center; font-size: 1.05rem;">Integração tática no Booking inicialmente. A longo prazo, eliminação das comissões aos intermediários.</p>
                    </div>
                    
                    <div class="mix-card mix-card-long" style="text-align: center;">
                        <h3 style="text-align: center;">Preço</h3>
-                       <p style="text-align: center; margin-bottom: 10px;">Estratégia focada no posicionamento de valor e luxo premium:</p>
-                       <div class="price-tags" style="justify-content: center;">
-                           <span>Casas & Pombais: 150€ - 250€ / Noite</span>
-                           <span>Barco Privado: 180€ / pax</span>
-                           <span>Spa Vinoterapia: 65€ / pax</span>
-                           <span>Passeio Jipe: 40€ / pax</span>
-                           <span>Piquenique: 35€ / pax</span>
-                           <span>Adega + Degustação: 35€ / pax</span>
+                       <p style="text-align: center; margin-bottom: 10px; font-size: 1.05rem;">Estratégia focada no posicionamento de valor e luxo premium:</p>
+                       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; justify-items: center; width: 100%;">
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Casas & Pombais: 150€ - 250€ / Noite</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Barco Privado: 180€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Spa Vinoterapia: 65€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Passeio Jipe: 40€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Piquenique: 35€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Adega + Degustação: 35€ / pax</span>
                        </div>
                    </div>
                    
@@ -782,7 +746,6 @@ river_4p: `
                            </div>
                            <div style="flex:1.5; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); height: 170px; display:flex; align-items:center; justify-content:center;">
                                
-                               <!-- Redes Sociais -->
                                <div id="p-redes" class="promo-content-group active">
                                    <img src="insta.jpg" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x120/111/D4AF37?text=Insta'}" style="width:55%; height:135px; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
                                    <div style="width:40%; height:135px; background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); border-radius:10px; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; pointer-events:all;" onclick="openInsta()">
@@ -791,7 +754,6 @@ river_4p: `
                                    </div>
                                </div>
                                
-                               <!-- Parcerias -->
                                <div id="p-parcerias" class="promo-content-group">
                                    <div class="parcerias-container">
                                        <div class="parcerias-sub-title">Nacionais</div>
@@ -809,7 +771,6 @@ river_4p: `
                                    </div>
                                </div>
 
-                               <!-- Flyers e Cartões -->
                                <div id="p-flyers" class="promo-content-group">
                                    <div class="flyers-grid">
                                        <img src="car1.jpg" title="Cartão Frente" onerror="this.src='https://via.placeholder.com/70x130/111/D4AF37?text=Car1'">
@@ -819,7 +780,6 @@ river_4p: `
                                    </div>
                                </div>
 
-                               <!-- Tote Bag Centrada -->
                                <div id="p-tote" class="promo-content-group">
                                    <div class="tote-container">
                                        <img src="totebag.jpg" onerror="this.src='tote.jpg'; this.onerror=function(){this.src='https://via.placeholder.com/130x130/111/D4AF37?text=ToteBag'}" style="max-height: 135px; max-width: 100%; object-fit: contain; border-radius: 8px; border: 1px solid rgba(212,175,55,0.4);">
@@ -972,6 +932,7 @@ riverNodes[currentRiverNode].classList.add('visible', 'active-node');
 currentRiverNode++;
 }, 800); 
 } else {
+                    // Após fechar o último nó, o rio está completo e mostra o botão
                     presentationPhase = 'ready_for_builder';
                     setTimeout(() => {
                         document.getElementById('create-site-btn-container').style.opacity = '1';
@@ -1045,7 +1006,8 @@ handleNodeClick(currentRiverNode, match[1]);
 closeModal();
 }
 } else if (presentationPhase === 'ready_for_builder') {
-transitionToSiteBuilder();
+                    // Após acabar o rio, o próximo clique no Espaço chama também a criação do site
+                    transitionToSiteBuilder();
 }
 }
 });
@@ -1108,11 +1070,44 @@ showMicroSlide(currentSlideIdx + 1);
         }
 
         window.transitionToSiteBuilder = function() {
-presentationPhase = 'builder';
+            presentationPhase = 'builder';
             document.getElementById('create-site-btn-container').style.opacity = '0';
             document.getElementById('create-site-btn-container').style.pointerEvents = 'none';
-document.getElementById('site-builder').classList.add('active');
-updateHoverTargets();
+            document.getElementById('site-builder').classList.add('active');
+            updateHoverTargets();
+        }
+
+// FUNÇÃO PARA IMAGENS MVV
+window.showMVV = function(type, el) {
+    document.querySelectorAll('.tri-item').forEach(item => item.classList.remove('active-mvv'));
+    el.classList.add('active-mvv');
+    
+    const img1 = document.getElementById('mvv-img-1');
+    const img2 = document.getElementById('mvv-img-2');
+    const img3 = document.getElementById('mvv-img-3');
+    
+    img1.style.opacity = '0';
+    img2.style.opacity = '0';
+    img3.style.opacity = '0';
+    
+    setTimeout(() => {
+        if(type === 'missao') {
+            img1.src = 'mis1.jpg'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+1';
+            img2.src = 'mis2.jpg'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+2';
+            img3.src = 'mis3.jpg'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+3';
+        } else if(type === 'visao') {
+            img1.src = 'vis1.jpg'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+1';
+            img2.src = 'vis2.jpg'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+2';
+            img3.src = 'vis3.jpg'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+3';
+        } else if(type === 'valores') {
+            img1.src = 'val1.jpg'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+1';
+            img2.src = 'val2.jpg'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+2';
+            img3.src = 'val3.jpg'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+3';
+        }
+        img1.style.opacity = '1';
+        img2.style.opacity = '1';
+        img3.style.opacity = '1';
+    }, 300);
 }
 
 // ------------------------------------------------------------------
