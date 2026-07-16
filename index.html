@@ -161,6 +161,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .custom-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
 .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.8); }
 
+
         .active-mvv { border-color: var(--accent-color) !important; background: rgba(212, 175, 55, 0.15) !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3) !important; transform: translateY(-5px); }
         .mvv-img-box { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: opacity 0.4s ease; opacity: 0.1; }
 
@@ -413,6 +414,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 </div>
 </div>
 
+<!-- JANELA DO INSTAGRAM FLUTUANTE -->
 <div class="insta-modal-overlay" id="insta-modal" onclick="closeInsta()">
 <div class="insta-modal-content custom-scroll" onclick="event.stopPropagation()">
 <button class="hover-target" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:1.4rem; color:#888; cursor:pointer; pointer-events:all;" onclick="closeInsta()">✕</button>
@@ -644,8 +646,8 @@ river_publico: `
                        <div style="text-align: left;">
                            <h4>Psicografia e Motivações</h4>
                            <p style="margin: 0; line-height: 1.8;">
-                               Casais ou pequenos grupos interessados em turismo rural, enoturismo, natureza e bem-estar.<br><br>
-                               Procuram <strong>experiências autênticas</strong> e contacto imersivo com o património duriense.<br><br>
+                               Casais ou pequenos grupos interessados em turismo rural, enoturismo, natureza e bem-estar.<br>
+                               Procuram <strong>experiências autênticas</strong> e contacto imersivo com o património duriense.<br>
                                São verdadeiros amantes de provas vínicas.
                            </p>
                        </div>
@@ -746,14 +748,12 @@ river_4p: `
                            </div>
                            <div style="flex:1.5; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); height: 170px; display:flex; align-items:center; justify-content:center;">
                                
+                               <!-- Redes Sociais -->
                                <div id="p-redes" class="promo-content-group active">
-                                   <img src="insta.jpg" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x120/111/D4AF37?text=Insta'}" style="width:55%; height:135px; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
-                                   <div style="width:40%; height:135px; background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); border-radius:10px; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; pointer-events:all;" onclick="openInsta()">
-                                       <span style="font-size:2.2rem; margin-bottom:5px;">📱</span>
-                                       <span style="font-family:'Manrope'; font-size:0.9rem; text-align:center;">Insta Oficial</span>
-                                   </div>
+                                   <img src="insta.jpg" class="hover-target" onclick="openInsta()" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x120/111/D4AF37?text=Insta'}" style="max-height: 140px; max-width: 100%; border-radius:10px; object-fit:contain; border:1px solid rgba(212,175,55,0.4); cursor:pointer; pointer-events:all;">
                                </div>
                                
+                               <!-- Parcerias -->
                                <div id="p-parcerias" class="promo-content-group">
                                    <div class="parcerias-container">
                                        <div class="parcerias-sub-title">Nacionais</div>
@@ -771,6 +771,7 @@ river_4p: `
                                    </div>
                                </div>
 
+                               <!-- Flyers e Cartões -->
                                <div id="p-flyers" class="promo-content-group">
                                    <div class="flyers-grid">
                                        <img src="car1.jpg" title="Cartão Frente" onerror="this.src='https://via.placeholder.com/70x130/111/D4AF37?text=Car1'">
@@ -780,6 +781,7 @@ river_4p: `
                                    </div>
                                </div>
 
+                               <!-- Tote Bag Centrada -->
                                <div id="p-tote" class="promo-content-group">
                                    <div class="tote-container">
                                        <img src="totebag.jpg" onerror="this.src='tote.jpg'; this.onerror=function(){this.src='https://via.placeholder.com/130x130/111/D4AF37?text=ToteBag'}" style="max-height: 135px; max-width: 100%; object-fit: contain; border-radius: 8px; border: 1px solid rgba(212,175,55,0.4);">
@@ -932,7 +934,6 @@ riverNodes[currentRiverNode].classList.add('visible', 'active-node');
 currentRiverNode++;
 }, 800); 
 } else {
-                    // Após fechar o último nó, o rio está completo e mostra o botão
                     presentationPhase = 'ready_for_builder';
                     setTimeout(() => {
                         document.getElementById('create-site-btn-container').style.opacity = '1';
@@ -1006,8 +1007,7 @@ handleNodeClick(currentRiverNode, match[1]);
 closeModal();
 }
 } else if (presentationPhase === 'ready_for_builder') {
-                    // Após acabar o rio, o próximo clique no Espaço chama também a criação do site
-                    transitionToSiteBuilder();
+transitionToSiteBuilder();
 }
 }
 });
@@ -1070,12 +1070,12 @@ showMicroSlide(currentSlideIdx + 1);
         }
 
         window.transitionToSiteBuilder = function() {
-            presentationPhase = 'builder';
+presentationPhase = 'builder';
             document.getElementById('create-site-btn-container').style.opacity = '0';
             document.getElementById('create-site-btn-container').style.pointerEvents = 'none';
-            document.getElementById('site-builder').classList.add('active');
-            updateHoverTargets();
-        }
+document.getElementById('site-builder').classList.add('active');
+updateHoverTargets();
+}
 
 // FUNÇÃO PARA IMAGENS MVV
 window.showMVV = function(type, el) {
