@@ -44,7 +44,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .wine-ripple.splash { animation: rippleEffect 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 @keyframes rippleEffect { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; border-width: 4px; } 50% { opacity: 0.5; border-width: 2px; } 100% { transform: translate(-50%, -50%) scale(30); opacity: 0; border-width: 0px; } }
 
-/* LOGO A ENCHER (ABRANDADO) */
+/* LOGO A ENCHER */
 .logo-wrapper { position: relative; width: 280px; height: 280px; overflow: hidden; opacity: 0; transition: opacity 0.5s; }
 .logo-wrapper.show { opacity: 1; }
 .logo-vazio { width: 100%; height: 100%; object-fit: contain; opacity: 0.2; filter: grayscale(100%); }
@@ -74,7 +74,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 .map-container.focus-mode .map-bg-container, .map-container.card-open .map-bg-container { filter: blur(12px) brightness(0.35); transform: translate(var(--px), var(--py)) scale(1.05); }
 
-.map-container.focus-mode .hero-title, .map-container.card-open .hero-title, .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo, .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase { opacity: 0 !important; filter: blur(5px); pointer-events: none !important; transition: opacity 0.5s ease; }
+.map-container.focus-mode .hero-title, .map-container.card-open .hero-title, .map-container.focus-mode .corner-logo, .map-container.card-open .corner-logo, .map-container.focus-mode .motivation-phrase, .map-container.card-open .motivation-phrase, .map-container.curator-open .hero-title { opacity: 0 !important; filter: blur(5px); pointer-events: none !important; transition: opacity 0.5s ease; }
 
 .map-slice { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('fundo_douro.jpg') center/cover no-repeat; transition: transform 1.5s cubic-bezier(0.86, 0, 0.07, 1); }
 .slice-1 { clip-path: polygon(0 0, 25.5% 0, 25.5% 100%, 0% 100%); transform: translateY(-100%); }
@@ -102,6 +102,35 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .map-container.assemble .motivation-phrase { opacity: 1; transform: translateY(0); transition-delay: 2s; }
 .motivation-phrase.fade-out { opacity: 0 !important; filter: blur(5px); pointer-events: none !important; transform: translateY(-10px); transition: all 0.4s ease !important; }
 .motivation-phrase p { font-family: 'Cinzel', serif; font-size: 1.6rem; line-height: 1.6; color: rgba(255, 255, 255, 0.95); border-left: 3px solid var(--accent-color); padding-left: 25px; text-shadow: 0 10px 20px rgba(0,0,0,0.9); }
+
+/* ================= COLEÇÃO DO CURADOR (PAINEL ESQUERDO) ================= */
+.curator-trigger { position: absolute; top: 0; left: 0; width: 50px; height: 100vh; z-index: 70; display: flex; align-items: center; justify-content: center; background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, transparent 100%); transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s; cursor: pointer; pointer-events: all; border-right: 1px dashed rgba(212,175,55,0.3); backdrop-filter: blur(4px); }
+.curator-trigger:hover { width: 80px; background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 100%); border-right: 1px solid var(--accent-color); }
+.curator-trigger span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Cinzel', serif; color: var(--accent-color); letter-spacing: 5px; font-size: 1.15rem; font-weight: 700; opacity: 0.9; transition: all 0.4s; pointer-events: none; text-shadow: 0 0 10px rgba(212,175,55,0.5); display: flex; align-items: center; gap: 15px; }
+.curator-trigger span::before { content: '⟫'; font-size: 1.5rem; transform: rotate(90deg); opacity: 0.7; }
+.curator-trigger:hover span { opacity: 1; text-shadow: 0 0 20px rgba(212,175,55,1); letter-spacing: 7px; }
+.map-container.menu-open .curator-trigger { opacity: 0; pointer-events: none; }
+
+.curator-panel { position: absolute; top: 0; left: -450px; width: 400px; height: 100vh; background: rgba(8,8,8,0.85); backdrop-filter: blur(25px); border-right: 1px solid rgba(212,175,55,0.2); z-index: 75; transition: left 0.6s cubic-bezier(0.25, 1, 0.5, 1); padding: 40px; display: flex; flex-direction: column; pointer-events: all; box-shadow: 20px 0 50px rgba(0,0,0,0.5); overflow-y: auto; overflow-x: hidden; }
+.curator-panel.active { left: 0; }
+.close-curator { position: absolute; top: 25px; right: 30px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; transition: color 0.3s; pointer-events: all; }
+.close-curator:hover { color: var(--accent-color); }
+.curator-section { margin-bottom: 35px; }
+.curator-label { text-transform: uppercase; font-size: 0.75rem; color: var(--accent-color); letter-spacing: 2px; margin-bottom: 15px; font-weight: 600; }
+.press-tags { display: flex; flex-wrap: wrap; gap: 15px; font-family: 'Cinzel', serif; color: #888; font-size: 1.1rem; }
+.press-tags span { transition: color 0.3s; cursor: pointer; pointer-events: all;}
+.press-tags span:hover { color: #fff; }
+.media-card { display: flex; gap: 15px; align-items: center; margin-bottom: 15px; cursor: pointer; transition: transform 0.3s; pointer-events: all;}
+.media-card:hover { transform: translateX(5px); }
+.media-icon { font-size: 1.8rem; }
+.media-card h4 { color: #fff; font-family: 'Cinzel', serif; margin-bottom: 3px; font-size: 1rem; }
+.media-card p { color: #aaa; font-size: 0.8rem; line-height: 1.4; }
+.mini-timeline { list-style: none; padding-left: 10px; border-left: 1px solid rgba(212,175,55,0.3); }
+.mini-timeline li { position: relative; margin-bottom: 10px; font-size: 0.9rem; padding-left: 15px; }
+.mini-timeline li::before { content: ''; position: absolute; left: -14px; top: 6px; width: 6px; height: 6px; background: var(--accent-color); border-radius: 50%; }
+.mini-timeline li strong { color: var(--accent-color); font-family: 'Cinzel', serif; margin-right: 5px; }
+.curator-ambient { margin-top: auto; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: flex-end; font-family: 'Manrope', sans-serif; font-size: 0.8rem; line-height: 1.6; color: #777; }
+
 
 /* MARCA DE ÁGUA SARA REIS */
 .watermark { position: absolute; bottom: 20px; width: 100%; text-align: center; color: rgba(255,255,255,0.4); font-family: 'Manrope', sans-serif; font-size: 0.8rem; letter-spacing: 2px; z-index: 10; pointer-events: none; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
@@ -145,10 +174,10 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 #node-5 { top: 48%; left: 35%; } 
 #node-6 { top: 25%; left: 20%; } 
 
-/* MODAIS DOS PONTOS DE MAPA (ALARGADO PARA 1250px) */
+/* MODAIS DOS PONTOS DE MAPA (ALARGADO PARA 1400px) */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.5s ease, visibility 0.5s; z-index: 9990; }
 .modal-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
-.modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1250px; width: 95%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); pointer-events: all; }
+.modal-content { background: var(--glass-bg); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 20px; padding: 50px; max-width: 1400px; width: 95%; max-height: 85vh; overflow-y: auto; transform: translateY(50px) scale(0.95); transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.9); pointer-events: all; }
 .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
 
 .close-btn { position: absolute; top: 25px; right: 30px; font-size: 1.5rem; color: var(--text-color); background: none; border: none; font-family: 'Manrope'; transition: color 0.3s; font-weight: 600; z-index: 100; cursor: pointer; pointer-events: all !important;}
@@ -161,17 +190,16 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .custom-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
 .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.8); }
 
+.active-mvv { border-color: var(--accent-color) !important; background: rgba(212, 175, 55, 0.15) !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3) !important; transform: translateY(-5px); }
+.mvv-img-box { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: opacity 0.4s ease; opacity: 0.1; }
 
-        .active-mvv { border-color: var(--accent-color) !important; background: rgba(212, 175, 55, 0.15) !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3) !important; transform: translateY(-5px); }
-        .mvv-img-box { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: opacity 0.4s ease; opacity: 0.1; }
-
-        /* Estruturas Internas Modais */
+/* Estruturas Internas Modais */
 .grid-tripartida { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
 .tri-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px; border-radius: 15px; transition: transform 0.3s, border-color 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .tri-item:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.6); }
 .tri-item h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px; text-align: center; }
 
-/* TAGS DE PALAVRAS-CHAVE (MISSÃO, VISÃO, VALORES) - DESIGN PREMIUM */
+/* TAGS DE PALAVRAS-CHAVE */
 .kw-tag { display: block; width: 100%; padding: 12px 15px; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3); border-radius: 8px; font-size: 0.95rem; margin-bottom: 10px; font-family: 'Manrope', sans-serif; color: #eee; transition: all 0.3s; cursor: default; text-align: center; box-sizing: border-box; }
 .kw-tag:hover { background: rgba(212,175,55,0.2); border-color: var(--accent-color); color: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.2); }
 
@@ -215,7 +243,8 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .price-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; justify-content: flex-start; }
 .price-tags span { background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); display: inline-block; }
 
-.promo-btn { display: inline-block; padding: 10px 15px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 8px; font-size: 0.9rem; margin: 5px; font-family: 'Manrope', sans-serif; color: #ddd; transition: all 0.3s; cursor: pointer; pointer-events: all; text-align: center; width: 100%; display: block; box-sizing: border-box;}
+/* PROMOÇÃO ESQUERDA BOTOES */
+.promo-btn { display: inline-block; padding: 10px 15px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 8px; font-size: 0.9rem; margin: 5px; font-family: 'Manrope', sans-serif; color: #ddd; transition: all 0.3s; cursor: pointer; pointer-events: all; text-align: center; }
 .promo-btn:hover { background: var(--accent-color); color: #000; font-weight: 600; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
 
 /* INTERFACES DINÂMICAS DE PROMOÇÃO */
@@ -223,10 +252,11 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .promo-content-group.active { display: flex; animation: fadeSlide 0.4s ease forwards; }
 @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.parcerias-container { display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; }
+/* PARCERIAS EM FORMATO TEXTO */
+.parcerias-container { display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; justify-content: center; }
 .parcerias-sub-title { font-size: 0.75rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; text-align: left; font-weight: 600; }
-.parcerias-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; height: 85px; }
-.parcerias-row img { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; border: 1px solid rgba(212,175,55,0.3); background: rgba(255,255,255,0.03); padding: 5px; box-sizing: border-box; }
+.parceria-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: 6px; display: flex; justify-content: center; align-items: center; color: #ccc; font-family: 'Manrope', sans-serif; font-size: 0.85rem; text-align: center; padding: 5px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); font-weight: 600; transition: all 0.3s; }
+.parceria-box:hover { border-color: var(--accent-color); background: rgba(212,175,55,0.15); color: #fff; }
 
 .flyers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; width: 100%; height: 210px; }
 .flyers-grid img { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; border: 1px solid rgba(212,175,55,0.3); background: rgba(255,255,255,0.03); padding: 4px; box-sizing: border-box; }
@@ -267,13 +297,13 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .builder-content { width: 800px; text-align: center; }
 .builder-content h2 { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 10px; }
 .builder-content p { font-size: 1.1rem; color: #aaa; margin-bottom: 40px; }
-.builder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-bottom: 40px;}
-.build-option { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.3); padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: all 0.3s; cursor: none; }
+.builder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; margin-bottom: 30px;}
+.build-option { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.3); padding: 15px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: all 0.3s; cursor: pointer; pointer-events: all;}
 .build-option:hover, .build-option.selected { border-color: var(--accent-color); background: rgba(212, 175, 55, 0.1); }
 .build-option .checkbox { width: 24px; height: 24px; border: 2px solid var(--accent-color); border-radius: 6px; display: flex; justify-content: center; align-items: center; transition: all 0.2s; }
 .build-option.selected .checkbox { background: var(--accent-color); }
 .build-option.selected .checkbox::after { content: '✓'; color: #000; font-weight: bold; font-size: 14px;}
-.build-option span { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #fff; }
+.build-option span { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #fff; }
 .btn-launch { padding: 18px 50px; background: var(--accent-color); color: #000; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1.1rem; border: none; border-radius: 50px; text-transform: uppercase; transition: all 0.3s; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); cursor: pointer; pointer-events: all;}
 .btn-launch:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.5); background: #fff; }
 
@@ -357,7 +387,77 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 <div class="map-slice slice-4"></div>
 </div>
 
-<div class="map-overlay" id="main-overlay"></div>
+<div class="map-overlay" id="main-overlay" onclick="if(menuOpen) toggleMenu(); if(curatorOpen) toggleCurator();"></div>
+
+<div class="curator-trigger hover-target" id="curator-trigger" onclick="toggleCurator()">
+    <span>COLEÇÃO DO CURADOR</span>
+</div>
+
+<div class="curator-panel custom-scroll" id="curator-panel">
+    <button class="close-curator hover-target" onclick="toggleCurator()">✕</button>
+    
+    <h2 style="font-family:'Cinzel'; color:#fff; font-size:1.8rem; margin-top: 20px;">Coleção do Curador</h2>
+    <div style="width: 40px; height: 2px; background:var(--accent-color); margin: 15px 0 30px 0;"></div>
+
+    <p style="font-style:italic; color:#ccc; font-size:1.05rem; line-height:1.6; margin-bottom:40px;">"O Douro, Património Mundial. Um território moldado pelo homem ao longo de séculos, onde cada socalco conta uma história."</p>
+
+    <div class="curator-section">
+        <p class="curator-label">Reconhecido Por</p>
+        <div class="press-tags">
+            <span class="hover-target">Decanter</span>
+            <span class="hover-target">Wine Spectator</span>
+            <span class="hover-target">Revista de Vinhos</span>
+            <span class="hover-target">Falstaff</span>
+        </div>
+    </div>
+
+    <div class="curator-section">
+        <p class="curator-label">Inspire-se</p>
+        <div class="media-card hover-target">
+            <span class="media-icon">🎥</span>
+            <div>
+                <h4>O Som do Xisto</h4>
+                <p>Documentário sobre as raízes das vinhas centenárias (2024).</p>
+            </div>
+        </div>
+        <div class="media-card hover-target">
+            <span class="media-icon">🎙️</span>
+            <div>
+                <h4>Vozes do Douro</h4>
+                <p>Podcast com a nossa enóloga principal sobre a vindima.</p>
+            </div>
+        </div>
+        <div class="media-card hover-target">
+            <span class="media-icon">📚</span>
+            <div>
+                <h4>O Guia da Adega</h4>
+                <p>Livro de edição limitada da Quinta do Paraíso.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="curator-section" style="margin-bottom: 20px;">
+        <p class="curator-label">Linha de Tempo</p>
+        <ul class="mini-timeline">
+            <li><strong>1932</strong> <span style="color:#aaa;">Fundação</span></li>
+            <li><strong>1998</strong> <span style="color:#aaa;">Nova Adega</span></li>
+            <li><strong>2026</strong> <span style="color:#aaa;">Experiências Imersivas</span></li>
+        </ul>
+    </div>
+
+    <div class="curator-ambient">
+        <div>
+            <span style="color:var(--accent-color);">COORDENADAS</span><br>
+            41°09'31"N<br>7°39'48"W
+        </div>
+        <div style="text-align:right;">
+            <span style="color:var(--accent-color);">HOJE</span><br>
+            27°C | Vento 8 km/h<br>
+            Vindima em Preparação
+        </div>
+    </div>
+</div>
+
 <img src="Logo.png" alt="QP" class="corner-logo hover-target" id="nav-logo" onclick="openBrandModal()" title="Estúdio de Marca">
 
 <div class="hero-title" id="main-title">
@@ -414,7 +514,6 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 </div>
 </div>
 
-<!-- JANELA DO INSTAGRAM FLUTUANTE -->
 <div class="insta-modal-overlay" id="insta-modal" onclick="closeInsta()">
 <div class="insta-modal-content custom-scroll" onclick="event.stopPropagation()">
 <button class="hover-target" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:1.4rem; color:#888; cursor:pointer; pointer-events:all;" onclick="closeInsta()">✕</button>
@@ -507,7 +606,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span>Mural Social (Instagram)</span></div>
             </div>
             
-            <div id="loading-container"  style="display:none; width:100%; max-width: 600px; margin: 0 auto 30px;">
+            <div id="loading-container" style="display:none; width:100%; max-width: 600px; margin: 0 auto 30px;">
                 <p style="color:var(--accent-color); margin-bottom:10px; font-family:'Cinzel'; font-size:1.2rem; letter-spacing: 2px;">A Compilar Módulos...</p>
                 <div style="width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden;">
                     <div id="loading-bar" style="width:0%; height:100%; background:var(--accent-color); transition: width 0.1s linear; box-shadow: 0 0 15px var(--accent-color);"></div>
@@ -538,7 +637,7 @@ document.documentElement.style.setProperty('--py', `${y}px`);
 });
 
 const updateHoverTargets = () => {
-document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option, .kw-tag, .promo-btn').forEach(target => {
+document.querySelectorAll('.hover-target, button, input, select, .river-node, .idea-pill, .logo-box, .build-option, .kw-tag, .promo-btn, .close-curator, .curator-trigger, .media-card, .press-tags span').forEach(target => {
 if (target.dataset.hoverBound !== 'true') {
 target.dataset.hoverBound = 'true';
 target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
@@ -552,7 +651,7 @@ const deckContainer = document.getElementById('deck-container');
 let cardElements = [];
 for(let i = 1; i <= 11; i++) {
 let img = document.createElement('img');
-img.src = `enqgeo${i}.jpg`; img.className = 'deck-card'; img.alt = `Mapa ${i}`;
+img.src = `enqgeo${i}.png`; img.className = 'deck-card'; img.alt = `Mapa ${i}`;
 img.onerror = function() { this.src = 'fundo_douro.jpg'; }; 
 deckContainer.appendChild(img); cardElements.push(img);
 }
@@ -583,14 +682,32 @@ updateDeck();
 });
 updateDeck();
 
+let curatorOpen = false;
+window.toggleCurator = function() {
+    const panel = document.getElementById('curator-panel');
+    const trigger = document.getElementById('curator-trigger');
+    curatorOpen = !curatorOpen;
+    if(curatorOpen) {
+        panel.classList.add('active');
+        trigger.style.opacity = '0';
+        trigger.style.pointerEvents = 'none';
+        mapaContainer.classList.add('curator-open');
+    } else {
+        panel.classList.remove('active');
+        trigger.style.opacity = '1';
+        trigger.style.pointerEvents = 'all';
+        mapaContainer.classList.remove('curator-open');
+    }
+}
+
 // ------------------------------------------------------------------
 // DADOS DOS MODAIS
 // ------------------------------------------------------------------
 const modalData = {
 river_missao: `
-               <h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
+<h2 style="text-align: center; margin-bottom: 40px;">Missão, Visão e Valores</h2>
                <div class="grid-tripartida hover-target">
-                   <div class="tri-item">
+                   <div class="tri-item" onclick="showMVV('missao', this)" style="cursor: pointer; pointer-events: all;">
                        <h3>Missão</h3>
                        <div style="display:flex; flex-direction:column; gap:5px; margin-top: 15px;">
                            <span class="kw-tag hover-target">Autenticidade Turística</span>
@@ -598,7 +715,7 @@ river_missao: `
                            <span class="kw-tag hover-target">Envolvimento da Comunidade</span>
                        </div>
                    </div>
-                   <div class="tri-item">
+                   <div class="tri-item" onclick="showMVV('visao', this)" style="cursor: pointer; pointer-events: all;">
                        <h3>Visão</h3>
                        <div style="display:flex; flex-direction:column; gap:5px; margin-top: 15px;">
                            <span class="kw-tag hover-target">Referência Internacional</span>
@@ -606,7 +723,7 @@ river_missao: `
                            <span class="kw-tag hover-target">Turismo Sustentável</span>
                        </div>
                    </div>
-                   <div class="tri-item">
+                   <div class="tri-item" onclick="showMVV('valores', this)" style="cursor: pointer; pointer-events: all;">
                        <h3>Valores</h3>
                        <div style="display:flex; flex-direction:column; gap:5px; margin-top: 15px;">
                            <span class="kw-tag hover-target">Qualidade & Excelência</span>
@@ -615,9 +732,14 @@ river_missao: `
                        </div>
                    </div>
                </div>
+               <div class="grid-tripartida" id="mvv-images-container" style="margin-top: 25px;">
+                   <img id="mvv-img-1" src="Logo.png" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+1'">
+                   <img id="mvv-img-2" src="Logo.png" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+2'">
+                   <img id="mvv-img-3" src="Logo.png" class="mvv-img-box" onerror="this.src='https://via.placeholder.com/300x300/111/D4AF37?text=Foto+3'">
+               </div>
            `,
 river_publico: `
-               <h2 style="text-align: center; margin-bottom: 30px;">Público-Alvo</h2>
+<h2 style="text-align: center; margin-bottom: 30px;">Público-Alvo</h2>
                <div class="target-personas hover-target">
                    <div class="persona-card">
                        <div class="p-icon">🌍</div>
@@ -641,8 +763,8 @@ river_publico: `
                        <div style="text-align: left;">
                            <h4>Psicografia e Motivações</h4>
                            <p style="margin: 0; line-height: 1.8;">
-                               Casais ou pequenos grupos interessados em turismo rural, enoturismo, natureza e bem-estar.<br><br>
-                               Procuram <strong>experiências autênticas</strong> e contacto imersivo com o património duriense.<br><br>
+                               Casais ou pequenos grupos interessados em turismo rural, enoturismo, natureza e bem-estar.<br>
+                               Procuram <strong>experiências autênticas</strong> e contacto imersivo com o património duriense.<br>
                                São verdadeiros amantes de provas vínicas.
                            </p>
                        </div>
@@ -703,29 +825,29 @@ river_swot: `
                </div>
            `,
 river_4p: `
-               <h2 style="text-align: center;">Marketing-Mix (4 P's)</h2>
+<h2 style="text-align: center;">Marketing-Mix (4 P's)</h2>
                <div class="mix-grid hover-target">
-                   <div class="mix-card custom-scroll">
-                       <h3>Produto</h3>
-                       <p>Alojamento turístico em propriedade tradicional com vertente vitivinícola premium. Oferta de restaurante exclusivo, quartos familiares e piscinas privativas.</p>
-                       <p>Infraestruturas adaptadas, postos elétricos, lavanderia e luxuoso cabaz de boas-vindas.</p>
+                   <div class="mix-card custom-scroll" style="text-align: center;">
+                       <h3 style="text-align: center;">Produto</h3>
+                       <p style="text-align: center; font-size: 1.05rem;">Alojamento turístico em propriedade tradicional com vertente vitivinícola premium. Oferta de restaurante exclusivo, quartos familiares e piscinas privativas.</p>
+                       <p style="text-align: center; font-size: 1.05rem;">Infraestruturas adaptadas, postos elétricos, lavanderia e luxuoso cabaz de boas-vindas.</p>
                    </div>
-                   <div class="mix-card custom-scroll">
-                       <h3>Distribuição</h3>
-                       <p>Estratégia multicanal (direta e indireta). Canal primário no website oficial (motor de reservas e pagamentos diretos).</p>
-                       <p>Integração tática no Booking inicialmente. A longo prazo, eliminação das comissões aos intermediários.</p>
+                   <div class="mix-card custom-scroll" style="text-align: center;">
+                       <h3 style="text-align: center;">Distribuição</h3>
+                       <p style="text-align: center; font-size: 1.05rem;">Estratégia multicanal (direta e indireta). Canal primário no website oficial (motor de reservas e pagamentos diretos).</p>
+                       <p style="text-align: center; font-size: 1.05rem;">Integração tática no Booking inicialmente. A longo prazo, eliminação das comissões aos intermediários.</p>
                    </div>
                    
-                   <div class="mix-card mix-card-long">
-                       <h3>Preço</h3>
-                       <p style="margin-bottom: 10px;">Estratégia focada no posicionamento de valor e luxo premium:</p>
-                       <div class="price-tags">
-                           <span>Casas & Pombais: 150€ - 250€ / Noite</span>
-                           <span>Barco Privado: 180€ / pax</span>
-                           <span>Spa Vinoterapia: 65€ / pax</span>
-                           <span>Passeio Jipe: 40€ / pax</span>
-                           <span>Piquenique: 35€ / pax</span>
-                           <span>Adega + Degustação: 35€ / pax</span>
+                   <div class="mix-card mix-card-long" style="text-align: center;">
+                       <h3 style="text-align: center;">Preço</h3>
+                       <p style="text-align: center; margin-bottom: 10px; font-size: 1.05rem;">Estratégia focada no posicionamento de valor e luxo premium:</p>
+                       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; justify-items: center; width: 100%;">
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Casas & Pombais: 150€ - 250€ / Noite</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Barco Privado: 180€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Spa Vinoterapia: 65€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Passeio Jipe: 40€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Piquenique: 35€ / pax</span>
+                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Adega + Degustação: 35€ / pax</span>
                        </div>
                    </div>
                    
@@ -743,34 +865,27 @@ river_4p: `
                            </div>
                            <div style="flex:1.5; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); height: 250px; display:flex; align-items:center; justify-content:center;">
                                
-                               <!-- Redes Sociais -->
-                               <div id="p-redes" class="promo-content-group active">
-                                   <img src="insta.jpg" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x120/111/D4AF37?text=Insta'}" style="width:55%; height:135px; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4);">
-                                   <div style="width:40%; height:135px; background:rgba(0,0,0,0.5); border:1px solid rgba(212,175,55,0.4); border-radius:10px; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; pointer-events:all;" onclick="openInsta()">
-                                       <span style="font-size:2.2rem; margin-bottom:5px;">📱</span>
-                                       <span style="font-family:'Manrope'; font-size:0.9rem; text-align:center;">Insta Oficial</span>
-                                   </div>
+                               <div id="p-redes" class="promo-content-group active" style="width: 100%; height: 100%;">
+                                   <img src="insta.png" class="hover-target" onclick="openInsta()" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/600x300/111/D4AF37?text=Insta'}" style="width: 100%; height: 100%; border-radius:10px; object-fit:contain; cursor:pointer; pointer-events:all;">
                                </div>
                                
-                               <!-- Parcerias -->
                                <div id="p-parcerias" class="promo-content-group">
                                    <div class="parcerias-container">
                                        <div class="parcerias-sub-title">Nacionais</div>
                                        <div class="parcerias-row">
-                                           <img src="par1.png" onerror="this.src='https://via.placeholder.com/80x60/111/D4AF37?text=Par1'">
-                                           <img src="par2.png" onerror="this.src='https://via.placeholder.com/80x60/111/D4AF37?text=Par2'">
-                                           <img src="par3.png" onerror="this.src='https://via.placeholder.com/80x60/111/D4AF37?text=Par3'">
+                                           <div class="parceria-box">Kensington</div>
+                                           <div class="parceria-box">JCI</div>
+                                           <div class="parceria-box">Vinhos de Portugal</div>
                                        </div>
                                        <div class="parcerias-sub-title" style="margin-top: 4px;">Internacionais</div>
                                        <div class="parcerias-row">
-                                           <img src="par4.png" onerror="this.src='https://via.placeholder.com/80x60/111/D4AF37?text=Par4'">
-                                           <img src="par5.png" onerror="this.src='https://via.placeholder.com/80x60/111/D4AF37?text=Par5'">
-                                           <img src="par6.png" onerror="this.src='https://via.placeholder.com/80x60/111/D4AF37?text=Par6'">
+                                           <div class="parceria-box">Decanter</div>
+                                           <div class="parceria-box">Wine Spectator</div>
+                                           <div class="parceria-box">Relais & Châteaux</div>
                                        </div>
                                    </div>
                                </div>
 
-                               <!-- Flyers e Cartões -->
                                <div id="p-flyers" class="promo-content-group">
                                    <div class="flyers-grid">
                                        <img src="car1.png" title="Cartão Frente" onerror="this.src='https://via.placeholder.com/70x130/111/D4AF37?text=Car1'">
@@ -780,10 +895,9 @@ river_4p: `
                                    </div>
                                </div>
 
-                               <!-- Tote Bag Centrada -->
                                <div id="p-tote" class="promo-content-group">
                                    <div class="tote-container">
-                                       <img src="tote.png" onerror="this.src='tote.jpg'; this.onerror=function(){this.src='https://via.placeholder.com/250x250/111/D4AF37?text=ToteBag'}" style="height: 220px; width: 100%; object-fit: contain; border-radius: 8px;">
+                                       <img src="totebag.png" onerror="this.src='tote.png'; this.onerror=function(){this.src='https://via.placeholder.com/250x250/111/D4AF37?text=ToteBag'}" style="height: 220px; width: 100%; object-fit: contain; border-radius: 8px;">
                                    </div>
                                </div>
 
@@ -849,15 +963,15 @@ river_microprojeto: `
                    </div>
                    <div style="flex: 1.2; display: flex; flex-direction: column; align-items: center;">
                        <div style="width: 100%; border-radius: 15px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.6);">
-                           <img class="micro-slide active-slide" src="proj1.jpg" alt="Projeto 1" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+1'">
-                           <img class="micro-slide" src="proj2.jpg" alt="Projeto 2" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+2'">
-                           <img class="micro-slide" src="proj3.jpg" alt="Projeto 3" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+3'">
-                           <img class="micro-slide" src="proj4.jpg" alt="Projeto 4" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+4'">
-                           <img class="micro-slide" src="proj5.jpg" alt="Projeto 5" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+5'">
-                           <img class="micro-slide" src="proj6.jpg" alt="Projeto 6" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+6'">
-                           <img class="micro-slide" src="proj7.jpg" alt="Projeto 7" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+7'">
-                           <img class="micro-slide" src="proj8.jpg" alt="Projeto 8" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+8'">
-                           <img class="micro-slide" src="proj9.jpg" alt="Projeto 9" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+9'">
+                           <img class="micro-slide active-slide" src="proj1.png" alt="Projeto 1" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+1'">
+                           <img class="micro-slide" src="proj2.png" alt="Projeto 2" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+2'">
+                           <img class="micro-slide" src="proj3.png" alt="Projeto 3" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+3'">
+                           <img class="micro-slide" src="proj4.png" alt="Projeto 4" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+4'">
+                           <img class="micro-slide" src="proj5.png" alt="Projeto 5" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+5'">
+                           <img class="micro-slide" src="proj6.png" alt="Projeto 6" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+6'">
+                           <img class="micro-slide" src="proj7.png" alt="Projeto 7" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+7'">
+                           <img class="micro-slide" src="proj8.png" alt="Projeto 8" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+8'">
+                           <img class="micro-slide" src="proj9.png" alt="Projeto 9" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+9'">
                        </div>
                        <div class="slide-controls">
                            <span class="slide-dot active-dot" onclick="currentMicroSlide(0)"></span>
@@ -1069,11 +1183,44 @@ showMicroSlide(currentSlideIdx + 1);
         }
 
         window.transitionToSiteBuilder = function() {
-presentationPhase = 'builder';
+            presentationPhase = 'builder';
             document.getElementById('create-site-btn-container').style.opacity = '0';
             document.getElementById('create-site-btn-container').style.pointerEvents = 'none';
-document.getElementById('site-builder').classList.add('active');
-updateHoverTargets();
+            document.getElementById('site-builder').classList.add('active');
+            updateHoverTargets();
+        }
+
+// FUNÇÃO PARA IMAGENS MVV
+window.showMVV = function(type, el) {
+    document.querySelectorAll('.tri-item').forEach(item => item.classList.remove('active-mvv'));
+    el.classList.add('active-mvv');
+    
+    const img1 = document.getElementById('mvv-img-1');
+    const img2 = document.getElementById('mvv-img-2');
+    const img3 = document.getElementById('mvv-img-3');
+    
+    img1.style.opacity = '0';
+    img2.style.opacity = '0';
+    img3.style.opacity = '0';
+    
+    setTimeout(() => {
+        if(type === 'missao') {
+            img1.src = 'mis1.png'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+1';
+            img2.src = 'mis2.png'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+2';
+            img3.src = 'mis3.png'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Missão+3';
+        } else if(type === 'visao') {
+            img1.src = 'vis1.png'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+1';
+            img2.src = 'vis2.png'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+2';
+            img3.src = 'vis3.png'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Visão+3';
+        } else if(type === 'valores') {
+            img1.src = 'val1.png'; img1.onerror = () => img1.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+1';
+            img2.src = 'val2.png'; img2.onerror = () => img2.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+2';
+            img3.src = 'val3.png'; img3.onerror = () => img3.src = 'https://via.placeholder.com/300x300/111/D4AF37?text=Valores+3';
+        }
+        img1.style.opacity = '1';
+        img2.style.opacity = '1';
+        img3.style.opacity = '1';
+    }, 300);
 }
 
 // ------------------------------------------------------------------
