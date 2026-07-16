@@ -161,20 +161,20 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .custom-scroll::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.5); border-radius: 10px; }
 .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.8); }
 
-        .active-mvv { border-color: var(--accent-color) !important; background: rgba(212, 175, 55, 0.15) !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3) !important; transform: translateY(-5px); }
-        .mvv-img-box { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: opacity 0.4s ease; opacity: 0.1; }
+.active-mvv { border-color: var(--accent-color) !important; background: rgba(212, 175, 55, 0.15) !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3) !important; transform: translateY(-5px); }
+.mvv-img-box { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: opacity 0.4s ease; opacity: 0.1; }
 
-        /* Estruturas Internas Modais */
+/* Estruturas Internas Modais */
 .grid-tripartida { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 20px; }
 .tri-item { background: rgba(0,0,0,0.4); border: 1px solid rgba(212, 175, 55, 0.2); padding: 30px; border-radius: 15px; transition: transform 0.3s, border-color 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .tri-item:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.6); }
 .tri-item h3 { color: var(--accent-color); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px; text-align: center; }
 
-/* TAGS DE PALAVRAS-CHAVE (MISSÃO, VISÃO, VALORES) - DESIGN PREMIUM */
+/* TAGS DE PALAVRAS-CHAVE */
 .kw-tag { display: block; width: 100%; padding: 12px 15px; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3); border-radius: 8px; font-size: 0.95rem; margin-bottom: 10px; font-family: 'Manrope', sans-serif; color: #eee; transition: all 0.3s; cursor: default; text-align: center; box-sizing: border-box; }
 .kw-tag:hover { background: rgba(212,175,55,0.2); border-color: var(--accent-color); color: #fff; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.2); }
 
-/* Design de Público Alvo (Personas) */
+/* Personas */
 .target-personas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
 .persona-card { background: rgba(0,0,0,0.5); border: 1px solid rgba(212,175,55,0.3); border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s; }
 .persona-card:hover { border-color: var(--accent-color); background: rgba(212,175,55,0.1); transform: translateY(-5px); }
@@ -203,16 +203,13 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .swot-box.opportunities li::before { background: #2196F3; }
 .swot-box.threats li::before { background: #FF9800; }
 
-/* MARKETING MIX GRID - REESTRUTURADO */
+/* MARKETING MIX GRID */
 .mix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
 .mix-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px; border-radius: 15px; transition: border-color 0.3s; }
 .mix-card:hover { border-color: var(--accent-color); }
 .mix-card h3 { color: var(--accent-color); font-size: 1.4rem; margin-bottom: 15px; font-family: 'Cinzel', serif; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 10px;}
 .mix-card p { font-size: 0.95rem; color: #ccc; line-height: 1.7; margin-bottom: 15px; text-align: justify; }
 .mix-card-long { grid-column: 1 / -1; }
-
-.price-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; justify-content: flex-start; }
-.price-tags span { background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); display: inline-block; }
 
 .promo-btn { display: inline-block; padding: 10px 15px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 8px; font-size: 0.9rem; margin: 5px; font-family: 'Manrope', sans-serif; color: #ddd; transition: all 0.3s; cursor: pointer; pointer-events: all; text-align: center; flex: 1 1 calc(50% - 10px); box-sizing: border-box;}
 .promo-btn:hover { background: var(--accent-color); color: #000; font-weight: 600; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
@@ -224,19 +221,14 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 
 .parcerias-container { display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; }
 .parcerias-sub-title { font-size: 0.75rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; text-align: left; font-weight: 600; }
-.parcerias-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; height: 60px; }
-.parcerias-row img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid rgba(212,175,55,0.3); }
-
-.flyers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; height: 140px; }
-.flyers-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; border: 1px solid rgba(212,175,55,0.3); }
+.parcerias-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; flex: 1; min-height: 0; }
 
 .tote-container { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
 
-/* ======================================================== */
 /* NOVOS ESTILOS: PARCERIAS DE TEXTO E FLYERS (FLIP EFFECT) */
-/* ======================================================== */
-.parceria-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.65rem; padding: 6px; color: #ddd; font-family: 'Manrope', sans-serif; width: 100%; height: 100%; transition: all 0.3s; cursor: pointer; pointer-events: all; }
+.parceria-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.65rem; padding: 10px; color: #ddd; font-family: 'Manrope', sans-serif; width: 100%; height: 100%; transition: all 0.3s; cursor: pointer; pointer-events: all; }
 .parceria-box:hover { border-color: var(--accent-color); color: #fff; background: rgba(212,175,55,0.1); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.2); }
+
 .flyers-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; height: 100%; perspective: 1000px; }
 .flip-card { background: transparent; width: 100%; height: 100%; cursor: pointer; pointer-events: all; }
 .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); transform-style: preserve-3d; }
@@ -279,9 +271,11 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .builder-content { width: 1100px; max-width: 95%; text-align: center; }
 .builder-content h2 { font-size: 3.5rem; color: var(--accent-color); margin-bottom: 10px; }
 .builder-content p { font-size: 1.1rem; color: #aaa; margin-bottom: 40px; }
-.builder-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; text-align: left; margin-bottom: 35px;}
 
-.build-option { background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(5,5,5,0.95)); border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); cursor: none; box-shadow: 0 10px 20px rgba(0,0,0,0.4); pointer-events: all;}
+.builder-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; text-align: left; margin-bottom: 35px; align-items: stretch;}
+.builder-grid .build-option:nth-child(10) { grid-column: 2; } /* Módulo 10 ao centro */
+
+.build-option { background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(5,5,5,0.95)); border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px 20px; border-radius: 12px; display: flex; align-items: center; gap: 15px; transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1); cursor: none; box-shadow: 0 10px 20px rgba(0,0,0,0.4); pointer-events: all; height: 100%;}
 .build-option:hover, .build-option.selected { border-color: var(--accent-color); background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(10,10,10,0.9)); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15); }
 .build-option .checkbox { width: 22px; height: 22px; flex-shrink: 0; border: 2px solid var(--accent-color); border-radius: 6px; display: flex; justify-content: center; align-items: center; transition: all 0.2s; }
 .build-option.selected .checkbox { background: var(--accent-color); }
@@ -310,8 +304,8 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .brand-section h3 { color: var(--accent-color); font-size: 1.6rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase;}
 
 .ideas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.idea-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; pointer-events: all; }
-.idea-pill.span-2 { grid-column: 1 / -1; text-align: center; }
+.idea-pill { display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.3; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 15px; border-radius: 8px; font-size: 0.95rem; color: #ddd; transition: all 0.3s; cursor: none; pointer-events: all; }
+.idea-pill.span-2 { grid-column: 1 / -1; }
 .idea-pill:hover { border-color: var(--accent-color); color: #fff; background: rgba(212, 175, 55, 0.1); }
 .idea-pill.chosen { border-color: var(--accent-color); color: var(--accent-color); font-weight: 600; background: rgba(212, 175, 55, 0.15); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);}
 
@@ -332,7 +326,7 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .btn-insta-follow:hover { background: #0081d6; }
 
 /* BOTÃO CRIAR SITE */
-#create-site-btn-container { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); opacity: 0; pointer-events: none; z-index: 100; transition: opacity 0.8s ease; }
+#create-site-btn-container { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); opacity: 0; pointer-events: none; z-index: 100; transition: opacity 0.8s ease; }
 
 @media (max-width: 768px) {
 .grid-tripartida { grid-template-columns: 1fr; }
@@ -743,13 +737,13 @@ river_4p: `
                    <div class="mix-card mix-card-long" style="text-align: center;">
                        <h3 style="text-align: center;">Preço</h3>
                        <p style="text-align: center; margin-bottom: 10px; font-size: 1.05rem;">Estratégia focada no posicionamento de valor e luxo premium:</p>
-                       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; justify-items: center; width: 100%;">
-                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Casas & Pombais: 150€ - 250€ / Noite</span>
-                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Barco Privado: 180€ / pax</span>
-                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Spa Vinoterapia: 65€ / pax</span>
-                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Passeio Jipe: 40€ / pax</span>
-                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Piquenique: 35€ / pax</span>
-                           <span style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%;">Adega + Degustação: 35€ / pax</span>
+                       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; justify-items: center; width: 100%;">
+                           <div style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 18px; border-radius: 25px; font-size: 1.05rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.5; text-align: center;">Casas & Pombais<br><span style="color: #ddd; font-size: 0.95rem; font-weight: 400;">150€ - 250€ / Noite</span></div>
+                           <div style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 18px; border-radius: 25px; font-size: 1.05rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.5; text-align: center;">Barco Privado<br><span style="color: #ddd; font-size: 0.95rem; font-weight: 400;">180€ / pax</span></div>
+                           <div style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 18px; border-radius: 25px; font-size: 1.05rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.5; text-align: center;">Spa Vinoterapia<br><span style="color: #ddd; font-size: 0.95rem; font-weight: 400;">65€ / pax</span></div>
+                           <div style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 18px; border-radius: 25px; font-size: 1.05rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.5; text-align: center;">Passeio Jipe<br><span style="color: #ddd; font-size: 0.95rem; font-weight: 400;">40€ / pax</span></div>
+                           <div style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 18px; border-radius: 25px; font-size: 1.05rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.5; text-align: center;">Piquenique<br><span style="color: #ddd; font-size: 0.95rem; font-weight: 400;">35€ / pax</span></div>
+                           <div style="background: rgba(212, 175, 55, 0.12); color: var(--accent-color); padding: 18px; border-radius: 25px; font-size: 1.05rem; font-weight: 600; border: 1px solid rgba(212, 175, 55, 0.4); width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.5; text-align: center;">Adega + Degustação<br><span style="color: #ddd; font-size: 0.95rem; font-weight: 400;">35€ / pax</span></div>
                        </div>
                    </div>
                    
@@ -758,9 +752,9 @@ river_4p: `
                        <div style="display:flex; justify-content: space-between; gap: 20px; align-items: stretch; width:100%; margin-top:10px;">
                            
                            <!-- COLUNA ESQUERDA: MENOR LARGURA E BOTÕES EMPILHADOS -->
-                           <div style="flex:0.7; display:flex; flex-direction:column;">
-                               <p style="margin-bottom: 25px;">Estratégia omnicanal focada na valorização da nossa identidade duriense.</p>
-                               <div style="display:flex; flex-direction:column; gap:10px;">
+                           <div style="flex:0.7; display:flex; flex-direction:column; justify-content: space-between;">
+                               <p style="margin-bottom: 15px;">Estratégia omnicanal focada na valorização da nossa identidade duriense.</p>
+                               <div style="display:flex; flex-direction:column; gap:10px; margin-top: auto;">
                                     <span class="promo-btn" onmouseover="changePromoDisplay('p-redes')">Redes Sociais</span>
                                     <span class="promo-btn" onmouseover="changePromoDisplay('p-parcerias')">Parcerias</span>
                                     <span class="promo-btn" onmouseover="changePromoDisplay('p-flyers')">Flyers & Cartões</span>
@@ -769,11 +763,11 @@ river_4p: `
                            </div>
                            
                            <!-- COLUNA DIREITA: MAIOR LARGURA PARA AS IMAGENS -->
-                           <div style="flex:2.2; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); min-height: 220px; display:flex; align-items:center; justify-content:center;">
+                           <div style="flex:2.2; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); height: 260px; display:flex; align-items:center; justify-content:center;">
                                
                                <!-- Redes Sociais: Imagem a ocupar largura total -->
                                <div id="p-redes" class="promo-content-group active">
-                                   <img src="insta.jpg" class="hover-target" onclick="openInsta()" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/800x300/111/D4AF37?text=Instagram'}" style="width: 100%; height: 100%; min-height: 190px; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4); cursor:pointer; pointer-events:all;">
+                                   <img src="insta.jpg" class="hover-target" onclick="openInsta()" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/800x300/111/D4AF37?text=Instagram'}" style="width: 100%; height: 100%; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4); cursor:pointer; pointer-events:all;">
                                </div>
                                
                                <!-- Parcerias: Nomes em retângulos -->
@@ -817,7 +811,7 @@ river_4p: `
                                <!-- Tote Bag -->
                                <div id="p-tote" class="promo-content-group">
                                    <div class="tote-container">
-                                       <img src="totebag.jpg" onerror="this.src='tote.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x200/111/D4AF37?text=ToteBag'}" style="max-height: 190px; max-width: 100%; object-fit: contain; border-radius: 8px; border: 1px solid rgba(212,175,55,0.4);">
+                                       <img src="totebag.jpg" onerror="this.src='tote.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x200/111/D4AF37?text=ToteBag'}" style="height: 100%; width: 100%; object-fit: contain; border-radius: 8px; border: 1px solid rgba(212,175,55,0.4);">
                                    </div>
                                </div>
 
