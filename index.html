@@ -215,21 +215,21 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .promo-btn:hover { background: var(--accent-color); color: #000; font-weight: 600; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.3); }
 
 /* INTERFACES DINÂMICAS DE PROMOÇÃO */
-.promo-content-group { display: none; width: 100%; height: 100%; gap: 12px; align-items: center; justify-content: center; }
+.promo-content-group { display: none; width: 100%; height: 100%; gap: 12px; align-items: center; justify-content: center; overflow: hidden; }
 .promo-content-group.active { display: flex; animation: fadeSlide 0.4s ease forwards; }
 @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-.parcerias-container { display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; }
+.parcerias-container { display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; justify-content: center; }
 .parcerias-sub-title { font-size: 0.75rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; text-align: left; font-weight: 600; }
 .parcerias-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; flex: 1; min-height: 0; }
 
-.tote-container { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+.tote-container { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; overflow: visible; }
 
 /* NOVOS ESTILOS: PARCERIAS DE TEXTO E FLYERS (FLIP EFFECT) */
-.parceria-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.65rem; padding: 10px; color: #ddd; font-family: 'Manrope', sans-serif; width: 100%; height: 100%; transition: all 0.3s; cursor: pointer; pointer-events: all; }
+.parceria-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.85rem; font-weight: 600; padding: 15px; color: #ddd; font-family: 'Manrope', sans-serif; width: 100%; height: 100%; transition: all 0.3s; cursor: pointer; pointer-events: all; }
 .parceria-box:hover { border-color: var(--accent-color); color: #fff; background: rgba(212,175,55,0.1); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.2); }
 
-.flyers-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; height: 100%; perspective: 1000px; }
+.flyers-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; height: 100%; perspective: 1000px; align-content: flex-end; padding-top: 20px;}
 .flip-card { background: transparent; width: 100%; height: 100%; cursor: pointer; pointer-events: all; }
 .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); transform-style: preserve-3d; }
 .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
@@ -763,15 +763,15 @@ river_4p: `
                            </div>
                            
                            <!-- COLUNA DIREITA: MAIOR LARGURA PARA AS IMAGENS -->
-                           <div style="flex:2.2; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); height: 260px; display:flex; align-items:center; justify-content:center;">
+                           <div style="flex:2.2; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); display:flex; align-items:stretch; justify-content:center;">
                                
                                <!-- Redes Sociais: Imagem a ocupar largura total -->
-                               <div id="p-redes" class="promo-content-group active">
+                               <div id="p-redes" class="promo-content-group active" style="height: 100%;">
                                    <img src="insta.jpg" class="hover-target" onclick="openInsta()" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/800x300/111/D4AF37?text=Instagram'}" style="width: 100%; height: 100%; border-radius:10px; object-fit:cover; border:1px solid rgba(212,175,55,0.4); cursor:pointer; pointer-events:all;">
                                </div>
                                
                                <!-- Parcerias: Nomes em retângulos -->
-                               <div id="p-parcerias" class="promo-content-group">
+                               <div id="p-parcerias" class="promo-content-group" style="height: 100%;">
                                    <div class="parcerias-container">
                                        <div class="parcerias-sub-title">Nacionais</div>
                                        <div class="parcerias-row">
@@ -789,7 +789,7 @@ river_4p: `
                                </div>
 
                                <!-- Flyers e Cartões: Efeito Flip -->
-                               <div id="p-flyers" class="promo-content-group">
+                               <div id="p-flyers" class="promo-content-group" style="height: 100%;">
                                    <div class="flyers-grid-2">
                                        <!-- Item 1: Cartões -->
                                        <div class="flip-card hover-target" onclick="this.classList.toggle('flipped')">
@@ -809,9 +809,9 @@ river_4p: `
                                </div>
 
                                <!-- Tote Bag -->
-                               <div id="p-tote" class="promo-content-group">
-                                   <div class="tote-container">
-                                       <img src="totebag.png" onerror="this.src='tote.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x200/111/D4AF37?text=ToteBag'}" style="height: 100%; width: 100%; object-fit: contain; border-radius: 8px; border: 1px solid rgba(212,175,55,0.4);">
+                               <div id="p-tote" class="promo-content-group" style="height: 100%;">
+                                   <div class="tote-container" style="overflow: visible;">
+                                       <img src="totebag.png" onerror="this.src='tote.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x200/111/D4AF37?text=ToteBag'}" style="max-height: 250px; max-width: 100%; object-fit: contain; border-radius: 8px; border: 1px solid rgba(212,175,55,0.4); transform: rotate(-90deg) scale(1.4);">
                                    </div>
                                </div>
 
