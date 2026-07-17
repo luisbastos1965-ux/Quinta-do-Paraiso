@@ -230,12 +230,12 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .parceria-box:hover { border-color: var(--accent-color); color: #fff; background: rgba(212,175,55,0.1); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212,175,55,0.2); }
 
 .flyers-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; height: 100%; perspective: 1000px; align-content: center;}
-.flip-card { background: transparent; width: 100%; height: 190px; cursor: pointer; pointer-events: all; }
+.flip-card { background: transparent; width: 100%; height: 180px; cursor: pointer; pointer-events: all; }
 .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1); transform-style: preserve-3d; }
 .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-.flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 8px; overflow: hidden; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 8px; overflow: hidden; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 5px 15px rgba(0,0,0,0.5); background-color: #fff; display: flex; justify-content: center; align-items: center;}
 .flip-card-back { transform: rotateY(180deg); }
-.flip-card img { width: 100%; height: 100%; object-fit: cover; }
+.flip-card img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
 
 /* Estrutura Org ALARGADA E CORRIGIDA */
 .org-layout { display: flex; gap: 30px; align-items: stretch; margin-top: 20px; flex-wrap: nowrap; width: 100%; }
@@ -508,16 +508,16 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
             <button class="promo-btn hover-target" style="margin-bottom: 25px; padding: 12px 25px; background: rgba(212,175,55,0.15); border-color: var(--accent-color); color: var(--accent-color); font-weight: bold;" onclick="selectAllModules()">Selecionar Todos os Módulos</button>
             
             <div class="builder-grid" id="builder-options">
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🛎️</i> Motor de Reservas (Alojamento)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🛎️</i> Motor de Reservas</span></div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🍷</i> Loja Vínica & E-commerce</span></div>
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🍽️</i> Restaurante (Menu de Autor)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🍽️</i> Restaurante</span></div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🍇</i> Integração de Enoturismo</span></div>
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🤖</i> Assistente IA (Sommelier)</span></div>
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🎮</i> Academia (Jornada Vindima)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🤖</i> Assistente IA</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🎮</i> Academia</span></div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>📰</i> Coleção do Curador</span></div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>🖼️</i> Galeria 3D Dinâmica</span></div>
                 <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>⭐</i> Testemunhos Editoriais</span></div>
-                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>📱</i> Mural Social (Instagram)</span></div>
+                <div class="build-option hover-target" onclick="this.classList.toggle('selected')"><div class="checkbox"></div><span><i>📱</i> Mural Social</span></div>
             </div>
             
             <div id="loading-container" style="display:none; width:100%; max-width: 600px; margin: 0 auto 30px;">
@@ -751,10 +751,10 @@ river_4p: `
                        <h3>Promoção</h3>
                        <div style="display:flex; justify-content: space-between; gap: 20px; align-items: center; width:100%; margin-top:15px;">
                            
-                           <!-- COLUNA ESQUERDA: MENOR LARGURA E BOTÕES EMPILHADOS -->
-                           <div style="flex:0.7; display:flex; flex-direction:column; justify-content: center;">
-                               <p style="margin-bottom: 20px;">Estratégia omnicanal focada na valorização da nossa identidade duriense.</p>
-                               <div style="display:flex; flex-direction:column; gap:12px;">
+                           <!-- COLUNA ESQUERDA -->
+                           <div style="flex:0.7; display:flex; flex-direction:column; justify-content: space-between; height: 240px;">
+                               <p style="margin-bottom: 0;">Estratégia omnicanal focada na valorização da nossa identidade duriense.</p>
+                               <div style="display:flex; flex-direction:column; gap:12px; margin-top: auto;">
                                     <span class="promo-btn" onmouseover="changePromoDisplay('p-redes')">Redes Sociais</span>
                                     <span class="promo-btn" onmouseover="changePromoDisplay('p-parcerias')">Parcerias</span>
                                     <span class="promo-btn" onmouseover="changePromoDisplay('p-flyers')">Flyers & Cartões</span>
@@ -762,15 +762,15 @@ river_4p: `
                                </div>
                            </div>
                            
-                           <!-- COLUNA DIREITA: MAIOR LARGURA PARA AS IMAGENS -->
-                           <div style="flex:2.2; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); height: 300px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                           <!-- COLUNA DIREITA -->
+                           <div style="flex:2.2; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2); height: 240px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
                                
-                               <!-- Redes Sociais: Imagem a ocupar largura total -->
+                               <!-- Redes Sociais -->
                                <div id="p-redes" class="promo-content-group active" style="height: 100%;">
                                    <img src="insta.jpg" class="hover-target" onclick="openInsta()" onerror="this.src='insta.png'; this.onerror=function(){this.src='https://via.placeholder.com/800x300/111/D4AF37?text=Instagram'}" style="width: 100%; height: 100%; border-radius:10px; object-fit:contain; border:none; cursor:pointer; pointer-events:all;">
                                </div>
                                
-                               <!-- Parcerias: Nomes em retângulos -->
+                               <!-- Parcerias -->
                                <div id="p-parcerias" class="promo-content-group" style="height: 100%;">
                                    <div class="parcerias-container">
                                        <div class="parcerias-sub-title">Nacionais</div>
@@ -788,7 +788,7 @@ river_4p: `
                                    </div>
                                </div>
 
-                               <!-- Flyers e Cartões: Efeito Flip -->
+                               <!-- Flyers e Cartões -->
                                <div id="p-flyers" class="promo-content-group" style="height: 100%;">
                                    <div class="flyers-grid-2">
                                        <!-- Item 1: Cartões -->
@@ -811,7 +811,7 @@ river_4p: `
                                <!-- Tote Bag -->
                                <div id="p-tote" class="promo-content-group" style="height: 100%;">
                                    <div class="tote-container" style="overflow: visible;">
-                                       <img src="totebag.png" onerror="this.src='tote.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x200/111/D4AF37?text=ToteBag'}" style="max-height: 100%; max-width: 100%; object-fit: contain; border: none; transform: rotate(-90deg) scale(1.8);">
+                                       <img src="totebag.png" onerror="this.src='tote.png'; this.onerror=function(){this.src='https://via.placeholder.com/200x200/111/D4AF37?text=ToteBag'}" style="height: 100%; width: 100%; object-fit: contain; border: none; transform: rotate(-90deg) scale(1.7);">
                                    </div>
                                </div>
 
@@ -877,14 +877,14 @@ river_microprojeto: `
                    </div>
                    <div style="flex: 1.2; display: flex; flex-direction: column; align-items: center;">
                        <div style="width: 100%; border-radius: 15px; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.6);">
-                           <img class="micro-slide active-slide" src="proj1.jpg" alt="Projeto 1" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+1'">
+                           <img class="micro-slide active-slide" src="proj8.jpg" alt="Projeto 8" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+8'">
+                           <img class="micro-slide" src="proj1.jpg" alt="Projeto 1" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+1'">
                            <img class="micro-slide" src="proj2.jpg" alt="Projeto 2" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+2'">
                            <img class="micro-slide" src="proj3.jpg" alt="Projeto 3" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+3'">
                            <img class="micro-slide" src="proj4.jpg" alt="Projeto 4" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+4'">
                            <img class="micro-slide" src="proj5.jpg" alt="Projeto 5" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+5'">
                            <img class="micro-slide" src="proj6.jpg" alt="Projeto 6" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+6'">
                            <img class="micro-slide" src="proj7.jpg" alt="Projeto 7" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+7'">
-                           <img class="micro-slide" src="proj8.jpg" alt="Projeto 8" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+8'">
                            <img class="micro-slide" src="proj9.jpg" alt="Projeto 9" onerror="this.src='https://via.placeholder.com/600x400/111/D4AF37?text=Foto+9'">
                        </div>
                        <div class="slide-controls">
