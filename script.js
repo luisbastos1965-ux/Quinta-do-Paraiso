@@ -208,17 +208,16 @@ const sectionData = {
                 </div>
             </div>
             
-            <!-- Última Linha: Visita+Degustação (1 coluna) e Personalizar (2 colunas) -->
-            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
+            <div class="service-item span-2-col service-highlight hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍇</div>
                 <div class="si-details">
                     <h4>Visita à Adega + Degustação</h4>
                     <p>1h30 <span>•</span> 35€ / pax</p>
-                    <div class="si-extra">A experiência completa. Explore as nossas caves históricas e termine com uma prova de vinhos de luxo.</div>
+                    <div class="si-extra">A experiência completa. Explore as nossas caves históricas e termine com uma prova de vinhos de luxo na nossa sala panorâmica.</div>
                 </div>
             </div>
             
-            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+            <div class="service-item service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
                 <div class="si-icon" style="margin-bottom: 5px;">✨</div>
                 <div class="si-details">
                     <h4 style="font-size: 1.3rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
@@ -235,7 +234,11 @@ const sectionData = {
             <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
-                        <span class="wine-type">Rosé</span><h4 class="wine-name">Tavedo Rosé</h4>
+                        <div>
+                            <span class="wine-type">Rosé</span>
+                            <h4 class="wine-name">Tavedo Rosé</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">18.00€</div>
+                        </div>
                         <img src="Vinho1.png" alt="Tavedo Rosé" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho1'">
                     </div>
                     <div class="wine-flip-back">
@@ -254,7 +257,11 @@ const sectionData = {
             <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
-                        <span class="wine-type">Branco</span><h4 class="wine-name">Branco Clássico</h4>
+                        <div>
+                            <span class="wine-type">Branco</span>
+                            <h4 class="wine-name">Branco Clássico</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">22.50€</div>
+                        </div>
                         <img src="Vinho2.png" alt="Branco Clássico" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho2'">
                     </div>
                     <div class="wine-flip-back">
@@ -273,7 +280,11 @@ const sectionData = {
             <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
-                        <span class="wine-type">Branco Reserva</span><h4 class="wine-name">Casa Branco</h4>
+                        <div>
+                            <span class="wine-type">Branco Reserva</span>
+                            <h4 class="wine-name">Casa Branco</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">35.00€</div>
+                        </div>
                         <img src="Vinho3.png" alt="Casa Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho3'">
                     </div>
                     <div class="wine-flip-back">
@@ -292,7 +303,11 @@ const sectionData = {
             <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
-                        <span class="wine-type">Tinto Reserva</span><h4 class="wine-name">Touriga Nacional</h4>
+                        <div>
+                            <span class="wine-type">Tinto Reserva</span>
+                            <h4 class="wine-name">Touriga Nacional</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">45.00€</div>
+                        </div>
                         <img src="Vinho4.png" alt="Touriga Nacional" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho4'">
                     </div>
                     <div class="wine-flip-back">
@@ -311,7 +326,11 @@ const sectionData = {
             <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
-                        <span class="wine-type">Tinto</span><h4 class="wine-name">Casa Tinto</h4>
+                        <div>
+                            <span class="wine-type">Tinto</span>
+                            <h4 class="wine-name">Casa Tinto</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">28.00€</div>
+                        </div>
                         <img src="Vinho5.png" alt="Casa Tinto" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho5'">
                     </div>
                     <div class="wine-flip-back">
@@ -330,7 +349,11 @@ const sectionData = {
             <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
-                        <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Tawny Clássico</h4>
+                        <div>
+                            <span class="wine-type">Vinho do Porto</span>
+                            <h4 class="wine-name">Tawny Clássico</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">32.00€</div>
+                        </div>
                         <img src="Vinho6.png" alt="Tawny Clássico" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho6'">
                     </div>
                     <div class="wine-flip-back">
@@ -349,7 +372,11 @@ const sectionData = {
             <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front" style="border-color: var(--accent-color);">
-                        <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Quinta do Paraíso Vintage</h4>
+                        <div>
+                            <span class="wine-type">Vinho do Porto</span>
+                            <h4 class="wine-name">Quinta do Paraíso Vintage</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">85.00€</div>
+                        </div>
                         <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
                     </div>
                     <div class="wine-flip-back" style="border-color: var(--accent-color);">
@@ -366,7 +393,7 @@ const sectionData = {
 
         </div>
 
-        <div id="wine-detail-view" class="wine-detail-wrapper">
+        <div id="wine-detail-view" class="wine-detail-wrapper" style="display:none;">
             <div class="wd-img-container">
                 <img id="wd-img" src="" alt="Garrafa">
             </div>
@@ -516,7 +543,6 @@ const sectionData = {
             
             <!-- FASE 1: Colheita -->
             <div id="vindima-1" class="vindima-stage active">
-                <div class="stage-icon">✂️</div>
                 <h3 class="stage-title">Fase 1: A Colheita Manual</h3>
                 <p class="stage-desc">As uvas maduras começaram a surgir nas videiras. Seja rápido! Clique nas 5 uvas maduras para as apanhar antes que desapareçam.</p>
                 
@@ -529,21 +555,17 @@ const sectionData = {
 
             <!-- FASE 2: Pisar -->
             <div id="vindima-2" class="vindima-stage">
-                <div class="stage-icon">🦶</div>
                 <h3 class="stage-title">Fase 2: A Pisar no Lagar</h3>
                 <p class="stage-desc">A tradição manda pisar a pé! Clique no lagar o mais rápido que conseguir para esmagar as uvas e extrair o mosto.</p>
                 <div class="interactive-game-area" style="flex-direction: column;">
                     <div class="game-progress-bar"><div class="game-progress-fill" id="lagar-bar"></div></div>
-                    <div class="lagar-area hover-target" onclick="clickLagar(event)">
-                        <span style="font-size: 5rem; pointer-events:none;">🏺</span>
-                    </div>
+                    <div class="lagar-area hover-target" onclick="clickLagar(event)"></div>
                 </div>
                 <button class="btn-submit hover-target" id="btn-next-2" style="display:none; margin-top:20px;" onclick="advanceVindima(3)">Ir para a Fermentação</button>
             </div>
 
             <!-- FASE 3: Fermentação -->
             <div id="vindima-3" class="vindima-stage">
-                <div class="stage-icon">🌡️</div>
                 <h3 class="stage-title">Fase 3: Controlo da Fermentação</h3>
                 <p class="stage-desc">Cuidado com o calor! O processo faz a temperatura subir. Clique no botão de arrefecer para manter o mosto na <strong>zona verde</strong> até a barra encher.</p>
                 
@@ -557,7 +579,6 @@ const sectionData = {
 
             <!-- FASE 4: Estágio -->
             <div id="vindima-4" class="vindima-stage">
-                <div class="stage-icon">🪵</div>
                 <h3 class="stage-title">Fase 4: Estágio em Barrica</h3>
                 <p class="stage-desc">Precisão é fundamental. Tente selar a barrica exatamente quando a linha cruzar a marca dourada central!</p>
                 
@@ -573,8 +594,7 @@ const sectionData = {
 
             <!-- FASE 5: Engarrafar -->
             <div id="vindima-5" class="vindima-stage">
-                <div class="stage-icon">🍾</div>
-                <h3 class="stage-title">Sucesso de Ouro!</h3>
+                <h3 class="stage-title" style="font-size: 2.5rem; margin-bottom: 20px;">Sucesso de Ouro!</h3>
                 <p class="stage-desc">Parabéns! Dominou o processo de vinificação com mestria. É oficialmente um <strong>Mestre do Douro</strong>. O seu vinho Grande Reserva está pronto a servir.</p>
                 <button class="btn-submit hover-target" onclick="resetVindima()" style="margin-top:20px;">Tentar Outra Colheita</button>
             </div>
@@ -603,6 +623,7 @@ const sectionData = {
         </div>
         
         <div class="reviews-grid custom-scroll" id="reviews-container">
+            <!-- Review 1 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -615,6 +636,7 @@ const sectionData = {
                 <p class="rev-text">A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!</p>
             </div>
             
+            <!-- Review 2 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -627,6 +649,7 @@ const sectionData = {
                 <p class="rev-text">O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados e prontos para regressar à cidade.</p>
             </div>
             
+            <!-- Review 3 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -639,6 +662,7 @@ const sectionData = {
                 <p class="rev-text">Excelência a todos níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!</p>
             </div>
             
+            <!-- Review 4 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -651,6 +675,7 @@ const sectionData = {
                 <p class="rev-text">Uma experiência imersiva e luxuosa. O jantar harmonizado no restaurante superou todas as nossas expectativas gastronómicas.</p>
             </div>
             
+            <!-- Review 5 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -663,6 +688,7 @@ const sectionData = {
                 <p class="rev-text">We loved every second of our stay. The wine tasting with the sommelier was the highlight of our trip to Portugal!</p>
             </div>
             
+            <!-- Review 6 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -675,6 +701,7 @@ const sectionData = {
                 <p class="rev-text">As vistas dos quartos são de cortar a respiração. Acordar com o nevoeiro sobre o rio e o sol a bater nas vinhas é mágico.</p>
             </div>
             
+            <!-- Review 7 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -687,6 +714,7 @@ const sectionData = {
                 <p class="rev-text">Tudo pensado ao detalhe, desde o cabaz de boas-vindas até ao requinte da decoração. Um verdadeiro paraíso escondido.</p>
             </div>
             
+            <!-- Review 8 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -699,6 +727,7 @@ const sectionData = {
                 <p class="rev-text">Ein wunderbarer Ort! Der Vintage Portwein ist fantastisch und die Bootsfahrt bei Sonnenuntergang war unbeschreiblich schön.</p>
             </div>
             
+            <!-- Review 9 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -711,6 +740,7 @@ const sectionData = {
                 <p class="rev-text">Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros muito baixos.</p>
             </div>
             
+            <!-- Review 10 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -723,6 +753,7 @@ const sectionData = {
                 <p class="rev-text">A quinta é maravilhosa e o design de interiores deslumbrante. Apenas achei a água da piscina exterior um pouco fria pela manhã.</p>
             </div>
             
+            <!-- Review 11 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -735,6 +766,7 @@ const sectionData = {
                 <p class="rev-text">Adoramos o passeio de jipe e o contacto com a natureza. O Wi-Fi na zona mais isolada das vinhas falha um pouco, mas serve para desligar.</p>
             </div>
             
+            <!-- Review 12 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -866,7 +898,6 @@ window.showWineDetail = function(id) {
     document.getElementById('wd-desc').innerText = w.desc;
     document.getElementById('wd-price').innerText = w.price;
     document.getElementById('wd-img').src = w.img;
-    document.getElementById('wd-buy').onclick = () => window.open(w.link, '_blank');
     
     document.getElementById('wine-detail-view').style.display = 'flex';
 }
