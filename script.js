@@ -16,7 +16,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const updateHoverTargets = () => {
-    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post').forEach(target => {
+    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post, .moving-grape, .lagar-area').forEach(target => {
         if (!target.dataset.hoverBound) {
             target.dataset.hoverBound = 'true';
             target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
@@ -208,8 +208,7 @@ const sectionData = {
                 </div>
             </div>
             
-            <!-- Última Linha com o botão Especial perfeitamente alinhado em altura -->
-            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
+            <div class="service-item span-2-col service-highlight hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍇</div>
                 <div class="si-details">
                     <h4>Visita à Adega + Degustação</h4>
@@ -218,11 +217,11 @@ const sectionData = {
                 </div>
             </div>
             
-            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+            <div class="service-item service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
                 <div class="si-icon" style="margin-bottom: 5px;">✨</div>
                 <div class="si-details">
-                    <h4 style="font-size: 1.25rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
-                    <p style="color: #000; font-weight: 600; font-size: 0.85rem; margin: 0; background: var(--accent-color); padding: 5px 15px; border-radius: 20px; display: inline-block;">Fale com a IA Concierge</p>
+                    <h4 style="font-size: 1.15rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
+                    <p style="color: #ccc; font-weight: 400; font-size: 0.85rem; margin: 0;">Fale com a IA Concierge</p>
                 </div>
             </div>
         </div>
@@ -421,53 +420,65 @@ const sectionData = {
             <div id="vindima-1" class="vindima-stage active">
                 <div class="stage-icon">✂️</div>
                 <h3 class="stage-title">Fase 1: A Colheita Manual</h3>
-                <p class="stage-desc">As uvas Touriga Nacional atingiram a maturação perfeita. Clique nas 4 uvas maduras para encher os cestos e avançar!</p>
-                <div class="interactive-game-area" id="grape-area">
-                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
-                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
-                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
-                    <span class="game-item grape hover-target" onclick="clickGrape(this)">🍇</span>
-                </div>
+                <p class="stage-desc">As uvas maduras começaram a surgir nas videiras. Seja rápido! Clique nas 5 uvas maduras para as apanhar antes que desapareçam.</p>
+                
+                <div class="vine-container" id="vine-container"></div>
+                <div class="game-progress-bar"><div class="game-progress-fill" id="colheita-bar"></div></div>
+                
+                <button class="btn-submit hover-target" id="btn-start-1" onclick="startColheita()">Iniciar Colheita</button>
+                <button class="btn-submit hover-target" id="btn-next-1" style="display:none;" onclick="advanceVindima(2)">Ir para o Lagar</button>
             </div>
 
             <!-- FASE 2: Pisar -->
             <div id="vindima-2" class="vindima-stage">
                 <div class="stage-icon">🦶</div>
                 <h3 class="stage-title">Fase 2: A Pisar no Lagar</h3>
-                <p class="stage-desc">A tradição manda pisar a pé! Clique no lagar várias vezes para esmagar as uvas e extrair o mosto.</p>
+                <p class="stage-desc">A tradição manda pisar a pé! Clique no lagar o mais rápido que conseguir para esmagar as uvas e extrair o mosto.</p>
                 <div class="interactive-game-area" style="flex-direction: column;">
                     <div class="game-progress-bar"><div class="game-progress-fill" id="lagar-bar"></div></div>
-                    <span class="game-item hover-target" onclick="clickLagar()" style="font-size: 5rem;">🏺</span>
+                    <div class="lagar-area hover-target" onclick="clickLagar(event)">
+                        <span style="font-size: 5rem; pointer-events:none;">🏺</span>
+                    </div>
                 </div>
+                <button class="btn-submit hover-target" id="btn-next-2" style="display:none; margin-top:20px;" onclick="advanceVindima(3)">Ir para a Fermentação</button>
             </div>
 
             <!-- FASE 3: Fermentação -->
             <div id="vindima-3" class="vindima-stage">
                 <div class="stage-icon">🌡️</div>
-                <h3 class="stage-title">Fase 3: Fermentação</h3>
-                <p class="stage-desc">O açúcar transforma-se em álcool. Inicie o processo e aguarde que as leveduras façam a sua magia.</p>
-                <button class="btn-submit hover-target" id="btn-fermentar" onclick="startFermentation()">Iniciar Fermentação</button>
-                <div class="interactive-game-area" style="margin-top: 20px;">
-                    <div class="game-progress-bar"><div class="game-progress-fill" id="ferment-bar"></div></div>
-                </div>
+                <h3 class="stage-title">Fase 3: Controlo da Fermentação</h3>
+                <p class="stage-desc">Cuidado com o calor! O processo faz a temperatura subir. Clique no botão de arrefecer para manter o mosto na <strong>zona verde</strong> até a barra encher.</p>
+                
+                <div class="temp-meter"><div class="temp-pointer" id="temp-pointer"></div></div>
+                <div class="game-progress-bar"><div class="game-progress-fill" id="ferment-bar"></div></div>
+                
+                <button class="btn-submit hover-target" id="btn-cool" onclick="coolDown()" style="display:none; background:#2196F3; color:#fff; border-color:#2196F3; margin-bottom:15px;">❄️ Arrefecer Cuba</button>
+                <button class="btn-submit hover-target" id="btn-start-3" onclick="startFermentation()">Ligar Cubas</button>
+                <button class="btn-submit hover-target" id="btn-next-3" style="display:none;" onclick="advanceVindima(4)">Ir para o Estágio</button>
             </div>
 
             <!-- FASE 4: Estágio -->
             <div id="vindima-4" class="vindima-stage">
                 <div class="stage-icon">🪵</div>
                 <h3 class="stage-title">Fase 4: Estágio em Barrica</h3>
-                <p class="stage-desc">O vinho precisa de descansar e ganhar corpo. Clique na barrica de carvalho francês para selar e iniciar o estágio.</p>
-                <div class="interactive-game-area">
-                    <span class="game-item hover-target" onclick="advanceVindima(5)" style="font-size: 6rem;">🛢️</span>
+                <p class="stage-desc">Precisão é fundamental. Tente selar a barrica exatamente quando a linha cruzar a marca dourada central!</p>
+                
+                <div class="timing-bar-container">
+                    <div class="timing-target"></div>
+                    <div class="timing-cursor" id="timing-cursor"></div>
                 </div>
+                
+                <button class="btn-submit hover-target" id="btn-start-4" onclick="startEstagio()">Preparar Barrica</button>
+                <button class="btn-submit hover-target" id="btn-stop-4" onclick="stopEstagio()" style="display:none; background:#FF9800;">Selar Barrica!</button>
+                <button class="btn-submit hover-target" id="btn-next-4" style="display:none;" onclick="advanceVindima(5)">Ver Resultado</button>
             </div>
 
             <!-- FASE 5: Engarrafar -->
             <div id="vindima-5" class="vindima-stage">
-                <div class="stage-icon">🍷</div>
-                <h3 class="stage-title">Fase 5: Sucesso!</h3>
-                <p class="stage-desc">Parabéns! Dominou o processo de vinificação da Quinta do Paraíso. O seu vinho Grande Reserva está pronto a servir.</p>
-                <button class="btn-submit hover-target" onclick="resetVindima()">Jogar Novamente</button>
+                <div class="stage-icon">🍾</div>
+                <h3 class="stage-title">Sucesso de Ouro!</h3>
+                <p class="stage-desc">Parabéns! Dominou o processo de vinificação com mestria. É oficialmente um <strong>Mestre do Douro</strong>. O seu vinho Grande Reserva está pronto a servir.</p>
+                <button class="btn-submit hover-target" onclick="resetVindima()" style="margin-top:20px;">Tentar Outra Colheita</button>
             </div>
 
         </div>
@@ -494,7 +505,6 @@ const sectionData = {
         </div>
         
         <div class="reviews-grid custom-scroll" id="reviews-container">
-            <!-- Review 1 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -507,7 +517,6 @@ const sectionData = {
                 <p class="rev-text">A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!</p>
             </div>
             
-            <!-- Review 2 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -520,7 +529,6 @@ const sectionData = {
                 <p class="rev-text">O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados e prontos para regressar à cidade.</p>
             </div>
             
-            <!-- Review 3 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -533,7 +541,6 @@ const sectionData = {
                 <p class="rev-text">Excelência a todos níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!</p>
             </div>
             
-            <!-- Review 4 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -546,7 +553,6 @@ const sectionData = {
                 <p class="rev-text">Uma experiência imersiva e luxuosa. O jantar harmonizado no restaurante superou todas as nossas expectativas gastronómicas.</p>
             </div>
             
-            <!-- Review 5 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -559,7 +565,6 @@ const sectionData = {
                 <p class="rev-text">We loved every second of our stay. The wine tasting with the sommelier was the highlight of our trip to Portugal!</p>
             </div>
             
-            <!-- Review 6 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -572,7 +577,6 @@ const sectionData = {
                 <p class="rev-text">As vistas dos quartos são de cortar a respiração. Acordar com o nevoeiro sobre o rio e o sol a bater nas vinhas é mágico.</p>
             </div>
             
-            <!-- Review 7 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -585,7 +589,6 @@ const sectionData = {
                 <p class="rev-text">Tudo pensado ao detalhe, desde o cabaz de boas-vindas até ao requinte da decoração. Um verdadeiro paraíso escondido.</p>
             </div>
             
-            <!-- Review 8 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -598,7 +601,6 @@ const sectionData = {
                 <p class="rev-text">Ein wunderbarer Ort! Der Vintage Portwein ist fantastisch und die Bootsfahrt bei Sonnenuntergang war unbeschreiblich schön.</p>
             </div>
             
-            <!-- Review 9 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -611,7 +613,6 @@ const sectionData = {
                 <p class="rev-text">Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros muito baixos.</p>
             </div>
             
-            <!-- Review 10 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -624,7 +625,6 @@ const sectionData = {
                 <p class="rev-text">A quinta é maravilhosa e o design de interiores deslumbrante. Apenas achei a água da piscina exterior um pouco fria pela manhã.</p>
             </div>
             
-            <!-- Review 11 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -637,7 +637,6 @@ const sectionData = {
                 <p class="rev-text">Adoramos o passeio de jipe e o contacto com a natureza. O Wi-Fi na zona mais isolada das vinhas falha um pouco, mas serve para desligar.</p>
             </div>
             
-            <!-- Review 12 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -697,6 +696,13 @@ const sectionData = {
     `
 };
 
+let gameIntervals = [];
+
+function clearGameIntervals() {
+    gameIntervals.forEach(clearInterval);
+    gameIntervals = [];
+}
+
 const modalOverlay = document.getElementById('main-modal');
 const modalBody = document.getElementById('modal-body-content');
 
@@ -712,6 +718,7 @@ window.closeSection = function() {
     modalOverlay.classList.remove('active');
     isSectionOpen = false; // Permite ao carrossel voltar a rodar
     autoSpin = true;
+    clearGameIntervals(); // Para os loops do minijogo
 }
 
 // ==========================================================================
@@ -803,44 +810,146 @@ window.openLb = function(el) {
 window.closeLb = function() { document.getElementById('lightbox').classList.remove('active'); }
 
 // ==========================================================================
-// 6. ACADEMIA (LÓGICA JOGO DA VINDIMA)
+// 6. ACADEMIA (LÓGICA JOGO DA VINDIMA - DINÂMICO)
 // ==========================================================================
-let grapesLeft = 4;
-let lagarClicks = 0;
+let colheitaScore = 0;
+let lagarScore = 0;
+let fermProgress = 0;
+let tempPos = 10;
+let timingPos = 0;
+let timingDir = 1;
 
 window.advanceVindima = function(stage) {
+    clearGameIntervals();
     document.querySelectorAll('.vindima-stage').forEach(el => el.classList.remove('active'));
     document.getElementById('vindima-' + stage).classList.add('active');
 }
 
-window.clickGrape = function(el) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(50px) scale(0)';
-    setTimeout(() => el.style.display = 'none', 300);
-    grapesLeft--;
-    if(grapesLeft <= 0) { setTimeout(() => advanceVindima(2), 600); }
+// Fase 1: Colheita Random
+window.startColheita = function() {
+    document.getElementById('btn-start-1').style.display = 'none';
+    colheitaScore = 0;
+    let container = document.getElementById('vine-container');
+    container.innerHTML = '';
+    
+    let spawnGrape = setInterval(() => {
+        let grape = document.createElement('span');
+        grape.className = 'moving-grape hover-target';
+        grape.innerText = '🍇';
+        // Ensure they spawn inside bounds (10% to 90% width/height)
+        grape.style.left = (Math.random() * 80 + 10) + '%';
+        grape.style.top = (Math.random() * 70 + 10) + '%';
+        
+        grape.onclick = function() {
+            this.remove();
+            colheitaScore++;
+            document.getElementById('colheita-bar').style.width = (colheitaScore * 20) + '%';
+            if(colheitaScore >= 5) {
+                clearGameIntervals();
+                container.innerHTML = '<h3 style="color:#4CAF50; margin-top:80px; text-shadow: 0 2px 5px #000; font-family: Cinzel; font-size: 2rem;">Colheita Perfeita!</h3>';
+                document.getElementById('btn-next-1').style.display = 'inline-block';
+            }
+        };
+        container.appendChild(grape);
+        
+        // Remove after a short time to simulate whack-a-mole
+        setTimeout(() => { if(container.contains(grape)) grape.remove(); }, 1200);
+    }, 800);
+    gameIntervals.push(spawnGrape);
 }
 
-window.clickLagar = function() {
-    lagarClicks++;
-    let perc = lagarClicks * 20;
-    document.getElementById('lagar-bar').style.width = perc + '%';
-    if(lagarClicks >= 5) { setTimeout(() => advanceVindima(3), 500); }
+// Fase 2: Pisar
+window.clickLagar = function(e) {
+    if(lagarScore >= 20) return;
+    lagarScore++;
+    document.getElementById('lagar-bar').style.width = (lagarScore * 5) + '%';
+    
+    // Splash Effect
+    let splash = document.createElement('div');
+    splash.className = 'splash-particle';
+    splash.innerText = '💧';
+    splash.style.left = e.offsetX + 'px';
+    splash.style.top = e.offsetY + 'px';
+    splash.style.setProperty('--sx', (Math.random() - 0.5) * 100);
+    splash.style.setProperty('--sy', (Math.random() - 1) * 100);
+    e.currentTarget.appendChild(splash);
+    
+    setTimeout(() => splash.remove(), 500);
+
+    if(lagarScore >= 20) {
+        document.getElementById('btn-next-2').style.display = 'inline-block';
+    }
 }
 
+// Fase 3: Fermentação (Temperatura)
 window.startFermentation = function() {
-    document.getElementById('btn-fermentar').style.display = 'none';
-    let w = 0;
-    let int = setInterval(() => {
-        w += 2;
-        document.getElementById('ferment-bar').style.width = w + '%';
-        if(w >= 100) { clearInterval(int); setTimeout(() => advanceVindima(4), 500); }
-    }, 50);
+    document.getElementById('btn-start-3').style.display = 'none';
+    document.getElementById('btn-cool').style.display = 'inline-block';
+    tempPos = 10; fermProgress = 0;
+    
+    let fermInt = setInterval(() => {
+        tempPos += 3; // Aquecer rápido
+        if(tempPos > 100) tempPos = 100;
+        document.getElementById('temp-pointer').style.left = tempPos + '%';
+        
+        // Sweet spot: 40 a 60
+        if(tempPos >= 40 && tempPos <= 60) {
+            fermProgress += 4;
+            document.getElementById('ferment-bar').style.width = fermProgress + '%';
+        } else if(tempPos > 80) {
+            fermProgress -= 2; // Penalização por sobreaquecimento
+            if(fermProgress < 0) fermProgress = 0;
+            document.getElementById('ferment-bar').style.width = fermProgress + '%';
+        }
+
+        if(fermProgress >= 100) {
+            clearGameIntervals();
+            document.getElementById('btn-cool').style.display = 'none';
+            document.getElementById('btn-next-3').style.display = 'inline-block';
+        }
+    }, 150);
+    gameIntervals.push(fermInt);
+}
+
+window.coolDown = function() {
+    tempPos -= 15;
+    if(tempPos < 0) tempPos = 0;
+    document.getElementById('temp-pointer').style.left = tempPos + '%';
+}
+
+// Fase 4: Estágio (Timing)
+window.startEstagio = function() {
+    document.getElementById('btn-start-4').style.display = 'none';
+    document.getElementById('btn-stop-4').style.display = 'inline-block';
+    timingPos = 0;
+    
+    let timeInt = setInterval(() => {
+        timingPos += 3 * timingDir;
+        if(timingPos >= 100 || timingPos <= 0) timingDir *= -1;
+        document.getElementById('timing-cursor').style.left = timingPos + '%';
+    }, 30);
+    gameIntervals.push(timeInt);
+}
+
+window.stopEstagio = function() {
+    clearGameIntervals();
+    // Sweet spot é de 40% a 60%
+    if(timingPos >= 40 && timingPos <= 60) {
+        document.getElementById('btn-stop-4').style.display = 'none';
+        document.getElementById('btn-next-4').style.display = 'inline-block';
+    } else {
+        alert('Falhou o momento perfeito (Tem de selar na área central delimitada). Tente novamente.');
+        startEstagio();
+    }
 }
 
 window.resetVindima = function() {
-    grapesLeft = 4;
-    lagarClicks = 0;
+    clearGameIntervals();
+    colheitaScore = 0;
+    lagarScore = 0;
+    fermProgress = 0;
+    tempPos = 10;
+    timingPos = 0;
     openSection('jogos'); 
 }
 
