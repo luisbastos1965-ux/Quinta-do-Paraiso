@@ -126,13 +126,13 @@ carContainer.addEventListener('mousemove', (e) => {
 // ==========================================================================
 
 const wineDetails = {
-    w1: { type: "Rosé", name: "Tavedo Rosé", price: "18.00€", img: "Vinho1.png", link: "https://burmester.pt/vinhos/tavedo-rose/" },
-    w2: { type: "Branco", name: "Branco Clássico", price: "22.50€", img: "Vinho2.png", link: "https://burmester.pt/vinhos/burmester-branco/" },
-    w3: { type: "Branco Reserva", name: "Casa Branco", price: "35.00€", img: "Vinho3.png", link: "https://burmester.pt/vinhos/casa-burmester-branco/" },
-    w4: { type: "Tinto Reserva", name: "Touriga Nacional", price: "45.00€", img: "Vinho4.png", link: "https://burmester.pt/vinhos/casa-burmester-touriga-nacional-2018/" },
-    w5: { type: "Tinto", name: "Casa Tinto", price: "28.00€", img: "Vinho5.png", link: "https://burmester.pt/vinhos/casa-burmester-tinto/" },
-    w6: { type: "Vinho do Porto", name: "Tawny Clássico", price: "32.00€", img: "Vinho6.png", link: "https://burmester.pt/vinhos/burmester-tawny-port/" },
-    w7: { type: "Vinho do Porto", name: "Quinta do Paraíso Vintage", price: "85.00€", img: "Vinho7.png", link: "https://burmester.pt/vinhos/vintage-2018-quinta-do-arnozelo/" }
+    w1: { type: "Rosé", name: "Tavedo Rosé", price: "18.00€", img: "Vinho1.png", link: "https://burmester.pt/vinhos/tavedo-rose/", desc: "De cor suave e apetecível, este rosé demonstra uma frescura imediata no nariz. As notas de frutos vermelhos de acidez elevada como groselha e framboesa imiscuem-se com nuances mentoladas. Na boca é equilibrado e guloso, conseguindo manter esse registo no tempo. Ideal para acompanhar sushi, pratos de peixe e saladas." },
+    w2: { type: "Branco", name: "Branco Clássico", price: "22.50€", img: "Vinho2.png", link: "https://burmester.pt/vinhos/burmester-branco/", desc: "De aroma elegante e frutado, a elegância do nariz é pautada pela frescura das notas cítricas envoltas num conjunto de ervas frescas. Envolvente na prova de boca, este é um vinho que se revela guloso e fresco, proporcionando bons momentos de descontração. Ideal para acompanhar saladas e pratos de peixe." },
+    w3: { type: "Branco Reserva", name: "Casa Branco", price: "35.00€", img: "Vinho3.png", link: "https://burmester.pt/vinhos/casa-burmester-branco/", desc: "Um Reserva de grande elegância e carácter, que cativa pelas notas a fruta amarela e ervas aromáticas frescas. Vibrante na frescura, cheio no corpo, pleno de garra, revela ligeiras notas fumadas que realçam a sua complexidade. Um vinho bem estruturado com um final longo e muito refrescante. Ideal para acompanhar mariscos, peixes gordos e carnes brancas." },
+    w4: { type: "Tinto Reserva", name: "Touriga Nacional", price: "45.00€", img: "Vinho4.png", link: "https://burmester.pt/vinhos/casa-burmester-touriga-nacional-2018/", desc: "Concentrado e pleno de frescura, apresenta delicadas notas florais envolvidas pela exuberância de fruta preta. Um conjunto elegante, marcado pelos taninos maduros e redondos, demonstrando um excelente volume em boca que se prolonga no tempo. Um vinho que cativa pela persistência e cremosidade. Ideal para acompanhar carnes vermelhas, carnes de caça e também queijos." },
+    w5: { type: "Tinto", name: "Casa Tinto", price: "28.00€", img: "Vinho5.png", link: "https://burmester.pt/vinhos/casa-burmester-tinto/", desc: "Nariz profundo e denso, onde a fruta preta sobressai num fundo de leves notas de especiarias. Barrica muito fina e bem integrada, fazendo sobressair a frescura do bouquet. Boca estruturada revelando uma textura elegante e aveludada com a fruta bem presente. Termina longo e recheado de pormenores muito sedutores. Ideal para acompanhar carnes vermelhas, carnes de caça e queijos." },
+    w6: { type: "Vinho do Porto", name: "Tawny Clássico", price: "32.00€", img: "Vinho6.png", link: "https://burmester.pt/vinhos/burmester-tawny-port/", desc: "Brilhante cor castanha-aloirada. Nariz repleto de fruta madura com sedutoras nuances abaunilhadas. No palato mostra uma apetitosa frescura e um pronunciado caráter frutado. Aveludado, redondo e de notável envolvência. Servido bem fresco, é o aperitivo ideal para acompanhar com frutos secos e sobremesas." },
+    w7: { type: "Vinho do Porto", name: "Quinta do Paraíso Vintage", price: "85.00€", img: "Vinho7.png", link: "https://burmester.pt/vinhos/vintage-2018-quinta-do-arnozelo/", desc: "De cor vermelho opaco com laivos violetas, este Vintage marca por uma expressão aromática bastante floral e pelas notas de fruta tropical, onde se destacam as notas de flor de laranjeira, cassis, rosmaninho, frutos do bosque e ameixas. Com taninos bem marcados, tensos e musculados, envolvidos em notas de alcaçuz e fruta fresca, revela o vigor do terroir da Quinta. Final longo e elegante." }
 };
 
 const sectionData = {
@@ -244,7 +244,7 @@ const sectionData = {
                     <div class="wine-flip-back">
                         <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Tavedo Rosé</h4>
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">18.00€</span>
-                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <p>De cor suave e apetecível, demonstra uma frescura imediata. Frutos vermelhos imiscuem-se com nuances mentoladas.</p>
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w1')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w1'].link, '_blank')">Comprar</button>
@@ -267,7 +267,7 @@ const sectionData = {
                     <div class="wine-flip-back">
                         <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Branco Clássico</h4>
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">22.50€</span>
-                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <p>Aroma elegante e frutado. A elegância do nariz é pautada pela frescura das notas cítricas envoltas em ervas frescas.</p>
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w2')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w2'].link, '_blank')">Comprar</button>
@@ -290,7 +290,7 @@ const sectionData = {
                     <div class="wine-flip-back">
                         <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Casa Branco</h4>
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">35.00€</span>
-                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <p>Reserva de grande elegância, cativa pela fruta amarela e ervas frescas. Vibrante, cheio no corpo e pleno de garra.</p>
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w3')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w3'].link, '_blank')">Comprar</button>
@@ -313,7 +313,7 @@ const sectionData = {
                     <div class="wine-flip-back">
                         <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Touriga Nacional</h4>
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">45.00€</span>
-                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <p>Concentrado e pleno de frescura, apresenta delicadas notas florais envolvidas pela exuberância de fruta preta.</p>
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w4')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w4'].link, '_blank')">Comprar</button>
@@ -336,7 +336,7 @@ const sectionData = {
                     <div class="wine-flip-back">
                         <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Casa Tinto</h4>
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">28.00€</span>
-                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <p>Nariz profundo onde a fruta preta sobressai num fundo de especiarias. Textura elegante, aveludada e final longo.</p>
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w5')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w5'].link, '_blank')">Comprar</button>
@@ -359,7 +359,7 @@ const sectionData = {
                     <div class="wine-flip-back">
                         <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Tawny Clássico</h4>
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">32.00€</span>
-                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <p>Brilhante cor castanha-aloirada. Nariz repleto de fruta madura com sedutoras nuances abaunilhadas. Aveludado e redondo.</p>
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w6')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w6'].link, '_blank')">Comprar</button>
@@ -382,7 +382,7 @@ const sectionData = {
                     <div class="wine-flip-back" style="border-color: var(--accent-color);">
                         <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Vintage</h4>
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">85.00€</span>
-                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <p>Cor vermelho opaco. Expressão aromática floral com notas de flor de laranjeira, cassis e frutos do bosque. Taninos tensos e musculados.</p>
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w7')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w7'].link, '_blank')">Comprar</button>
