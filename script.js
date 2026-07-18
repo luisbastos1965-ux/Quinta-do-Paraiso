@@ -138,24 +138,22 @@ const wineDetails = {
 
 const sectionData = {
     quem: `
-        <h2 class="modal-title">Quem Somos</h2>
-        <div class="about-split-container hover-target">
-            <div class="about-text-area">
-                <div class="about-split-left">
-                    <h3>Tradição,<br>Natureza &<br>Hospitalidade</h3>
-                </div>
-                <div class="about-split-right">
-                    <p>Na Quinta do Paraíso acreditamos que as melhores experiências nascem da autenticidade. Situada no coração do Alto Douro Vinhateiro, a nossa quinta combina a tradição vitivinícola com o conforto, a natureza e a hospitalidade, proporcionando momentos únicos a todos os que nos visitam. Mais do que um alojamento, somos um espaço onde o vinho, a cultura, a gastronomia e a tranquilidade se unem para criar memórias que perduram no tempo.</p>
+        <h2 class="modal-title" style="margin-bottom: 10px;">A Nossa História</h2>
+        <div class="editorial-layout hover-target">
+            <div class="editorial-image-box">
+                <img src="sara.jpg" alt="Sara Reis" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'">
+                <div class="editorial-signature">
+                    <h4>Sara Reis</h4>
+                    <span>Fundadora</span>
                 </div>
             </div>
             
-            <div class="bio-section">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Gestora" class="bio-img">
-                <div class="bio-text">
-                    <h4>Sara Reis</h4>
-                    <span>Fundadora & Gestora de Enoturismo</span>
-                    <p>Com uma paixão enraizada pelas encostas durienses desde a infância, a Sara transformou a herança familiar na Quinta do Paraíso. Especialista em gestão hoteleira e vitivinicultura, o seu toque pessoal garante que cada detalhe — desde a colheita na vinha até ao momento de receber os hóspedes — transmita a verdadeira alma e o luxo do Alto Douro.</p>
-                </div>
+            <div class="editorial-text-box custom-scroll">
+                <p class="lead">Sou apaixonada pelo Douro, pelas suas paisagens e pelas tradições que fazem desta região um dos maiores tesouros de Portugal. Cresci rodeada pela cultura da vinha e pelo respeito pelo trabalho da terra, aprendendo desde cedo que cada colheita conta uma história e que cada garrafa de vinho transporta consigo a dedicação de quem a produz.</p>
+                <p>Foi dessa ligação à região que nasceu o sonho de criar um espaço onde a autenticidade do Douro pudesse ser vivida por todos. Mais do que uma quinta de produção vinícola, imaginei um lugar onde os visitantes encontrassem tranquilidade, conforto e experiências memoráveis, rodeados pelas vinhas, pela gastronomia local e pelas paisagens classificadas como Património Mundial.</p>
+                <p>Na nossa quinta, acreditamos que o enoturismo vai muito além da prova de vinhos. É uma oportunidade para conhecer as tradições durienses, participar em momentos únicos da vida da vinha, desfrutar de alojamentos acolhedores e criar memórias inesquecíveis num ambiente onde a natureza e a hospitalidade caminham lado a lado.</p>
+                <p>Cada detalhe foi pensado para proporcionar uma experiência genuína, combinando a riqueza da tradição com o conforto contemporâneo. O nosso compromisso é receber cada visitante como parte da nossa história, partilhando a paixão pelo vinho, pela cultura e pela beleza incomparável do Douro.</p>
+                <p class="welcome">Seja bem-vindo(a) à nossa quinta. Esperamos que cada visita seja uma celebração dos sentidos e uma oportunidade para descobrir tudo aquilo que torna o Douro verdadeiramente único.</p>
             </div>
         </div>
     `,
@@ -202,20 +200,25 @@ const sectionData = {
                     <div class="si-extra">Uma visita guiada ao coração da nossa produção. Desça às caves antigas e entenda o nosso processo de estágio em barrica.</div>
                 </div>
             </div>
+            
+            <!-- Última Linha: Degustação (1 coluna) e Personalizar (2 colunas) -->
             <div class="service-item" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍷</div>
                 <div class="si-details">
-                    <h4>Degustação de Vinhos</h4>
-                    <p>1h00 <span>•</span> 25€ / pax</p>
-                    <div class="si-extra">Uma prova orientada pela nossa Sommelier. Inclui degustação de 3 referências premium e harmonização com queijos e compotas locais.</div>
-                </div>
-            </div>
-            <div class="service-item service-highlight" onclick="this.classList.toggle('expanded')">
-                <div class="si-icon">🍇</div>
-                <div class="si-details">
                     <h4>Visita à Adega + Degustação</h4>
                     <p>1h30 <span>•</span> 35€ / pax</p>
-                    <div class="si-extra">A experiência completa. Explore as nossas caves históricas e termine com uma prova de vinhos de luxo na nossa sala de provas panorâmica.</div>
+                    <div class="si-extra">Explore as nossas caves históricas e termine com uma prova de vinhos de luxo na nossa sala panorâmica.</div>
+                </div>
+            </div>
+            
+            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+                <div class="si-icon" style="margin-bottom: 10px;">✨</div>
+                <div class="si-details">
+                    <h4 style="font-size: 1.4rem;">Personalize a sua Experiência</h4>
+                    <p style="color: #fff; font-weight: 300;">Feito à sua medida. O limite é a sua imaginação.</p>
+                    <div class="si-extra" style="max-height: 200px; opacity: 1; margin-top: 15px; border-top: 1px dashed rgba(212,175,55,0.3); padding-top: 15px;">
+                        Fale diretamente com o nosso Concierge (IA) para planear um roteiro exclusivo. Provas cegas, passeios de helicóptero ou pedidos de casamento na adega. <br><br><strong style="color: var(--accent-color);">Clique aqui para iniciar o planeamento.</strong>
+                    </div>
                 </div>
             </div>
         </div>
@@ -401,7 +404,8 @@ const sectionData = {
             </div>
 
             <div class="map-embed-container hover-target">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.8118029524025!2d-7.143890284586326!3d41.07725997929462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3a39e88b6b0bf5%3A0xa61877eeb09f3e!2sVila%20Nova%20de%20Foz%20C%C3%B4a!5e0!3m2!1spt-PT!2spt!4v1650000000000!5m2!1spt-PT!2spt" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <!-- Coordenadas Geográficas atualizadas com precisão -->
+                <iframe src="https://maps.google.com/maps?q=41.136054,-7.3031649&hl=pt&z=14&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     `,
