@@ -338,3 +338,41 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 @media (max-width: 900px) {
     .span-2-col { grid-column: span 1; }
 }
+
+/* ========================================================================== */
+/* ATUALIZAÇÕES: ATIVIDADES (ALTURAS) & MURAL INSTAGRAM POST */
+/* ========================================================================== */
+
+/* Garantir que todos os cartões de atividades mantêm a mesma altura */
+.services-luxury-grid { align-items: stretch; }
+.service-item { height: 100%; display: flex; align-items: center; }
+
+/* Botão Especial "Personalizar" */
+.service-highlight-custom { background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(15,15,15,0.9)); border-color: var(--accent-color); justify-content: center; text-align: center; flex-direction: column; transition: all 0.4s; }
+.service-highlight-custom:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 15px 40px rgba(212,175,55,0.3); background: var(--accent-color); }
+.service-highlight-custom:hover .si-details h4, .service-highlight-custom:hover .si-details p { color: #000 !important; }
+.service-highlight-custom .si-details { text-align: center; width: 100%; }
+
+/* Modal Individual do Instagram (Estilo Feed/Comentários) */
+.post-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; transition: all 0.3s; z-index: 100000; }
+.post-modal-overlay.active { opacity: 1; visibility: visible; pointer-events: all; }
+.post-modal-content { display: flex; background: #000; border: 1px solid rgba(212,175,55,0.3); border-radius: 15px; overflow: hidden; width: 950px; max-width: 95%; height: 600px; max-height: 90vh; box-shadow: 0 20px 50px rgba(0,0,0,0.8); cursor: default; }
+.post-img-col { flex: 1.5; background: #111; display: flex; align-items: center; justify-content: center; border-right: 1px solid rgba(255,255,255,0.1); }
+.post-img-col img { width: 100%; height: 100%; object-fit: cover; }
+.post-info-col { flex: 1; display: flex; flex-direction: column; background: #0a0a0a; color: #fff; }
+.post-header { display: flex; align-items: center; gap: 15px; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.post-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-color), #8a7322); color: #000; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Cinzel'; font-size: 1.2rem; }
+.post-author { font-weight: 700; font-family: 'Manrope'; font-size: 1.05rem; }
+.post-comments { padding: 20px; flex: 1; overflow-y: auto; font-family: 'Manrope'; font-size: 0.95rem; }
+.post-comment { margin-bottom: 18px; line-height: 1.6; color: #ccc; }
+.post-comment strong { color: var(--accent-color); margin-right: 8px; }
+.post-actions { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); }
+.post-likes { font-weight: bold; margin-bottom: 5px; color: #fff; font-size: 1.1rem; }
+.post-date { font-size: 0.8rem; color: #777; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;}
+.post-close { position: absolute; top: 20px; right: 30px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; text-shadow: 0 2px 5px #000; z-index: 10; font-family: 'Manrope'; pointer-events: all; }
+.post-close:hover { color: var(--accent-color); }
+
+@media(max-width: 768px) {
+    .post-modal-content { flex-direction: column; height: 85vh; }
+    .post-img-col, .post-info-col { flex: 1; }
+}
