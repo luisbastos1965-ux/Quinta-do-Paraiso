@@ -376,3 +376,23 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
     .post-modal-content { flex-direction: column; height: 85vh; }
     .post-img-col, .post-info-col { flex: 1; }
 }
+
+/* ========================================================================== */
+/* ACADEMIA: MINIJOGOS INTERATIVOS DA VINDIMA                                 */
+/* ========================================================================== */
+.vine-container { position: relative; width: 100%; height: 220px; background: url('fundo_douro.jpg') center/cover; border-radius: 15px; border: 2px solid rgba(212,175,55,0.4); overflow: hidden; margin-bottom: 20px; box-shadow: inset 0 0 50px rgba(0,0,0,0.8); }
+.moving-grape { position: absolute; font-size: 3rem; cursor: pointer; transition: transform 0.1s; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; pointer-events: all; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.8)); }
+.moving-grape:hover { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--accent-color)); }
+@keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+
+.lagar-area { position: relative; width: 150px; height: 150px; margin: 0 auto 20px; background: rgba(0,0,0,0.5); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; border: 2px dashed rgba(212,175,55,0.5); pointer-events: all; transition: transform 0.1s;}
+.lagar-area:active { transform: scale(0.95); background: rgba(212,175,55,0.1); }
+.splash-particle { position: absolute; font-size: 1.5rem; pointer-events: none; animation: splashAnim 0.5s ease-out forwards; z-index: 10; filter: drop-shadow(0 0 5px #800080); }
+@keyframes splashAnim { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(calc(var(--sx) * 1px), calc(var(--sy) * 1px)) scale(0); opacity: 0; } }
+
+.temp-meter { width: 100%; max-width: 400px; height: 35px; background: linear-gradient(90deg, #4CAF50 0%, #4CAF50 40%, #FF9800 60%, #F44336 100%); border-radius: 20px; position: relative; border: 2px solid rgba(255,255,255,0.2); margin: 0 auto 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
+.temp-pointer { width: 12px; height: 45px; background: #fff; position: absolute; top: -5px; left: 10%; transition: left 0.1s linear; border-radius: 6px; box-shadow: 0 0 15px rgba(0,0,0,0.9); }
+
+.timing-bar-container { width: 100%; max-width: 400px; height: 35px; background: #222; border-radius: 20px; position: relative; border: 2px solid rgba(255,255,255,0.2); margin: 0 auto 20px; overflow: hidden; box-shadow: inset 0 0 10px #000;}
+.timing-target { position: absolute; top: 0; left: 40%; width: 20%; height: 100%; background: rgba(212,175,55,0.4); border-left: 2px solid var(--accent-color); border-right: 2px solid var(--accent-color); }
+.timing-cursor { width: 8px; height: 35px; background: #fff; position: absolute; top: 0; left: 0; box-shadow: 0 0 15px #fff; border-radius: 4px;}
