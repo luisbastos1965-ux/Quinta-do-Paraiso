@@ -16,7 +16,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const updateHoverTargets = () => {
-    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post, .moving-grape, .lagar-area').forEach(target => {
+    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post, .moving-grape, .lagar-area, .wine-flip-card').forEach(target => {
         if (!target.dataset.hoverBound) {
             target.dataset.hoverBound = 'true';
             target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
@@ -126,13 +126,13 @@ carContainer.addEventListener('mousemove', (e) => {
 // ==========================================================================
 
 const wineDetails = {
-    w1: { type: "Rosé", name: "Tavedo Rosé", price: "18.00€", img: "Vinho1.png", link: "https://burmester.pt/vinhos/tavedo-rose/", desc: "Um vinho jovem, fresco e frutado, ideal para momentos de descontração. Apresenta uma cor rosada brilhante, com aromas vibrantes de framboesa e morango silvestre. Na boca é equilibrado e refrescante." },
-    w2: { type: "Branco", name: "Branco Clássico", price: "22.50€", img: "Vinho2.png", link: "https://burmester.pt/vinhos/burmester-branco/", desc: "Blend elegante de castas tradicionais durienses. Cor cítrica, aromas florais e notas de fruta de polpa branca. Excelente volume de boca e acidez crocante." },
-    w3: { type: "Branco Reserva", name: "Casa Branco", price: "35.00€", img: "Vinho3.png", link: "https://burmester.pt/vinhos/casa-burmester-branco/", desc: "Vinho Branco Reserva com estágio parcial em barrica. Perfil complexo com notas de baunilha, pêssego e mineralidade. Textura untuosa e final longo." },
-    w4: { type: "Tinto Reserva", name: "Touriga Nacional", price: "45.00€", img: "Vinho4.png", link: "https://burmester.pt/vinhos/casa-burmester-touriga-nacional-2018/", desc: "A expressão pura da Touriga Nacional do Douro. Estágio de 12 meses em barricas de carvalho francês. Notas exuberantes de violeta, bergamota e chocolate negro. Taninos firmes e sedosos." },
-    w5: { type: "Tinto", name: "Casa Tinto", price: "28.00€", img: "Vinho5.png", link: "https://burmester.pt/vinhos/casa-burmester-tinto/", desc: "Um tinto clássico e envolvente. Fruta vermelha madura com nuances de especiarias e toques balsâmicos. Estrutura elegante, perfeito para pratos de carne tradicionais." },
-    w6: { type: "Vinho do Porto", name: "Tawny Clássico", price: "32.00€", img: "Vinho6.png", link: "https://burmester.pt/vinhos/burmester-tawny-port/", desc: "Envelhecido em cascos de carvalho. Cor alourada, notas intensas de frutos secos, caramelo e um toque de laranjeira. Ideal para acompanhar sobremesas conventuais." },
-    w7: { type: "Vinho do Porto", name: "Quinta do Paraíso Vintage", price: "85.00€", img: "Vinho7.png", link: "https://burmester.pt/vinhos/vintage-2018-quinta-do-arnozelo/", desc: "A joia da nossa coroa. Proveniente de um ano excecional, apresenta uma cor rubi profunda. Aromas intensos a frutos pretos compotados, cacau e especiarias. Estrutura monumental com enorme potencial de guarda." }
+    w1: { type: "Rosé", name: "Tavedo Rosé", price: "18.00€", img: "Vinho1.png", link: "https://burmester.pt/vinhos/tavedo-rose/" },
+    w2: { type: "Branco", name: "Branco Clássico", price: "22.50€", img: "Vinho2.png", link: "https://burmester.pt/vinhos/burmester-branco/" },
+    w3: { type: "Branco Reserva", name: "Casa Branco", price: "35.00€", img: "Vinho3.png", link: "https://burmester.pt/vinhos/casa-burmester-branco/" },
+    w4: { type: "Tinto Reserva", name: "Touriga Nacional", price: "45.00€", img: "Vinho4.png", link: "https://burmester.pt/vinhos/casa-burmester-touriga-nacional-2018/" },
+    w5: { type: "Tinto", name: "Casa Tinto", price: "28.00€", img: "Vinho5.png", link: "https://burmester.pt/vinhos/casa-burmester-tinto/" },
+    w6: { type: "Vinho do Porto", name: "Tawny Clássico", price: "32.00€", img: "Vinho6.png", link: "https://burmester.pt/vinhos/burmester-tawny-port/" },
+    w7: { type: "Vinho do Porto", name: "Quinta do Paraíso Vintage", price: "85.00€", img: "Vinho7.png", link: "https://burmester.pt/vinhos/vintage-2018-quinta-do-arnozelo/" }
 };
 
 const sectionData = {
@@ -208,20 +208,21 @@ const sectionData = {
                 </div>
             </div>
             
-            <div class="service-item span-2-col service-highlight hover-target" onclick="this.classList.toggle('expanded')">
+            <!-- Última Linha: Visita+Degustação (1 coluna) e Personalizar (2 colunas) -->
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍇</div>
                 <div class="si-details">
                     <h4>Visita à Adega + Degustação</h4>
                     <p>1h30 <span>•</span> 35€ / pax</p>
-                    <div class="si-extra">A experiência completa. Explore as nossas caves históricas e termine com uma prova de vinhos de luxo na nossa sala panorâmica.</div>
+                    <div class="si-extra">A experiência completa. Explore as nossas caves históricas e termine com uma prova de vinhos de luxo.</div>
                 </div>
             </div>
             
-            <div class="service-item service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
                 <div class="si-icon" style="margin-bottom: 5px;">✨</div>
                 <div class="si-details">
-                    <h4 style="font-size: 1.15rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
-                    <p style="color: #ccc; font-weight: 400; font-size: 0.85rem; margin: 0;">Fale com a IA Concierge</p>
+                    <h4 style="font-size: 1.3rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
+                    <p style="color: #ccc; font-weight: 400; font-size: 0.9rem; margin: 0;">Fale com a IA Concierge</p>
                 </div>
             </div>
         </div>
@@ -229,42 +230,140 @@ const sectionData = {
     loja: `
         <h2 class="modal-title">Garrafeira Haute Couture</h2>
         
-        <div id="wine-grid-view" class="shop-grid custom-scroll">
-            <div class="wine-card hover-target">
-                <span class="wine-type">Rosé</span><h4 class="wine-name">Tavedo Rosé</h4>
-                <img src="Vinho1.png" alt="Tavedo Rosé" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho1'">
-                <button class="btn-buy hover-target" onclick="showWineDetail('w1')">Saber Mais</button>
+        <div class="shop-grid custom-scroll">
+            <!-- VINHO 1 -->
+            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front">
+                        <span class="wine-type">Rosé</span><h4 class="wine-name">Tavedo Rosé</h4>
+                        <img src="Vinho1.png" alt="Tavedo Rosé" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho1'">
+                    </div>
+                    <div class="wine-flip-back">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Tavedo Rosé</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">18.00€</span>
+                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w1')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w1'].link, '_blank')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="wine-card hover-target">
-                <span class="wine-type">Branco</span><h4 class="wine-name">Branco Clássico</h4>
-                <img src="Vinho2.png" alt="Branco Clássico" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho2'">
-                <button class="btn-buy hover-target" onclick="showWineDetail('w2')">Saber Mais</button>
+
+            <!-- VINHO 2 -->
+            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front">
+                        <span class="wine-type">Branco</span><h4 class="wine-name">Branco Clássico</h4>
+                        <img src="Vinho2.png" alt="Branco Clássico" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho2'">
+                    </div>
+                    <div class="wine-flip-back">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Branco Clássico</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">22.50€</span>
+                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w2')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w2'].link, '_blank')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="wine-card hover-target">
-                <span class="wine-type">Branco Reserva</span><h4 class="wine-name">Casa Branco</h4>
-                <img src="Vinho3.png" alt="Casa Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho3'">
-                <button class="btn-buy hover-target" onclick="showWineDetail('w3')">Saber Mais</button>
+
+            <!-- VINHO 3 -->
+            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front">
+                        <span class="wine-type">Branco Reserva</span><h4 class="wine-name">Casa Branco</h4>
+                        <img src="Vinho3.png" alt="Casa Branco" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho3'">
+                    </div>
+                    <div class="wine-flip-back">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Casa Branco</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">35.00€</span>
+                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w3')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w3'].link, '_blank')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="wine-card hover-target">
-                <span class="wine-type">Tinto Reserva</span><h4 class="wine-name">Touriga Nacional</h4>
-                <img src="Vinho4.png" alt="Touriga Nacional" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho4'">
-                <button class="btn-buy hover-target" onclick="showWineDetail('w4')">Saber Mais</button>
+
+            <!-- VINHO 4 -->
+            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front">
+                        <span class="wine-type">Tinto Reserva</span><h4 class="wine-name">Touriga Nacional</h4>
+                        <img src="Vinho4.png" alt="Touriga Nacional" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho4'">
+                    </div>
+                    <div class="wine-flip-back">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Touriga Nacional</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">45.00€</span>
+                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w4')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w4'].link, '_blank')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="wine-card hover-target">
-                <span class="wine-type">Tinto</span><h4 class="wine-name">Casa Tinto</h4>
-                <img src="Vinho5.png" alt="Casa Tinto" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho5'">
-                <button class="btn-buy hover-target" onclick="showWineDetail('w5')">Saber Mais</button>
+
+            <!-- VINHO 5 -->
+            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front">
+                        <span class="wine-type">Tinto</span><h4 class="wine-name">Casa Tinto</h4>
+                        <img src="Vinho5.png" alt="Casa Tinto" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho5'">
+                    </div>
+                    <div class="wine-flip-back">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Casa Tinto</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">28.00€</span>
+                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w5')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w5'].link, '_blank')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="wine-card hover-target">
-                <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Tawny Clássico</h4>
-                <img src="Vinho6.png" alt="Tawny Clássico" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho6'">
-                <button class="btn-buy hover-target" onclick="showWineDetail('w6')">Saber Mais</button>
+
+            <!-- VINHO 6 -->
+            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front">
+                        <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Tawny Clássico</h4>
+                        <img src="Vinho6.png" alt="Tawny Clássico" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho6'">
+                    </div>
+                    <div class="wine-flip-back">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Tawny Clássico</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">32.00€</span>
+                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w6')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w6'].link, '_blank')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="wine-card hover-target" style="border-color: var(--accent-color);">
-                <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Quinta do Paraíso Vintage</h4>
-                <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
-                <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="showWineDetail('w7')">Saber Mais</button>
+
+            <!-- VINHO 7 -->
+            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front" style="border-color: var(--accent-color);">
+                        <span class="wine-type">Vinho do Porto</span><h4 class="wine-name">Quinta do Paraíso Vintage</h4>
+                        <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
+                    </div>
+                    <div class="wine-flip-back" style="border-color: var(--accent-color);">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Vintage</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">85.00€</span>
+                        <p>Descrição detalhada e notas de prova deste vinho serão inseridas aqui em breve...</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w7')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w7'].link, '_blank')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <div id="wine-detail-view" class="wine-detail-wrapper">
@@ -274,11 +373,10 @@ const sectionData = {
             <div class="wd-info-container">
                 <span id="wd-type" class="wd-type"></span>
                 <h3 id="wd-title" class="wd-title"></h3>
-                <p id="wd-desc" class="wd-desc"></p>
+                <p id="wd-desc" class="wd-desc">As notas de prova da adega serão exibidas aqui para análise.</p>
                 <div id="wd-price" class="wd-price"></div>
                 <div class="wd-actions">
                     <button class="btn-back hover-target" onclick="hideWineDetail()">Voltar à Garrafeira</button>
-                    <button id="wd-buy" class="btn-buy hover-target" style="margin:0; background: var(--accent-color); color: #000;">Comprar Online</button>
                 </div>
             </div>
         </div>
