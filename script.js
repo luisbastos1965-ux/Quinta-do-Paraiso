@@ -16,7 +16,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const updateHoverTargets = () => {
-    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item').forEach(target => {
+    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card').forEach(target => {
         if (!target.dataset.hoverBound) {
             target.dataset.hoverBound = 'true';
             target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
@@ -107,7 +107,6 @@ animateCarousel();
 
 document.querySelectorAll('.carousel-card').forEach(card => {
     card.addEventListener('mouseenter', () => { autoSpin = false; });
-    // Só volta a rodar se o modal não estiver aberto
     card.addEventListener('mouseleave', () => { if (!isDragging && !isSectionOpen) autoSpin = true; });
 });
 
@@ -160,7 +159,7 @@ const sectionData = {
     servicos: `
         <h2 class="modal-title">Atividades & Serviços</h2>
         <div class="services-luxury-grid">
-            <div class="service-item" onclick="this.classList.toggle('expanded')">
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🚤</div>
                 <div class="si-details">
                     <h4>Passeio de Barco no Rio Douro</h4>
@@ -168,7 +167,7 @@ const sectionData = {
                     <div class="si-extra">Navegue pelas águas calmas do Douro num barco rabelo privado. Inclui prova de vinhos a bordo e paragem num cais secreto para fotografias fantásticas.</div>
                 </div>
             </div>
-            <div class="service-item" onclick="this.classList.toggle('expanded')">
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🚙</div>
                 <div class="si-details">
                     <h4>Passeio de Jipe pelas Vinhas</h4>
@@ -176,7 +175,7 @@ const sectionData = {
                     <div class="si-extra">Aventure-se pelos socalcos mais altos da quinta num veículo todo-o-terreno. A melhor forma de ver o pôr-do-sol entre as videiras centenárias.</div>
                 </div>
             </div>
-            <div class="service-item" onclick="this.classList.toggle('expanded')">
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🧺</div>
                 <div class="si-details">
                     <h4>Piquenique na Vinha</h4>
@@ -184,7 +183,7 @@ const sectionData = {
                     <div class="si-extra">Preparamos um cesto luxuoso com queijos, enchidos regionais e pão rústico, harmonizado com o nosso melhor vinho, num cenário idílico isolado.</div>
                 </div>
             </div>
-            <div class="service-item" onclick="this.classList.toggle('expanded')">
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🧖‍♀️</div>
                 <div class="si-details">
                     <h4>Spa de Vinoterapia</h4>
@@ -192,7 +191,7 @@ const sectionData = {
                     <div class="si-extra">Tratamentos de relaxamento profundo utilizando as propriedades antioxidantes das nossas uvas. Um renascer do corpo e da mente.</div>
                 </div>
             </div>
-            <div class="service-item" onclick="this.classList.toggle('expanded')">
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🏺</div>
                 <div class="si-details">
                     <h4>Visita à Adega</h4>
@@ -200,25 +199,30 @@ const sectionData = {
                     <div class="si-extra">Uma visita guiada ao coração da nossa produção. Desça às caves antigas e entenda o nosso processo de estágio em barrica.</div>
                 </div>
             </div>
-            
-            <!-- Última Linha: Degustação (1 coluna) e Personalizar (2 colunas) -->
-            <div class="service-item" onclick="this.classList.toggle('expanded')">
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍷</div>
                 <div class="si-details">
-                    <h4>Visita à Adega + Degustação</h4>
-                    <p>1h30 <span>•</span> 35€ / pax</p>
-                    <div class="si-extra">Explore as nossas caves históricas e termine com uma prova de vinhos de luxo na nossa sala panorâmica.</div>
+                    <h4>Degustação de Vinhos</h4>
+                    <p>1h00 <span>•</span> 25€ / pax</p>
+                    <div class="si-extra">Uma prova orientada pela nossa Sommelier. Inclui degustação de 3 referências premium e harmonização com queijos e compotas locais.</div>
                 </div>
             </div>
             
-            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
-                <div class="si-icon" style="margin-bottom: 10px;">✨</div>
+            <!-- Última Linha: Visita+Degustação (2 colunas) e Personalizar (1 coluna) -->
+            <div class="service-item span-2-col service-highlight hover-target" onclick="this.classList.toggle('expanded')">
+                <div class="si-icon">🍇</div>
                 <div class="si-details">
-                    <h4 style="font-size: 1.4rem;">Personalize a sua Experiência</h4>
-                    <p style="color: #fff; font-weight: 300;">Feito à sua medida. O limite é a sua imaginação.</p>
-                    <div class="si-extra" style="max-height: 200px; opacity: 1; margin-top: 15px; border-top: 1px dashed rgba(212,175,55,0.3); padding-top: 15px;">
-                        Fale diretamente com o nosso Concierge (IA) para planear um roteiro exclusivo. Provas cegas, passeios de helicóptero ou pedidos de casamento na adega. <br><br><strong style="color: var(--accent-color);">Clique aqui para iniciar o planeamento.</strong>
-                    </div>
+                    <h4>Visita à Adega + Degustação</h4>
+                    <p>1h30 <span>•</span> 35€ / pax</p>
+                    <div class="si-extra">A experiência completa. Explore as nossas caves históricas e termine com uma prova de vinhos de luxo na nossa sala panorâmica.</div>
+                </div>
+            </div>
+            
+            <div class="service-item service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+                <div class="si-icon" style="margin-bottom: 5px;">✨</div>
+                <div class="si-details">
+                    <h4 style="font-size: 1.15rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
+                    <p style="color: #ccc; font-weight: 400; font-size: 0.85rem; margin: 0;">Fale com a IA Concierge</p>
                 </div>
             </div>
         </div>
@@ -404,7 +408,6 @@ const sectionData = {
             </div>
 
             <div class="map-embed-container hover-target">
-                <!-- Coordenadas Geográficas atualizadas com precisão -->
                 <iframe src="https://maps.google.com/maps?q=41.136054,-7.3031649&hl=pt&z=14&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
@@ -480,28 +483,159 @@ const sectionData = {
     `,
     reviews: `
         <h2 class="modal-title">Testemunhos Editoriais</h2>
-        <div style="text-align: center; margin-bottom: 10px; color:#aaa; font-family:'Manrope'; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem;">Filtre a experiência por classificação:</div>
-        <div class="star-filter-container hover-target" style="text-align: center;">
+        <div style="text-align: center; margin-bottom: 10px; color:#aaa; font-family:'Manrope'; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem;">Filtrar Experiências</div>
+        <div class="star-filter-container hover-target" style="text-align: center; margin-bottom: 30px;">
             <span class="filter-star s1" style="color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color);" onclick="filterRev(1)">★</span>
             <span class="filter-star s2" style="color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color);" onclick="filterRev(2)">★</span>
             <span class="filter-star s3" style="color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color);" onclick="filterRev(3)">★</span>
             <span class="filter-star s4" style="color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color);" onclick="filterRev(4)">★</span>
             <span class="filter-star s5" style="color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color);" onclick="filterRev(5)">★</span>
         </div>
-        <div class="reviews-wrapper custom-scroll" id="reviews-container" style="max-height: 500px; overflow-y: auto; padding-right: 15px;">
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!"</p><p class="rev-author">— Sarah T., Londres</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados e prontos para regressar à cidade."</p><p class="rev-author">— João P., Lisboa</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"Excelência a todos níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!"</p><p class="rev-author">— Claire M., Paris</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"Uma experiência imersiva e luxuosa. O jantar harmonizado no restaurante superou todas as nossas expectativas gastronómicas."</p><p class="rev-author">— António V., Madrid</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"We loved every second of our stay. The wine tasting with the sommelier was the highlight of our trip to Portugal!"</p><p class="rev-author">— Emily R., Nova Iorque</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"As vistas dos quartos são de cortar a respiração. Acordar com o nevoeiro sobre o rio e o sol a bater nas vinhas é mágico."</p><p class="rev-author">— Pedro N., Porto</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"Tudo pensado ao detalhe, desde o cabaz de boas-vindas até ao requinte da decoração. Um verdadeiro paraíso escondido."</p><p class="rev-author">— Ana S., Faro</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"Ein wunderbarer Ort! Der Vintage Portwein ist fantastisch und die Bootsfahrt bei Sonnenuntergang war unbeschreiblich schön."</p><p class="rev-author">— Hans M., Berlim</p></div>
+        
+        <div class="reviews-grid custom-scroll" id="reviews-container">
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">ST</div>
+                    <div>
+                        <div class="rev-author">Sarah T., Londres</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!</p>
+            </div>
             
-            <div class="review-card show r4"><div class="rev-stars">⭐⭐⭐⭐</div><p class="rev-text">"Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros muito baixos."</p><p class="rev-author">— Manuel G., Porto</p></div>
-            <div class="review-card show r4"><div class="rev-stars">⭐⭐⭐⭐</div><p class="rev-text">"A quinta é maravilhosa e o design de interiores deslumbrante. Apenas achei a água da piscina exterior um pouco fria pela manhã."</p><p class="rev-author">— Laura K., Zurique</p></div>
-            <div class="review-card show r4"><div class="rev-stars">⭐⭐⭐⭐</div><p class="rev-text">"Adoramos o passeio de jipe e o contacto com a natureza. O Wi-Fi na zona mais isolada das vinhas falha um pouco, mas serve para desligar."</p><p class="rev-author">— Rui S., Coimbra</p></div>
-            <div class="review-card show r4"><div class="rev-stars">⭐⭐⭐⭐</div><p class="rev-text">"A comida do restaurante é divina, mas aconselho a reservar com muita antecedência pois as mesas com melhor vista esgotam rápido."</p><p class="rev-author">— Sofia L., Lisboa</p></div>
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">JP</div>
+                    <div>
+                        <div class="rev-author">João P., Lisboa</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados e prontos para regressar à cidade.</p>
+            </div>
+            
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">CM</div>
+                    <div>
+                        <div class="rev-author">Claire M., Paris</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">Excelência a todos níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!</p>
+            </div>
+            
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">AV</div>
+                    <div>
+                        <div class="rev-author">António V., Madrid</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">Uma experiência imersiva e luxuosa. O jantar harmonizado no restaurante superou todas as nossas expectativas gastronómicas.</p>
+            </div>
+            
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">ER</div>
+                    <div>
+                        <div class="rev-author">Emily R., Nova Iorque</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">We loved every second of our stay. The wine tasting with the sommelier was the highlight of our trip to Portugal!</p>
+            </div>
+            
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">PN</div>
+                    <div>
+                        <div class="rev-author">Pedro N., Porto</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">As vistas dos quartos são de cortar a respiração. Acordar com o nevoeiro sobre o rio e o sol a bater nas vinhas é mágico.</p>
+            </div>
+            
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">AS</div>
+                    <div>
+                        <div class="rev-author">Ana S., Faro</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">Tudo pensado ao detalhe, desde o cabaz de boas-vindas até ao requinte da decoração. Um verdadeiro paraíso escondido.</p>
+            </div>
+            
+            <div class="review-card show r5 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">HM</div>
+                    <div>
+                        <div class="rev-author">Hans M., Berlim</div>
+                        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">Ein wunderbarer Ort! Der Vintage Portwein ist fantastisch und die Bootsfahrt bei Sonnenuntergang war unbeschreiblich schön.</p>
+            </div>
+            
+            <div class="review-card show r4 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">MG</div>
+                    <div>
+                        <div class="rev-author">Manuel G., Porto</div>
+                        <div class="rev-stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros muito baixos.</p>
+            </div>
+            
+            <div class="review-card show r4 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">LK</div>
+                    <div>
+                        <div class="rev-author">Laura K., Zurique</div>
+                        <div class="rev-stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">A quinta é maravilhosa e o design de interiores deslumbrante. Apenas achei a água da piscina exterior um pouco fria pela manhã.</p>
+            </div>
+            
+            <div class="review-card show r4 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">RS</div>
+                    <div>
+                        <div class="rev-author">Rui S., Coimbra</div>
+                        <div class="rev-stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">Adoramos o passeio de jipe e o contacto com a natureza. O Wi-Fi na zona mais isolada das vinhas falha um pouco, mas serve para desligar.</p>
+            </div>
+            
+            <div class="review-card show r4 hover-target">
+                <div class="quote-mark">"</div>
+                <div class="rev-header">
+                    <div class="rev-avatar">SL</div>
+                    <div>
+                        <div class="rev-author">Sofia L., Lisboa</div>
+                        <div class="rev-stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="rev-text">A comida do restaurante é divina, mas aconselho a reservar com muita antecedência pois as mesas com melhor vista esgotam rápido.</p>
+            </div>
         </div>
     `,
     mural: `
@@ -653,7 +787,8 @@ const siteBrain = [
     { k: ['quem', 'história', 'dona', 'gerente', 'sobre', 'família'], r: "Somos um projeto familiar com raízes profundas na região. Conheça a nossa história e a biografia da nossa fundadora abrindo a secção 'Quem Somos'." },
     { k: ['jogo', 'vindima', 'academia', 'jogar', 'interativo'], r: "Quer testar as suas capacidades vitivinícolas? Feche o assistente e clique na carta 'Academia' para jogar à nossa Jornada Interativa da Vindima em 5 fases!" },
     { k: ['testemunho', 'review', 'avaliação', 'opinião', 'estrelas', 'comentários'], r: "Gostamos de total transparência. Pode ler as opiniões reais de quem já nos visitou filtrando por estrelas na secção 'Testemunhos'." },
-    { k: ['galeria', 'fotos', 'imagens', 'ver', 'fotografia'], r: "Pode explorar os nossos espaços em alta definição. Selecione a carta 'Galeria' no carrossel para aceder a uma amostra 3D dinâmica da nossa quinta." }
+    { k: ['galeria', 'fotos', 'imagens', 'ver', 'fotografia'], r: "Pode explorar os nossos espaços em alta definição. Selecione a carta 'Galeria' no carrossel para aceder a uma amostra 3D dinâmica da nossa quinta." },
+    { k: ['personalizar', 'exclusivo', 'à medida', 'roteiro', 'plano', 'experiência'], r: "Excelente escolha! O nosso Concierge pode ajudá-lo a criar momentos únicos, como um pedido de casamento na adega ou um voo sobre o Douro. Por favor, detalhe-nos a sua visão." }
 ];
 
 const siteDefaultResp = "Sou o guia digital da plataforma. Posso ajudá-lo a encontrar reservas, o menu do restaurante, a loja de vinhos ou detalhes sobre as atividades no nosso site.";
