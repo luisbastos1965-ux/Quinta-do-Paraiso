@@ -16,7 +16,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const updateHoverTargets = () => {
-    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card').forEach(target => {
+    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post').forEach(target => {
         if (!target.dataset.hoverBound) {
             target.dataset.hoverBound = 'true';
             target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
@@ -54,7 +54,7 @@ loneIcons.forEach(icon => {
 
 let menuOpen = false;
 let curatorOpen = false;
-let isSectionOpen = false; // Controla se um modal está aberto para travar o carrossel
+let isSectionOpen = false; 
 const mapaContainer = document.getElementById('mapa-interativo');
 const carousel = document.getElementById('carousel');
 
@@ -208,8 +208,8 @@ const sectionData = {
                 </div>
             </div>
             
-            <!-- Última Linha: Visita+Degustação (2 colunas) e Personalizar (1 coluna) -->
-            <div class="service-item span-2-col service-highlight hover-target" onclick="this.classList.toggle('expanded')">
+            <!-- Última Linha com o botão Especial perfeitamente alinhado em altura -->
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍇</div>
                 <div class="si-details">
                     <h4>Visita à Adega + Degustação</h4>
@@ -218,11 +218,11 @@ const sectionData = {
                 </div>
             </div>
             
-            <div class="service-item service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
                 <div class="si-icon" style="margin-bottom: 5px;">✨</div>
                 <div class="si-details">
-                    <h4 style="font-size: 1.15rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
-                    <p style="color: #ccc; font-weight: 400; font-size: 0.85rem; margin: 0;">Fale com a IA Concierge</p>
+                    <h4 style="font-size: 1.25rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
+                    <p style="color: #000; font-weight: 600; font-size: 0.85rem; margin: 0; background: var(--accent-color); padding: 5px 15px; border-radius: 20px; display: inline-block;">Fale com a IA Concierge</p>
                 </div>
             </div>
         </div>
@@ -366,10 +366,11 @@ const sectionData = {
                             <label>Tipologia do Refúgio</label>
                             <select required>
                                 <option value="" disabled selected>Escolha o seu alojamento...</option>
-                                <option value="branco">Casa Branco (Familiar, Vista Rio)</option>
-                                <option value="tinto">Casa Tinto (Premium, Lareira)</option>
-                                <option value="pombal1">Pombal Vintage (Piscina Privada)</option>
-                                <option value="pombal2">Pombal Reserva (Piscina Privada)</option>
+                                <option value="branco">Refúgio Branco (2 a 4 pax)</option>
+                                <option value="rose">Refúgio Rosé (2 a 4 pax)</option>
+                                <option value="tinto">Refúgio Tinto (2 a 4 pax)</option>
+                                <option value="tawny">Casa Tawny (4 a 8 pax, Familiar)</option>
+                                <option value="ruby">Casa Ruby (4 a 8 pax, Familiar)</option>
                             </select>
                         </div>
                     </div>
@@ -493,6 +494,7 @@ const sectionData = {
         </div>
         
         <div class="reviews-grid custom-scroll" id="reviews-container">
+            <!-- Review 1 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -505,6 +507,7 @@ const sectionData = {
                 <p class="rev-text">A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!</p>
             </div>
             
+            <!-- Review 2 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -517,6 +520,7 @@ const sectionData = {
                 <p class="rev-text">O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados e prontos para regressar à cidade.</p>
             </div>
             
+            <!-- Review 3 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -529,6 +533,7 @@ const sectionData = {
                 <p class="rev-text">Excelência a todos níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!</p>
             </div>
             
+            <!-- Review 4 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -541,6 +546,7 @@ const sectionData = {
                 <p class="rev-text">Uma experiência imersiva e luxuosa. O jantar harmonizado no restaurante superou todas as nossas expectativas gastronómicas.</p>
             </div>
             
+            <!-- Review 5 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -553,6 +559,7 @@ const sectionData = {
                 <p class="rev-text">We loved every second of our stay. The wine tasting with the sommelier was the highlight of our trip to Portugal!</p>
             </div>
             
+            <!-- Review 6 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -565,6 +572,7 @@ const sectionData = {
                 <p class="rev-text">As vistas dos quartos são de cortar a respiração. Acordar com o nevoeiro sobre o rio e o sol a bater nas vinhas é mágico.</p>
             </div>
             
+            <!-- Review 7 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -577,6 +585,7 @@ const sectionData = {
                 <p class="rev-text">Tudo pensado ao detalhe, desde o cabaz de boas-vindas até ao requinte da decoração. Um verdadeiro paraíso escondido.</p>
             </div>
             
+            <!-- Review 8 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -589,6 +598,7 @@ const sectionData = {
                 <p class="rev-text">Ein wunderbarer Ort! Der Vintage Portwein ist fantastisch und die Bootsfahrt bei Sonnenuntergang war unbeschreiblich schön.</p>
             </div>
             
+            <!-- Review 9 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -601,6 +611,7 @@ const sectionData = {
                 <p class="rev-text">Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros muito baixos.</p>
             </div>
             
+            <!-- Review 10 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -613,6 +624,7 @@ const sectionData = {
                 <p class="rev-text">A quinta é maravilhosa e o design de interiores deslumbrante. Apenas achei a água da piscina exterior um pouco fria pela manhã.</p>
             </div>
             
+            <!-- Review 11 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -625,6 +637,7 @@ const sectionData = {
                 <p class="rev-text">Adoramos o passeio de jipe e o contacto com a natureza. O Wi-Fi na zona mais isolada das vinhas falha um pouco, mas serve para desligar.</p>
             </div>
             
+            <!-- Review 12 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -643,17 +656,42 @@ const sectionData = {
         <div class="insta-header">
             <div class="insta-profile"></div>
             <div class="insta-stats">
-                <div><strong>56</strong> Publicações</div>
-                <div><strong>12.5k</strong> Seguidores</div>
-                <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="window.open('https://www.instagram.com/quintadoparaiso_2026/', '_blank')">Seguir Conta</button>
+                <div><strong>9</strong> Publicações</div>
+                <div><strong>1.2k</strong> Visitantes</div>
+                <button class="btn-submit hover-target" style="margin:0; padding: 10px 25px; font-size: 0.9rem;" onclick="alert('Funcionalidade de Upload a carregar...')">Solicitar Partilha</button>
             </div>
         </div>
+        
         <div class="insta-grid">
-            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 340 💬 12</div></div>
-            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 512 💬 45</div></div>
-            <div class="insta-post hover-target"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"><div class="insta-overlay">❤️ 890 💬 112</div></div>
-            <div class="insta-post hover-target" style="background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer;" onclick="alert('Upload ativado. Escolha a sua foto com a hashtag #QuintaDoParaiso.')">
-                <span style="font-size:3rem; color:var(--accent-color);">+</span><p style="color:#fff; font-family:'Manrope';">Partilhar Foto</p>
+            <div class="insta-post hover-target" onclick="openInstaPost(1)"><img src="MU1.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU1'"><div class="insta-overlay">❤️ 340 💬 12</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(2)"><img src="MU2.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU2'"><div class="insta-overlay">❤️ 215 💬 8</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(3)"><img src="MU3.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU3'"><div class="insta-overlay">❤️ 890 💬 112</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(4)"><img src="MU4.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU4'"><div class="insta-overlay">❤️ 450 💬 31</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(5)"><img src="MU5.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU5'"><div class="insta-overlay">❤️ 320 💬 15</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(6)"><img src="MU6.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU6'"><div class="insta-overlay">❤️ 610 💬 42</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(7)"><img src="MU7.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU7'"><div class="insta-overlay">❤️ 280 💬 9</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(8)"><img src="MU8.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU8'"><div class="insta-overlay">❤️ 540 💬 38</div></div>
+            <div class="insta-post hover-target" onclick="openInstaPost(9)"><img src="MU9.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU9'"><div class="insta-overlay">❤️ 412 💬 22</div></div>
+        </div>
+
+        <!-- Modal Post Individual Embutido -->
+        <div class="post-modal-overlay" id="post-modal" onclick="closeInstaPost()">
+            <div class="post-modal-content" onclick="event.stopPropagation()">
+                <button class="post-close hover-target" onclick="closeInstaPost()">✕</button>
+                <div class="post-img-col">
+                    <img id="pi-img" src="">
+                </div>
+                <div class="post-info-col">
+                    <div class="post-header">
+                        <div class="post-avatar" id="pi-avatar"></div>
+                        <div class="post-author" id="pi-author"></div>
+                    </div>
+                    <div class="post-comments custom-scroll" id="pi-comments"></div>
+                    <div class="post-actions">
+                        <div class="post-likes" id="pi-likes"></div>
+                        <div class="post-date" id="pi-date">HÁ 2 DIAS</div>
+                    </div>
+                </div>
             </div>
         </div>
     `
@@ -672,8 +710,43 @@ window.openSection = function(type) {
 
 window.closeSection = function() {
     modalOverlay.classList.remove('active');
-    isSectionOpen = false; // Permite ao carrossel voltar a rodar (se não houver rato em cima)
+    isSectionOpen = false; // Permite ao carrossel voltar a rodar
     autoSpin = true;
+}
+
+// ==========================================================================
+// MURAL SOCIAL INSTAGRAM - POST INDIVIDUAL
+// ==========================================================================
+const instaData = {
+    1: { img: 'MU1.jpg', author: 'joaomartins_88', av: 'JM', likes: '340 gostos', date: 'Há 5 Horas', comments: '<strong>joaomartins_88</strong> Um fim de semana inesquecível no Douro! O vinho é divinal.<br><br><strong>sarah_v</strong> Que vista fantástica 😍<br><br><strong>pedro.p</strong> Precisamos de lá voltar no verão.' },
+    2: { img: 'MU2.jpg', author: 'marta.sousa', av: 'MS', likes: '215 gostos', date: 'Há 1 Dia', comments: '<strong>marta.sousa</strong> O melhor refúgio para desligar da cidade. Recomendo vivamente o Spa de Vinoterapia!<br><br><strong>anaclara</strong> Uau, que luxo autêntico.' },
+    3: { img: 'MU3.jpg', author: 'carlos_travel', av: 'CT', likes: '890 gostos', date: 'Há 2 Dias', comments: '<strong>carlos_travel</strong> As vinhas do Arnozelo têm uma magia muito própria. Parabéns à Quinta do Paraíso pelo excelente trabalho.<br><br><strong>wine_lover</strong> Excelente colheita este ano 🍷' },
+    4: { img: 'MU4.jpg', author: 'sofia.rodrigues', av: 'SR', likes: '450 gostos', date: 'Há 3 Dias', comments: '<strong>sofia.rodrigues</strong> Piquenique perfeito entre as vinhas. O cesto estava recheado de coisas deliciosas da região 🧺🧀<br><br><strong>ines_m</strong> Que inveja boa!' },
+    5: { img: 'MU5.jpg', author: 'tiago_ferreira', av: 'TF', likes: '320 gostos', date: 'Há 4 Dias', comments: '<strong>tiago_ferreira</strong> Passeio de barco no Douro ao pôr do sol. Sem palavras! 🚤🌅<br><br><strong>rita.g</strong> Magnífico, a não perder.' },
+    6: { img: 'MU6.jpg', author: 'lucas.explore', av: 'LE', likes: '610 gostos', date: 'Há 1 Semana', comments: '<strong>lucas.explore</strong> A adega histórica é lindíssima. Aprendemos imenso na prova de vinhos com a sommelier.<br><br><strong>winetours_pt</strong> Sem dúvida, uma das melhores experiências da região!' },
+    7: { img: 'MU7.jpg', author: 'beatriz.silva', av: 'BS', likes: '280 gostos', date: 'Há 1 Semana', comments: '<strong>beatriz.silva</strong> Casa Tawny: super acolhedora para toda a família! As crianças adoraram a piscina privada.<br><br><strong>familia_v</strong> O lugar perfeito para relaxar e fugir à rotina.' },
+    8: { img: 'MU8.jpg', author: 'daniel_c', av: 'DC', likes: '540 gostos', date: 'Há 2 Semanas', comments: '<strong>daniel_c</strong> Jantar harmonizado incrível. A Bochecha de Porco Preto estava literalmente a desfazer-se 🍽️🍷<br><br><strong>chef.marco</strong> Grande prato e excelente execução.' },
+    9: { img: 'MU9.jpg', author: 'mariana.luz', av: 'ML', likes: '412 gostos', date: 'Há 3 Semanas', comments: '<strong>mariana.luz</strong> Paisagens que parecem pinturas. Um lugar que fica para sempre guardado no coração ❤️<br><br><strong>clara.t</strong> Lindo, lindo, lindo! Mal posso esperar para ir.' }
+};
+
+window.openInstaPost = function(id) {
+    const data = instaData[id];
+    const imgEl = document.getElementById('pi-img');
+    
+    imgEl.src = data.img;
+    imgEl.onerror = function() { this.src = 'https://via.placeholder.com/600x600/111/D4AF37?text=Foto+Mural+'+id; };
+    
+    document.getElementById('pi-avatar').innerText = data.av;
+    document.getElementById('pi-author').innerText = data.author;
+    document.getElementById('pi-comments').innerHTML = data.comments;
+    document.getElementById('pi-likes').innerText = data.likes;
+    document.getElementById('pi-date').innerText = data.date;
+    
+    document.getElementById('post-modal').classList.add('active');
+}
+
+window.closeInstaPost = function() {
+    document.getElementById('post-modal').classList.remove('active');
 }
 
 // ==========================================================================
@@ -697,7 +770,6 @@ window.hideWineDetail = function() {
     document.getElementById('wine-detail-view').style.display = 'none';
     document.getElementById('wine-grid-view').style.display = 'grid';
 }
-
 
 window.filterRev = function(stars) {
     const starEls = document.querySelectorAll('.filter-star');
