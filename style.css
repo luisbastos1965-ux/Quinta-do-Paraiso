@@ -438,3 +438,20 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 .timing-bar-container { background: #111; border: 2px solid rgba(212,175,55,0.5); box-shadow: inset 0 0 10px #000; z-index: 2;}
 .timing-target { background: rgba(212,175,55,0.3); border-left: 2px solid #FFD700; border-right: 2px solid #FFD700; box-shadow: 0 0 15px rgba(212,175,55,0.5); }
 .timing-cursor { background: #fff; box-shadow: 0 0 15px #fff; }
+
+/* ========================================================================== */
+/* ATUALIZAÇÕES FINAIS: ATIVIDADES, VINHOS E ACADEMIA                         */
+/* ========================================================================== */
+
+/* Garante alturas estritamente iguais na grelha de Atividades */
+.services-luxury-grid { grid-auto-rows: 1fr; }
+.service-item { height: 100%; box-sizing: border-box; }
+.service-highlight-custom { padding: 30px; }
+
+/* Centrar textos e adicionar espaço para o preço na frente dos cartões de vinho */
+.wine-flip-front { text-align: center; }
+.wine-flip-front div { width: 100%; }
+
+/* Limpar a caixa extra da Academia (deixa apenas o fundo elegante do modal) */
+.game-zone { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; }
+.game-zone::before { display: none !important; }
