@@ -54,6 +54,7 @@ loneIcons.forEach(icon => {
 
 let menuOpen = false;
 let curatorOpen = false;
+let isSectionOpen = false; // Controla se um modal está aberto para travar o carrossel
 const mapaContainer = document.getElementById('mapa-interativo');
 const carousel = document.getElementById('carousel');
 
@@ -106,12 +107,13 @@ animateCarousel();
 
 document.querySelectorAll('.carousel-card').forEach(card => {
     card.addEventListener('mouseenter', () => { autoSpin = false; });
-    card.addEventListener('mouseleave', () => { if (!isDragging) autoSpin = true; });
+    // Só volta a rodar se o modal não estiver aberto
+    card.addEventListener('mouseleave', () => { if (!isDragging && !isSectionOpen) autoSpin = true; });
 });
 
 const carContainer = document.getElementById('carousel-container');
 carContainer.addEventListener('mousedown', (e) => { isDragging = true; autoSpin = false; startX = e.clientX; });
-window.addEventListener('mouseup', () => { isDragging = false; setTimeout(() => { autoSpin = true; }, 1500); });
+window.addEventListener('mouseup', () => { isDragging = false; setTimeout(() => { if(!isSectionOpen) autoSpin = true; }, 1500); });
 carContainer.addEventListener('mousemove', (e) => {
     if(!isDragging) return;
     const deltaX = e.clientX - startX;
@@ -159,7 +161,6 @@ const sectionData = {
     `,
     servicos: `
         <h2 class="modal-title">Atividades & Serviços</h2>
-        <p class="modal-text">Clique numa experiência para descobrir os detalhes.</p>
         <div class="services-luxury-grid">
             <div class="service-item" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🚤</div>
@@ -278,7 +279,6 @@ const sectionData = {
     `,
     restaurante: `
         <h2 class="modal-title">Gastronomia de Autor</h2>
-        <p class="modal-text">Uma viagem de sabores onde a matriz regional do Douro se cruza com a alta cozinha de autor.</p>
         <div class="rest-container">
             <div class="rest-image hover-target">
                 <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Restaurante">
@@ -326,7 +326,6 @@ const sectionData = {
     `,
     reservas: `
         <h2 class="modal-title">O Seu Passaporte para o Paraíso</h2>
-        <p class="modal-text">Reserve o seu refúgio de luxo entre os socalcos e o rio. Garanta a melhor tarifa através do nosso portal direto.</p>
         <div class="booking-split">
             <div class="booking-img-side"></div>
             <div class="booking-form-side">
@@ -488,7 +487,7 @@ const sectionData = {
         <div class="reviews-wrapper custom-scroll" id="reviews-container" style="max-height: 500px; overflow-y: auto; padding-right: 15px;">
             <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!"</p><p class="rev-author">— Sarah T., Londres</p></div>
             <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados e prontos para regressar à cidade."</p><p class="rev-author">— João P., Lisboa</p></div>
-            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"Excelência a todos os níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!"</p><p class="rev-author">— Claire M., Paris</p></div>
+            <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"Excelência a todos níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!"</p><p class="rev-author">— Claire M., Paris</p></div>
             <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"Uma experiência imersiva e luxuosa. O jantar harmonizado no restaurante superou todas as nossas expectativas gastronómicas."</p><p class="rev-author">— António V., Madrid</p></div>
             <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"We loved every second of our stay. The wine tasting with the sommelier was the highlight of our trip to Portugal!"</p><p class="rev-author">— Emily R., Nova Iorque</p></div>
             <div class="review-card show r5"><div class="rev-stars">⭐⭐⭐⭐⭐</div><p class="rev-text">"As vistas dos quartos são de cortar a respiração. Acordar com o nevoeiro sobre o rio e o sol a bater nas vinhas é mágico."</p><p class="rev-author">— Pedro N., Porto</p></div>
@@ -528,11 +527,15 @@ const modalBody = document.getElementById('modal-body-content');
 window.openSection = function(type) {
     modalBody.innerHTML = sectionData[type];
     modalOverlay.classList.add('active');
+    isSectionOpen = true; // Impede o carrossel de rodar
+    autoSpin = false;
     updateHoverTargets();
 }
 
 window.closeSection = function() {
     modalOverlay.classList.remove('active');
+    isSectionOpen = false; // Permite ao carrossel voltar a rodar (se não houver rato em cima)
+    autoSpin = true;
 }
 
 // ==========================================================================
