@@ -608,23 +608,23 @@ const sectionData = {
         <!-- Vista dos Baralhos -->
         <div class="gallery-decks-wrapper" id="gal-decks">
             <div class="deck-container hover-target" onclick="openGalleryCategory('ext', 45, 'O Exterior')">
-                <div class="deck-layer layer-1" style="background-image: url('ext3.jpg');"></div>
-                <div class="deck-layer layer-2" style="background-image: url('ext2.jpg');"></div>
-                <div class="deck-layer layer-3" style="background-image: url('ext1.jpg');"></div>
+                <div class="deck-layer layer-1" style="background-image: url('ext3.jpeg');"></div>
+                <div class="deck-layer layer-2" style="background-image: url('ext2.jpeg');"></div>
+                <div class="deck-layer layer-3" style="background-image: url('ext1.jpeg');"></div>
                 <div class="deck-title">O Exterior</div>
             </div>
             
             <div class="deck-container hover-target" onclick="openGalleryCategory('int', 16, 'O Interior')">
-                <div class="deck-layer layer-1" style="background-image: url('int3.jpg');"></div>
-                <div class="deck-layer layer-2" style="background-image: url('int2.jpg');"></div>
-                <div class="deck-layer layer-3" style="background-image: url('int1.jpg');"></div>
+                <div class="deck-layer layer-1" style="background-image: url('int3.jpeg');"></div>
+                <div class="deck-layer layer-2" style="background-image: url('int2.jpeg');"></div>
+                <div class="deck-layer layer-3" style="background-image: url('int1.jpeg');"></div>
                 <div class="deck-title">O Interior</div>
             </div>
             
             <div class="deck-container hover-target" onclick="openGalleryCategory('ute', 31, 'Arte & Ofício')">
-                <div class="deck-layer layer-1" style="background-image: url('ute3.jpg');"></div>
-                <div class="deck-layer layer-2" style="background-image: url('ute2.jpg');"></div>
-                <div class="deck-layer layer-3" style="background-image: url('ute1.jpg');"></div>
+                <div class="deck-layer layer-1" style="background-image: url('ute3.jpeg');"></div>
+                <div class="deck-layer layer-2" style="background-image: url('ute2.jpeg');"></div>
+                <div class="deck-layer layer-3" style="background-image: url('ute1.jpeg');"></div>
                 <div class="deck-title">Arte & Ofício</div>
             </div>
         </div>
