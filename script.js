@@ -220,7 +220,7 @@ const sectionData = {
             <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
                 <div class="si-icon" style="margin-bottom: 5px;">✨</div>
                 <div class="si-details">
-                    <h4 style="font-size: 1.3rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
+                    <h4 style="font-size: 1.3rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Experiência</h4>
                     <p style="color: #ccc; font-weight: 400; font-size: 0.9rem; margin: 0;">Fale com a IA Concierge</p>
                 </div>
             </div>
@@ -231,7 +231,7 @@ const sectionData = {
         
         <div class="shop-grid custom-scroll">
             <!-- VINHO 1 -->
-            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
                         <div>
@@ -246,15 +246,15 @@ const sectionData = {
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">18.00€</span>
                         <p>De cor suave e apetecível, demonstra uma frescura imediata. Frutos vermelhos imiscuem-se com nuances mentoladas.</p>
                         <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w1')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w1'].link, '_blank')">Comprar</button>
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w1')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w1')">Comprar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- VINHO 2 -->
-            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
                         <div>
@@ -269,15 +269,15 @@ const sectionData = {
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">22.50€</span>
                         <p>Aroma elegante e frutado. A elegância do nariz é pautada pela frescura das notas cítricas envoltas em ervas frescas.</p>
                         <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w2')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w2'].link, '_blank')">Comprar</button>
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w2')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w2')">Comprar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- VINHO 3 -->
-            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
                         <div>
@@ -292,15 +292,15 @@ const sectionData = {
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">35.00€</span>
                         <p>Reserva de grande elegância, cativa pela fruta amarela e ervas frescas. Vibrante, cheio no corpo e pleno de garra.</p>
                         <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w3')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w3'].link, '_blank')">Comprar</button>
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w3')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w3')">Comprar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- VINHO 4 -->
-            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
                         <div>
@@ -315,15 +315,15 @@ const sectionData = {
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">45.00€</span>
                         <p>Concentrado e pleno de frescura, apresenta delicadas notas florais envolvidas pela exuberância de fruta preta.</p>
                         <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w4')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w4'].link, '_blank')">Comprar</button>
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w4')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w4')">Comprar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- VINHO 5 -->
-            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
                         <div>
@@ -338,15 +338,15 @@ const sectionData = {
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">28.00€</span>
                         <p>Nariz profundo onde a fruta preta sobressai num fundo de especiarias. Textura elegante, aveludada e final longo.</p>
                         <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w5')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w5'].link, '_blank')">Comprar</button>
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w5')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w5')">Comprar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- VINHO 6 -->
-            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front">
                         <div>
@@ -361,15 +361,15 @@ const sectionData = {
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">32.00€</span>
                         <p>Brilhante cor castanha-aloirada. Nariz repleto de fruta madura com sedutoras nuances abaunilhadas. Aveludado e redondo.</p>
                         <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w6')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w6'].link, '_blank')">Comprar</button>
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w6')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w6')">Comprar</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- VINHO 7 -->
-            <div class="wine-flip-card hover-target" onclick="this.classList.toggle('flipped')">
+            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front" style="border-color: var(--accent-color);">
                         <div>
@@ -384,8 +384,8 @@ const sectionData = {
                         <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">85.00€</span>
                         <p>Cor vermelho opaco. Expressão aromática floral com notas de flor de laranjeira, cassis e frutos do bosque. Taninos tensos e musculados.</p>
                         <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="event.stopPropagation(); showWineDetail('w7')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="event.stopPropagation(); window.open(wineDetails['w7'].link, '_blank')">Comprar</button>
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w7')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w7')">Comprar</button>
                         </div>
                     </div>
                 </div>
@@ -602,8 +602,7 @@ const sectionData = {
         </div>
     `,
     galeria: `
-        <h2 class="modal-title" id="gal-main-title">Galeria 3D Dinâmica</h2>
-        <p class="modal-text" id="gal-subtitle">Selecione uma coleção para explorar as nossas memórias fotográficas.</p>
+        <h2 class="modal-title" id="gal-main-title">Galeria</h2>
         
         <!-- Vista dos Baralhos -->
         <div class="gallery-decks-wrapper" id="gal-decks">
@@ -909,7 +908,6 @@ window.closeInstaPost = function() {
 window.openGalleryCategory = function(prefix, count, title) {
     document.getElementById('gal-decks').style.display = 'none';
     document.getElementById('gal-main-title').style.display = 'none';
-    document.getElementById('gal-subtitle').style.display = 'none';
     
     document.getElementById('gal-cat-title').innerText = title;
     const grid = document.getElementById('gal-grid');
@@ -933,7 +931,6 @@ window.closeGalleryCategory = function() {
     document.getElementById('gal-expanded').classList.remove('active');
     document.getElementById('gal-decks').style.display = 'flex';
     document.getElementById('gal-main-title').style.display = 'block';
-    document.getElementById('gal-subtitle').style.display = 'block';
 }
 
 window.openLb = function(el) {
@@ -947,6 +944,24 @@ window.closeLb = function() { document.getElementById('lightbox').classList.remo
 // ==========================================================================
 // LOJA VÍNICA (DETALHES DA GARRAFEIRA)
 // ==========================================================================
+window.flipWineCard = function(card) {
+    // Garante que apenas um vinho fica virado de cada vez
+    document.querySelectorAll('.wine-flip-card').forEach(c => {
+        if(c !== card) c.classList.remove('flipped');
+    });
+    card.classList.toggle('flipped');
+}
+
+window.openDetails = function(e, id) {
+    if(e) e.stopPropagation(); // Impede que o clique no botão vire o cartão de novo
+    showWineDetail(id);
+}
+
+window.buyWine = function(e, id) {
+    if(e) e.stopPropagation();
+    window.open(wineDetails[id].link, '_blank');
+}
+
 window.showWineDetail = function(id) {
     const w = wineDetails[id];
     document.getElementById('wine-grid-view').style.display = 'none';
@@ -962,6 +977,29 @@ window.showWineDetail = function(id) {
 window.hideWineDetail = function() {
     document.getElementById('wine-detail-view').style.display = 'none';
     document.getElementById('wine-grid-view').style.display = 'grid';
+}
+
+window.filterRev = function(stars) {
+    const starEls = document.querySelectorAll('.filter-star');
+    starEls.forEach((el, index) => {
+        if(index < stars) { 
+            el.style.color = 'var(--accent-color)'; 
+            el.style.textShadow = '0 0 20px var(--accent-color)'; 
+        } else { 
+            el.style.color = '#444'; 
+            el.style.textShadow = '0 5px 10px rgba(0,0,0,0.8)'; 
+        }
+    });
+
+    document.querySelectorAll('.review-card').forEach(card => card.classList.remove('show'));
+    document.querySelectorAll('.r-temp').forEach(el=>el.remove());
+
+    const targetCards = document.querySelectorAll('.r' + stars);
+    if(targetCards.length > 0) { 
+        targetCards.forEach(card => card.classList.add('show')); 
+    } else { 
+        document.getElementById('reviews-container').innerHTML += `<p class="rev-text r-temp" style="text-align:center; color:#888;">Ainda não existem avaliações de ${stars} estrelas.</p>`;
+    }
 }
 
 // ==========================================================================
