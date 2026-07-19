@@ -208,7 +208,7 @@ const sectionData = {
                 </div>
             </div>
             
-            <div class="service-item span-2-col service-highlight hover-target" onclick="this.classList.toggle('expanded')">
+            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍇</div>
                 <div class="si-details">
                     <h4>Visita à Adega + Degustação</h4>
@@ -217,7 +217,7 @@ const sectionData = {
                 </div>
             </div>
             
-            <div class="service-item service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
                 <div class="si-icon" style="margin-bottom: 5px;">✨</div>
                 <div class="si-details">
                     <h4 style="font-size: 1.3rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Roteiro</h4>
@@ -374,8 +374,8 @@ const sectionData = {
                     <div class="wine-flip-front" style="border-color: var(--accent-color);">
                         <div>
                             <span class="wine-type">Vinho do Porto</span>
-                            <h4 class="wine-name">Quinta do Paraíso Vintage</h4>
-                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px;">85.00€</div>
+                            <h4 class="wine-name" style="text-align: center;">Quinta do Paraíso Vintage</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px; text-align: center;">85.00€</div>
                         </div>
                         <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
                     </div>
@@ -652,7 +652,6 @@ const sectionData = {
         </div>
         
         <div class="reviews-grid custom-scroll" id="reviews-container">
-            <!-- Review 1 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -665,7 +664,6 @@ const sectionData = {
                 <p class="rev-text">A autêntica alma duriense concentrada num só lugar. O pequeno-almoço com vista para o rio Douro é inesquecível!</p>
             </div>
             
-            <!-- Review 2 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -678,7 +676,6 @@ const sectionData = {
                 <p class="rev-text">O serviço de vinoterapia no Spa é do outro mundo. Saímos completamente renovados e prontos para regressar à cidade.</p>
             </div>
             
-            <!-- Review 3 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -691,7 +688,6 @@ const sectionData = {
                 <p class="rev-text">Excelência a todos níveis. O staff é de uma simpatia formidável e o nosso pombal privado era um autêntico sonho. Voltaremos certamente!</p>
             </div>
             
-            <!-- Review 4 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -704,7 +700,6 @@ const sectionData = {
                 <p class="rev-text">Uma experiência imersiva e luxuosa. O jantar harmonizado no restaurante superou todas as nossas expectativas gastronómicas.</p>
             </div>
             
-            <!-- Review 5 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -717,7 +712,6 @@ const sectionData = {
                 <p class="rev-text">We loved every second of our stay. The wine tasting with the sommelier was the highlight of our trip to Portugal!</p>
             </div>
             
-            <!-- Review 6 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -730,7 +724,6 @@ const sectionData = {
                 <p class="rev-text">As vistas dos quartos são de cortar a respiração. Acordar com o nevoeiro sobre o rio e o sol a bater nas vinhas é mágico.</p>
             </div>
             
-            <!-- Review 7 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -743,7 +736,6 @@ const sectionData = {
                 <p class="rev-text">Tudo pensado ao detalhe, desde o cabaz de boas-vindas até ao requinte da decoração. Um verdadeiro paraíso escondido.</p>
             </div>
             
-            <!-- Review 8 -->
             <div class="review-card show r5 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -756,7 +748,6 @@ const sectionData = {
                 <p class="rev-text">Ein wunderbarer Ort! Der Vintage Portwein ist fantastisch und die Bootsfahrt bei Sonnenuntergang war unbeschreiblich schön.</p>
             </div>
             
-            <!-- Review 9 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -769,7 +760,6 @@ const sectionData = {
                 <p class="rev-text">Lindo alojamento e vinhos incríveis, mas a estrada de acesso pela montanha é um pouco sinuosa para carros muito baixos.</p>
             </div>
             
-            <!-- Review 10 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -782,7 +772,6 @@ const sectionData = {
                 <p class="rev-text">A quinta é maravilhosa e o design de interiores deslumbrante. Apenas achei a água da piscina exterior um pouco fria pela manhã.</p>
             </div>
             
-            <!-- Review 11 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -795,7 +784,6 @@ const sectionData = {
                 <p class="rev-text">Adoramos o passeio de jipe e o contacto com a natureza. O Wi-Fi na zona mais isolada das vinhas falha um pouco, mas serve para desligar.</p>
             </div>
             
-            <!-- Review 12 (4 estrelas) -->
             <div class="review-card show r4 hover-target">
                 <div class="quote-mark">"</div>
                 <div class="rev-header">
@@ -930,7 +918,7 @@ window.openGalleryCategory = function(prefix, count, title) {
     for(let i = 1; i <= count; i++) {
         let card = document.createElement('div');
         card.className = 'exp-gal-card hover-target';
-        card.style.backgroundImage = `url('${prefix}${i}.jpg')`;
+        card.style.backgroundImage = `url('${prefix}${i}.jpeg')`;
         card.style.animationDelay = `${i * 0.02}s`; 
         card.setAttribute('onerror', `this.style.backgroundImage="url('https://via.placeholder.com/600x400/111/D4AF37?text=${prefix}+${i}')"`);
         card.onclick = function() { openLb(this); };
@@ -974,29 +962,6 @@ window.showWineDetail = function(id) {
 window.hideWineDetail = function() {
     document.getElementById('wine-detail-view').style.display = 'none';
     document.getElementById('wine-grid-view').style.display = 'grid';
-}
-
-window.filterRev = function(stars) {
-    const starEls = document.querySelectorAll('.filter-star');
-    starEls.forEach((el, index) => {
-        if(index < stars) { 
-            el.style.color = 'var(--accent-color)'; 
-            el.style.textShadow = '0 0 20px var(--accent-color)'; 
-        } else { 
-            el.style.color = '#444'; 
-            el.style.textShadow = '0 5px 10px rgba(0,0,0,0.8)'; 
-        }
-    });
-
-    document.querySelectorAll('.review-card').forEach(card => card.classList.remove('show'));
-    document.querySelectorAll('.r-temp').forEach(el=>el.remove());
-
-    const targetCards = document.querySelectorAll('.r' + stars);
-    if(targetCards.length > 0) { 
-        targetCards.forEach(card => card.classList.add('show')); 
-    } else { 
-        document.getElementById('reviews-container').innerHTML += `<p class="rev-text r-temp" style="text-align:center; color:#888;">Ainda não existem avaliações de ${stars} estrelas.</p>`;
-    }
 }
 
 // ==========================================================================
