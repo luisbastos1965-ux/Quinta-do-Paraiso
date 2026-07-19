@@ -16,7 +16,7 @@ window.addEventListener('mousemove', (e) => {
 });
 
 const updateHoverTargets = () => {
-    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post, .moving-grape, .lagar-area, .wine-flip-card').forEach(target => {
+    document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post, .moving-grape, .lagar-area, .wine-flip-card, .deck-container, .btn-back-gallery, .exp-gal-card').forEach(target => {
         if (!target.dataset.hoverBound) {
             target.dataset.hoverBound = 'true';
             target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
@@ -542,7 +542,7 @@ const sectionData = {
         <div class="game-zone">
             
             <!-- FASE 1: Colheita -->
-            <div id="vindima-1" class="vindima-stage active">
+            <div id="vindima-1" class="vindima-stage active" style="padding: 40px;">
                 <h3 class="stage-title">Fase 1: A Colheita Manual</h3>
                 <p class="stage-desc">As uvas maduras começaram a surgir nas videiras. Seja rápido! Clique nas 5 uvas maduras para as apanhar antes que desapareçam.</p>
                 
@@ -554,7 +554,7 @@ const sectionData = {
             </div>
 
             <!-- FASE 2: Pisar -->
-            <div id="vindima-2" class="vindima-stage">
+            <div id="vindima-2" class="vindima-stage" style="padding: 40px;">
                 <h3 class="stage-title">Fase 2: A Pisar no Lagar</h3>
                 <p class="stage-desc">A tradição manda pisar a pé! Clique no lagar o mais rápido que conseguir para esmagar as uvas e extrair o mosto.</p>
                 <div class="interactive-game-area" style="flex-direction: column;">
@@ -565,7 +565,7 @@ const sectionData = {
             </div>
 
             <!-- FASE 3: Fermentação -->
-            <div id="vindima-3" class="vindima-stage">
+            <div id="vindima-3" class="vindima-stage" style="padding: 40px;">
                 <h3 class="stage-title">Fase 3: Controlo da Fermentação</h3>
                 <p class="stage-desc">Cuidado com o calor! O processo faz a temperatura subir. Clique no botão de arrefecer para manter o mosto na <strong>zona verde</strong> até a barra encher.</p>
                 
@@ -578,7 +578,7 @@ const sectionData = {
             </div>
 
             <!-- FASE 4: Estágio -->
-            <div id="vindima-4" class="vindima-stage">
+            <div id="vindima-4" class="vindima-stage" style="padding: 40px;">
                 <h3 class="stage-title">Fase 4: Estágio em Barrica</h3>
                 <p class="stage-desc">Precisão é fundamental. Tente selar a barrica exatamente quando a linha cruzar a marca dourada central!</p>
                 
@@ -593,7 +593,7 @@ const sectionData = {
             </div>
 
             <!-- FASE 5: Engarrafar -->
-            <div id="vindima-5" class="vindima-stage">
+            <div id="vindima-5" class="vindima-stage" style="padding: 40px;">
                 <h3 class="stage-title" style="font-size: 2.5rem; margin-bottom: 20px;">Sucesso de Ouro!</h3>
                 <p class="stage-desc">Parabéns! Dominou o processo de vinificação com mestria. É oficialmente um <strong>Mestre do Douro</strong>. O seu vinho Grande Reserva está pronto a servir.</p>
                 <button class="btn-submit hover-target" onclick="resetVindima()" style="margin-top:20px;">Tentar Outra Colheita</button>
@@ -602,13 +602,42 @@ const sectionData = {
         </div>
     `,
     galeria: `
-        <h2 class="modal-title">Galeria 3D Dinâmica</h2>
-        <div class="dynamic-gallery custom-scroll">
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1437158941788-b210214c7dc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
-            <div class="gal-card hover-target" style="background-image: url('https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80');" onclick="openLb(this)"></div>
+        <h2 class="modal-title" id="gal-main-title">Galeria 3D Dinâmica</h2>
+        <p class="modal-text" id="gal-subtitle">Selecione uma coleção para explorar as nossas memórias fotográficas.</p>
+        
+        <!-- Vista dos Baralhos -->
+        <div class="gallery-decks-wrapper" id="gal-decks">
+            <div class="deck-container hover-target" onclick="openGalleryCategory('ext', 45, 'O Exterior')">
+                <div class="deck-layer layer-1" style="background-image: url('ext3.jpg');"></div>
+                <div class="deck-layer layer-2" style="background-image: url('ext2.jpg');"></div>
+                <div class="deck-layer layer-3" style="background-image: url('ext1.jpg');"></div>
+                <div class="deck-title">O Exterior</div>
+            </div>
+            
+            <div class="deck-container hover-target" onclick="openGalleryCategory('int', 16, 'O Interior')">
+                <div class="deck-layer layer-1" style="background-image: url('int3.jpg');"></div>
+                <div class="deck-layer layer-2" style="background-image: url('int2.jpg');"></div>
+                <div class="deck-layer layer-3" style="background-image: url('int1.jpg');"></div>
+                <div class="deck-title">O Interior</div>
+            </div>
+            
+            <div class="deck-container hover-target" onclick="openGalleryCategory('ute', 31, 'Arte & Ofício')">
+                <div class="deck-layer layer-1" style="background-image: url('ute3.jpg');"></div>
+                <div class="deck-layer layer-2" style="background-image: url('ute2.jpg');"></div>
+                <div class="deck-layer layer-3" style="background-image: url('ute1.jpg');"></div>
+                <div class="deck-title">Arte & Ofício</div>
+            </div>
+        </div>
+
+        <!-- Vista Expandida -->
+        <div class="gallery-expanded" id="gal-expanded">
+            <div class="gallery-header">
+                <h3 id="gal-cat-title">Categoria</h3>
+                <button class="btn-back-gallery hover-target" onclick="closeGalleryCategory()">← Voltar aos Baralhos</button>
+            </div>
+            <div class="expanded-grid custom-scroll" id="gal-grid">
+                <!-- Imagens injetadas via JS -->
+            </div>
         </div>
     `,
     reviews: `
@@ -839,16 +868,16 @@ const modalBody = document.getElementById('modal-body-content');
 window.openSection = function(type) {
     modalBody.innerHTML = sectionData[type];
     modalOverlay.classList.add('active');
-    isSectionOpen = true; // Impede o carrossel de rodar
+    isSectionOpen = true; 
     autoSpin = false;
     updateHoverTargets();
 }
 
 window.closeSection = function() {
     modalOverlay.classList.remove('active');
-    isSectionOpen = false; // Permite ao carrossel voltar a rodar
+    isSectionOpen = false; 
     autoSpin = true;
-    clearGameIntervals(); // Para os loops do minijogo
+    clearGameIntervals();
 }
 
 // ==========================================================================
@@ -887,9 +916,49 @@ window.closeInstaPost = function() {
 }
 
 // ==========================================================================
-// 5. LOJA VÍNICA (DETALHES) E REVIEWS
+// GALERIA DE FOTOS (DINÂMICA EM BARALHOS)
 // ==========================================================================
+window.openGalleryCategory = function(prefix, count, title) {
+    document.getElementById('gal-decks').style.display = 'none';
+    document.getElementById('gal-main-title').style.display = 'none';
+    document.getElementById('gal-subtitle').style.display = 'none';
+    
+    document.getElementById('gal-cat-title').innerText = title;
+    const grid = document.getElementById('gal-grid');
+    grid.innerHTML = ''; 
+    
+    for(let i = 1; i <= count; i++) {
+        let card = document.createElement('div');
+        card.className = 'exp-gal-card hover-target';
+        card.style.backgroundImage = `url('${prefix}${i}.jpg')`;
+        card.style.animationDelay = `${i * 0.02}s`; 
+        card.setAttribute('onerror', `this.style.backgroundImage="url('https://via.placeholder.com/600x400/111/D4AF37?text=${prefix}+${i}')"`);
+        card.onclick = function() { openLb(this); };
+        grid.appendChild(card);
+    }
+    
+    document.getElementById('gal-expanded').classList.add('active');
+    updateHoverTargets(); 
+}
 
+window.closeGalleryCategory = function() {
+    document.getElementById('gal-expanded').classList.remove('active');
+    document.getElementById('gal-decks').style.display = 'flex';
+    document.getElementById('gal-main-title').style.display = 'block';
+    document.getElementById('gal-subtitle').style.display = 'block';
+}
+
+window.openLb = function(el) {
+    let bgImage = el.style.backgroundImage;
+    let url = bgImage.slice(4, -1).replace(/['"]/g, ""); 
+    document.getElementById('lb-img').src = url;
+    document.getElementById('lightbox').classList.add('active');
+}
+window.closeLb = function() { document.getElementById('lightbox').classList.remove('active'); }
+
+// ==========================================================================
+// LOJA VÍNICA (DETALHES DA GARRAFEIRA)
+// ==========================================================================
 window.showWineDetail = function(id) {
     const w = wineDetails[id];
     document.getElementById('wine-grid-view').style.display = 'none';
@@ -930,14 +999,6 @@ window.filterRev = function(stars) {
     }
 }
 
-window.openLb = function(el) {
-    let bgImage = el.style.backgroundImage;
-    let url = bgImage.slice(4, -1).replace(/"/g, ""); 
-    document.getElementById('lb-img').src = url;
-    document.getElementById('lightbox').classList.add('active');
-}
-window.closeLb = function() { document.getElementById('lightbox').classList.remove('active'); }
-
 // ==========================================================================
 // 6. ACADEMIA (LÓGICA JOGO DA VINDIMA - DINÂMICO)
 // ==========================================================================
@@ -965,7 +1026,6 @@ window.startColheita = function() {
         let grape = document.createElement('span');
         grape.className = 'moving-grape hover-target';
         grape.innerText = '🍇';
-        // Ensure they spawn inside bounds (10% to 90% width/height)
         grape.style.left = (Math.random() * 80 + 10) + '%';
         grape.style.top = (Math.random() * 70 + 10) + '%';
         
@@ -981,7 +1041,6 @@ window.startColheita = function() {
         };
         container.appendChild(grape);
         
-        // Remove after a short time to simulate whack-a-mole
         setTimeout(() => { if(container.contains(grape)) grape.remove(); }, 1200);
     }, 800);
     gameIntervals.push(spawnGrape);
@@ -1017,16 +1076,15 @@ window.startFermentation = function() {
     tempPos = 10; fermProgress = 0;
     
     let fermInt = setInterval(() => {
-        tempPos += 3; // Aquecer rápido
+        tempPos += 3; 
         if(tempPos > 100) tempPos = 100;
         document.getElementById('temp-pointer').style.left = tempPos + '%';
         
-        // Sweet spot: 40 a 60
         if(tempPos >= 40 && tempPos <= 60) {
             fermProgress += 4;
             document.getElementById('ferment-bar').style.width = fermProgress + '%';
         } else if(tempPos > 80) {
-            fermProgress -= 2; // Penalização por sobreaquecimento
+            fermProgress -= 2; 
             if(fermProgress < 0) fermProgress = 0;
             document.getElementById('ferment-bar').style.width = fermProgress + '%';
         }
@@ -1062,7 +1120,6 @@ window.startEstagio = function() {
 
 window.stopEstagio = function() {
     clearGameIntervals();
-    // Sweet spot é de 40% a 60%
     if(timingPos >= 40 && timingPos <= 60) {
         document.getElementById('btn-stop-4').style.display = 'none';
         document.getElementById('btn-next-4').style.display = 'inline-block';
@@ -1083,7 +1140,7 @@ window.resetVindima = function() {
 }
 
 // ==========================================================================
-// 7. SOMMELIER IA (CÉREBRO DO SITE - GUIA DE NAVEGAÇÃO E PRÉ-ESTADIA)
+// 7. SOMMELIER IA (CÉREBRO DO SITE)
 // ==========================================================================
 const aiInterface = document.getElementById('ai-interface');
 const aiMessage = document.getElementById('ai-message');
