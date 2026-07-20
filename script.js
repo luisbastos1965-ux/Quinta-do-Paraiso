@@ -5,9 +5,13 @@ const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
 
 window.addEventListener('mousemove', (e) => {
-    cursorDot.style.left = `${e.clientX}px`; 
-    cursorDot.style.top = `${e.clientY}px`;
-    cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+    if(cursorDot) {
+        cursorDot.style.left = `${e.clientX}px`; 
+        cursorDot.style.top = `${e.clientY}px`;
+    }
+    if(cursorOutline) {
+        cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+    }
     
     const x = (window.innerWidth - e.pageX * 2) / 90;
     const y = (window.innerHeight - e.pageY * 2) / 90;
@@ -19,8 +23,8 @@ const updateHoverTargets = () => {
     document.querySelectorAll('.hover-target, button, input, select, textarea, .carousel-card, .lone-icon, .gal-card, .ai-pill, .filter-star, .game-item, .btn-submit, .wine-card, .service-item, .review-card, .insta-post, .moving-grape, .lagar-area, .wine-flip-card, .deck-container, .btn-back-gallery, .exp-gal-card').forEach(target => {
         if (!target.dataset.hoverBound) {
             target.dataset.hoverBound = 'true';
-            target.addEventListener('mouseenter', () => cursorOutline.classList.add('expand'));
-            target.addEventListener('mouseleave', () => cursorOutline.classList.remove('expand'));
+            target.addEventListener('mouseenter', () => { if(cursorOutline) cursorOutline.classList.add('expand'); });
+            target.addEventListener('mouseleave', () => { if(cursorOutline) cursorOutline.classList.remove('expand'); });
         }
     });
 };
@@ -36,9 +40,11 @@ const logoMestreWrapper = document.getElementById('logo-mestre-wrapper');
 
 loneIcons.forEach(icon => {
     icon.addEventListener('mouseenter', () => {
-        infoTitle.innerText = icon.getAttribute('data-t');
-        infoDesc.innerText = icon.getAttribute('data-d');
-        infoScreen.classList.add('active');
+        if(infoTitle && infoDesc && infoScreen) {
+            infoTitle.innerText = icon.getAttribute('data-t');
+            infoDesc.innerText = icon.getAttribute('data-d');
+            infoScreen.classList.add('active');
+        }
         if(logoMestreWrapper) logoMestreWrapper.classList.add('shift-up');
         
         loneIcons.forEach(other => {
@@ -46,7 +52,7 @@ loneIcons.forEach(icon => {
         });
     });
     icon.addEventListener('mouseleave', () => {
-        infoScreen.classList.remove('active');
+        if(infoScreen) infoScreen.classList.remove('active');
         if(logoMestreWrapper) logoMestreWrapper.classList.remove('shift-up');
         loneIcons.forEach(other => other.classList.remove('flee'));
     });
@@ -67,37 +73,30 @@ window.toggleMenu = function() {
     menuOpen = !menuOpen;
     if(menuOpen) {
         document.getElementById('modal-body-content').innerHTML = ''; 
-        mapaContainer.classList.add('menu-open');
+        if(mapaContainer) mapaContainer.classList.add('menu-open');
         const cards = document.querySelectorAll('.carousel-card');
         const angleStep = 360 / cards.length;
         cards.forEach((card, i) => {
             card.style.transform = `rotateY(${i * angleStep}deg) translateZ(450px)`;
         });
     } else {
-        mapaContainer.classList.remove('menu-open');
+        if(mapaContainer) mapaContainer.classList.remove('menu-open');
         autoSpin = true;
     }
 }
 
 window.toggleCurator = function() {
     const panel = document.getElementById('curator-panel');
-    const trigger = document.getElementById('curator-trigger');
     curatorOpen = !curatorOpen;
     if(curatorOpen) {
-        panel.classList.add('active');
-        trigger.style.opacity = '0';
-        trigger.style.pointerEvents = 'none';
-        mapaContainer.classList.add('curator-open');
+        if(panel) panel.classList.add('active');
     } else {
-        panel.classList.remove('active');
-        trigger.style.opacity = '1';
-        trigger.style.pointerEvents = 'all';
-        mapaContainer.classList.remove('curator-open');
+        if(panel) panel.classList.remove('active');
     }
 }
 
 function animateCarousel() {
-    if(menuOpen && autoSpin && !isDragging) {
+    if(menuOpen && autoSpin && !isDragging && carousel) {
         currAngle -= 0.15; 
         carousel.style.transform = `rotateX(-5deg) rotateY(${currAngle}deg)`;
     }
@@ -111,15 +110,17 @@ document.querySelectorAll('.carousel-card').forEach(card => {
 });
 
 const carContainer = document.getElementById('carousel-container');
-carContainer.addEventListener('mousedown', (e) => { isDragging = true; autoSpin = false; startX = e.clientX; });
-window.addEventListener('mouseup', () => { isDragging = false; setTimeout(() => { if(!isSectionOpen) autoSpin = true; }, 1500); });
-carContainer.addEventListener('mousemove', (e) => {
-    if(!isDragging) return;
-    const deltaX = e.clientX - startX;
-    currAngle += deltaX * 0.3;
-    carousel.style.transform = `rotateX(-5deg) rotateY(${currAngle}deg)`;
-    startX = e.clientX;
-});
+if(carContainer) {
+    carContainer.addEventListener('mousedown', (e) => { isDragging = true; autoSpin = false; startX = e.clientX; });
+    window.addEventListener('mouseup', () => { isDragging = false; setTimeout(() => { if(!isSectionOpen) autoSpin = true; }, 1500); });
+    carContainer.addEventListener('mousemove', (e) => {
+        if(!isDragging || !carousel) return;
+        const deltaX = e.clientX - startX;
+        currAngle += deltaX * 0.3;
+        carousel.style.transform = `rotateX(-5deg) rotateY(${currAngle}deg)`;
+        startX = e.clientX;
+    });
+}
 
 // ==========================================================================
 // 4. CONTEÚDOS DOS MODAIS DA PLATAFORMA
@@ -830,7 +831,6 @@ const sectionData = {
             <div class="insta-post hover-target" onclick="openInstaPost(9)"><img src="MU9.jpg" onerror="this.src='https://via.placeholder.com/400/111/D4AF37?text=MU9'"><div class="insta-overlay">❤️ 412 💬 22</div></div>
         </div>
 
-        <!-- Modal Post Individual Embutido -->
         <div class="post-modal-overlay" id="post-modal" onclick="closeInstaPost()">
             <div class="post-modal-content" onclick="event.stopPropagation()">
                 <button class="post-close hover-target" onclick="closeInstaPost()">✕</button>
@@ -853,29 +853,26 @@ const sectionData = {
     `
 };
 
-let gameIntervals = [];
-
-function clearGameIntervals() {
-    gameIntervals.forEach(clearInterval);
-    gameIntervals = [];
-}
-
-const modalOverlay = document.getElementById('main-modal');
-const modalBody = document.getElementById('modal-body-content');
-
 window.openSection = function(type) {
-    modalBody.innerHTML = sectionData[type];
-    modalOverlay.classList.add('active');
-    isSectionOpen = true; 
-    autoSpin = false;
-    updateHoverTargets();
+    const modalBody = document.getElementById('modal-body-content');
+    const modalOverlay = document.getElementById('main-modal');
+    if(modalBody && modalOverlay) {
+        modalBody.innerHTML = sectionData[type];
+        modalOverlay.classList.add('active');
+        isSectionOpen = true; 
+        autoSpin = false;
+        updateHoverTargets();
+    }
 }
 
 window.closeSection = function() {
-    modalOverlay.classList.remove('active');
-    isSectionOpen = false; 
-    autoSpin = true;
-    clearGameIntervals();
+    const modalOverlay = document.getElementById('main-modal');
+    if(modalOverlay) {
+        modalOverlay.classList.remove('active');
+        isSectionOpen = false; 
+        autoSpin = true;
+        clearGameIntervals();
+    }
 }
 
 // ==========================================================================
@@ -896,61 +893,70 @@ const instaData = {
 window.openInstaPost = function(id) {
     const data = instaData[id];
     const imgEl = document.getElementById('pi-img');
+    if(imgEl) {
+        imgEl.src = data.img;
+        imgEl.onerror = function() { this.src = 'https://via.placeholder.com/600x600/111/D4AF37?text=Foto+Mural+'+id; };
+    }
     
-    imgEl.src = data.img;
-    imgEl.onerror = function() { this.src = 'https://via.placeholder.com/600x600/111/D4AF37?text=Foto+Mural+'+id; };
+    if(document.getElementById('pi-avatar')) document.getElementById('pi-avatar').innerText = data.av;
+    if(document.getElementById('pi-author')) document.getElementById('pi-author').innerText = data.author;
+    if(document.getElementById('pi-comments')) document.getElementById('pi-comments').innerHTML = data.comments;
+    if(document.getElementById('pi-likes')) document.getElementById('pi-likes').innerText = data.likes;
+    if(document.getElementById('pi-date')) document.getElementById('pi-date').innerText = data.date;
     
-    document.getElementById('pi-avatar').innerText = data.av;
-    document.getElementById('pi-author').innerText = data.author;
-    document.getElementById('pi-comments').innerHTML = data.comments;
-    document.getElementById('pi-likes').innerText = data.likes;
-    document.getElementById('pi-date').innerText = data.date;
-    
-    document.getElementById('post-modal').classList.add('active');
+    if(document.getElementById('post-modal')) document.getElementById('post-modal').classList.add('active');
 }
 
 window.closeInstaPost = function() {
-    document.getElementById('post-modal').classList.remove('active');
+    if(document.getElementById('post-modal')) document.getElementById('post-modal').classList.remove('active');
 }
 
 // ==========================================================================
 // GALERIA DE FOTOS (DINÂMICA EM BARALHOS)
 // ==========================================================================
 window.openGalleryCategory = function(prefix, count, title) {
-    document.getElementById('gal-decks').style.display = 'none';
-    document.getElementById('gal-main-title').style.display = 'none';
+    if(document.getElementById('gal-decks')) document.getElementById('gal-decks').style.display = 'none';
+    if(document.getElementById('gal-main-title')) document.getElementById('gal-main-title').style.display = 'none';
     
-    document.getElementById('gal-cat-title').innerText = title;
+    if(document.getElementById('gal-cat-title')) document.getElementById('gal-cat-title').innerText = title;
+    
     const grid = document.getElementById('gal-grid');
-    grid.innerHTML = ''; 
-    
-    for(let i = 1; i <= count; i++) {
-        let card = document.createElement('div');
-        card.className = 'exp-gal-card hover-target';
-        card.style.backgroundImage = `url('${prefix}${i}.jpeg')`;
-        card.style.animationDelay = `${i * 0.02}s`; 
-        card.setAttribute('onerror', `this.style.backgroundImage="url('https://via.placeholder.com/600x400/111/D4AF37?text=${prefix}+${i}')"`);
-        card.onclick = function() { openLb(this); };
-        grid.appendChild(card);
+    if(grid) {
+        grid.innerHTML = ''; 
+        for(let i = 1; i <= count; i++) {
+            let card = document.createElement('div');
+            card.className = 'exp-gal-card hover-target';
+            card.style.backgroundImage = `url('${prefix}${i}.jpeg')`;
+            card.style.animationDelay = `${i * 0.02}s`; 
+            card.setAttribute('onerror', `this.style.backgroundImage="url('https://via.placeholder.com/600x400/111/D4AF37?text=${prefix}+${i}')"`);
+            card.onclick = function() { openLb(this); };
+            grid.appendChild(card);
+        }
     }
     
-    document.getElementById('gal-expanded').classList.add('active');
+    if(document.getElementById('gal-expanded')) document.getElementById('gal-expanded').classList.add('active');
     updateHoverTargets(); 
 }
 
 window.closeGalleryCategory = function() {
-    document.getElementById('gal-expanded').classList.remove('active');
-    document.getElementById('gal-decks').style.display = 'flex';
-    document.getElementById('gal-main-title').style.display = 'block';
+    if(document.getElementById('gal-expanded')) document.getElementById('gal-expanded').classList.remove('active');
+    if(document.getElementById('gal-decks')) document.getElementById('gal-decks').style.display = 'flex';
+    if(document.getElementById('gal-main-title')) document.getElementById('gal-main-title').style.display = 'block';
 }
 
 window.openLb = function(el) {
     let bgImage = el.style.backgroundImage;
     let url = bgImage.slice(4, -1).replace(/['"]/g, ""); 
-    document.getElementById('lb-img').src = url;
-    document.getElementById('lightbox').classList.add('active');
+    const lbImg = document.getElementById('lb-img');
+    const lightbox = document.getElementById('lightbox');
+    if(lbImg && lightbox) {
+        lbImg.src = url;
+        lightbox.classList.add('active');
+    }
 }
-window.closeLb = function() { document.getElementById('lightbox').classList.remove('active'); }
+window.closeLb = function() { 
+    if(document.getElementById('lightbox')) document.getElementById('lightbox').classList.remove('active'); 
+}
 
 // ==========================================================================
 // LOJA VÍNICA (DETALHES DA GARRAFEIRA)
@@ -969,24 +975,28 @@ window.openDetails = function(e, id) {
 
 window.buyWine = function(e, id) {
     if(e) e.stopPropagation();
-    window.open(wineDetails[id].link, '_blank');
+    if(wineDetails[id] && wineDetails[id].link) {
+        window.open(wineDetails[id].link, '_blank');
+    }
 }
 
 window.showWineDetail = function(id) {
     const w = wineDetails[id];
-    document.getElementById('wine-grid-view').style.display = 'none';
-    document.getElementById('wd-type').innerText = w.type;
-    document.getElementById('wd-title').innerText = w.name;
-    document.getElementById('wd-desc').innerText = w.desc;
-    document.getElementById('wd-price').innerText = w.price;
-    document.getElementById('wd-img').src = w.img;
+    if(!w) return;
     
-    document.getElementById('wine-detail-view').style.display = 'flex';
+    if(document.getElementById('wine-grid-view')) document.getElementById('wine-grid-view').style.display = 'none';
+    if(document.getElementById('wd-type')) document.getElementById('wd-type').innerText = w.type;
+    if(document.getElementById('wd-title')) document.getElementById('wd-title').innerText = w.name;
+    if(document.getElementById('wd-desc')) document.getElementById('wd-desc').innerText = w.desc;
+    if(document.getElementById('wd-price')) document.getElementById('wd-price').innerText = w.price;
+    if(document.getElementById('wd-img')) document.getElementById('wd-img').src = w.img;
+    
+    if(document.getElementById('wine-detail-view')) document.getElementById('wine-detail-view').style.display = 'flex';
 }
 
 window.hideWineDetail = function() {
-    document.getElementById('wine-detail-view').style.display = 'none';
-    document.getElementById('wine-grid-view').style.display = 'grid';
+    if(document.getElementById('wine-detail-view')) document.getElementById('wine-detail-view').style.display = 'none';
+    if(document.getElementById('wine-grid-view')) document.getElementById('wine-grid-view').style.display = 'grid';
 }
 
 window.filterRev = function(stars) {
@@ -1005,10 +1015,11 @@ window.filterRev = function(stars) {
     document.querySelectorAll('.r-temp').forEach(el=>el.remove());
 
     const targetCards = document.querySelectorAll('.r' + stars);
+    const container = document.getElementById('reviews-container');
     if(targetCards.length > 0) { 
         targetCards.forEach(card => card.classList.add('show')); 
-    } else { 
-        document.getElementById('reviews-container').innerHTML += `<p class="rev-text r-temp" style="text-align:center; color:#888;">Ainda não existem avaliações de ${stars} estrelas.</p>`;
+    } else if(container) { 
+        container.innerHTML += `<p class="rev-text r-temp" style="text-align:center; color:#888;">Ainda não existem avaliações de ${stars} estrelas.</p>`;
     }
 }
 
@@ -1025,14 +1036,15 @@ let timingDir = 1;
 window.advanceVindima = function(stage) {
     clearGameIntervals();
     document.querySelectorAll('.vindima-stage').forEach(el => el.classList.remove('active'));
-    document.getElementById('vindima-' + stage).classList.add('active');
+    const nxtStage = document.getElementById('vindima-' + stage);
+    if(nxtStage) nxtStage.classList.add('active');
 }
 
-// Fase 1: Colheita Random
 window.startColheita = function() {
-    document.getElementById('btn-start-1').style.display = 'none';
+    if(document.getElementById('btn-start-1')) document.getElementById('btn-start-1').style.display = 'none';
     colheitaScore = 0;
     let container = document.getElementById('vine-container');
+    if(!container) return;
     container.innerHTML = '';
     
     let spawnGrape = setInterval(() => {
@@ -1045,27 +1057,24 @@ window.startColheita = function() {
         grape.onclick = function() {
             this.remove();
             colheitaScore++;
-            document.getElementById('colheita-bar').style.width = (colheitaScore * 20) + '%';
+            if(document.getElementById('colheita-bar')) document.getElementById('colheita-bar').style.width = (colheitaScore * 20) + '%';
             if(colheitaScore >= 5) {
                 clearGameIntervals();
                 container.innerHTML = '<h3 style="color:#4CAF50; margin-top:80px; text-shadow: 0 2px 5px #000; font-family: Cinzel; font-size: 2rem;">Colheita Perfeita!</h3>';
-                document.getElementById('btn-next-1').style.display = 'inline-block';
+                if(document.getElementById('btn-next-1')) document.getElementById('btn-next-1').style.display = 'inline-block';
             }
         };
         container.appendChild(grape);
-        
         setTimeout(() => { if(container.contains(grape)) grape.remove(); }, 1200);
     }, 800);
     gameIntervals.push(spawnGrape);
 }
 
-// Fase 2: Pisar
 window.clickLagar = function(e) {
     if(lagarScore >= 20) return;
     lagarScore++;
-    document.getElementById('lagar-bar').style.width = (lagarScore * 5) + '%';
+    if(document.getElementById('lagar-bar')) document.getElementById('lagar-bar').style.width = (lagarScore * 5) + '%';
     
-    // Splash Effect
     let splash = document.createElement('div');
     splash.className = 'splash-particle';
     splash.innerText = '💧';
@@ -1078,34 +1087,33 @@ window.clickLagar = function(e) {
     setTimeout(() => splash.remove(), 500);
 
     if(lagarScore >= 20) {
-        document.getElementById('btn-next-2').style.display = 'inline-block';
+        if(document.getElementById('btn-next-2')) document.getElementById('btn-next-2').style.display = 'inline-block';
     }
 }
 
-// Fase 3: Fermentação (Temperatura)
 window.startFermentation = function() {
-    document.getElementById('btn-start-3').style.display = 'none';
-    document.getElementById('btn-cool').style.display = 'inline-block';
+    if(document.getElementById('btn-start-3')) document.getElementById('btn-start-3').style.display = 'none';
+    if(document.getElementById('btn-cool')) document.getElementById('btn-cool').style.display = 'inline-block';
     tempPos = 10; fermProgress = 0;
     
     let fermInt = setInterval(() => {
         tempPos += 3; 
         if(tempPos > 100) tempPos = 100;
-        document.getElementById('temp-pointer').style.left = tempPos + '%';
+        if(document.getElementById('temp-pointer')) document.getElementById('temp-pointer').style.left = tempPos + '%';
         
         if(tempPos >= 40 && tempPos <= 60) {
             fermProgress += 4;
-            document.getElementById('ferment-bar').style.width = fermProgress + '%';
+            if(document.getElementById('ferment-bar')) document.getElementById('ferment-bar').style.width = fermProgress + '%';
         } else if(tempPos > 80) {
             fermProgress -= 2; 
             if(fermProgress < 0) fermProgress = 0;
-            document.getElementById('ferment-bar').style.width = fermProgress + '%';
+            if(document.getElementById('ferment-bar')) document.getElementById('ferment-bar').style.width = fermProgress + '%';
         }
 
         if(fermProgress >= 100) {
             clearGameIntervals();
-            document.getElementById('btn-cool').style.display = 'none';
-            document.getElementById('btn-next-3').style.display = 'inline-block';
+            if(document.getElementById('btn-cool')) document.getElementById('btn-cool').style.display = 'none';
+            if(document.getElementById('btn-next-3')) document.getElementById('btn-next-3').style.display = 'inline-block';
         }
     }, 150);
     gameIntervals.push(fermInt);
@@ -1114,19 +1122,18 @@ window.startFermentation = function() {
 window.coolDown = function() {
     tempPos -= 15;
     if(tempPos < 0) tempPos = 0;
-    document.getElementById('temp-pointer').style.left = tempPos + '%';
+    if(document.getElementById('temp-pointer')) document.getElementById('temp-pointer').style.left = tempPos + '%';
 }
 
-// Fase 4: Estágio (Timing)
 window.startEstagio = function() {
-    document.getElementById('btn-start-4').style.display = 'none';
-    document.getElementById('btn-stop-4').style.display = 'inline-block';
+    if(document.getElementById('btn-start-4')) document.getElementById('btn-start-4').style.display = 'none';
+    if(document.getElementById('btn-stop-4')) document.getElementById('btn-stop-4').style.display = 'inline-block';
     timingPos = 0;
     
     let timeInt = setInterval(() => {
         timingPos += 3 * timingDir;
         if(timingPos >= 100 || timingPos <= 0) timingDir *= -1;
-        document.getElementById('timing-cursor').style.left = timingPos + '%';
+        if(document.getElementById('timing-cursor')) document.getElementById('timing-cursor').style.left = timingPos + '%';
     }, 30);
     gameIntervals.push(timeInt);
 }
@@ -1134,8 +1141,8 @@ window.startEstagio = function() {
 window.stopEstagio = function() {
     clearGameIntervals();
     if(timingPos >= 40 && timingPos <= 60) {
-        document.getElementById('btn-stop-4').style.display = 'none';
-        document.getElementById('btn-next-4').style.display = 'inline-block';
+        if(document.getElementById('btn-stop-4')) document.getElementById('btn-stop-4').style.display = 'none';
+        if(document.getElementById('btn-next-4')) document.getElementById('btn-next-4').style.display = 'inline-block';
     } else {
         alert('Falhou o momento perfeito (Tem de selar na área central delimitada). Tente novamente.');
         startEstagio();
@@ -1153,46 +1160,57 @@ window.resetVindima = function() {
 }
 
 // ==========================================================================
-// 7. SOMMELIER IA (CÉREBRO DO SITE)
+// 7. SOMMELIER IA (CÉREBRO DO SITE - 100% BLINDADO)
 // ==========================================================================
 const aiInterface = document.getElementById('ai-interface');
 const aiMessage = document.getElementById('ai-message');
 
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+}
+
 const siteBrain = [
-    { k: ['reserva', 'reservar', 'quarto', 'dormir', 'preço', 'alojamento', 'tarifa', 'estadia'], r: "Para garantir o seu refúgio, feche este assistente e selecione a carta 'Reservas' no carrossel central. Lá encontrará as nossas tipologias e o formulário de marcação." },
-    { k: ['vinho', 'loja', 'comprar', 'garrafa', 'rosé', 'branco', 'tinto', 'porto', 'compras'], r: "A nossa Garrafeira Haute Couture encontra-se na secção 'Loja Vínica' do menu principal. Pode rodar as garrafas em 3D para ler as notas de prova e encomendar." },
-    { k: ['restaurante', 'comer', 'jantar', 'almoço', 'menu', 'prato', 'fome', 'gastronomia'], r: "Servimos alta gastronomia com sabores durienses. Feche a IA e abra a carta 'Restaurante' no menu rotativo para descobrir a nossa carta de degustação e respetivos valores." },
-    { k: ['atividade', 'barco', 'jipe', 'spa', 'prova', 'massagem', 'piscina', 'tour'], r: "Temos dezenas de experiências imersivas, desde passeios no rio a provas na adega. Descubra os detalhes e preçários clicando na carta 'Atividades' no carrossel central." },
-    { k: ['onde fica', 'localização', 'morada', 'contactos', 'falar', 'mensagem', 'mapa', 'telefone', 'email'], r: "A Quinta do Paraíso fica no coração do Alto Douro, em Foz Côa. Pode consultar o nosso mapa interativo e enviar-nos uma mensagem direta selecionando a carta 'Contactos'." },
-    { k: ['quem', 'história', 'dona', 'gerente', 'sobre', 'família'], r: "Somos um projeto familiar com raízes profundas na região. Conheça a nossa história e a biografia da nossa fundadora abrindo a secção 'Quem Somos'." },
-    { k: ['jogo', 'vindima', 'academia', 'jogar', 'interativo'], r: "Quer testar as suas capacidades vitivinícolas? Feche o assistente e clique na carta 'Academia' para jogar à nossa Jornada Interativa da Vindima em 5 fases!" },
-    { k: ['testemunho', 'review', 'avaliação', 'opinião', 'estrelas', 'comentários'], r: "Gostamos de total transparência. Pode ler as opiniões reais de quem já nos visitou filtrando por estrelas na secção 'Testemunhos'." },
-    { k: ['galeria', 'fotos', 'imagens', 'ver', 'fotografia'], r: "Pode explorar os nossos espaços em alta definição. Selecione a carta 'Galeria' no carrossel para aceder a uma amostra 3D dinâmica da nossa quinta." },
-    { k: ['personalizar', 'exclusivo', 'à medida', 'roteiro', 'plano', 'experiência'], r: "Excelente escolha! O nosso Concierge pode ajudá-lo a criar momentos únicos, como um pedido de casamento na adega ou um voo sobre o Douro. Por favor, detalhe-nos a sua visão." }
+    { k: ['reserva', 'reservar', 'quarto', 'dormir', 'preço', 'alojamento', 'tarifa', 'estadia', 'noite', 'disponibilidade'], r: "Temos refúgios perfeitos para si: Refúgios para 2 a 4 pax (Branco, Rosé e Tinto) entre 150€ a 250€/noite, e as Casas Familiares Tawny e Ruby. Feche o assistente e abra a aba 'Reservas' para pedir a sua." },
+    { k: ['vinho', 'loja', 'comprar', 'garrafa', 'rosé', 'branco', 'tinto', 'porto', 'compras', 'garrafeira', 'tawny', 'vintage'], r: "A nossa Garrafeira Haute Couture possui vinhos de excelência, do fresco Tavedo Rosé ao nosso icónico Quinta do Paraíso Vintage. Dirija-se à secção 'Loja Vínica' no menu principal." },
+    { k: ['restaurante', 'comer', 'jantar', 'almoço', 'menu', 'prato', 'fome', 'gastronomia', 'alheira', 'bacalhau', 'bochecha', 'cabrito'], r: "O nosso restaurante oferece Gastronomia de Autor. Delicie-se com Bochecha de Porco Preto estufada ou Cabrito do Monte. Consulte a secção 'Restaurante' para ver a ementa completa." },
+    { k: ['atividade', 'barco', 'jipe', 'spa', 'prova', 'massagem', 'piscina', 'tour', 'piquenique', 'passeio', 'adega', 'vinoterapia', 'experiência', 'roteiro'], r: "Temos experiências imersivas: Passeio de Barco Rabelo (45€), Jipe (40€), Spa de Vinoterapia (65€), Piquenique (35€) e visitas à Adega. Feche a IA e abra 'Atividades' para agendar." },
+    { k: ['personalizar', 'exclusivo', 'à medida', 'casamento', 'evento', 'helicóptero', 'surpresa'], r: "Como seu Concierge, posso desenhar um roteiro à medida! Seja um pedido de casamento nas vinhas, um voo privado ou uma prova cega exclusiva. Envie-nos uma mensagem nos 'Contactos'." },
+    { k: ['onde fica', 'localização', 'morada', 'contactos', 'falar', 'mensagem', 'mapa', 'telefone', 'email', 'coordenadas', 'foz', 'côa'], r: "A Quinta do Paraíso está localizada em Vila Nova de Foz Côa (Coordenadas: 41.136054, -7.303164). Fale connosco pelo email refugio@quintadoparaiso.pt ou +351 279 000 000." },
+    { k: ['quem', 'história', 'dona', 'gerente', 'sobre', 'família', 'sara', 'reis', 'fundadora', 'origem'], r: "Somos um projeto familiar impulsionado pela paixão da nossa fundadora, Sara Reis. Transformámos a herança duriense num espaço de cultura e hospitalidade. Explore a nossa 'História'." },
+    { k: ['jogo', 'vindima', 'academia', 'jogar', 'interativo', 'colheita', 'lagar', 'fermentação', 'estágio', 'barrica'], r: "Pronto para ser um Mestre do Douro? Na nossa 'Academia', pode jogar a Jornada da Vindima: desde a colheita manual até ao estágio em barrica. Abra a Academia e divirta-se!" },
+    { k: ['testemunho', 'review', 'avaliação', 'opinião', 'estrelas', 'comentários', 'clientes', 'feedback'], r: "A excelência é a nossa assinatura. Leia os testemunhos de clientes de todo o mundo na nossa secção 'Testemunhos Editoriais'." },
+    { k: ['galeria', 'fotos', 'imagens', 'ver', 'fotografia', 'exterior', 'interior', 'utensílios', 'baralhos'], r: "O nosso arquivo visual divide-se em baralhos interativos 3D. Selecione a aba 'Galeria' no carrossel para explorar coleções do Exterior, Interior e Arte & Ofício." },
+    { k: ['curador', 'imprensa', 'linha', 'tempo', 'timeline', 'notícias', 'documentário', 'podcast'], r: "Explore a 'Coleção do Curador' através da aba lateral esquerda para ver as nossas menções na imprensa, documentários e a linha cronológica." },
+    { k: ['mural', 'instagram', 'social', 'partilhar', 'visitantes', 'redes'], r: "Na secção 'Mural Social', encontra fotografias e memórias partilhadas pelos nossos visitantes. Aproveite e solicite a partilha da sua própria fotografia!" },
+    { k: ['ola', 'olá', 'bom dia', 'boa tarde', 'boa noite', 'ajuda', 'hey'], r: "Olá! Sou a Orbe, o seu Concierge e Sommelier de Inteligência Artificial. Posso esclarecer dúvidas sobre reservas, recomendar-lhe pratos ou sugerir atividades. Como posso ajudar?" }
 ];
 
 const siteDefaultResp = "Sou o guia digital da plataforma. Posso ajudá-lo a encontrar reservas, o menu do restaurante, a loja de vinhos ou detalhes sobre as atividades no nosso site.";
 
 window.openAI = function() {
-    aiInterface.classList.add('active');
-    aiMessage.innerText = '"Olá. Sou o guia digital da plataforma. O que procura ou gostaria de saber sobre o nosso refúgio?"';
+    if(aiInterface) {
+        aiInterface.classList.add('active');
+        if(aiMessage) aiMessage.innerText = '"Olá. Sou o guia digital da plataforma. O que procura ou gostaria de saber sobre o nosso refúgio?"';
+    }
     if('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
 
 window.closeAI = function() {
-    aiInterface.classList.remove('active');
-    if('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if(aiInterface) aiInterface.classList.remove('active');
+    if('speechSynthesis' in window) window.speechSynthesis.cancel(); 
 }
 
 window.askAI = function(q) {
-    if(!q) return;
-    if('speechSynthesis' in window) window.speechSynthesis.cancel();
-    aiMessage.style.opacity = 0;
+    if(!q || q.trim() === '') return;
+    if('speechSynthesis' in window) window.speechSynthesis.cancel(); 
+    if(aiMessage) aiMessage.style.opacity = 0;
     
     setTimeout(() => {
-        aiMessage.style.color = "var(--accent-color)";
-        aiMessage.innerHTML = "A pesquisar na plataforma...";
-        aiMessage.style.opacity = 1;
+        if(aiMessage) {
+            aiMessage.style.color = "var(--accent-color)";
+            aiMessage.innerHTML = "A pesquisar na plataforma...";
+            aiMessage.style.opacity = 1;
+        }
         
         setTimeout(() => {
             const pNormalizada = q.toLowerCase();
@@ -1205,26 +1223,33 @@ window.askAI = function(q) {
                 }
             }
 
-            aiMessage.style.opacity = 0;
+            if(aiMessage) aiMessage.style.opacity = 0;
             setTimeout(() => {
-                aiMessage.style.color = "#fff";
-                aiMessage.innerHTML = `"${respostaEncontrada}"`;
-                aiMessage.style.opacity = 1;
+                if(aiMessage) {
+                    aiMessage.style.color = "#fff";
+                    aiMessage.innerHTML = `"${respostaEncontrada}"`;
+                    aiMessage.style.opacity = 1;
+                }
                 
                 const inputEl = document.getElementById('ai-input');
                 if(inputEl) inputEl.value = '';
                 
-                speakText(respostaEncontrada); 
+                if (aiInterface && aiInterface.classList.contains('active')) {
+                    speakText(respostaEncontrada); 
+                }
             }, 400);
         }, 1000);
     }, 300);
 }
 
-document.getElementById('ai-input')?.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        askAI(this.value);
-    }
-});
+const inputAI = document.getElementById('ai-input');
+if(inputAI) {
+    inputAI.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            askAI(this.value);
+        }
+    });
+}
 
 function speakText(txt) {
     if ('speechSynthesis' in window) {
