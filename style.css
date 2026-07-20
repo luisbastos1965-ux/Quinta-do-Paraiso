@@ -530,3 +530,63 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 @media (max-width: 900px) {
     .wine-flip-card.vintage-highlight { max-width: 100%; }
 }
+
+/* ========================================================================== */
+/* DESTAQUE GARRAFEIRA: VINHO VINTAGE (LAYOUT HORIZONTAL PREMIUM)             */
+/* ========================================================================== */
+.wine-flip-card.vintage-highlight { 
+    grid-column: 1 / -1; 
+    max-width: 900px; 
+    height: 280px; 
+    margin: 15px auto 40px auto; 
+}
+.vintage-front-content, .vintage-back-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    gap: 30px;
+    text-align: left;
+}
+.vintage-text-area {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.vintage-text-area .wine-type { margin-bottom: 5px; }
+.vintage-text-area .wine-name { font-size: 2.2rem; margin-bottom: 10px; text-align: left !important; }
+.vintage-text-area .vintage-price { color: var(--accent-color); font-size: 1.4rem; font-weight: bold; margin-bottom: 15px; }
+.vintage-text-area .vintage-desc { color: #aaa; font-size: 1rem; line-height: 1.6; font-family: 'Manrope', sans-serif; font-style: normal; margin-bottom: 0;}
+.vintage-img-area {
+    flex: 0.8;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+}
+.vintage-img-area img {
+    height: 100%;
+    object-fit: contain;
+}
+.vintage-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+.vintage-actions button {
+    flex: 1;
+    padding: 12px;
+    font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+    .wine-flip-card.vintage-highlight { height: auto; min-height: 400px; }
+    .vintage-front-content, .vintage-back-content { flex-direction: column; text-align: center; }
+    .vintage-text-area .wine-name { text-align: center !important; font-size: 1.8rem; }
+    .vintage-img-area { height: 180px; margin-top: 20px; }
+    .vintage-actions { flex-direction: column; }
+}
