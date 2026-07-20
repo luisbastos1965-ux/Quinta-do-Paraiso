@@ -500,3 +500,33 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
 @media (max-width: 900px) {
     .gallery-decks-wrapper { gap: 80px; }
 }
+
+/* ========================================================================== */
+/* DESTAQUE GARRAFEIRA: VINHO VINTAGE                                         */
+/* ========================================================================== */
+.wine-flip-card.vintage-highlight { 
+    grid-column: 1 / -1; 
+    max-width: 380px; 
+    margin: 0 auto 30px auto; 
+}
+.recomendacao-badge { 
+    position: absolute; 
+    top: -15px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    background: var(--accent-color); 
+    color: #000; 
+    padding: 6px 20px; 
+    border-radius: 20px; 
+    font-weight: 800; 
+    font-family: 'Manrope', sans-serif; 
+    font-size: 0.85rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    z-index: 10; 
+    box-shadow: 0 5px 15px rgba(212,175,55,0.4); 
+    white-space: nowrap; 
+}
+@media (max-width: 900px) {
+    .wine-flip-card.vintage-highlight { max-width: 100%; }
+}
