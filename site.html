@@ -154,6 +154,7 @@
         </div>
     </div>
 
+    <!-- Modais e Janelas da Plataforma -->
     <div class="modal-overlay" id="main-modal">
         <div class="modal-content custom-scroll">
             <button class="close-btn hover-target" onclick="closeSection()">FECHAR ✕</button>
@@ -174,7 +175,7 @@
         </div>
         
         <div class="input-area" style="display: flex; gap: 10px; margin-top: 30px; margin-bottom: 20px; width: 100%; max-width: 600px; padding: 0 20px;">
-            <input type="text" id="ai-input" placeholder="Pergunte onde encontrar algo no site..." style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 25px; padding: 15px 20px; color: #fff; font-size: 1rem; outline: none; font-family: 'Manrope', sans-serif;">
+            <input type="text" id="ai-input" class="hover-target" placeholder="Pergunte onde encontrar algo no site..." style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.4); border-radius: 25px; padding: 15px 20px; color: #fff; font-size: 1rem; outline: none; font-family: 'Manrope', sans-serif;">
             <button onclick="askAI(document.getElementById('ai-input').value)" class="hover-target" style="width: 50px; height: 50px; border-radius: 50%; background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.4); color: var(--accent-color); font-size: 1.2rem; cursor: pointer;">➤</button>
         </div>
 
