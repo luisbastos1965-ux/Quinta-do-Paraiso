@@ -229,7 +229,32 @@ const sectionData = {
     loja: `
         <h2 class="modal-title">Garrafeira Haute Couture</h2>
         
-        <div class="shop-grid custom-scroll">
+        <div id="wine-grid-view" class="shop-grid custom-scroll">
+            
+            <!-- VINHO 7 (VINTAGE - DESTAQUE) -->
+            <div class="wine-flip-card vintage-highlight hover-target" onclick="flipWineCard(this)">
+                <div class="recomendacao-badge">★ A Nossa Recomendação ★</div>
+                <div class="wine-flip-inner">
+                    <div class="wine-flip-front" style="border-color: var(--accent-color); box-shadow: 0 0 30px rgba(212,175,55,0.2);">
+                        <div>
+                            <span class="wine-type">Vinho do Porto</span>
+                            <h4 class="wine-name" style="text-align: center;">Quinta do Paraíso Vintage</h4>
+                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px; text-align: center;">85.00€</div>
+                        </div>
+                        <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
+                    </div>
+                    <div class="wine-flip-back" style="border-color: var(--accent-color);">
+                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Vintage</h4>
+                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">85.00€</span>
+                        <p>Cor vermelho opaco. Expressão aromática floral com notas de flor de laranjeira, cassis e frutos do bosque. Taninos tensos e musculados.</p>
+                        <div class="wine-back-actions">
+                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w7')">Informações</button>
+                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w7')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- VINHO 1 -->
             <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
                 <div class="wine-flip-inner">
@@ -363,29 +388,6 @@ const sectionData = {
                         <div class="wine-back-actions">
                             <button class="btn-buy hover-target" onclick="openDetails(event, 'w6')">Informações</button>
                             <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w6')">Comprar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VINHO 7 -->
-            <div class="wine-flip-card hover-target" onclick="flipWineCard(this)">
-                <div class="wine-flip-inner">
-                    <div class="wine-flip-front" style="border-color: var(--accent-color);">
-                        <div>
-                            <span class="wine-type">Vinho do Porto</span>
-                            <h4 class="wine-name" style="text-align: center;">Quinta do Paraíso Vintage</h4>
-                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px; text-align: center;">85.00€</div>
-                        </div>
-                        <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
-                    </div>
-                    <div class="wine-flip-back" style="border-color: var(--accent-color);">
-                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Vintage</h4>
-                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">85.00€</span>
-                        <p>Cor vermelho opaco. Expressão aromática floral com notas de flor de laranjeira, cassis e frutos do bosque. Taninos tensos e musculados.</p>
-                        <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w7')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w7')">Comprar</button>
                         </div>
                     </div>
                 </div>
@@ -945,7 +947,6 @@ window.closeLb = function() { document.getElementById('lightbox').classList.remo
 // LOJA VÍNICA (DETALHES DA GARRAFEIRA)
 // ==========================================================================
 window.flipWineCard = function(card) {
-    // Garante que apenas um vinho fica virado de cada vez
     document.querySelectorAll('.wine-flip-card').forEach(c => {
         if(c !== card) c.classList.remove('flipped');
     });
@@ -953,7 +954,7 @@ window.flipWineCard = function(card) {
 }
 
 window.openDetails = function(e, id) {
-    if(e) e.stopPropagation(); // Impede que o clique no botão vire o cartão de novo
+    if(e) e.stopPropagation(); 
     showWineDetail(id);
 }
 
