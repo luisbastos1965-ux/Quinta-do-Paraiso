@@ -208,7 +208,7 @@ const sectionData = {
                 </div>
             </div>
             
-            <div class="service-item hover-target" onclick="this.classList.toggle('expanded')">
+            <div class="service-item span-2-col hover-target" onclick="this.classList.toggle('expanded')">
                 <div class="si-icon">🍇</div>
                 <div class="si-details">
                     <h4>Visita à Adega + Degustação</h4>
@@ -217,7 +217,7 @@ const sectionData = {
                 </div>
             </div>
             
-            <div class="service-item span-2-col service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
+            <div class="service-item service-highlight-custom hover-target" onclick="closeSection(); openAI();" style="cursor: pointer;">
                 <div class="si-icon" style="margin-bottom: 5px;">✨</div>
                 <div class="si-details">
                     <h4 style="font-size: 1.3rem; margin-bottom: 5px; font-family: 'Cinzel'; color: #fff;">Personalizar Experiência</h4>
@@ -231,25 +231,34 @@ const sectionData = {
         
         <div id="wine-grid-view" class="shop-grid custom-scroll">
             
-            <!-- VINHO 7 (VINTAGE - DESTAQUE) -->
+            <!-- VINHO 7 (VINTAGE - DESTAQUE HORIZONTAL) -->
             <div class="wine-flip-card vintage-highlight hover-target" onclick="flipWineCard(this)">
                 <div class="recomendacao-badge">★ A Nossa Recomendação ★</div>
                 <div class="wine-flip-inner">
                     <div class="wine-flip-front" style="border-color: var(--accent-color); box-shadow: 0 0 30px rgba(212,175,55,0.2);">
-                        <div>
-                            <span class="wine-type">Vinho do Porto</span>
-                            <h4 class="wine-name" style="text-align: center;">Quinta do Paraíso Vintage</h4>
-                            <div style="color:var(--accent-color); font-weight: bold; font-size: 1.1rem; margin-top: -5px; margin-bottom: 15px; text-align: center;">85.00€</div>
+                        <div class="vintage-front-content">
+                            <div class="vintage-text-area">
+                                <span class="wine-type">Vinho do Porto</span>
+                                <h4 class="wine-name">Quinta do Paraíso Vintage</h4>
+                                <div class="vintage-price">85.00€</div>
+                                <p class="vintage-desc">A joia da nossa coroa. Produção extremamente limitada para os verdadeiros apreciadores. Clique na carta para explorar.</p>
+                            </div>
+                            <div class="vintage-img-area">
+                                <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
+                            </div>
                         </div>
-                        <img src="Vinho7.png" alt="Vintage" class="wine-bottle-img" onerror="this.src='https://via.placeholder.com/100x250/111/D4AF37?text=Vinho7'">
                     </div>
                     <div class="wine-flip-back" style="border-color: var(--accent-color);">
-                        <h4 class="wine-name" style="color:var(--accent-color); font-size: 1.5rem; margin-bottom:5px;">Vintage</h4>
-                        <span style="color:#fff; font-size: 1.1rem; font-weight: bold;">85.00€</span>
-                        <p>Cor vermelho opaco. Expressão aromática floral com notas de flor de laranjeira, cassis e frutos do bosque. Taninos tensos e musculados.</p>
-                        <div class="wine-back-actions">
-                            <button class="btn-buy hover-target" onclick="openDetails(event, 'w7')">Informações</button>
-                            <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w7')">Comprar</button>
+                        <div class="vintage-back-content">
+                            <div class="vintage-text-area">
+                                <h4 class="wine-name" style="color:var(--accent-color); margin-bottom:5px;">Vintage</h4>
+                                <div class="vintage-price" style="color:#fff;">85.00€</div>
+                                <p class="vintage-desc" style="color:#ccc; font-style: italic;">Cor vermelho opaco. Expressão aromática floral com notas de flor de laranjeira, cassis e frutos do bosque. Taninos tensos e musculados.</p>
+                                <div class="vintage-actions">
+                                    <button class="btn-buy hover-target" onclick="openDetails(event, 'w7')">Informações</button>
+                                    <button class="btn-buy hover-target" style="background: var(--accent-color); color: #000;" onclick="buyWine(event, 'w7')">Comprar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
