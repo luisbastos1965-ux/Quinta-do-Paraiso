@@ -590,3 +590,16 @@ h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 600; }
     .vintage-img-area { height: 180px; margin-top: 20px; }
     .vintage-actions { flex-direction: column; }
 }
+
+/* ========================================================================== */
+/* AJUSTE VERTICAL DO CARROSSEL DE NAVEGAÇÃO                                  */
+/* ========================================================================== */
+
+#carousel-container {
+    top: 42% !important; /* Move o eixo central do carrossel ligeiramente para cima */
+}
+
+/* Garante que o container interativo acompanha a subida do carrossel */
+.menu-open #carousel-container {
+    transform: translate(-50%, -50%) scale(1);
+}
